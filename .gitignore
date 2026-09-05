@@ -1,0 +1,13 @@
+# NebuDCS — Rust Workspace
+/target/
+Cargo.lock
+
+# Editor / OS artefacts
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Benchmark output
+criterion/

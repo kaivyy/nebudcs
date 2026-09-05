@@ -1,0 +1,18 @@
+[package]
+name        = "nebudcs-topology"
+version     = "0.1.0"
+edition     = "2021"
+description = "Generic graph-based topology engine, port validation, piping, signal networks, and recycle (SCC) detection for NebuDCS"
+license     = "MIT OR Apache-2.0"
+
+[dependencies]
+nebudcs-types = { path = "../nebudcs-types" }
+nebudcs-units = { path = "../nebudcs-units" }
+nebudcs-model = { path = "../nebudcs-model" }
+serde         = { workspace = true }
+serde_json    = { workspace = true }
+thiserror     = { workspace = true }
+indexmap      = { workspace = true }
+
+[dev-dependencies]
+serde_json = { workspace = true }

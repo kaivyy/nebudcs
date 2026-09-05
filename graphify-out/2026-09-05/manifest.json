@@ -1,0 +1,432 @@
+{
+  "crates/nebudcs-model/src/equipment.rs": {
+    "mtime": 1788623218.6909273,
+    "ast_hash": "5ca0fedae06f2e732b774b04ba2bc9ba",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-model/src/lib.rs": {
+    "mtime": 1788623035.3777983,
+    "ast_hash": "8323cad49981fabea3cdfddb82931a25",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-model/src/project.rs": {
+    "mtime": 1788623257.3841655,
+    "ast_hash": "d7a22afb6174d541090100031db935a4",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-model/src/stream.rs": {
+    "mtime": 1788623218.6939273,
+    "ast_hash": "647aa3a199515d81135bae1e1aef0910",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-model/src/tag.rs": {
+    "mtime": 1788623263.3382022,
+    "ast_hash": "0fc0593e856ab22a4e98b5d1338060c1",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-model/src/validation.rs": {
+    "mtime": 1788623025.1357353,
+    "ast_hash": "18c673858e6bbc2f9740d836093a1465",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-physics/src/conservation.rs": {
+    "mtime": 1788626369.8133333,
+    "ast_hash": "bb0d980e38ded0a6da5935e8e63f2faf",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-physics/src/equipment.rs": {
+    "mtime": 1788626995.761188,
+    "ast_hash": "c45dc2dbed3e52666e047fd780f11c67",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-physics/src/error.rs": {
+    "mtime": 1788626589.8706884,
+    "ast_hash": "eac6d03cf4f198161f8870b8bc701e51",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-physics/src/hydraulics.rs": {
+    "mtime": 1788626995.7631881,
+    "ast_hash": "bdf2da10ea10e93b7feda6018bcc8148",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-physics/src/lib.rs": {
+    "mtime": 1788626995.764188,
+    "ast_hash": "831e8e0a700fa588a955ee58f93ec868",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-physics/src/properties.rs": {
+    "mtime": 1788626995.7681882,
+    "ast_hash": "8b79e92f4bac64a51c9433d930a5debf",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-physics/src/solver.rs": {
+    "mtime": 1788626850.1112912,
+    "ast_hash": "41a5ffe144b69328b35363ff07de6b7f",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-physics/src/state.rs": {
+    "mtime": 1788626995.773188,
+    "ast_hash": "c85664f86f98e40f657625e6b8ab61ff",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-physics/src/system.rs": {
+    "mtime": 1788626927.1097653,
+    "ast_hash": "9eaece2ee749dca26c8695bb12ec4308",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-physics/tests/physics_tests.rs": {
+    "mtime": 1788626995.7851882,
+    "ast_hash": "a5df14b750f5ae4b54dec5379f3bfd41",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-sim/src/clock.rs": {
+    "mtime": 1788625448.0836568,
+    "ast_hash": "8c2ee2671d934430385d4646fe733aef",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-sim/src/engine.rs": {
+    "mtime": 1788625415.1974542,
+    "ast_hash": "c1652692600b17ee5b46867b1ed336b2",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-sim/src/error.rs": {
+    "mtime": 1788625448.0846567,
+    "ast_hash": "1f156873a34193802959192e02047e87",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-sim/src/lib.rs": {
+    "mtime": 1788625448.0846567,
+    "ast_hash": "c4d34d97b1b9444c544f5af33e84c855",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-sim/src/plan.rs": {
+    "mtime": 1788625341.5530007,
+    "ast_hash": "b857c0f1446ca3bcead908216efc0404",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-sim/src/state.rs": {
+    "mtime": 1788625407.3084056,
+    "ast_hash": "b65ef5035452f16106fc7cd19d200571",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-sim/src/system.rs": {
+    "mtime": 1788625346.3500302,
+    "ast_hash": "b9fcc0c6b5524f16955b8c0a07340ddd",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-sim/tests/sim_tests.rs": {
+    "mtime": 1788625490.8419201,
+    "ast_hash": "be1def50460e69052040dfa63867ad15",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-topology/src/error.rs": {
+    "mtime": 1788624519.3729374,
+    "ast_hash": "813a382b472622db2138751152179fe0",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-topology/src/graph.rs": {
+    "mtime": 1788624593.9283965,
+    "ast_hash": "51c93f75ae4088c4169165067882af98",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-topology/src/lib.rs": {
+    "mtime": 1788624428.86038,
+    "ast_hash": "dd44faf0c31916958579ce7718fdaa51",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-topology/src/pipe.rs": {
+    "mtime": 1788624405.7472377,
+    "ast_hash": "3d2e99122ee1e11c323c8cce2a922a4a",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-topology/src/port.rs": {
+    "mtime": 1788624605.722469,
+    "ast_hash": "d08c4f119897fd68c7e734e3fed001fd",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-topology/src/scc.rs": {
+    "mtime": 1788624554.6261544,
+    "ast_hash": "38b398fd545649a56b4fc3723ebc46e5",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-topology/src/signal.rs": {
+    "mtime": 1788624409.2522593,
+    "ast_hash": "e8e706f86f08bc98726d33e55b70915e",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-topology/tests/topology_tests.rs": {
+    "mtime": 1788625467.0467737,
+    "ast_hash": "a8e7a37af99c7be68705e0e4cec0b704",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-types/src/error.rs": {
+    "mtime": 1788623243.4050796,
+    "ast_hash": "c6ac38d070f7f64904ec98ae90210080",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-types/src/ids.rs": {
+    "mtime": 1788624440.3154504,
+    "ast_hash": "866a7b55655ac377b3760d1bb5d6d12a",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-types/src/lib.rs": {
+    "mtime": 1788624357.8139424,
+    "ast_hash": "39c11935aa88f4bb4021dddd6d22c6c4",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-types/src/time.rs": {
+    "mtime": 1788625398.1483493,
+    "ast_hash": "98c5757ead35dcb1f436cc0198f52838",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-types/src/version.rs": {
+    "mtime": 1788623218.7009273,
+    "ast_hash": "6c20b03b0236b2ceafe45d86b22b4831",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-units/src/conversion.rs": {
+    "mtime": 1788623218.7039273,
+    "ast_hash": "e409cc7f7c7f70369556a84623c42135",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-units/src/display.rs": {
+    "mtime": 1788626057.352409,
+    "ast_hash": "5ff022452ded7b2ca1b605b2622327b2",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-units/src/lib.rs": {
+    "mtime": 1788626059.1834202,
+    "ast_hash": "c55c5ca304d8c470901f7bab9e18fe0b",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-units/src/quantities.rs": {
+    "mtime": 1788626048.8743567,
+    "ast_hash": "961a5f0a5a123907f3928a2e687c0cd8",
+    "semantic_hash": ""
+  },
+  "PRD.md": {
+    "mtime": 1788620917.9856608,
+    "ast_hash": "f010d130adc544d12380e92d41a373cb",
+    "semantic_hash": ""
+  },
+  "docs/architecture/ARCHITECTURE-REVIEW.md": {
+    "mtime": 1788621613.486176,
+    "ast_hash": "438f427069ad4cb6c5625aaa566dded7",
+    "semantic_hash": ""
+  },
+  "docs/architecture/README.md": {
+    "mtime": 1788621337.0563393,
+    "ast_hash": "e7f755a5b3e430a99cfe80334c3ec6f1",
+    "semantic_hash": ""
+  },
+  "docs/architecture/adr/ADR-001-rust-core.md": {
+    "mtime": 1788621384.5296316,
+    "ast_hash": "f81d45c108651230969892ae5ecb2f96",
+    "semantic_hash": ""
+  },
+  "docs/architecture/adr/ADR-002-simulation-determinism.md": {
+    "mtime": 1788621390.74767,
+    "ast_hash": "76c38465a19b671210f043883652f257",
+    "semantic_hash": ""
+  },
+  "docs/architecture/adr/ADR-003-equipment-data-driven.md": {
+    "mtime": 1788621396.5047054,
+    "ast_hash": "250049ff541024531ae5f838a1670b62",
+    "semantic_hash": ""
+  },
+  "docs/architecture/adr/ADR-004-desktop-ui-egui-wgpu.md": {
+    "mtime": 1788621396.5437057,
+    "ast_hash": "b0b4dc610edb3e1bcfbdec2068cb28ff",
+    "semantic_hash": ""
+  },
+  "docs/architecture/adr/ADR-005-web-ui-framework.md": {
+    "mtime": 1788621396.7517068,
+    "ast_hash": "9350e34075ba0f2e6728ff65479ee174",
+    "semantic_hash": ""
+  },
+  "docs/architecture/adr/ADR-006-persistence-sqlite.md": {
+    "mtime": 1788621417.4978347,
+    "ast_hash": "5e4cf53a4289901b90817a84f9683b1e",
+    "semantic_hash": ""
+  },
+  "docs/architecture/adr/ADR-007-scripting-rhai.md": {
+    "mtime": 1788621423.882874,
+    "ast_hash": "529a6d16adb12d7e963b35f7775d13b2",
+    "semantic_hash": ""
+  },
+  "docs/architecture/adr/ADR-008-protocol-websocket.md": {
+    "mtime": 1788621430.017912,
+    "ast_hash": "2dae9081d75a3ee0dacf35ae7dd12346",
+    "semantic_hash": ""
+  },
+  "docs/architecture/adr/ADR-009-crate-architecture.md": {
+    "mtime": 1788621430.062912,
+    "ast_hash": "0ab847802bade7c8718f6fe18de59521",
+    "semantic_hash": ""
+  },
+  "docs/architecture/adr/ADR-010-thermodynamics-pluggable.md": {
+    "mtime": 1788621430.1339126,
+    "ast_hash": "c1f9d70890017fe706b7f59f8dc95086",
+    "semantic_hash": ""
+  },
+  "docs/architecture/alarm-historian.md": {
+    "mtime": 1788621376.15258,
+    "ast_hash": "02c26e8e5385d62a0d0ee864e81c16e3",
+    "semantic_hash": ""
+  },
+  "docs/architecture/behavior-model.md": {
+    "mtime": 1788621386.8056457,
+    "ast_hash": "22775abfbf3b2f396482e3a11385855c",
+    "semantic_hash": ""
+  },
+  "docs/architecture/control-engine.md": {
+    "mtime": 1788621368.2955317,
+    "ast_hash": "3a7c74aa80a887c8e109b163ed41561f",
+    "semantic_hash": ""
+  },
+  "docs/architecture/custom-equipment.md": {
+    "mtime": 1788621383.5726259,
+    "ast_hash": "8dedeaebfc7e156b8277f1e06748e879",
+    "semantic_hash": ""
+  },
+  "docs/architecture/domain-model.md": {
+    "mtime": 1788621385.549638,
+    "ast_hash": "9e178c67454a3b693f1967336c5d0573",
+    "semantic_hash": ""
+  },
+  "docs/architecture/equipment-sdk.md": {
+    "mtime": 1788621380.501607,
+    "ast_hash": "b0bf78bc095dd628e3a71a76b53012b6",
+    "semantic_hash": ""
+  },
+  "docs/architecture/hmi-pid.md": {
+    "mtime": 1788621384.4626312,
+    "ast_hash": "47dcd754b99b9d0761f91c2ea9499ca0",
+    "semantic_hash": ""
+  },
+  "docs/architecture/performance.md": {
+    "mtime": 1788621360.4354832,
+    "ast_hash": "725ac9bd7571b1f47e676d5541752000",
+    "semantic_hash": ""
+  },
+  "docs/architecture/physics.md": {
+    "mtime": 1788621389.4326618,
+    "ast_hash": "b0aa18921d70ba1e4a5cb47d094d1ce8",
+    "semantic_hash": ""
+  },
+  "docs/architecture/project-format.md": {
+    "mtime": 1788621393.203685,
+    "ast_hash": "ad4a2c2ef2d1e6fabf93f9556b646a32",
+    "semantic_hash": ""
+  },
+  "docs/architecture/protection.md": {
+    "mtime": 1788621376.13958,
+    "ast_hash": "013f0ac25acde1b781685e416b16dd8a",
+    "semantic_hash": ""
+  },
+  "docs/architecture/protocol.md": {
+    "mtime": 1788621393.0806844,
+    "ast_hash": "6f857c313fc324eee3766c1e834f0857",
+    "semantic_hash": ""
+  },
+  "docs/architecture/scenario-engine.md": {
+    "mtime": 1788621365.433514,
+    "ast_hash": "56ee7aaa04f501f33300ecba9417d314",
+    "semantic_hash": ""
+  },
+  "docs/architecture/security.md": {
+    "mtime": 1788621360.3304827,
+    "ast_hash": "33c87122b906040a3fa9c48d4fc193f9",
+    "semantic_hash": ""
+  },
+  "docs/architecture/simulation-engine.md": {
+    "mtime": 1788621360.1584816,
+    "ast_hash": "c69ca216429275ac612bcbb4b2f9e9d6",
+    "semantic_hash": ""
+  },
+  "docs/architecture/solver.md": {
+    "mtime": 1788621389.6656632,
+    "ast_hash": "6af9bf1b4c135be606124d9b2755a04b",
+    "semantic_hash": ""
+  },
+  "docs/architecture/system-architecture.md": {
+    "mtime": 1788621353.6114414,
+    "ast_hash": "0dafd73db2b67098e13aeba10bfa6b8f",
+    "semantic_hash": ""
+  },
+  "docs/architecture/testing.md": {
+    "mtime": 1788621360.408483,
+    "ast_hash": "bf595c169afc491b8f72357dd43513f1",
+    "semantic_hash": ""
+  },
+  "docs/architecture/thermodynamics.md": {
+    "mtime": 1788621389.443662,
+    "ast_hash": "1bd2df108b9e60726037762e33c60633",
+    "semantic_hash": ""
+  },
+  "docs/architecture/topology.md": {
+    "mtime": 1788621379.036598,
+    "ast_hash": "88c533cfde7bae46a381f029717b8b88",
+    "semantic_hash": ""
+  },
+  "docs/architecture/training.md": {
+    "mtime": 1788621375.0075731,
+    "ast_hash": "ca0dac227111008ebeea342e6cc65145",
+    "semantic_hash": ""
+  },
+  "docs/architecture/units.md": {
+    "mtime": 1788621376.3615813,
+    "ast_hash": "e5019d6a646879e273cc8224eeab9868",
+    "semantic_hash": ""
+  },
+  "docs/architecture/validation.md": {
+    "mtime": 1788621353.733442,
+    "ast_hash": "b0903258ef277fb26ef3b0c19fe07942",
+    "semantic_hash": ""
+  },
+  "docs/architecture/versioning.md": {
+    "mtime": 1788621393.4136863,
+    "ast_hash": "7c047d3459007976b744f24cedd3d773",
+    "semantic_hash": ""
+  },
+  "docs/implementation/README.md": {
+    "mtime": 1788622224.8526587,
+    "ast_hash": "933c0c2bc4c4bce7594e3c9931cf772a",
+    "semantic_hash": ""
+  },
+  "docs/implementation/architecture-traceability.md": {
+    "mtime": 1788622224.8527389,
+    "ast_hash": "dc3026f076d90aaebabb181273a351e6",
+    "semantic_hash": ""
+  },
+  "docs/implementation/coding-agent-rules.md": {
+    "mtime": 1788622224.853008,
+    "ast_hash": "93cba4632380a199f1ec956592f6e085",
+    "semantic_hash": ""
+  },
+  "docs/implementation/dependency-map.md": {
+    "mtime": 1788622224.852785,
+    "ast_hash": "f926fb2bc2433ac2062810b5ac2fbdef",
+    "semantic_hash": ""
+  },
+  "docs/implementation/phase-01-foundation.md": {
+    "mtime": 1788622224.8528783,
+    "ast_hash": "bb24cbe7314f7999743e82f288c9a5c4",
+    "semantic_hash": ""
+  },
+  "docs/implementation/roadmap.md": {
+    "mtime": 1788622224.852837,
+    "ast_hash": "5545aafa224a75bfd9e400a1391d9312",
+    "semantic_hash": ""
+  },
+  "docs/implementation/testing-strategy.md": {
+    "mtime": 1788622224.8529682,
+    "ast_hash": "19341435d3e3d8ec2af91b1a556934c2",
+    "semantic_hash": ""
+  },
+  "docs/implementation/vertical-slice-01.md": {
+    "mtime": 1788622224.8529265,
+    "ast_hash": "0bcc43158730a11c5df33a7c3ac0890f",
+    "semantic_hash": ""
+  }
+}

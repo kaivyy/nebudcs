@@ -1,0 +1,14 @@
+[package]
+name        = "nebudcs-units"
+version     = "0.1.0"
+edition     = "2021"
+description = "Strongly typed physical quantities and engineering unit conversion for NebuDCS"
+license     = "MIT OR Apache-2.0"
+
+[dependencies]
+nebudcs-types = { path = "../nebudcs-types" }
+serde         = { workspace = true }
+thiserror     = { workspace = true }
+
+[dev-dependencies]
+serde_json = { workspace = true }

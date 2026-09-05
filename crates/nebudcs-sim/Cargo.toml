@@ -1,0 +1,19 @@
+[package]
+name        = "nebudcs-sim"
+version     = "0.1.0"
+edition     = "2021"
+description = "Deterministic simulation clock, double-buffered runtime state, and execution pipeline for NebuDCS"
+license     = "MIT OR Apache-2.0"
+
+[dependencies]
+nebudcs-types    = { path = "../nebudcs-types" }
+nebudcs-units    = { path = "../nebudcs-units" }
+nebudcs-model    = { path = "../nebudcs-model" }
+nebudcs-topology = { path = "../nebudcs-topology" }
+serde            = { workspace = true }
+serde_json       = { workspace = true }
+thiserror        = { workspace = true }
+indexmap         = { workspace = true }
+
+[dev-dependencies]
+serde_json = { workspace = true }

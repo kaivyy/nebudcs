@@ -1,0 +1,16 @@
+[package]
+name        = "nebudcs-types"
+version     = "0.1.0"
+edition     = "2021"
+description = "Core strongly-typed identifiers, simulation time, schema versioning, and errors for NebuDCS"
+license     = "MIT OR Apache-2.0"
+# ARCHITECTURAL INVARIANT: nebudcs-types must have ZERO workspace crate dependencies.
+# (coding-agent-rules.md invariant #1)
+
+[dependencies]
+serde     = { workspace = true }
+thiserror = { workspace = true }
+ulid      = { workspace = true }
+
+[dev-dependencies]
+serde_json = { workspace = true }

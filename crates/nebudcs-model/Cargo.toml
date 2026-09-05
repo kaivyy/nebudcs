@@ -1,0 +1,19 @@
+[package]
+name        = "nebudcs-model"
+version     = "0.1.0"
+edition     = "2021"
+description = "Project hierarchy DTOs, EquipmentDefinition schema, and domain model for NebuDCS"
+license     = "MIT OR Apache-2.0"
+
+[dependencies]
+nebudcs-types = { path = "../nebudcs-types" }
+nebudcs-units = { path = "../nebudcs-units" }
+serde         = { workspace = true }
+serde_json    = { workspace = true }
+toml          = { workspace = true }
+indexmap      = { workspace = true }
+thiserror     = { workspace = true }
+
+[dev-dependencies]
+serde_json = { workspace = true }
+toml       = { workspace = true }

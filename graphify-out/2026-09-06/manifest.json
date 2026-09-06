@@ -395,8 +395,8 @@
     "semantic_hash": ""
   },
   "docs/implementation/architecture-traceability.md": {
-    "mtime": 1788638475.8818874,
-    "ast_hash": "8748b203b126bfbdaaaf70db8774cb73",
+    "mtime": 1788654391.5299025,
+    "ast_hash": "acf6a916858bd726220d9e44313a0950",
     "semantic_hash": ""
   },
   "docs/implementation/coding-agent-rules.md": {
@@ -405,8 +405,8 @@
     "semantic_hash": ""
   },
   "docs/implementation/dependency-map.md": {
-    "mtime": 1788635850.6467202,
-    "ast_hash": "a100559c33babfb7a11ba7247811e64e",
+    "mtime": 1788654383.3708522,
+    "ast_hash": "6d3b2a79ba413493c7a49613cf5f315d",
     "semantic_hash": ""
   },
   "docs/implementation/phase-01-foundation.md": {
@@ -415,8 +415,8 @@
     "semantic_hash": ""
   },
   "docs/implementation/roadmap.md": {
-    "mtime": 1788638465.2968223,
-    "ast_hash": "4e06e3f35c890b8c80545c12ec708230",
+    "mtime": 1788654333.3565443,
+    "ast_hash": "581b7047cdb81fa23a06e8b6d9321477",
     "semantic_hash": ""
   },
   "docs/implementation/testing-strategy.md": {
@@ -435,8 +435,8 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1788636192.7008266,
-    "ast_hash": "2687e8fbc5398704b7a3e5b12f21e4ff",
+    "mtime": 1788654376.5868104,
+    "ast_hash": "6b7c5f7c61696948c58264a0457de767",
     "semantic_hash": ""
   },
   "docs/implementation/phase-04-process-physics.md": {
@@ -675,8 +675,8 @@
     "semantic_hash": ""
   },
   "apps/nebudcs-server/src/host.rs": {
-    "mtime": 1788640561.22973,
-    "ast_hash": "e042ba06e95821d27a40bc04c4a2315c",
+    "mtime": 1788654308.2213895,
+    "ast_hash": "3cc3526c6b776a1cc4f9c2dbdfc863e6",
     "semantic_hash": ""
   },
   "apps/nebudcs-server/src/lib.rs": {
@@ -710,8 +710,8 @@
     "semantic_hash": ""
   },
   "apps/nebudcs-server/src/routes/mod.rs": {
-    "mtime": 1788640523.6924987,
-    "ast_hash": "18edb4a7205ad3a46cb21e4eaeac7bb5",
+    "mtime": 1788654308.2313895,
+    "ast_hash": "8ed76011f6f530df6ada7eab4da5cd4d",
     "semantic_hash": ""
   },
   "apps/nebudcs-server/src/routes/sim.rs": {
@@ -745,13 +745,13 @@
     "semantic_hash": ""
   },
   "crates/nebudcs-protocol/src/command.rs": {
-    "mtime": 1788640523.8624997,
-    "ast_hash": "979e7fadd914dae5bbddf45b991a20b6",
+    "mtime": 1788653760.7440178,
+    "ast_hash": "b7a2cac1290a782af17a9834e946764b",
     "semantic_hash": ""
   },
   "crates/nebudcs-protocol/src/dto.rs": {
-    "mtime": 1788640523.8634999,
-    "ast_hash": "987ebec311f76d0167d5fac215dcc5a8",
+    "mtime": 1788653733.676851,
+    "ast_hash": "b6f67cfdc3add013e3a6fa26696253be",
     "semantic_hash": ""
   },
   "crates/nebudcs-protocol/src/error.rs": {
@@ -760,8 +760,8 @@
     "semantic_hash": ""
   },
   "crates/nebudcs-protocol/src/lib.rs": {
-    "mtime": 1788639984.012175,
-    "ast_hash": "e1b3d08741bf06560eb015b27800be17",
+    "mtime": 1788653740.1908913,
+    "ast_hash": "6de0e47a7bc40bb6174c4f83c7ef18b8",
     "semantic_hash": ""
   },
   "crates/nebudcs-protocol/src/message.rs": {
@@ -900,13 +900,13 @@
     "semantic_hash": ""
   },
   "apps/nebudcs-server/tests/scenario_api_tests.rs": {
-    "mtime": 1788640571.5237932,
-    "ast_hash": "a604e233473dddf6778ba44e97d0868a",
+    "mtime": 1788652901.9947293,
+    "ast_hash": "dc96e3f17b284770d519778261c6c875",
     "semantic_hash": ""
   },
   "crates/nebudcs-scenario/src/disturbance.rs": {
-    "mtime": 1788640523.8734999,
-    "ast_hash": "03b78eb4c4c929362947124fcb5348e5",
+    "mtime": 1788652765.1748867,
+    "ast_hash": "66b4d72d7f7fedc2775c18498cfa9192",
     "semantic_hash": ""
   },
   "crates/nebudcs-scenario/src/engine.rs": {
@@ -920,8 +920,8 @@
     "semantic_hash": ""
   },
   "crates/nebudcs-scenario/src/fault.rs": {
-    "mtime": 1788640523.8814998,
-    "ast_hash": "4b3372f3f017a55b8d88b366b758f82d",
+    "mtime": 1788652877.0465755,
+    "ast_hash": "111e45f0b30e43fdf611778fc990756f",
     "semantic_hash": ""
   },
   "crates/nebudcs-scenario/src/lib.rs": {
@@ -967,6 +967,71 @@
   "web/tests/scenario.test.ts": {
     "mtime": 1788640516.0919204,
     "ast_hash": "7c87177bfcc51f2fac97eb5b68420edd",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scenario/tests/independent_verification_tests.rs": {
+    "mtime": 1788652877.0655758,
+    "ast_hash": "239f3c35d8f534e2f50c45041790f521",
+    "semantic_hash": ""
+  },
+  "apps/nebudcs-server/src/routes/equipment.rs": {
+    "mtime": 1788654308.2273896,
+    "ast_hash": "7aafe75df0cafea8777e4f4abf248cc1",
+    "semantic_hash": ""
+  },
+  "apps/nebudcs-server/tests/custom_equipment_api_tests.rs": {
+    "mtime": 1788654308.2543895,
+    "ast_hash": "b49f919ed64cf85c8deaa32b7f03c728",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/src/curve.rs": {
+    "mtime": 1788653457.8051522,
+    "ast_hash": "d4b22c1097d35ac6cf918f5328f17eb8",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/src/error.rs": {
+    "mtime": 1788653446.6160834,
+    "ast_hash": "b3239da0fbfd4bb7adc91078e3970e8b",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/src/lib.rs": {
+    "mtime": 1788654308.4483907,
+    "ast_hash": "bfd32e8dd8b8e24e4b2f0f9272ccb325",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/src/model.rs": {
+    "mtime": 1788653464.0451906,
+    "ast_hash": "662061c1864ae015be86a32c5c1dc8cb",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/src/runtime.rs": {
+    "mtime": 1788654308.455391,
+    "ast_hash": "d3edd029162f9456604b339df1678bae",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/src/sandbox.rs": {
+    "mtime": 1788654308.458391,
+    "ast_hash": "8918a8fe0e4c9069ba52bd387c3bcf86",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/src/validation.rs": {
+    "mtime": 1788654308.462391,
+    "ast_hash": "5499729430f1235a586d4407f4afbcbf",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/tests/curve_tests.rs": {
+    "mtime": 1788654308.465391,
+    "ast_hash": "fcde7a42984825f97a81ba4f20533bd3",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/tests/custom_equipment_tests.rs": {
+    "mtime": 1788654308.470391,
+    "ast_hash": "9805d3b00a4eeb0ee5ddea134bdbe38a",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/tests/sandbox_tests.rs": {
+    "mtime": 1788654308.472391,
+    "ast_hash": "7807cd680d4ce564465acb9a06a944f0",
     "semantic_hash": ""
   }
 }

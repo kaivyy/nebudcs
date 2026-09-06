@@ -14,11 +14,14 @@ pub mod error;
 pub mod message;
 pub mod version;
 
-pub use command::{PidModeDto, RuntimeCommand, ScenarioCommand, SimControlCommand, TagValueDto};
+pub use command::{
+    EquipmentCommand, PidModeDto, RuntimeCommand, ScenarioCommand, SimControlCommand, TagValueDto,
+};
 pub use dto::{
     ActiveFaultDto, AlarmSeverityDto, AlarmSnapshotDto, AlarmStateDto, DeltaUpdateDto,
-    HistoricalEventDto, ScenarioStatusDto, ServerHealthDto, StateSnapshotDto, TagQualityDto,
-    TagValueSampleDto,
+    EquipmentControlRequestDto, EquipmentDefinitionSummaryDto, EquipmentInstanceSummaryDto,
+    HistoricalEventDto, InstantiateEquipmentRequestDto, ScenarioStatusDto, ServerHealthDto,
+    StateSnapshotDto, TagQualityDto, TagValueSampleDto, ValidateEquipmentResponseDto,
 };
 pub use error::{ProtocolError, ProtocolErrorCode, ProtocolResult};
 pub use message::{ClientCapabilities, ClientMessage, ServerMessage};

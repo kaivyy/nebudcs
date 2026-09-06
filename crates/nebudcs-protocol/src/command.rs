@@ -80,6 +80,40 @@ pub enum RuntimeCommand {
 
     /// Scenario and fault injection controls.
     Scenario(ScenarioCommand),
+
+    /// Custom equipment runtime controls.
+    Equipment(EquipmentCommand),
+}
+
+/// Custom equipment runtime commands.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(tag = "action", rename_all = "snake_case")]
+pub enum EquipmentCommand {
+    Define {
+        definition_json: String,
+    },
+    Instantiate {
+        definition_id: String,
+        name: String,
+        #[serde(default)]
+        parameter_overrides: std::collections::BTreeMap<String, f64>,
+        #[serde(default)]
+        instance_id: Option<String>,
+    },
+    Start {
+        instance_id: String,
+    },
+    Stop {
+        instance_id: String,
+    },
+    ResetTrip {
+        instance_id: String,
+    },
+    SetVariable {
+        instance_id: String,
+        var_name: String,
+        value: f64,
+    },
 }
 
 /// Scenario execution commands.

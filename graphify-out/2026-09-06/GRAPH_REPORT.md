@@ -1,16 +1,16 @@
 # Graph Report - NebuDCS  (2026-09-06)
 
 ## Corpus Check
-- 193 files · ~145,677 words
+- 206 files · ~158,449 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2677 nodes · 4966 edges · 162 communities (143 shown, 19 thin omitted)
-- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 66 edges (avg confidence: 0.76)
+- 2844 nodes · 5382 edges · 174 communities (154 shown, 20 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 75 edges (avg confidence: 0.76)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `cbf76672`
+- Built from commit: `d0b546e4`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -79,6 +79,7 @@
 - Thermodynamics Architecture
 - NebuDCS Implementation Blueprint
 - Physics Architecture
+- implementation/README.md
 - 3. Technology Direction
 - 21. Faceplates
 - 8. Reactor Framework
@@ -123,6 +124,7 @@
 - .alarms
 - VesselProcessPhysics
 - EquipmentInstance
+- alarm_tests.rs
 - nebudcs-alarm/src/engine.rs
 - NebuDCS Architecture Overview
 - .new
@@ -170,12 +172,22 @@
 - vite.config.ts
 - .fmt
 - NebuConnectionStatus
+- independent_verification_tests.rs
+- HistorianRunMeta
+- ProtocolError
+- command.rs
+- nebudcs-historian/src/lib.rs
+- EquipmentInstance
+- 3. Actuator Arbitration & Priority Hierarchy
+- NebuApp
+- AlarmError
+- .alarms
 
 ## God Nodes (most connected - your core abstractions)
-1. `String` - 153 edges
-2. `HostHandle` - 70 edges
-3. `PhysicsError` - 58 edges
-4. `RuntimeTagStore` - 57 edges
+1. `String` - 184 edges
+2. `HostHandle` - 81 edges
+3. `RuntimeTagStore` - 63 edges
+4. `PhysicsError` - 58 edges
 5. `TopologyGraph` - 49 edges
 6. `SimulationTime` - 46 edges
 7. `TagQuality` - 42 edges
@@ -184,33 +196,33 @@
 10. `ComponentComposition` - 39 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `validate_equipment()` --calls--> `validate_definition()`  [INFERRED]
+  apps/nebudcs-server/src/routes/equipment.rs → crates/nebudcs-scripting/src/validation.rs
+- `define_equipment()` --calls--> `validate_definition()`  [INFERRED]
+  apps/nebudcs-server/src/routes/equipment.rs → crates/nebudcs-scripting/src/validation.rs
 - `handle_ws_session()` --calls--> `is_compatible_protocol_version()`  [INFERRED]
   apps/nebudcs-server/src/session.rs → crates/nebudcs-protocol/src/version.rs
 - `extract_token_from_query()` --references--> `String`  [EXTRACTED]
   apps/nebudcs-server/src/auth.rs → crates/nebudcs-types/src/version.rs
 - `ServerConfig` --references--> `String`  [EXTRACTED]
   apps/nebudcs-server/src/config.rs → crates/nebudcs-types/src/version.rs
-- `ServerError` --references--> `String`  [EXTRACTED]
-  apps/nebudcs-server/src/error.rs → crates/nebudcs-types/src/version.rs
-- `HostHandle` --references--> `HistorianReader`  [EXTRACTED]
-  apps/nebudcs-server/src/host.rs → crates/nebudcs-historian/src/query.rs
 
 ## Import Cycles
 - None detected.
 
-## Communities (162 total, 19 thin omitted)
+## Communities (174 total, 20 thin omitted)
 
 ### Community 0 - "TopologyGraph"
-Cohesion: 0.16
-Nodes (8): Default, Option, ScenarioResult, Self, Vec, ScenarioEngine, ScenarioStatus, ScenarioState
+Cohesion: 0.15
+Nodes (9): Default, Option, ScenarioResult, Self, Vec, ScenarioEngine, ScenarioStatus, OperatorAction (+1 more)
 
 ### Community 1 - "String"
-Cohesion: 0.17
-Nodes (12): Into, Self, ComponentComposition, CompositionBasis, BTreeMap, IndexMap, Into, Result (+4 more)
+Cohesion: 0.06
+Nodes (27): CompiledDefinition, CustomEquipmentInstance, CustomEquipmentManager, CustomEquipmentSystem, Arc, AST, BTreeMap, Default (+19 more)
 
 ### Community 2 - "TopologyError"
-Cohesion: 0.12
-Nodes (24): StreamType, NebuError, EquipmentId, From, Phase, PipeSegmentId, PortId, Self (+16 more)
+Cohesion: 0.05
+Nodes (62): make_port(), Cardinality, PortDefinition, PortDirection, PortDomain, PortId, UtilityKind, StreamType (+54 more)
 
 ### Community 3 - "conversion.rs"
 Cohesion: 0.05
@@ -229,16 +241,16 @@ Cohesion: 0.06
 Nodes (34): 10. Solver/Convergence Assessment, 11. Control/Protection Assessment, 12. HMI/P&ID Assessment, 13. Protocol Assessment, 14. Versioning Assessment, 15. Security Review, 16. Dependency Review, 17. Performance Strategy (+26 more)
 
 ### Community 7 - "sim_tests.rs"
-Cohesion: 0.05
-Nodes (69): AlarmDefinitionId, AlarmDefinition, AlarmPriority, AlarmType, Capability, Cardinality, EnvelopeDimension, EquipmentCategory (+61 more)
+Cohesion: 0.09
+Nodes (40): AlarmDefinitionId, AlarmDefinition, AlarmPriority, AlarmType, Capability, EnvelopeDimension, EquipmentCategory, EquipmentDefinition (+32 more)
 
 ### Community 8 - "ComponentComposition"
 Cohesion: 0.04
 Nodes (46): 10.1 Configurable Retention Modes, 10.2 Safe Chunked Pruning, 10. Retention & Storage Policy, 11.1 Bucket Aggregation Contract, 11. Downsampling & Bucket Aggregation Model, 12.1 Historized Event Types, 12. Event Historian (Discrete DCS Events), 13. Project, Session & Model Isolation (+38 more)
 
 ### Community 9 - "PhysicsError"
-Cohesion: 0.12
-Nodes (22): AggregatedBucket, downsample_to_buckets(), quality_rank(), Vec, HistorianRecord, HistorianSendError, HistoricalEvent, Into (+14 more)
+Cohesion: 0.16
+Nodes (11): HistoricalEvent, Into, Option, Self, HistoricalSample, Self, Default, Display (+3 more)
 
 ### Community 10 - "Protection System Architecture"
 Cohesion: 0.18
@@ -249,8 +261,8 @@ Cohesion: 0.06
 Nodes (30): 10. Process Streams, 11. Utilities, 12. Control System, 13. Tag System, 16. Alarm System, 17. Historian, 18. Fault Injection, 1. Product Vision (+22 more)
 
 ### Community 12 - "SchemaVersion"
-Cohesion: 0.07
-Nodes (30): AreaId, Area, build_project(), Plant, Project, ProjectMetadata, Into, ProjectId (+22 more)
+Cohesion: 0.11
+Nodes (14): Display, Formatter, NebuResult, Option, Ord, Ordering, PartialOrd, Result (+6 more)
 
 ### Community 13 - "StateBuffer"
 Cohesion: 0.13
@@ -265,28 +277,28 @@ Cohesion: 0.17
 Nodes (12): 1. Overview, 2. What a Project Contains, 3. Project File Format Recommendation, 4. Schema Versioning & Migrations, 5. Dependency Resolution, 6. Deterministic Reproduction, 7. SQLite Schema Outline (Conceptual), 8. Architecture Diagrams (+4 more)
 
 ### Community 16 - "StreamDefinition"
-Cohesion: 0.13
+Cohesion: 0.12
 Nodes (17): make_stream(), PortRef, EquipmentId, IndexMap, Into, Item, Option, PortId (+9 more)
 
 ### Community 17 - "SimulationTime"
-Cohesion: 0.16
-Nodes (10): ActiveFault, ActiveFaultSummary, FaultManager, HashMap, Option, ScenarioResult, Self, Vec (+2 more)
+Cohesion: 0.18
+Nodes (8): ActiveFault, ActiveFaultSummary, FaultManager, HashMap, Option, ScenarioResult, Self, Vec
 
 ### Community 18 - "MassFlow"
-Cohesion: 0.12
-Nodes (6): Phase, PhysicalState, Density, SpecificEnthalpy, StreamId, StreamPhysicalState
+Cohesion: 0.11
+Nodes (13): ComponentComposition, CompositionBasis, Phase, PhysicalState, BTreeMap, Density, IndexMap, Into (+5 more)
 
 ### Community 19 - "Pressure"
 Cohesion: 0.13
 Nodes (4): AccumulatorVolumeModel, Density, Option, SpecificEnthalpy
 
 ### Community 20 - "SimulationEngine"
-Cohesion: 0.21
-Nodes (5): ExecutionBlock, ExecutionPlan, EquipmentId, Self, Vec
+Cohesion: 0.12
+Nodes (10): C, GenericEquipmentPhysics, Box, BTreeMap, EquipmentId, Into, Self, TagId (+2 more)
 
 ### Community 21 - "SimulationClock"
-Cohesion: 0.16
-Nodes (16): ComparisonOp, ControllerInitialState, DisturbanceDefinition, DisturbanceType, EquipmentInitialState, EventTrigger, FaultType, InitialConditions (+8 more)
+Cohesion: 0.18
+Nodes (15): ComparisonOp, ControllerInitialState, DisturbanceDefinition, DisturbanceType, EquipmentInitialState, EventTrigger, FaultDefinition, FaultType (+7 more)
 
 ### Community 22 - "roadmap.md"
 Cohesion: 0.10
@@ -309,16 +321,16 @@ Cohesion: 0.18
 Nodes (11): 1. Overview & Core Invariants, 2. Communication Paradigms, 3. Implemented REST API Endpoints, 4.1 Inbound Messages (`ClientMessage`), 4.2 Outbound Messages (`ServerMessage`), 4. Implemented WebSocket Protocol, 5. Security & Authentication, 6.1 Subsystem Boundaries (+3 more)
 
 ### Community 27 - "TagValue"
-Cohesion: 0.19
-Nodes (9): NebuError, EquipmentId, From, Self, TagId, SimError, F, Result (+1 more)
+Cohesion: 0.26
+Nodes (5): F, Result, TagId, StateReadView<'a>, StateWriteView<'a>
 
 ### Community 28 - ".solve_vector"
 Cohesion: 0.20
 Nodes (9): RecycleSolver, Default, F, Result, Self, Vec, SolverConfig, SolverReport (+1 more)
 
 ### Community 29 - "StateReadView"
-Cohesion: 0.13
-Nodes (10): DoubleBufferedState, EquipmentState, BTreeMap, EquipmentId, Into, Option, Self, TagId (+2 more)
+Cohesion: 0.17
+Nodes (5): EquipmentState, EquipmentId, Into, Option, Self
 
 ### Community 30 - "time.rs"
 Cohesion: 0.22
@@ -377,20 +389,20 @@ Cohesion: 0.17
 Nodes (11): 1. Overview, 2. Immutable Versions & Provenance, 3. Dependency Locking, 4. Equipment Definition Version Lifecycle, 5. Upgrade and Migration Paths, 6. Rollback Capability, 7. Architecture Diagrams, Migration Sequence (+3 more)
 
 ### Community 44 - "SimError"
-Cohesion: 0.17
-Nodes (9): ResolvedTag, BTreeMap, Into, Option, Self, TagId, Vec, RuntimeTagStore (+1 more)
+Cohesion: 0.19
+Nodes (10): ResolvedTag, BTreeMap, Into, Option, Self, TagId, Vec, RuntimeTagStore (+2 more)
 
 ### Community 45 - "phase-01-foundation.md"
 Cohesion: 0.18
 Nodes (10): CARGO.TOML CONTENT, CRATE-BY-CRATE SPECIFICATION, EXIT CRITERIA, EXPLICITLY EXCLUDED, GOAL, `nebudcs-model`, `nebudcs-types`, `nebudcs-units` (+2 more)
 
 ### Community 46 - "Temperature"
-Cohesion: 0.10
-Nodes (15): EnergyBalance, EnthalpyAccumulationInputs, MassBalance, MassBalanceResult, Result, SpecificEnthalpy, SpeciesBalance, EquipmentExecutionContext (+7 more)
+Cohesion: 0.18
+Nodes (7): EnergyBalance, EnthalpyAccumulationInputs, MassBalance, MassBalanceResult, Result, SpecificEnthalpy, SpeciesBalance
 
 ### Community 47 - "pipe_pressure_drop"
-Cohesion: 0.11
-Nodes (4): ClockState, Result, Self, SimulationClock
+Cohesion: 0.08
+Nodes (9): ClockState, Result, Self, SimulationClock, ExecutionBlock, ExecutionPlan, EquipmentId, Self (+1 more)
 
 ### Community 48 - "Security Architecture"
 Cohesion: 0.20
@@ -413,12 +425,12 @@ Cohesion: 0.14
 Nodes (13): 1. Multi-Layered Verification Architecture, 2. The Eight Verification Layers, 3. Future Security, Versioning & Governance Requirements, 4. Current Test Suite Status (Phases 0–8 Verified), Layer 1: Software Correctness (Per-Crate Unit Tests), Layer 2: Numerical Correctness & Safeguards, Layer 3: Physical & Model Verification, Layer 4: Deterministic Replay & Temporal Invariance (+5 more)
 
 ### Community 53 - "vertical-slice-01.md"
-Cohesion: 0.13
-Nodes (20): ApiClientConfig, PenConfig, ActiveFaultDto, AlarmSeverityDto, AlarmSnapshotDto, AlarmStateDto, ClientCapabilities, DeltaUpdateDto (+12 more)
+Cohesion: 0.23
+Nodes (6): ApiClientConfig, PenConfig, AlarmSnapshotDto, ScenarioStatusDto, StateSnapshotDto, StoreListener
 
 ### Community 54 - "Behavior Model Architecture"
-Cohesion: 0.25
-Nodes (7): 1. Behavioral Definitions, 2. Failure Mode Architecture, 3. Causal & Failure Propagation, 4. Failure Propagation through Utility Networks, 5. Auxiliary System Dependencies, 6. Dynamic Equipment Behavior, Behavior Model Architecture
+Cohesion: 0.12
+Nodes (13): 1. Behavioral Definitions, 2. Failure Mode Architecture, 3. Causal & Failure Propagation, 4. Failure Propagation through Utility Networks, 5. Auxiliary System Dependencies, 6. Dynamic Equipment Behavior, Behavior Model Architecture, 1. Overview (+5 more)
 
 ### Community 55 - "Engineering Units Architecture"
 Cohesion: 0.25
@@ -429,8 +441,8 @@ Cohesion: 0.25
 Nodes (7): 1. Overview, 2. Validation Categories, 3. Engineering Validation (Design-Time), 4. Validation Pipeline, 5. Reference Case Architecture, 6. Validation Rule Engine, Engineering and Design Validation
 
 ### Community 57 - "Custom Equipment Architecture"
-Cohesion: 0.29
-Nodes (6): 1. Overview, 2. Performance Targets, 3. Simulation Tick Budget, 4. Performance Techniques, 5. Monitoring and Benchmarking, Performance Architecture
+Cohesion: 0.13
+Nodes (8): Curve1D, Curve2D, ExtrapolationMode, InterpolationMethod, Into, ScriptingResult, Self, Vec
 
 ### Community 58 - "Performance Architecture"
 Cohesion: 0.09
@@ -448,13 +460,13 @@ Nodes (8): 1. Solver Architecture & Execution Hierarchy, 2.1 Solver Configuratio
 Cohesion: 0.22
 Nodes (8): 1. Pluggable Property Package System, 2.1 The `PropertyPackage` Trait Contract, 2.2 Verified Implementations, 2. Verified Phase 4 Property Packages, 3. Component Composition Tracking, 4. Advanced Thermodynamics Roadmap (Phase 12), Composition Invariants (`src/state.rs`), Thermodynamics & Property Package Architecture
 
-### Community 62 - "NebuDCS Implementation Blueprint"
-Cohesion: 0.14
-Nodes (4): NebuApp, ClientMessage, RuntimeCommand, WsClient
-
 ### Community 63 - "Physics Architecture"
 Cohesion: 0.18
 Nodes (10): 1. Physical Architecture Overview, 2.1 Conservation Laws, 2.2 Fluid Hydraulics & Pressure-Flow Equations, 2.3 Thermodynamics & Engineering VLE, 2.4 Nonlinear Recycle Solver (`RecycleSolver`), 2.5 Numerical Safeguards & Stability Invariants, 2. Verified Phase 4 Physics Scope, 3. Engineering-Fidelity Assumptions & Known Limitations (+2 more)
+
+### Community 64 - "implementation/README.md"
+Cohesion: 0.13
+Nodes (12): 1. The Authoritative Flow of Truth, 2. Dynamic Scenario Description, 3. Required Crates & Subsystems, 4. Acceptance Criteria & Verification Gates, Goal & Purpose, Vertical Slice 1: End-to-End Architecture Proof, Core Product Invariants, Crate Workspace Structure (+4 more)
 
 ### Community 65 - "3. Technology Direction"
 Cohesion: 0.40
@@ -473,28 +485,28 @@ Cohesion: 0.67
 Nodes (3): 28. UI Strategy, Desktop Engineering Station, Web Operator/Training Station
 
 ### Community 74 - "SimulationSystem"
-Cohesion: 0.08
-Nodes (18): Result, Result, StateReadView, StateWriteView, Send, SimulationSystem, StepContext, FailingSystem (+10 more)
+Cohesion: 0.10
+Nodes (12): StepContext, FailingSystem, make_def(), EquipmentId, Result, Vec, SystemA, SystemB (+4 more)
 
 ### Community 75 - "GenericEquipmentPhysics"
-Cohesion: 0.09
-Nodes (14): C, EquipmentCapability, GenericEquipmentPhysics, HeadSourceModel, Box, BTreeMap, EquipmentId, Into (+6 more)
+Cohesion: 0.19
+Nodes (6): GenericPhysicsSystem, BTreeMap, EquipmentId, Option, Self, TagId
 
 ### Community 77 - "SimError"
 Cohesion: 0.08
 Nodes (9): PermissiveGuard, BTreeMap, Into, Self, Vec, RsLatch, SrLatch, TofTimer (+1 more)
 
 ### Community 78 - "String"
-Cohesion: 0.28
-Nodes (7): Connection, HistorianResult, P, Self, Vec, SqliteHistorianReader, Mutex
+Cohesion: 0.17
+Nodes (15): AggregatedBucket, downsample_to_buckets(), quality_rank(), Vec, AggregatedQueryRequest, RawQueryRequest, Connection, HistorianResult (+7 more)
 
 ### Community 79 - "EquipmentInstance"
 Cohesion: 0.18
 Nodes (10): 1. Architectural Principles, 2.1 State & Composition (`state`), 2.2 Property Packages (`properties`), 2.3 Hydraulics & Flow Elements (`hydraulics`), 2.4 Conservation Laws (`conservation`), 2.5 Solvers (`solver`), 2.6 Equipment Capability Framework (`equipment` & `system`), 2. Modules & Governing Physics (+2 more)
 
 ### Community 80 - "nebudcs-types/src/error.rs"
-Cohesion: 0.16
-Nodes (11): ScenarioEvent, QueuedEvent, Option, Ord, Ordering, PartialOrd, Self, Vec (+3 more)
+Cohesion: 0.15
+Nodes (12): ScenarioAction, ScenarioEvent, QueuedEvent, Option, Ord, Ordering, PartialOrd, Self (+4 more)
 
 ### Community 83 - "Control Engine & Automation Architecture"
 Cohesion: 0.15
@@ -509,7 +521,7 @@ Cohesion: 0.06
 Nodes (31): 10. Performance Requirements, 11. Enhanced 7-Category Verification Matrix, 12. Phase Boundary Audit & Non-Goals, 1. Executive Architectural Assessment, 2.1 Mode Transition Contracts, 2.2 Controller Internal Memory & State Structures, 2. PID Controller Lifecycle & State Transitions, 3.1 Priority Hierarchy & Resolution Rules (+23 more)
 
 ### Community 86 - "PipeSegment"
-Cohesion: 0.17
+Cohesion: 0.20
 Nodes (12): PipeEndpoint, PipeSegment, PortRef, EquipmentId, From, Into, Option, PipeSegmentId (+4 more)
 
 ### Community 87 - "Scenario Engine Architecture"
@@ -517,8 +529,8 @@ Cohesion: 0.18
 Nodes (11): 1. Overview, 2. Data-Driven Scenario Architecture, 3. Fault Injection System, 4. Scenario Lifecycle, 5. Scenario Replay, 6. Architecture Diagrams, 7. Scenario File Format Sketch, Fault Injection into Simulation Model (+3 more)
 
 ### Community 88 - "NebuDCS Architecture Overview"
-Cohesion: 0.13
-Nodes (12): BTreeMap, BTreeSet, EquipmentDefinitionId, EquipmentId, Option, PipeSegmentId, PortId, Self (+4 more)
+Cohesion: 0.16
+Nodes (9): BTreeMap, BTreeSet, EquipmentDefinitionId, Option, PipeSegmentId, Result, SignalConnectionId, StreamId (+1 more)
 
 ### Community 89 - "conservation.rs"
 Cohesion: 0.38
@@ -545,24 +557,24 @@ Cohesion: 0.33
 Nodes (5): 1. Architecture Consistency Audit, 2. Comprehensive Requirements Traceability Matrix (Phases 0–16), 3. Product Environment Matrix, Architecture Traceability Matrix & Consistency Audit, Key Findings & Alignments
 
 ### Community 95 - "AlarmEngine"
-Cohesion: 0.16
-Nodes (4): AlarmEngine, BTreeMap, Self, TagId
+Cohesion: 0.18
+Nodes (9): Default, Option, Self, Vec, ServerConfig, build_alarm_snapshots(), AlarmSnapshotDto, Vec (+1 more)
 
 ### Community 96 - "NebuDCS Implementation Blueprint & Execution Guide"
 Cohesion: 0.33
 Nodes (6): Core Product Principles & Invariants, Current Implementation Baseline, Executive Overview, How a Coding Agent Must Use These Documents, Navigation & Implementation Document Index, NebuDCS Implementation Blueprint & Execution Guide
 
 ### Community 97 - "NebuDCS: Industrial Process Simulation & DCS Training Platform"
-Cohesion: 0.33
-Nodes (6): Core Product Invariants, Crate Workspace Structure, Current Implementation Baseline, Documentation Index, NebuDCS: Industrial Process Simulation & DCS Training Platform, Quickstart & Headless Verification
+Cohesion: 0.16
+Nodes (18): CompositionDefinition, CustomEquipmentDefinition, CustomizationTier, default_entry_point(), default_tripped_state(), InterlockRuleDefinition, InternalConnectionDefinition, PortMappingDefinition (+10 more)
 
 ### Community 98 - "SignalConnection"
-Cohesion: 0.21
+Cohesion: 0.17
 Nodes (10): EquipmentId, Into, Option, PortId, Self, SignalConnectionId, TagId, SignalConnection (+2 more)
 
 ### Community 99 - "block.rs"
 Cohesion: 0.20
-Nodes (6): AlarmType, AlarmBlockConfig, Self, TagId, AlarmSeverity, AlarmType
+Nodes (16): AreaId, Area, build_project(), Plant, Project, ProjectMetadata, Into, ProjectId (+8 more)
 
 ### Community 100 - "TankDrainPhysicsSystem"
 Cohesion: 0.29
@@ -570,10 +582,10 @@ Nodes (7): Density, EquipmentId, Result, Self, TankDrainPhysicsSystem, test_clos
 
 ### Community 101 - "pid.rs"
 Cohesion: 0.16
-Nodes (9): Box, EquipmentId, Option, Result, Self, TagId, Vec, SimulationEngine (+1 more)
+Nodes (9): Result, Self, NebuError, EquipmentId, From, Self, TagId, SimError (+1 more)
 
 ### Community 102 - "graph.rs"
-Cohesion: 0.29
+Cohesion: 0.25
 Nodes (7): IndexMap, find_strongly_connected_components(), BTreeMap, BTreeSet, EquipmentId, Vec, SccAnalysisResult
 
 ### Community 103 - "AlarmSystem"
@@ -585,8 +597,8 @@ Cohesion: 0.33
 Nodes (3): GlobalAlloc, Layout, TrackingAllocator
 
 ### Community 106 - "AlarmBlockConfig"
-Cohesion: 0.15
-Nodes (15): GasComponentProperty, IdealGasMixture, IncompressibleLiquid, PhaseEquilibrium, PropertyPackage, BTreeMap, Density, Phase (+7 more)
+Cohesion: 0.12
+Nodes (17): GasComponentProperty, IdealGasMixture, IncompressibleLiquid, PhaseEquilibrium, PropertyPackage, BTreeMap, Density, Into (+9 more)
 
 ### Community 107 - ".alarms"
 Cohesion: 0.18
@@ -597,8 +609,12 @@ Cohesion: 0.29
 Nodes (6): Density, EquipmentId, Result, Self, test_complete_causal_chain_with_faults_and_recovery(), VesselProcessPhysics
 
 ### Community 109 - "EquipmentInstance"
-Cohesion: 0.05
-Nodes (58): create_historian_channel(), prune_events_older_than(), prune_older_than(), RetentionPolicy, Connection, HistorianResult, generate_run_id(), HistorianRunMeta (+50 more)
+Cohesion: 0.19
+Nodes (18): flush_batch(), HistorianWriterHandle, Arc, AtomicBool, Default, Drop, Duration, HistorianResult (+10 more)
+
+### Community 111 - "alarm_tests.rs"
+Cohesion: 0.20
+Nodes (22): create_historian_channel(), t(), test_event_retention_pruning(), test_retention_multi_run_multi_point_without_rowid(), test_v01_deterministic_sampling(), test_v02_deadband_filtering(), test_v03_boxcar_heartbeat(), test_v04_quality_change_priority() (+14 more)
 
 ### Community 112 - "nebudcs-alarm/src/engine.rs"
 Cohesion: 0.15
@@ -613,24 +629,24 @@ Cohesion: 0.15
 Nodes (9): DegradationPolicy, ProtectionBlock, ProtectionConfig, ProtectionState, Result, Self, SensorInput, VotingResult (+1 more)
 
 ### Community 115 - "StepContext"
-Cohesion: 0.15
-Nodes (10): HistoricalSampleValue, HistorianSampler, PointSlot, Default, HistorianResult, Item, Iterator, Option (+2 more)
+Cohesion: 0.16
+Nodes (8): HistoricalSampleValue, HistorianSampler, PointSlot, Default, Item, Iterator, Self, Vec
 
 ### Community 116 - "StreamDefinition"
-Cohesion: 0.19
-Nodes (6): GenericPhysicsSystem, BTreeMap, EquipmentId, Option, Self, TagId
+Cohesion: 0.12
+Nodes (12): EquipmentCapability, EquipmentExecutionContext, FlowResistanceModel, HeadSourceModel, HeatExchangeModel, DifferentialPressure, Result, Send (+4 more)
 
 ### Community 117 - "IdealGasMixture"
-Cohesion: 0.15
-Nodes (6): ObjectiveStatus, ObjectiveEvaluator, ObjectiveTrackerItem, Option, Self, Vec
+Cohesion: 0.14
+Nodes (7): ObjectiveStatus, ObjectiveEvaluator, ObjectiveTrackerItem, Option, Self, Vec, Engine
 
 ### Community 118 - "HistorianPointConfig"
-Cohesion: 0.13
-Nodes (15): HistorianError, Error, TagId, HistorianPointConfig, HistorianPointId, Default, Display, Formatter (+7 more)
+Cohesion: 0.12
+Nodes (17): HistorianError, Error, TagId, HistorianPointConfig, HistorianPointId, Default, Display, Formatter (+9 more)
 
 ### Community 119 - "SqliteStorage"
-Cohesion: 0.70
-Nodes (4): get_health(), Json, ServerHealthDto, State
+Cohesion: 0.14
+Nodes (13): HostHandle, Receiver, ScenarioStatusDto, ServerHealthDto, ServerMessage, StateSnapshotDto, get_health(), Json (+5 more)
 
 ### Community 120 - "ControlError"
 Cohesion: 0.30
@@ -649,24 +665,24 @@ Cohesion: 0.20
 Nodes (9): Response, State, ws_upgrade_handler(), ClientGuard, handle_ws_session(), Drop, is_compatible_protocol_version(), WebSocket (+1 more)
 
 ### Community 124 - "tag.rs"
-Cohesion: 0.22
-Nodes (18): build_app(), Router, create_test_host(), test_fault_injection_and_clearing_api(), test_scenario_rest_lifecycle(), test_scenario_security_token_enforcement(), test_websocket_scenario_status_streaming(), create_test_host() (+10 more)
+Cohesion: 0.07
+Nodes (51): build_app(), Router, main(), Box, Error, Result, shutdown_signal(), create_test_host() (+43 more)
 
 ### Community 125 - "AlarmSystem"
 Cohesion: 0.11
-Nodes (25): apply_command(), build_alarm_snapshots(), build_scenario_status_dto(), build_snapshot_dto(), EnqueuedCommand, AlarmSnapshotDto, Arc, AtomicBool (+17 more)
+Nodes (28): apply_command(), build_scenario_status_dto(), build_snapshot_dto(), EnqueuedCommand, Arc, AtomicBool, Drop, JoinHandle (+20 more)
 
 ### Community 126 - "audit_causality_pid_actuator_tests.rs"
 Cohesion: 0.29
 Nodes (12): EventQueryParams, HistoryQueryParams, HistoryQueryResponse, query_events(), query_history(), HistoricalEventDto, Json, Option (+4 more)
 
 ### Community 127 - "HistorianReceiver"
-Cohesion: 0.13
-Nodes (9): HistorianReceiver, HistorianSender, Duration, Receiver, Result, Sender, SharedHealthTracker, RecvTimeoutError (+1 more)
+Cohesion: 0.16
+Nodes (8): HistorianRecord, HistorianSender, HistorianSendError, Duration, Result, Sender, RecvTimeoutError, TryRecvError
 
 ### Community 128 - "HistorianRunMeta"
-Cohesion: 0.27
-Nodes (12): get_tag(), list_tags(), Json, ServerResult, State, TagValueDto, Value, Vec (+4 more)
+Cohesion: 0.24
+Nodes (13): get_tag(), list_tags(), Json, Path, ServerResult, State, TagValueDto, Value (+5 more)
 
 ### Community 129 - "HistorianHealthTracker"
 Cohesion: 0.18
@@ -685,19 +701,23 @@ Cohesion: 0.23
 Nodes (9): ControlValveHydraulics, pipe_pressure_drop(), Density, DifferentialPressure, Result, Self, test_dynamic_causal_propagation_network(), test_network_source_pipe_valve_vessel_dynamic_simulation() (+1 more)
 
 ### Community 133 - "ServerConfig"
-Cohesion: 0.40
-Nodes (5): main(), Box, Error, Result, shutdown_signal()
+Cohesion: 0.18
+Nodes (7): Result, Result, DoubleBufferedState, BTreeMap, StateBuffer, StateReadView, StateWriteView
 
 ### Community 134 - "post_sim_control"
-Cohesion: 0.12
-Nodes (17): HostHandle, Receiver, ScenarioStatusDto, ServerHealthDto, ServerMessage, StateSnapshotDto, build_routes(), Router (+9 more)
+Cohesion: 0.43
+Nodes (7): get_snapshot(), post_sim_control(), Json, ServerResult, State, StateSnapshotDto, Value
+
+### Community 138 - ".alarms"
+Cohesion: 0.24
+Nodes (4): EquipmentId, PortId, Self, Vec
 
 ### Community 139 - "ControlError"
 Cohesion: 0.22
 Nodes (6): Result, ControlError, EquipmentId, TagId, Result, Result
 
 ### Community 140 - "tag.rs"
-Cohesion: 0.13
+Cohesion: 0.33
 Nodes (6): Self, TagId, t0(), TagSnapshot, test_tag_quality_good_and_bad(), test_tag_snapshot_serde()
 
 ### Community 141 - "pid.rs"
@@ -709,16 +729,16 @@ Cohesion: 0.30
 Nodes (5): DeterministicPrng, Default, Self, test_deterministic_repeatability(), test_range_bounds()
 
 ### Community 143 - "retention.rs"
-Cohesion: 0.38
-Nodes (9): create_verification_host(), test_audit_determinism_multi_run_repeatability(), test_audit_exhaustive_rest_endpoints(), test_audit_graceful_shutdown(), test_audit_lagged_client_resync(), test_audit_linearizability_read_consistency(), test_audit_numeric_input_validation(), test_audit_security_token_and_payload_limits() (+1 more)
+Cohesion: 0.27
+Nodes (5): Connection, HistorianResult, P, Self, SqliteStorage
 
 ### Community 144 - "hydraulics.rs"
 Cohesion: 0.24
 Nodes (4): ServerHealthDto, TagValueSampleDto, Store, ConnectionState
 
 ### Community 145 - "EquipmentInstance"
-Cohesion: 0.07
-Nodes (38): PidModeDto, Option, RuntimeCommand, ScenarioCommand, SimControlCommand, TagValueDto, ActiveFaultDto, AlarmSeverityDto (+30 more)
+Cohesion: 0.11
+Nodes (18): ProtocolError, ProtocolErrorCode, Into, Option, Self, ClientCapabilities, ClientMessage, AlarmSnapshotDto (+10 more)
 
 ### Community 146 - "StreamDefinition"
 Cohesion: 0.23
@@ -729,40 +749,76 @@ Cohesion: 0.24
 Nodes (4): PidConfig, PidDirection, Default, Self
 
 ### Community 148 - "vertical_slice_e2e_tests.rs"
-Cohesion: 0.13
-Nodes (17): Default, Option, Self, Vec, ServerConfig, create_vertical_slice_host(), ServerMessage, Vec (+9 more)
+Cohesion: 0.18
+Nodes (20): ActiveFaultDto, AlarmSeverityDto, AlarmSnapshotDto, AlarmStateDto, DeltaUpdateDto, EquipmentControlRequestDto, EquipmentDefinitionSummaryDto, EquipmentInstanceSummaryDto (+12 more)
 
 ### Community 149 - "AlarmSystem"
-Cohesion: 0.22
+Cohesion: 0.29
 Nodes (6): 1. Three Levels of Equipment Customization, 2. Future Level 3 Scripting Sandbox Architecture (Phase 10), 3. Package Architecture & Hierarchical Composition, Custom Equipment & Runtime Authoring Architecture, Security & Determinism Invariants, Tier Definitions
 
 ### Community 150 - "command.rs"
-Cohesion: 0.33
-Nodes (6): 1. The Authoritative Flow of Truth, 2. Dynamic Scenario Description, 3. Required Crates & Subsystems, 4. Acceptance Criteria & Verification Gates, Goal & Purpose, Vertical Slice 1: End-to-End Architecture Proof
+Cohesion: 0.36
+Nodes (14): control_equipment(), define_equipment(), get_definition(), get_instance(), instantiate_equipment(), list_definitions(), list_instances(), Json (+6 more)
+
+### Community 151 - "ServerMessage"
+Cohesion: 0.11
+Nodes (18): ActiveFaultDto, AlarmSeverityDto, AlarmStateDto, ClientCapabilities, ClientMessage, DeltaUpdateDto, HistoricalEventDto, HistoricalSampleDto (+10 more)
+
+### Community 155 - "AlarmError"
+Cohesion: 0.16
+Nodes (4): AlarmEngine, BTreeMap, Self, TagId
 
 ### Community 158 - "vite.config.ts"
-Cohesion: 0.61
-Nodes (7): ScenarioResult, validate_disturbance(), validate_event(), validate_initial_conditions(), validate_objective(), validate_operator_action(), validate_scenario()
+Cohesion: 0.56
+Nodes (8): ScenarioResult, validate_disturbance(), validate_event(), validate_fault(), validate_initial_conditions(), validate_objective(), validate_operator_action(), validate_scenario()
+
+### Community 162 - "independent_verification_tests.rs"
+Cohesion: 0.29
+Nodes (9): create_test_rig(), TagId, test_adversarial_validation_rejects_malformed_definitions(), test_all_12_fault_types_verified(), test_critical_multi_fault_composition_different_targets_and_overlapping_lifetimes(), test_critical_multi_fault_composition_same_tag(), test_disturbance_analytic_boundaries_and_seeded_prng(), test_simulation_time_independence_from_wall_clock() (+1 more)
+
+### Community 164 - "HistorianRunMeta"
+Cohesion: 0.31
+Nodes (6): generate_run_id(), HistorianRunMeta, Into, Option, ProjectId, Self
+
+### Community 165 - "ProtocolError"
+Cohesion: 0.20
+Nodes (6): AlarmType, AlarmBlockConfig, Self, TagId, AlarmSeverity, AlarmType
+
+### Community 166 - "command.rs"
+Cohesion: 0.33
+Nodes (8): EquipmentCommand, PidModeDto, BTreeMap, Option, RuntimeCommand, ScenarioCommand, SimControlCommand, TagValueDto
+
+### Community 167 - "nebudcs-historian/src/lib.rs"
+Cohesion: 0.43
+Nodes (6): prune_events_older_than(), prune_older_than(), RetentionPolicy, Connection, HistorianResult, test_v23_chunked_retention_pruning()
+
+### Community 168 - "EquipmentInstance"
+Cohesion: 0.29
+Nodes (3): HistorianReceiver, Receiver, SharedHealthTracker
+
+### Community 169 - "3. Actuator Arbitration & Priority Hierarchy"
+Cohesion: 0.40
+Nodes (3): EquipmentId, Option, TagId
 
 ## Knowledge Gaps
 - **547 isolated node(s):** `AlarmType`, `StateSnapshot`, `RetentionPolicy`, `name`, `version` (+542 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **19 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **20 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `String` connect `String` to `HistorianRunMeta`, `TopologyGraph`, `TopologyError`, `retention.rs`, `EntityId`, `sim_tests.rs`, `nebudcs-types/src/error.rs`, `PhysicsError`, `.alarms`, `ControlError`, `SchemaVersion`, `StateBuffer`, `pid.rs`, `StreamDefinition`, `EquipmentInstance`, `SimulationTime`, `vertical_slice_e2e_tests.rs`, `SimulationClock`, `AlarmError`, `TagValue`, `StateReadView`, `SimError`, `Temperature`, `GenericEquipmentPhysics`, `SimError`, `nebudcs-types/src/error.rs`, `PipeSegment`, `conservation.rs`, `AlarmEngine`, `SignalConnection`, `block.rs`, `AlarmBlockConfig`, `.alarms`, `EquipmentInstance`, `nebudcs-alarm/src/engine.rs`, `.new`, `IdealGasMixture`, `HistorianPointConfig`, `ControlError`, `audit_causality_pid_actuator_tests.rs`?**
-  _High betweenness centrality (0.327) - this node is a cross-community bridge._
-- **Why does `PhysicsError` connect `Temperature` to `String`, `ProtocolError`, `AlarmBlockConfig`, `MassFlow`, `Pressure`, `.solve_vector`?**
-  _High betweenness centrality (0.079) - this node is a cross-community bridge._
-- **Why does `ComponentComposition` connect `String` to `MassFlow`, `AlarmBlockConfig`, `Pressure`, `Temperature`?**
+- **Why does `String` connect `sim_tests.rs` to `HistorianRunMeta`, `TopologyGraph`, `TopologyError`, `retention.rs`, `String`, `EntityId`, `nebudcs-types/src/error.rs`, `PhysicsError`, `ControlError`, `SchemaVersion`, `StateBuffer`, `pid.rs`, `StreamDefinition`, `EquipmentInstance`, `MassFlow`, `SimulationTime`, `SimulationEngine`, `vertical_slice_e2e_tests.rs`, `command.rs`, `SimulationClock`, `AlarmError`, `StateReadView`, `HistorianRunMeta`, `ProtocolError`, `command.rs`, `AlarmError`, `SimError`, `.alarms`, `Custom Equipment Architecture`, `SimError`, `String`, `nebudcs-types/src/error.rs`, `PipeSegment`, `conservation.rs`, `AlarmEngine`, `NebuDCS: Industrial Process Simulation & DCS Training Platform`, `SignalConnection`, `block.rs`, `pid.rs`, `AlarmBlockConfig`, `.alarms`, `EquipmentInstance`, `nebudcs-alarm/src/engine.rs`, `.new`, `StreamDefinition`, `IdealGasMixture`, `HistorianPointConfig`, `ControlError`, `audit_causality_pid_actuator_tests.rs`?**
+  _High betweenness centrality (0.352) - this node is a cross-community bridge._
+- **Why does `PhysicsError` connect `StreamDefinition` to `ProtocolError`, `sim_tests.rs`, `AlarmBlockConfig`, `Temperature`, `MassFlow`, `Pressure`, `SimulationEngine`, `.solve_vector`?**
+  _High betweenness centrality (0.062) - this node is a cross-community bridge._
+- **Why does `SimulationTime` connect `PhysicsError` to `TopologyGraph`, `HistorianHealthTracker`, `ServerConfig`, `tag.rs`, `String`, `alarm_tests.rs`, `pipe_pressure_drop`, `StepContext`, `TagValue`, `time.rs`, `HistorianReceiver`?**
   _High betweenness centrality (0.041) - this node is a cross-community bridge._
 - **What connects `AlarmType`, `StateSnapshot`, `RetentionPolicy` to the rest of the system?**
   _547 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `TopologyGraph` be split into smaller, more focused modules?**
+  _Cohesion score 0.1452991452991453 - nodes in this community are weakly interconnected._
+- **Should `String` be split into smaller, more focused modules?**
+  _Cohesion score 0.06153846153846154 - nodes in this community are weakly interconnected._
 - **Should `TopologyError` be split into smaller, more focused modules?**
-  _Cohesion score 0.12258064516129032 - nodes in this community are weakly interconnected._
-- **Should `conversion.rs` be split into smaller, more focused modules?**
-  _Cohesion score 0.052525252525252523 - nodes in this community are weakly interconnected._
-- **Should `EntityId` be split into smaller, more focused modules?**
-  _Cohesion score 0.0960960960960961 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.053208137715179966 - nodes in this community are weakly interconnected._

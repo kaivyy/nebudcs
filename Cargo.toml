@@ -12,6 +12,7 @@ members = [
     "crates/nebudcs-historian",
     "crates/nebudcs-protocol",
     "crates/nebudcs-scenario",
+    "crates/nebudcs-scripting",
     "apps/nebudcs-server",
 ]
 
@@ -19,6 +20,8 @@ members = [
 # All member crates reference these via `{ workspace = true }` to keep
 # versions consistent across the repository.
 [workspace.dependencies]
+# Embedded scripting — approved by ADR-007
+rhai               = { version = "1.26", features = ["sync"] }
 # Serialization — approved by ADR-006 and project-format.md
 serde              = { version = "1.0", features = ["derive"] }
 serde_json         = "1.0"

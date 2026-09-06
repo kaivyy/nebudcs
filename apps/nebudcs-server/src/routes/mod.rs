@@ -2,6 +2,7 @@
 
 pub mod alarms;
 pub mod control;
+pub mod equipment;
 pub mod health;
 pub mod history;
 pub mod scenario;
@@ -63,6 +64,39 @@ pub fn build_routes() -> Router<HostHandle> {
             post(scenario::inject_fault),
         )
         .route("/api/v1/scenario/fault/clear", post(scenario::clear_fault))
+        // Custom Equipment
+        .route(
+            "/api/v1/equipment/validate",
+            post(equipment::validate_equipment),
+        )
+        .route(
+            "/api/v1/equipment/define",
+            post(equipment::define_equipment),
+        )
+        .route(
+            "/api/v1/equipment/definitions",
+            get(equipment::list_definitions),
+        )
+        .route(
+            "/api/v1/equipment/definitions/{id}",
+            get(equipment::get_definition),
+        )
+        .route(
+            "/api/v1/equipment/instantiate",
+            post(equipment::instantiate_equipment),
+        )
+        .route(
+            "/api/v1/equipment/instances",
+            get(equipment::list_instances),
+        )
+        .route(
+            "/api/v1/equipment/instances/{id}",
+            get(equipment::get_instance),
+        )
+        .route(
+            "/api/v1/equipment/control",
+            post(equipment::control_equipment),
+        )
         // Realtime Streaming WebSocket
         .route("/ws", get(ws::ws_upgrade_handler))
 }

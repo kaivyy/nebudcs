@@ -143,3 +143,67 @@ pub struct ScenarioStatusDto {
     pub score: f64,
     pub mandatory_completed: bool,
 }
+
+/// High-level summary of a registered custom equipment definition.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct EquipmentDefinitionSummaryDto {
+    pub id: String,
+    pub name: String,
+    pub version: String,
+    pub category: String,
+    pub tier: String,
+    pub description: String,
+    pub parameter_count: usize,
+    pub port_count: usize,
+    pub curve_count: usize,
+    pub trip_count: usize,
+    pub interlock_count: usize,
+    pub has_script: bool,
+    pub has_composition: bool,
+}
+
+/// State summary of an active custom equipment instance.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct EquipmentInstanceSummaryDto {
+    pub id: String,
+    pub definition_id: String,
+    pub name: String,
+    pub active_state: String,
+    pub is_running: bool,
+    pub is_tripped: bool,
+    pub latched_trips: Vec<String>,
+    pub parameters: std::collections::BTreeMap<String, f64>,
+    pub variables: std::collections::BTreeMap<String, f64>,
+    pub flags: std::collections::BTreeMap<String, bool>,
+}
+
+/// Pre-execution validation response for custom equipment definitions.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ValidateEquipmentResponseDto {
+    pub valid: bool,
+    pub definition_id: String,
+    pub errors: Vec<String>,
+    pub warnings: Vec<String>,
+}
+
+/// Request payload to instantiate a custom equipment definition.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct InstantiateEquipmentRequestDto {
+    #[serde(default)]
+    pub instance_id: Option<String>,
+    pub definition_id: String,
+    pub name: String,
+    #[serde(default)]
+    pub parameter_overrides: std::collections::BTreeMap<String, f64>,
+}
+
+/// Request payload to command custom equipment state or variable.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct EquipmentControlRequestDto {
+    pub instance_id: String,
+    pub action: String,
+    #[serde(default)]
+    pub variable_name: Option<String>,
+    #[serde(default)]
+    pub value: Option<f64>,
+}

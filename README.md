@@ -37,8 +37,9 @@
 | **Phase 7** | Realtime Protocol & API Server | `nebudcs-protocol`, `apps/nebudcs-server` | **`PHASE 7 VERIFIED`** | 29 Tests Passing |
 | **Phase 8** | End-to-End Vertical Slice 1 | Full Stack Integration (`web/`) | **`PHASE 8 VERIFIED`** | 31 Web Tests Passing |
 | **Phase 9** | Scenario & Fault Injection Engine | `nebudcs-scenario` | **`PHASE 9 VERIFIED`** | 20 Tests Passing |
+| **Phase 10** | Custom Equipment & Runtime Authoring | `nebudcs-scripting` | **`PHASE 10 VERIFIED`** | 31 Tests Passing |
 
-**Workspace Total**: **All 264 Rust workspace tests and 31/31 TypeScript tests passing cleanly (0 failures, 0 warnings)**.
+**Workspace Total**: **All 295 Rust workspace tests and 31/31 TypeScript tests passing cleanly (0 failures, 0 warnings)**.
 
 ---
 
@@ -57,6 +58,7 @@ crates/
   nebudcs-historian/ # Non-blocking SQLite WAL persistence, asynchronous sampling, downsampling
   nebudcs-protocol/  # Versioned network DTOs, WebSocket envelopes, typed commands, delta encoding
   nebudcs-scenario/  # Deterministic scenario engine, timeline triggers, dynamic fault injection, PRNG
+  nebudcs-scripting/ # Custom equipment authoring, 1D/2D curves, package composition, sandboxed Rhai
 apps/
   nebudcs-server/    # Headless Axum server, isolated simulation execution thread, WebSocket host
 web/                 # Native Web Components, SVG process graphics, trend charts, scenario panel
@@ -75,7 +77,7 @@ cargo fmt --check
 # Compile all workspace members
 cargo check --workspace
 
-# Run full test suite (264 Rust tests)
+# Run full test suite (295 Rust tests)
 cargo test --workspace
 
 # Run strict clippy analysis

@@ -14,6 +14,7 @@ nebudcs-alarm = { path = "../../crates/nebudcs-alarm" }
 nebudcs-historian = { path = "../../crates/nebudcs-historian" }
 nebudcs-protocol = { path = "../../crates/nebudcs-protocol" }
 nebudcs-scenario = { path = "../../crates/nebudcs-scenario" }
+nebudcs-scripting = { path = "../../crates/nebudcs-scripting" }
 
 tokio = { workspace = true }
 axum = { workspace = true }

@@ -25,7 +25,7 @@ This roadmap defines the definitive 17-phase lifecycle (Phases 0 through 16) for
 | **Phase 7** | Realtime Protocol & API Server | `nebudcs-protocol`, `apps/nebudcs-server` | **PHASE 7 VERIFIED** | Axum host, WebSocket delta subscription, REST API |
 | **Phase 8** | End-to-End Vertical Slice 1 | Full Stack (Simulation to UI) | **PHASE 8 VERIFIED** | Equipment → Port → Instrument → Controller → Actuator → Physics → State → Tag → Protocol → Web/Desktop UI → P&ID/HMI → Faceplate → Alarm/Trend |
 | **Phase 9** | Scenario & Fault Injection Engine | `nebudcs-scenario` | **PHASE 9 VERIFIED** | Data-driven scenarios, timeline events, physical fault injection |
-| **Phase 10** | Custom Equipment & Runtime Authoring | `nebudcs-scripting` | **PLANNED** | Level 1/2/3 customization, sandboxed Rhai, no core recompile |
+| **Phase 10** | Custom Equipment & Runtime Authoring | `nebudcs-scripting` | **`PHASE 10 VERIFIED`** | Level 1/2/3 customization, sandboxed Rhai, no core recompile |
 | **Phase 11** | Standard Equipment Library | Template Packages | **PLANNED** | Pumps, compressors, exchangers, columns, valves, furnaces |
 | **Phase 12** | Advanced Physics & Pluggable Thermo | `nebudcs-physics` (extensions) | **PLANNED** | Peng-Robinson, SRK, CoolProp, multi-tube, cavitation, DAE |
 | **Phase 13** | Engineering Studio Application | `apps/nebudcs-desktop` / Web Studio | **PLANNED** | Equipment Library → Navigator → P&ID Canvas → Inspector |
@@ -205,19 +205,22 @@ This roadmap defines the definitive 17-phase lifecycle (Phases 0 through 16) for
 - **Upstream / Downstream**: Consumes Phases 1–8; consumed by Phase 15 (Training Studio).
 
 ### Phase 10: Custom Equipment & Runtime Authoring
+- **Status**: **`PHASE 10 VERIFIED`**
 - **Purpose**: Enable Level 1, 2, and 3 custom equipment authoring from data without recompiling the Rust simulation core.
 - **Scope**:
-  - Level 1: Parameter configuration of existing templates via TOML/JSON.
+  - Level 1: Parameter configuration of existing templates via TOML/JSON, 1D/2D performance curves, and operating envelopes.
   - Level 2: Composition of existing capabilities and equipment subgraphs into reusable packages.
   - Level 3: Custom dynamic behavioral equations using sandboxed Rhai scripting.
-  - Security & Sandbox: Strict capability whitelisting; instruction counting and execution time limits per tick; memory allocation limits; complete denial of OS, filesystem, network, and process access.
-  - Deterministic execution: Sandboxed scripts take pure inputs and produce deterministic outputs with no external side-effects.
-- **Dependencies**: Phases 1 through 5.
-- **Non-Goals**: Exposing raw Rust pointers, dynamic C FFI loading, unconstrained Python interpreters.
-- **Architectural Outputs**: `crates/nebudcs-scripting`, package schema specifications.
-- **Acceptance Criteria**: A new custom separator with nonlinear behavior runs purely from a project file without recompiling the Rust core; runaway scripts are terminated cleanly by instruction limits.
-- **Verification Requirements**: Sandbox breakout penetration tests, instruction quota limit tests, determinism tests.
-- **Upstream / Downstream**: Consumes Phases 1–5; consumed by Phase 11 (Standard Library) and Phase 13 (Engineering Studio).
+  - Security & Sandbox: Strict capability whitelisting; instruction counting (strictly enforced 50,000 instruction limit per tick); call level depth limits (16); array/string/map bounds; complete denial of OS, filesystem, network, and process access.
+  - Deterministic execution: Sandboxed scripts take pure inputs and produce deterministic, bit-identical outputs with no external side-effects.
+  - Pre-execution validation: Rigorous syntax, AST, non-finite float rejection, parameter bounds, curve monotonicity, and dry-run script execution before runtime admission.
+  - REST & WebSocket API: Complete endpoints for equipment definition, pre-execution validation, instantiation, parameter overrides, and runtime control (start, stop, trip reset, parameter mutation).
+- **Dependencies**: Phases 1 through 5, Phase 7.
+- **Non-Goals**: Exposing raw Rust pointers, dynamic C FFI loading, unconstrained Python interpreters, refinery-specific hardcoded structs.
+- **Architectural Outputs**: `crates/nebudcs-scripting`, `nebudcs-protocol` equipment DTOs/commands, `apps/nebudcs-server` equipment routes.
+- **Acceptance Criteria**: Custom equipment with nonlinear curves and Rhai behavior executes purely from runtime data without recompiling the Rust core; runaway scripts are terminated cleanly by the 50,000 instruction limit; non-finite floats and security breakouts are prevented.
+- **Verification Requirements**: 26 unit, integration, and independent verification tests in `nebudcs-scripting` (curves, sandbox limits, security penetration, causal propagation, determinism, lifecycle isolation, subgraphs, no-recompile proof) and 5 end-to-end REST integration tests in `apps/nebudcs-server` (100% passing).
+- **Upstream / Downstream**: Consumes Phases 1–5, 7; consumed by Phase 11 (Standard Library) and Phase 13 (Engineering Studio).
 
 ### Phase 11: Standard Equipment Library
 - **Purpose**: Provide a comprehensive catalog of data-driven equipment definition packages covering industrial process engineering needs.

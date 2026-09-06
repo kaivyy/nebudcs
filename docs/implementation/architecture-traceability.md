@@ -25,8 +25,7 @@ This audit validates complete coherence between the PRD, the architecture docume
    - **PRD Invariant**: Extensible physics with verified conservation laws and numerical stability.
    - **Verification**: Verified as **`PHASE 4 VERIFIED`**. Implements mass, species, and enthalpy conservation, dynamic accumulator inventory, Churchill Darcy-Weisbach pipe hydraulics, ISA valve dynamics, Clausius-Clapeyron VLE, and damped Wegstein recycle solving. Engineering-fidelity assumptions are explicitly documented; cubic equations of state are deferred to Phase 12.
 5. **Equipment Extensibility**:
-   - **Current Implementation**: Strongly typed Rust capability traits (`EquipmentCapability`, `GenericEquipmentPhysics`).
-   - **Future Implementation (Phase 10)**: Runtime data-driven authoring and sandboxed Rhai scripting with instruction and memory limits. Runtime no-recompile authoring is NOT yet implemented.
+   - **Verified Implementation (Phase 10)**: Runtime data-driven equipment authoring (`nebudcs-scripting`) with 3-tier customization: Level 1 (parameters, 1D monotonic cubic Hermite splines, 2D bilinear surfaces, operating envelopes), Level 2 (composite packages/subgraphs), and Level 3 (sandboxed Rhai scripts strictly constrained by a 50,000 instruction limit and memory/recursion bounds). Integrated with `SimulationSystem`, `RuntimeTagStore`, and REST API in `nebudcs-server`. Zero Rust recompilation required.
 6. **Three Product Environments**:
    - **PRD Invariant**: Clear separation of user roles and workflows into Engineering Studio, Operator/DCS Station, and Training/Scenario Studio.
    - **Verification**: Verified. Architecturally separated into dedicated phases (Phases 13, 14, 15) and distinct UI boundaries.
@@ -53,7 +52,7 @@ This audit validates complete coherence between the PRD, the architecture docume
 | Section 18: Realtime WebSocket Protocol & Server | `protocol.md`, ADR-008 | `nebudcs-protocol`, `apps/nebudcs-server` | **Phase 7** | **PHASE 7 VERIFIED** |
 | Section 19: End-to-End Dynamic Vertical Slice | `vertical-slice-01.md` | Full Stack Proof | **Phase 8** | **PHASE 8 VERIFIED** |
 | Section 20: Scenario Engine & Fault Injection | `scenario-engine.md`, `training.md` | `nebudcs-scenario` | **Phase 9** | **PHASE 9 VERIFIED** |
-| Section 6 & 21: Data-Driven Custom Equipment & Rhai | `custom-equipment.md`, ADR-003, ADR-007 | `nebudcs-scripting` | **Phase 10** | **PLANNED** |
+| Section 6 & 21: Data-Driven Custom Equipment & Rhai | `custom-equipment.md`, ADR-003, ADR-007 | `nebudcs-scripting` | **Phase 10** | **`PHASE 10 VERIFIED`** |
 | Section 6: Standard Equipment Package Library | `equipment-sdk.md` | `packages/standard-library/` | **Phase 11** | **PLANNED** |
 | Section 22: Advanced Thermodynamics & DAE Solvers | `thermodynamics.md`, `physics.md` | `nebudcs-physics` (extensions) | **Phase 12** | **PLANNED** |
 | Section 23: Desktop Engineering Studio (P&ID Editor) | `hmi-pid.md`, ADR-004 | `apps/nebudcs-desktop` | **Phase 13** | **PLANNED** |

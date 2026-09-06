@@ -15,6 +15,7 @@ use nebudcs_control::ControlSystem;
 use nebudcs_model::tag::{TagQuality, TagValue};
 use nebudcs_protocol::*;
 use nebudcs_sim::{ClockState, SimulationEngine};
+use nebudcs_types::{EquipmentId, TagId};
 
 use crate::config::ServerConfig;
 use crate::error::{ServerError, ServerResult};
@@ -37,6 +38,7 @@ pub struct HostHandle {
     connected_clients: Arc<AtomicUsize>,
     historian_reader: Option<Arc<dyn nebudcs_historian::HistorianReader>>,
     config: ServerConfig,
+    equipment_manager: Arc<std::sync::RwLock<nebudcs_scripting::CustomEquipmentManager>>,
 }
 
 impl HostHandle {
@@ -113,6 +115,13 @@ impl HostHandle {
     pub fn config(&self) -> &ServerConfig {
         &self.config
     }
+
+    /// Access to the custom equipment manager.
+    pub fn equipment_manager(
+        &self,
+    ) -> &Arc<std::sync::RwLock<nebudcs_scripting::CustomEquipmentManager>> {
+        &self.equipment_manager
+    }
 }
 
 /// Production Simulation Host managing the isolated background runner thread.
@@ -132,13 +141,16 @@ impl SimulationHost {
         control_system: Option<ControlSystem>,
         historian_reader: Option<Arc<dyn nebudcs_historian::HistorianReader>>,
     ) -> ServerResult<Self> {
-        Self::start_with_scenario(
+        Self::start_with_all(
             config,
             engine,
             tag_store,
             alarm_system,
             control_system,
             Some(nebudcs_scenario::ScenarioEngine::new()),
+            Some(Arc::new(std::sync::RwLock::new(
+                nebudcs_scripting::CustomEquipmentManager::new(),
+            ))),
             historian_reader,
             None,
         )
@@ -156,8 +168,44 @@ impl SimulationHost {
         historian_reader: Option<Arc<dyn nebudcs_historian::HistorianReader>>,
         historian_sender: Option<nebudcs_historian::HistorianSender>,
     ) -> ServerResult<Self> {
+        Self::start_with_all(
+            config,
+            engine,
+            tag_store,
+            alarm_system,
+            control_system,
+            scenario_engine,
+            Some(Arc::new(std::sync::RwLock::new(
+                nebudcs_scripting::CustomEquipmentManager::new(),
+            ))),
+            historian_reader,
+            historian_sender,
+        )
+    }
+
+    /// Initializes and starts the simulation host with all optional subsystems.
+    #[allow(clippy::too_many_arguments)]
+    pub fn start_with_all(
+        config: ServerConfig,
+        engine: SimulationEngine,
+        tag_store: RuntimeTagStore,
+        alarm_system: Option<AlarmSystem>,
+        control_system: Option<ControlSystem>,
+        scenario_engine: Option<nebudcs_scenario::ScenarioEngine>,
+        equipment_manager: Option<
+            Arc<std::sync::RwLock<nebudcs_scripting::CustomEquipmentManager>>,
+        >,
+        historian_reader: Option<Arc<dyn nebudcs_historian::HistorianReader>>,
+        historian_sender: Option<nebudcs_historian::HistorianSender>,
+    ) -> ServerResult<Self> {
         let (command_tx, command_rx) = bounded::<EnqueuedCommand>(1024);
         let (broadcast_tx, _) = broadcast::channel::<ServerMessage>(config.broadcast_capacity);
+
+        let equipment_manager = equipment_manager.unwrap_or_else(|| {
+            Arc::new(std::sync::RwLock::new(
+                nebudcs_scripting::CustomEquipmentManager::new(),
+            ))
+        });
 
         // Initial snapshot and health
         let initial_sim_time = engine.clock().time().seconds();
@@ -214,12 +262,14 @@ impl SimulationHost {
             connected_clients: Arc::clone(&connected_clients),
             historian_reader,
             config: config.clone(),
+            equipment_manager: Arc::clone(&equipment_manager),
         };
 
         let runner_shutdown = Arc::clone(&shutdown_flag);
         let runner_snapshot = Arc::clone(&snapshot_cache);
         let runner_health = Arc::clone(&health_cache);
         let runner_scenario = Arc::clone(&scenario_cache);
+        let runner_equipment = Arc::clone(&equipment_manager);
         let runner_config = config;
 
         let runner_handle = Builder::new()
@@ -232,6 +282,7 @@ impl SimulationHost {
                     alarm_system,
                     control_system,
                     scenario_engine,
+                    runner_equipment,
                     historian_sender,
                     command_rx,
                     broadcast_tx,
@@ -281,6 +332,7 @@ fn run_simulation_loop(
     mut alarm_system: Option<AlarmSystem>,
     mut control_system: Option<ControlSystem>,
     mut scenario_engine: Option<nebudcs_scenario::ScenarioEngine>,
+    equipment_manager: Arc<std::sync::RwLock<nebudcs_scripting::CustomEquipmentManager>>,
     historian_sender: Option<nebudcs_historian::HistorianSender>,
     command_rx: Receiver<EnqueuedCommand>,
     broadcast_tx: broadcast::Sender<ServerMessage>,
@@ -337,6 +389,7 @@ fn run_simulation_loop(
                 &mut alarm_system,
                 &mut control_system,
                 &mut scenario_engine,
+                &equipment_manager,
                 &mut is_running,
                 &mut speed_multiplier,
                 &mut force_step,
@@ -361,6 +414,11 @@ fn run_simulation_loop(
                         historian_sender.as_ref(),
                     );
                 }
+            }
+
+            if let Ok(mut eq_mgr) = equipment_manager.write() {
+                let empty_inputs = std::collections::HashMap::new();
+                let _ = eq_mgr.step(base_dt, &empty_inputs, &mut tag_store);
             }
 
             if let Err(e) = engine.step() {
@@ -512,6 +570,7 @@ fn apply_command(
     alarm_system: &mut Option<AlarmSystem>,
     control_system: &mut Option<ControlSystem>,
     scenario_engine: &mut Option<nebudcs_scenario::ScenarioEngine>,
+    equipment_manager: &Arc<std::sync::RwLock<nebudcs_scripting::CustomEquipmentManager>>,
     is_running: &mut bool,
     speed_multiplier: &mut f64,
     force_step: &mut bool,
@@ -767,6 +826,176 @@ fn apply_command(
                     Err(ServerError::NotFound(
                         "Scenario engine not active".to_string(),
                     ))
+                }
+            }
+        },
+        RuntimeCommand::Equipment(eq_cmd) => match eq_cmd {
+            EquipmentCommand::Define { definition_json } => {
+                let def: nebudcs_scripting::CustomEquipmentDefinition =
+                    serde_json::from_str(definition_json).map_err(|e| {
+                        ServerError::InvalidRequest(format!("Invalid equipment JSON: {e}"))
+                    })?;
+                nebudcs_scripting::validation::validate_definition(&def)
+                    .map_err(|e| ServerError::InvalidRequest(e.to_string()))?;
+                let mut eq_mgr = equipment_manager.write().map_err(|_| {
+                    ServerError::Internal("Equipment manager lock poisoned".to_string())
+                })?;
+                eq_mgr
+                    .register_definition(def)
+                    .map_err(|e| ServerError::InvalidRequest(e.to_string()))?;
+                Ok(())
+            }
+            EquipmentCommand::Instantiate {
+                definition_id,
+                name,
+                parameter_overrides,
+                instance_id,
+            } => {
+                let eq_id = if let Some(id_str) = instance_id {
+                    id_str.parse::<EquipmentId>().map_err(|e| {
+                        ServerError::InvalidRequest(format!("Invalid EquipmentId: {e}"))
+                    })?
+                } else {
+                    EquipmentId::new()
+                };
+
+                let mut eq_mgr = equipment_manager.write().map_err(|_| {
+                    ServerError::Internal("Equipment manager lock poisoned".to_string())
+                })?;
+
+                eq_mgr
+                    .instantiate(eq_id, definition_id, name.clone(), parameter_overrides)
+                    .map_err(|e| ServerError::InvalidRequest(e.to_string()))?;
+
+                // Register and bind standard tags for this equipment
+                let tag_prefix = name.to_uppercase();
+                let status_tag_name = format!("{tag_prefix}.STATUS");
+                let status_tag_id = tag_store.resolve_name(&status_tag_name).unwrap_or_else(|| {
+                    let tid = TagId::new();
+                    tag_store.register_tag(
+                        &status_tag_name,
+                        tid,
+                        TagValue::Integer(0),
+                        TagQuality::Good,
+                    );
+                    tid
+                });
+                eq_mgr.bind_tag(eq_id, "STATUS", status_tag_id);
+
+                let speed_tag_name = format!("{tag_prefix}.SPEED");
+                let speed_tag_id = tag_store.resolve_name(&speed_tag_name).unwrap_or_else(|| {
+                    let tid = TagId::new();
+                    tag_store.register_tag(
+                        &speed_tag_name,
+                        tid,
+                        TagValue::Float(0.0),
+                        TagQuality::Good,
+                    );
+                    tid
+                });
+                eq_mgr.bind_tag(eq_id, "speed", speed_tag_id);
+
+                let dp_tag_name = format!("{tag_prefix}.DELTA_P");
+                let dp_tag_id = tag_store.resolve_name(&dp_tag_name).unwrap_or_else(|| {
+                    let tid = TagId::new();
+                    tag_store.register_tag(
+                        &dp_tag_name,
+                        tid,
+                        TagValue::Float(0.0),
+                        TagQuality::Good,
+                    );
+                    tid
+                });
+                eq_mgr.bind_tag(eq_id, "delta_p", dp_tag_id);
+
+                let flow_tag_name = format!("{tag_prefix}.FLOW");
+                let flow_tag_id = tag_store.resolve_name(&flow_tag_name).unwrap_or_else(|| {
+                    let tid = TagId::new();
+                    tag_store.register_tag(
+                        &flow_tag_name,
+                        tid,
+                        TagValue::Float(0.0),
+                        TagQuality::Good,
+                    );
+                    tid
+                });
+                eq_mgr.bind_tag(eq_id, "flow", flow_tag_id);
+
+                let trip_tag_name = format!("{tag_prefix}.TRIP");
+                let trip_tag_id = tag_store.resolve_name(&trip_tag_name).unwrap_or_else(|| {
+                    let tid = TagId::new();
+                    tag_store.register_tag(
+                        &trip_tag_name,
+                        tid,
+                        TagValue::Bool(false),
+                        TagQuality::Good,
+                    );
+                    tid
+                });
+                eq_mgr.bind_tag(eq_id, "is_tripped", trip_tag_id);
+
+                Ok(())
+            }
+            EquipmentCommand::Start { instance_id } => {
+                let eq_id = instance_id.parse::<EquipmentId>().map_err(|e| {
+                    ServerError::InvalidRequest(format!("Invalid EquipmentId: {e}"))
+                })?;
+                let mut eq_mgr = equipment_manager.write().map_err(|_| {
+                    ServerError::Internal("Equipment manager lock poisoned".to_string())
+                })?;
+                eq_mgr
+                    .start(eq_id)
+                    .map_err(|e| ServerError::InvalidRequest(e.to_string()))?;
+                Ok(())
+            }
+            EquipmentCommand::Stop { instance_id } => {
+                let eq_id = instance_id.parse::<EquipmentId>().map_err(|e| {
+                    ServerError::InvalidRequest(format!("Invalid EquipmentId: {e}"))
+                })?;
+                let mut eq_mgr = equipment_manager.write().map_err(|_| {
+                    ServerError::Internal("Equipment manager lock poisoned".to_string())
+                })?;
+                eq_mgr
+                    .stop(eq_id)
+                    .map_err(|e| ServerError::InvalidRequest(e.to_string()))?;
+                Ok(())
+            }
+            EquipmentCommand::ResetTrip { instance_id } => {
+                let eq_id = instance_id.parse::<EquipmentId>().map_err(|e| {
+                    ServerError::InvalidRequest(format!("Invalid EquipmentId: {e}"))
+                })?;
+                let mut eq_mgr = equipment_manager.write().map_err(|_| {
+                    ServerError::Internal("Equipment manager lock poisoned".to_string())
+                })?;
+                let ok = eq_mgr
+                    .reset_trip(eq_id)
+                    .map_err(|e| ServerError::InvalidRequest(e.to_string()))?;
+                if ok {
+                    Ok(())
+                } else {
+                    Err(ServerError::InvalidRequest(
+                        "Cannot reset trip: process condition still violated".to_string(),
+                    ))
+                }
+            }
+            EquipmentCommand::SetVariable {
+                instance_id,
+                var_name,
+                value,
+            } => {
+                let eq_id = instance_id.parse::<EquipmentId>().map_err(|e| {
+                    ServerError::InvalidRequest(format!("Invalid EquipmentId: {e}"))
+                })?;
+                let mut eq_mgr = equipment_manager.write().map_err(|_| {
+                    ServerError::Internal("Equipment manager lock poisoned".to_string())
+                })?;
+                if let Some(inst) = eq_mgr.get_instance_mut(eq_id) {
+                    inst.set_var(var_name, *value);
+                    Ok(())
+                } else {
+                    Err(ServerError::NotFound(format!(
+                        "Equipment instance '{instance_id}' not found"
+                    )))
                 }
             }
         },

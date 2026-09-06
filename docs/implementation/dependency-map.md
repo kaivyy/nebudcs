@@ -23,7 +23,7 @@ date: 2026-09-06
 | Realtime Protocol (`nebudcs-protocol`) | TRANSPORT | 7 | **PHASE 7 VERIFIED** | Network DTOs, WebSocket message envelopes, command definitions. |
 | Server Host (`apps/nebudcs-server`) | APPLICATION | 7 | **PHASE 7 VERIFIED** | Headless Axum server hosting simulation engine and WebSockets. |
 | Scenario Engine (`nebudcs-scenario`) | TRAINING | 9 | **PHASE 9 VERIFIED** | Data-driven scenarios, fault injection, instructor controls. |
-| Scripting Sandbox (`nebudcs-scripting`) | EXTENSION | 10 | **PLANNED** | Sandboxed Rhai scripts for Level 3 custom equipment authoring. |
+| Scripting Sandbox (`nebudcs-scripting`) | EXTENSION | 10 | **PHASE 10 VERIFIED** | Custom equipment authoring, 1D/2D curves, package composition, sandboxed Rhai. |
 | Desktop App (`apps/nebudcs-desktop`) | APPLICATION | 13/14 | **PLANNED** | Rust-native egui/wgpu engineering studio & operator console. |
 | Web Operator HMI (`apps/nebudcs-web`) | APPLICATION | 14 | **PLANNED** | Lightweight TypeScript + Web Components + SVG operator console. |
 
@@ -130,10 +130,15 @@ graph TD
     Types --> Scripting
     Units --> Scripting
     Model --> Scripting
+    Sim --> Scripting
+    Physics --> Scripting
+    Control --> Scripting
+    Alarm --> Scripting
 
     Sim --> Server
     Protocol --> Server
     Historian --> Server
+    Scripting --> Server
 
     Sim --> Desktop
     Protocol --> Desktop

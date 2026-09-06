@@ -160,5 +160,17 @@
   "158": "vite.config.ts",
   "159": ".fmt",
   "160": "vite.config.ts",
-  "161": "NebuConnectionStatus"
+  "161": "NebuConnectionStatus",
+  "162": "independent_verification_tests.rs",
+  "163": "audit_causality_pid_actuator_tests.rs",
+  "164": "HistorianRunMeta",
+  "165": "ProtocolError",
+  "166": "command.rs",
+  "167": "nebudcs-historian/src/lib.rs",
+  "168": "EquipmentInstance",
+  "169": "3. Actuator Arbitration & Priority Hierarchy",
+  "170": "NebuApp",
+  "171": "AlarmError",
+  "172": "alarm_tests.rs",
+  "173": ".alarms"
 }

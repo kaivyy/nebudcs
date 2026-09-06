@@ -38,8 +38,9 @@
 | **Phase 8** | End-to-End Vertical Slice 1 | Full Stack Integration (`web/`) | **`PHASE 8 VERIFIED`** | 31 Web Tests Passing |
 | **Phase 9** | Scenario & Fault Injection Engine | `nebudcs-scenario` | **`PHASE 9 VERIFIED`** | 20 Tests Passing |
 | **Phase 10** | Custom Equipment & Runtime Authoring | `nebudcs-scripting` | **`PHASE 10 VERIFIED`** | 31 Tests Passing |
+| **Phase 11** | Standard Equipment Library | `nebudcs-scripting`, `packages/standard-library/` | **`PHASE 11 VERIFIED`** | 50 Tests Passing |
 
-**Workspace Total**: **All 295 Rust workspace tests and 31/31 TypeScript tests passing cleanly (0 failures, 0 warnings)**.
+**Workspace Total**: **All 326 Rust workspace tests and 31/31 TypeScript tests passing cleanly (0 failures, 0 warnings)**.
 
 ---
 

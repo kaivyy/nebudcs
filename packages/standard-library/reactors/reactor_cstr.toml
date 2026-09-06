@@ -1,0 +1,99 @@
+id = "standard.reactor.cstr"
+name = "CSTR Reactor"
+version = "1.0.0"
+category = "process"
+source = "standard"
+
+[metadata]
+author = "NebuDCS Standard Library"
+description = "Continuous stirred chemical reaction vessel"
+tags = [
+    "reactor",
+    "cstr",
+]
+icon_hint = "process"
+created_at = "2026-09-06T00:00:00Z"
+schema_version = "1.0.0"
+
+[metadata.custom_attributes]
+
+[definition]
+id = "standard.reactor.cstr"
+name = "Continuous Stirred Reactor"
+version = "1.0.0"
+category = "process"
+tier = "level1_declarative"
+description = "Jacketed continuous stirred tank reactor with exothermic heat kinetics"
+alarm_definitions = []
+interlocks = []
+
+[definition.parameters.reactor_volume_m3]
+name = "reactor_volume_m3"
+description = "Reactor volume (m3)"
+quantity_kind = "volume"
+default_value = 12.0
+min_value = 0.5
+max_value = 100.0
+required = false
+
+[[definition.ports]]
+id = "01M1T4ZBRK1YER97SD242N8RCZ"
+name = "feed"
+domain = "material"
+direction = "inlet"
+phase_compatibility = ["liquid"]
+required = true
+cardinality = "zero_or_more"
+description = "Port feed"
+
+[[definition.ports]]
+id = "01M1T4ZBRKRTZDRANJMBSZN097"
+name = "effluent"
+domain = "material"
+direction = "outlet"
+phase_compatibility = ["liquid"]
+required = true
+cardinality = "zero_or_more"
+description = "Port effluent"
+
+[[definition.ports]]
+id = "01M1T4ZBRKTMPDDYE2B2Q7X1BP"
+name = "coolant_in"
+direction = "inlet"
+phase_compatibility = ["liquid"]
+required = true
+cardinality = "zero_or_more"
+description = "Port coolant_in"
+
+[definition.ports.domain]
+utility = "cooling_water"
+
+[[definition.ports]]
+id = "01M1T4ZBRKWNQVKWAX5DA2SHXF"
+name = "coolant_out"
+direction = "outlet"
+phase_compatibility = ["liquid"]
+required = true
+cardinality = "zero_or_more"
+description = "Port coolant_out"
+
+[definition.ports.domain]
+utility = "cooling_water"
+
+[definition.curves]
+
+[definition.curves_2d]
+
+[definition.operating_envelope]
+dimensions = []
+
+[[definition.trips]]
+id = "trip_runaway_temp"
+name = "Thermal Runaway Trip"
+condition_var = "temp"
+operator = "greater_than"
+threshold = 438.15
+fail_safe_state = "tripped"
+latched = true
+
+[definition.metadata]

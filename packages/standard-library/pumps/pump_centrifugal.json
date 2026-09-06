@@ -1,0 +1,161 @@
+{
+  "id": "standard.pump.centrifugal",
+  "name": "Centrifugal Pump",
+  "version": "1.0.0",
+  "category": "rotating",
+  "source": "standard",
+  "metadata": {
+    "author": "NebuDCS Standard Library",
+    "description": "Generic API 610 single-stage centrifugal pump",
+    "tags": [
+      "pump",
+      "rotating"
+    ],
+    "icon_hint": "rotating",
+    "documentation": null,
+    "created_at": "2026-09-06T00:00:00Z",
+    "schema_version": "1.0.0",
+    "custom_attributes": {}
+  },
+  "definition": {
+    "id": "standard.pump.centrifugal",
+    "name": "Standard Centrifugal Pump",
+    "version": "1.0.0",
+    "category": "rotating",
+    "tier": "level1_declarative",
+    "description": "Generic API 610 single-stage centrifugal process pump",
+    "parameters": {
+      "rated_flow": {
+        "name": "rated_flow",
+        "description": "Rated flow (m3/h)",
+        "quantity_kind": "volumetric_flow",
+        "default_value": 120.0,
+        "min_value": 0.0,
+        "max_value": 500.0,
+        "required": false
+      },
+      "rated_head": {
+        "name": "rated_head",
+        "description": "Rated differential pressure head (Pa)",
+        "quantity_kind": "pressure",
+        "default_value": 850000.0,
+        "min_value": 0.0,
+        "max_value": 3000000.0,
+        "required": false
+      },
+      "design_speed": {
+        "name": "design_speed",
+        "description": "Design rotor speed (rpm)",
+        "quantity_kind": "speed",
+        "default_value": 2950.0,
+        "min_value": 500.0,
+        "max_value": 3600.0,
+        "required": false
+      }
+    },
+    "ports": [
+      {
+        "id": "01M1T4ZBRKV1QS1KP477ARF720",
+        "name": "suction",
+        "domain": "material",
+        "direction": "inlet",
+        "phase_compatibility": [
+          "liquid"
+        ],
+        "required": true,
+        "cardinality": "zero_or_more",
+        "description": "Port suction"
+      },
+      {
+        "id": "01M1T4ZBRKR0MJ8CVA71XCNJ6S",
+        "name": "discharge",
+        "domain": "material",
+        "direction": "outlet",
+        "phase_compatibility": [
+          "liquid"
+        ],
+        "required": true,
+        "cardinality": "zero_or_more",
+        "description": "Port discharge"
+      },
+      {
+        "id": "01M1T4ZBRKX4A6EFGYXZW2H4RS",
+        "name": "motor_feeder",
+        "domain": "electrical",
+        "direction": "inlet",
+        "phase_compatibility": [],
+        "required": true,
+        "cardinality": "zero_or_more",
+        "description": "Port motor_feeder"
+      }
+    ],
+    "curves": {
+      "head_flow": {
+        "name": "head_flow",
+        "input_var": "flow",
+        "output_var": "delta_p",
+        "points": [
+          [
+            0.0,
+            1050000.0
+          ],
+          [
+            30.0,
+            1020000.0
+          ],
+          [
+            60.0,
+            970000.0
+          ],
+          [
+            90.0,
+            890000.0
+          ],
+          [
+            120.0,
+            780000.0
+          ],
+          [
+            150.0,
+            620000.0
+          ]
+        ],
+        "interpolation": "monotonic_cubic",
+        "extrapolation": "clamp"
+      }
+    },
+    "curves_2d": {},
+    "operating_envelope": {
+      "dimensions": [
+        {
+          "tag_id": "01M1T4ZBRKSVBBGKXPQC0E1WGC",
+          "description": "Operating flow range",
+          "normal_min": 20.0,
+          "normal_max": 140.0,
+          "warning_min": 15.0,
+          "warning_max": 150.0,
+          "critical_min": 10.0,
+          "critical_max": 160.0,
+          "trip_min": null,
+          "trip_max": null
+        }
+      ]
+    },
+    "alarm_definitions": [],
+    "trips": [
+      {
+        "id": "trip_high_vibration",
+        "name": "Vibration Trip",
+        "condition_var": "vibration",
+        "operator": "greater_than",
+        "threshold": 7.1,
+        "fail_safe_state": "tripped",
+        "latched": true
+      }
+    ],
+    "interlocks": [],
+    "script": null,
+    "composition": null,
+    "metadata": {}
+  }
+}

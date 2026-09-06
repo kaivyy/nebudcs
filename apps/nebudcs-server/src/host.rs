@@ -999,6 +999,173 @@ fn apply_command(
                 }
             }
         },
+        RuntimeCommand::Library(lib_cmd) => match lib_cmd {
+            LibraryCommand::RegisterTemplate { template_json } => {
+                let template: nebudcs_scripting::EquipmentTemplate =
+                    serde_json::from_str(template_json).map_err(|e| {
+                        ServerError::InvalidRequest(format!("Invalid template JSON: {e}"))
+                    })?;
+                let mut eq_mgr = equipment_manager.write().map_err(|_| {
+                    ServerError::Internal("Equipment manager lock poisoned".to_string())
+                })?;
+                eq_mgr
+                    .library_mut()
+                    .register_template(template)
+                    .map_err(|e| ServerError::InvalidRequest(e.to_string()))?;
+                Ok(())
+            }
+            LibraryCommand::InstantiateTemplate {
+                template_id,
+                version,
+                name,
+                instance_id,
+                parameter_overrides,
+            } => {
+                let eq_id = if let Some(id_str) = instance_id {
+                    id_str.parse::<EquipmentId>().map_err(|e| {
+                        ServerError::InvalidRequest(format!("Invalid EquipmentId: {e}"))
+                    })?
+                } else {
+                    EquipmentId::new()
+                };
+
+                let ver_parsed = match version {
+                    Some(v) => Some(v.parse::<nebudcs_types::SchemaVersion>().map_err(|e| {
+                        ServerError::InvalidRequest(format!("Invalid version format: {e}"))
+                    })?),
+                    None => None,
+                };
+
+                let mut eq_mgr = equipment_manager.write().map_err(|_| {
+                    ServerError::Internal("Equipment manager lock poisoned".to_string())
+                })?;
+
+                eq_mgr
+                    .instantiate_template(
+                        template_id,
+                        ver_parsed.as_ref(),
+                        eq_id,
+                        name.clone(),
+                        parameter_overrides,
+                    )
+                    .map_err(|e| ServerError::InvalidRequest(e.to_string()))?;
+
+                // Register and bind standard tags for this equipment
+                let tag_prefix = name.to_uppercase();
+                let status_tag_name = format!("{tag_prefix}.STATUS");
+                let status_tag_id = tag_store.resolve_name(&status_tag_name).unwrap_or_else(|| {
+                    let tid = TagId::new();
+                    tag_store.register_tag(
+                        &status_tag_name,
+                        tid,
+                        TagValue::Integer(0),
+                        TagQuality::Good,
+                    );
+                    tid
+                });
+                eq_mgr.bind_tag(eq_id, "STATUS", status_tag_id);
+
+                let speed_tag_name = format!("{tag_prefix}.SPEED");
+                let speed_tag_id = tag_store.resolve_name(&speed_tag_name).unwrap_or_else(|| {
+                    let tid = TagId::new();
+                    tag_store.register_tag(
+                        &speed_tag_name,
+                        tid,
+                        TagValue::Float(0.0),
+                        TagQuality::Good,
+                    );
+                    tid
+                });
+                eq_mgr.bind_tag(eq_id, "speed", speed_tag_id);
+
+                let dp_tag_name = format!("{tag_prefix}.DELTA_P");
+                let dp_tag_id = tag_store.resolve_name(&dp_tag_name).unwrap_or_else(|| {
+                    let tid = TagId::new();
+                    tag_store.register_tag(
+                        &dp_tag_name,
+                        tid,
+                        TagValue::Float(0.0),
+                        TagQuality::Good,
+                    );
+                    tid
+                });
+                eq_mgr.bind_tag(eq_id, "delta_p", dp_tag_id);
+
+                let flow_tag_name = format!("{tag_prefix}.FLOW");
+                let flow_tag_id = tag_store.resolve_name(&flow_tag_name).unwrap_or_else(|| {
+                    let tid = TagId::new();
+                    tag_store.register_tag(
+                        &flow_tag_name,
+                        tid,
+                        TagValue::Float(0.0),
+                        TagQuality::Good,
+                    );
+                    tid
+                });
+                eq_mgr.bind_tag(eq_id, "flow", flow_tag_id);
+
+                Ok(())
+            }
+            LibraryCommand::RegisterPackage { package_json } => {
+                let package: nebudcs_scripting::EquipmentPackage =
+                    serde_json::from_str(package_json).map_err(|e| {
+                        ServerError::InvalidRequest(format!("Invalid package JSON: {e}"))
+                    })?;
+                let mut eq_mgr = equipment_manager.write().map_err(|_| {
+                    ServerError::Internal("Equipment manager lock poisoned".to_string())
+                })?;
+                eq_mgr
+                    .library_mut()
+                    .register_package(package)
+                    .map_err(|e| ServerError::InvalidRequest(e.to_string()))?;
+                Ok(())
+            }
+            LibraryCommand::InstantiatePackage {
+                package_id,
+                version,
+                instance_prefix,
+                parameter_overrides,
+            } => {
+                let ver_parsed = match version {
+                    Some(v) => Some(v.parse::<nebudcs_types::SchemaVersion>().map_err(|e| {
+                        ServerError::InvalidRequest(format!("Invalid version format: {e}"))
+                    })?),
+                    None => None,
+                };
+
+                let mut eq_mgr = equipment_manager.write().map_err(|_| {
+                    ServerError::Internal("Equipment manager lock poisoned".to_string())
+                })?;
+
+                let res = eq_mgr
+                    .instantiate_package(
+                        package_id,
+                        ver_parsed.as_ref(),
+                        instance_prefix,
+                        parameter_overrides,
+                    )
+                    .map_err(|e| ServerError::InvalidRequest(e.to_string()))?;
+
+                for child in &res.instances {
+                    let tag_prefix = child.name.to_uppercase();
+                    let status_tag_name = format!("{tag_prefix}.STATUS");
+                    let status_tag_id =
+                        tag_store.resolve_name(&status_tag_name).unwrap_or_else(|| {
+                            let tid = TagId::new();
+                            tag_store.register_tag(
+                                &status_tag_name,
+                                tid,
+                                TagValue::Integer(0),
+                                TagQuality::Good,
+                            );
+                            tid
+                        });
+                    eq_mgr.bind_tag(child.id, "STATUS", status_tag_id);
+                }
+
+                Ok(())
+            }
+        },
     }
 }
 

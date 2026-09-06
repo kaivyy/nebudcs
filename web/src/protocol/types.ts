@@ -214,6 +214,89 @@ export interface ScenarioStatusDto {
   mandatory_completed: boolean;
 }
 
+export interface TemplateSummaryDto {
+  id: string;
+  name: string;
+  version: string;
+  category: string;
+  source: string;
+  description: string;
+  parameter_count: number;
+  port_count: number;
+  curve_count: number;
+  trip_count: number;
+  author: string;
+}
+
+export interface TemplateDetailDto {
+  id: string;
+  name: string;
+  version: string;
+  category: string;
+  source: string;
+  description: string;
+  author: string;
+  tags: string[];
+  icon_hint?: string;
+  definition_json: string;
+}
+
+export interface PackageSummaryDto {
+  id: string;
+  name: string;
+  version: string;
+  description: string;
+  author: string;
+  sub_component_count: number;
+  internal_stream_count: number;
+  external_port_count: number;
+  dependency_count: number;
+}
+
+export interface PackageDetailDto {
+  id: string;
+  name: string;
+  version: string;
+  description: string;
+  author: string;
+  package_json: string;
+}
+
+export interface ValidatePackageResponseDto {
+  valid: boolean;
+  package_id: string;
+  resolved_dependencies: string[];
+  errors: string[];
+  warnings: string[];
+}
+
+export interface ImportLibraryItemRequestDto {
+  content: string;
+  format?: string;
+}
+
+export interface InstantiateTemplateRequestDto {
+  template_id: string;
+  version?: string;
+  instance_id?: string;
+  name: string;
+  parameter_overrides?: Record<string, number>;
+}
+
+export interface InstantiatePackageRequestDto {
+  package_id: string;
+  version?: string;
+  instance_prefix: string;
+  parameter_overrides?: Record<string, number>;
+}
+
+export interface ExportLibraryItemResponseDto {
+  id: string;
+  version: string;
+  format: string;
+  content: string;
+}
+
 export function isCompatibleProtocol(version: string): boolean {
   const parts = version.split(".");
   if (parts.length !== 3) return false;

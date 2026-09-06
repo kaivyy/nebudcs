@@ -177,5 +177,10 @@
   "175": "Vertical Slice 1: End-to-End Architecture Proof",
   "176": "NebuDCS: Industrial Process Simulation & DCS Training Platform",
   "177": ".subscribe_broadcast",
-  "178": "mod.rs"
+  "178": "mod.rs",
+  "179": "NebuDCS: Industrial Process Simulation & DCS Training Platform",
+  "180": "AlarmError",
+  "181": "NebuError",
+  "182": "8. SQLite Storage Architecture & Schema",
+  "183": "5. Sampling Architecture & Deterministic Clock Basis"
 }

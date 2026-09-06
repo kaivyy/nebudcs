@@ -1,0 +1,86 @@
+id = "standard.fan.centrifugal"
+name = "Centrifugal Fan"
+version = "1.0.0"
+category = "rotating"
+source = "standard"
+
+[metadata]
+author = "NebuDCS Standard Library"
+description = "Industrial draft fan for air movement"
+tags = [
+    "fan",
+    "air",
+]
+icon_hint = "rotating"
+created_at = "2026-09-06T00:00:00Z"
+schema_version = "1.0.0"
+
+[metadata.custom_attributes]
+
+[definition]
+id = "standard.fan.centrifugal"
+name = "Standard Centrifugal Fan"
+version = "1.0.0"
+category = "rotating"
+tier = "level1_declarative"
+description = "Industrial forced draft / induced draft centrifugal fan"
+alarm_definitions = []
+trips = []
+interlocks = []
+
+[definition.parameters.rated_flow]
+name = "rated_flow"
+description = "Rated air flow capacity (m3/h)"
+quantity_kind = "volumetric_flow"
+default_value = 25000.0
+min_value = 100.0
+max_value = 100000.0
+required = false
+
+[definition.parameters.static_head_pa]
+name = "static_head_pa"
+description = "Static head (Pa)"
+quantity_kind = "pressure"
+default_value = 2500.0
+min_value = 0.0
+max_value = 10000.0
+required = false
+
+[[definition.ports]]
+id = "01M1T4ZBRKB2DWKEYCQX8NNJPB"
+name = "air_inlet"
+domain = "material"
+direction = "inlet"
+phase_compatibility = ["gas"]
+required = true
+cardinality = "zero_or_more"
+description = "Port air_inlet"
+
+[[definition.ports]]
+id = "01M1T4ZBRKEEM55BHPYW2N75DT"
+name = "air_outlet"
+domain = "material"
+direction = "outlet"
+phase_compatibility = ["gas"]
+required = true
+cardinality = "zero_or_more"
+description = "Port air_outlet"
+
+[[definition.ports]]
+id = "01M1T4ZBRKKA5K7PMNHM5G0SF9"
+name = "power"
+domain = "electrical"
+direction = "inlet"
+phase_compatibility = []
+required = true
+cardinality = "zero_or_more"
+description = "Port power"
+
+[definition.curves]
+
+[definition.curves_2d]
+
+[definition.operating_envelope]
+dimensions = []
+
+[definition.metadata]

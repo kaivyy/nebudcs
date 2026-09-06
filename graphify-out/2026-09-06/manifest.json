@@ -395,8 +395,8 @@
     "semantic_hash": ""
   },
   "docs/implementation/architecture-traceability.md": {
-    "mtime": 1788654391.5299025,
-    "ast_hash": "acf6a916858bd726220d9e44313a0950",
+    "mtime": 1788655921.7813265,
+    "ast_hash": "e1de259f8b2d499485f469a33d06788d",
     "semantic_hash": ""
   },
   "docs/implementation/coding-agent-rules.md": {
@@ -405,8 +405,8 @@
     "semantic_hash": ""
   },
   "docs/implementation/dependency-map.md": {
-    "mtime": 1788654383.3708522,
-    "ast_hash": "6d3b2a79ba413493c7a49613cf5f315d",
+    "mtime": 1788655907.896241,
+    "ast_hash": "8211df7a24ddbee77a2e168b949430c1",
     "semantic_hash": ""
   },
   "docs/implementation/phase-01-foundation.md": {
@@ -415,8 +415,8 @@
     "semantic_hash": ""
   },
   "docs/implementation/roadmap.md": {
-    "mtime": 1788654333.3565443,
-    "ast_hash": "581b7047cdb81fa23a06e8b6d9321477",
+    "mtime": 1788655900.6341963,
+    "ast_hash": "9d9eb50a0374074bc564d55a67be7978",
     "semantic_hash": ""
   },
   "docs/implementation/testing-strategy.md": {
@@ -435,8 +435,8 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1788654376.5868104,
-    "ast_hash": "6b7c5f7c61696948c58264a0457de767",
+    "mtime": 1788655885.0251,
+    "ast_hash": "dfd2659de5360cfd6a0fa4b1c4c5eaf3",
     "semantic_hash": ""
   },
   "docs/implementation/phase-04-process-physics.md": {
@@ -675,8 +675,8 @@
     "semantic_hash": ""
   },
   "apps/nebudcs-server/src/host.rs": {
-    "mtime": 1788654308.2213895,
-    "ast_hash": "3cc3526c6b776a1cc4f9c2dbdfc863e6",
+    "mtime": 1788657232.3923976,
+    "ast_hash": "8ef7e440453af8e531487d0d5b53ff87",
     "semantic_hash": ""
   },
   "apps/nebudcs-server/src/lib.rs": {
@@ -710,8 +710,8 @@
     "semantic_hash": ""
   },
   "apps/nebudcs-server/src/routes/mod.rs": {
-    "mtime": 1788654308.2313895,
-    "ast_hash": "8ed76011f6f530df6ada7eab4da5cd4d",
+    "mtime": 1788656835.9639564,
+    "ast_hash": "db2f4447d38132ad1d194a53d1416ebd",
     "semantic_hash": ""
   },
   "apps/nebudcs-server/src/routes/sim.rs": {
@@ -745,13 +745,13 @@
     "semantic_hash": ""
   },
   "crates/nebudcs-protocol/src/command.rs": {
-    "mtime": 1788653760.7440178,
-    "ast_hash": "b7a2cac1290a782af17a9834e946764b",
+    "mtime": 1788656790.938679,
+    "ast_hash": "53af5c5ad6de61edc3e8c04c691d334c",
     "semantic_hash": ""
   },
   "crates/nebudcs-protocol/src/dto.rs": {
-    "mtime": 1788653733.676851,
-    "ast_hash": "b6f67cfdc3add013e3a6fa26696253be",
+    "mtime": 1788656785.882648,
+    "ast_hash": "989b25a8c7cd5c4a0e7cc256dd5544da",
     "semantic_hash": ""
   },
   "crates/nebudcs-protocol/src/error.rs": {
@@ -760,8 +760,8 @@
     "semantic_hash": ""
   },
   "crates/nebudcs-protocol/src/lib.rs": {
-    "mtime": 1788653740.1908913,
-    "ast_hash": "6de0e47a7bc40bb6174c4f83c7ef18b8",
+    "mtime": 1788656795.6667082,
+    "ast_hash": "250c45aa331916ddde5f8d609d4ec2c6",
     "semantic_hash": ""
   },
   "crates/nebudcs-protocol/src/message.rs": {
@@ -845,8 +845,8 @@
     "semantic_hash": ""
   },
   "web/src/protocol/types.ts": {
-    "mtime": 1788640134.2701004,
-    "ast_hash": "2fd9c8518fc79077c6df09f3031df48c",
+    "mtime": 1788656900.3943532,
+    "ast_hash": "94f613ac19137fdf39bfbd35a5e2d1b8",
     "semantic_hash": ""
   },
   "web/src/state/store.ts": {
@@ -980,8 +980,8 @@
     "semantic_hash": ""
   },
   "apps/nebudcs-server/tests/custom_equipment_api_tests.rs": {
-    "mtime": 1788654308.2543895,
-    "ast_hash": "b49f919ed64cf85c8deaa32b7f03c728",
+    "mtime": 1788655819.6356974,
+    "ast_hash": "2ba8c5363d7a4e4ce3812d956037c45c",
     "semantic_hash": ""
   },
   "crates/nebudcs-scripting/src/curve.rs": {
@@ -990,13 +990,13 @@
     "semantic_hash": ""
   },
   "crates/nebudcs-scripting/src/error.rs": {
-    "mtime": 1788653446.6160834,
-    "ast_hash": "b3239da0fbfd4bb7adc91078e3970e8b",
+    "mtime": 1788656572.9323366,
+    "ast_hash": "8ee86f315d3d1bed8d7f376112eec735",
     "semantic_hash": ""
   },
   "crates/nebudcs-scripting/src/lib.rs": {
-    "mtime": 1788654308.4483907,
-    "ast_hash": "bfd32e8dd8b8e24e4b2f0f9272ccb325",
+    "mtime": 1788657232.6583993,
+    "ast_hash": "832f2f48c0902617b17bcda335afa358",
     "semantic_hash": ""
   },
   "crates/nebudcs-scripting/src/model.rs": {
@@ -1005,18 +1005,18 @@
     "semantic_hash": ""
   },
   "crates/nebudcs-scripting/src/runtime.rs": {
-    "mtime": 1788654308.455391,
-    "ast_hash": "d3edd029162f9456604b339df1678bae",
+    "mtime": 1788657232.6973996,
+    "ast_hash": "5adf79a120259fe1996ec04fc067de14",
     "semantic_hash": ""
   },
   "crates/nebudcs-scripting/src/sandbox.rs": {
-    "mtime": 1788654308.458391,
-    "ast_hash": "8918a8fe0e4c9069ba52bd387c3bcf86",
+    "mtime": 1788655749.3842647,
+    "ast_hash": "b55623302cf275d18e13de4de2075d64",
     "semantic_hash": ""
   },
   "crates/nebudcs-scripting/src/validation.rs": {
-    "mtime": 1788654308.462391,
-    "ast_hash": "5499729430f1235a586d4407f4afbcbf",
+    "mtime": 1788655752.0902815,
+    "ast_hash": "59707e9ae2076c096c87fa116513a232",
     "semantic_hash": ""
   },
   "crates/nebudcs-scripting/tests/curve_tests.rs": {
@@ -1032,6 +1032,141 @@
   "crates/nebudcs-scripting/tests/sandbox_tests.rs": {
     "mtime": 1788654308.472391,
     "ast_hash": "7807cd680d4ce564465acb9a06a944f0",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/tests/independent_verification_tests.rs": {
+    "mtime": 1788655862.3029602,
+    "ast_hash": "680676f9788649e0de2ef3d90af50342",
+    "semantic_hash": ""
+  },
+  "apps/nebudcs-server/src/routes/library.rs": {
+    "mtime": 1788657232.4123979,
+    "ast_hash": "ebc9ad08af7780f04d4a8c36b34d62df",
+    "semantic_hash": ""
+  },
+  "apps/nebudcs-server/tests/library_api_tests.rs": {
+    "mtime": 1788657232.445398,
+    "ast_hash": "7b1ea9dab46bd49a7d32e0358d4374d5",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/src/library/catalog.rs": {
+    "mtime": 1788657232.6623993,
+    "ast_hash": "ce132d4509c5a21299c26064af9e6f48",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/src/library/dependency.rs": {
+    "mtime": 1788657232.6663995,
+    "ast_hash": "7cdc1fe88dc125f12c70e634274bb926",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/src/library/import_export.rs": {
+    "mtime": 1788657232.6703994,
+    "ast_hash": "b1fcadf6de6994248701d57a6a350aa1",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/src/library/mod.rs": {
+    "mtime": 1788657232.6703994,
+    "ast_hash": "e959b40d84249524156d97791b7c58ed",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/src/library/package.rs": {
+    "mtime": 1788657232.6783996,
+    "ast_hash": "c16ca7baaf871faebded897acced32b1",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/src/library/standard.rs": {
+    "mtime": 1788657232.6883996,
+    "ast_hash": "2b886087882d9430095ef1cca3883d02",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/src/library/template.rs": {
+    "mtime": 1788657232.6903996,
+    "ast_hash": "8fad93af0c865266daf8d7af493c430e",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/src/library/versioning.rs": {
+    "mtime": 1788657232.6903996,
+    "ast_hash": "9c7866f98903908601b34bfa2ca695a1",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/tests/export_standard_library.rs": {
+    "mtime": 1788657232.7133996,
+    "ast_hash": "01a303988b78343818b632518581d44f",
+    "semantic_hash": ""
+  },
+  "crates/nebudcs-scripting/tests/library_tests.rs": {
+    "mtime": 1788657232.7303998,
+    "ast_hash": "b5203b7f9183b3a04ff208d0eac1d442",
+    "semantic_hash": ""
+  },
+  "packages/standard-library/compressors/compressor_centrifugal.json": {
+    "mtime": 1788657215.6392946,
+    "ast_hash": "77a6738cca98fa4247f0072b96aa0c0b",
+    "semantic_hash": ""
+  },
+  "packages/standard-library/fans/fan_centrifugal.json": {
+    "mtime": 1788657215.6402946,
+    "ast_hash": "85de75c49ea7f24e166de8896e2a51ac",
+    "semantic_hash": ""
+  },
+  "packages/standard-library/heat_exchangers/heat_exchanger_shell_and_tube.json": {
+    "mtime": 1788657215.6422946,
+    "ast_hash": "e1a1bbf5d8b85074e0298a3d1d3f07f6",
+    "semantic_hash": ""
+  },
+  "packages/standard-library/heaters/heater_fired_process.json": {
+    "mtime": 1788657215.6422946,
+    "ast_hash": "948f4181d0c6899bb689c888b62ee834",
+    "semantic_hash": ""
+  },
+  "packages/standard-library/mixers/mixer_static_inline.json": {
+    "mtime": 1788657215.6432946,
+    "ast_hash": "06723addd1277015c73477c536905591",
+    "semantic_hash": ""
+  },
+  "packages/standard-library/packages/pump_bypass_skid.json": {
+    "mtime": 1788657215.6432946,
+    "ast_hash": "7f37b389d9015ccad9ba3ecf593a9c04",
+    "semantic_hash": ""
+  },
+  "packages/standard-library/packages/two_stage_compressor_skid.json": {
+    "mtime": 1788657215.6432946,
+    "ast_hash": "86ba4bbe9513c95bd0a8cf34d6b01932",
+    "semantic_hash": ""
+  },
+  "packages/standard-library/pumps/pump_centrifugal.json": {
+    "mtime": 1788657215.6392946,
+    "ast_hash": "9d5a08412eaf5a2f0ba1e35cdf0d5a1f",
+    "semantic_hash": ""
+  },
+  "packages/standard-library/reactors/reactor_cstr.json": {
+    "mtime": 1788657215.6422946,
+    "ast_hash": "689d7f1b0e9f7114b5019d6f860e29f9",
+    "semantic_hash": ""
+  },
+  "packages/standard-library/sensors/sensor_transmitter.json": {
+    "mtime": 1788657215.6432946,
+    "ast_hash": "da1dfea41009ef1238c8f76632962071",
+    "semantic_hash": ""
+  },
+  "packages/standard-library/splitters/splitter_flow_splitter.json": {
+    "mtime": 1788657215.6432946,
+    "ast_hash": "c7d6c612a695a0b1fef7e119152e33d1",
+    "semantic_hash": ""
+  },
+  "packages/standard-library/tanks/tank_atmospheric.json": {
+    "mtime": 1788657215.6402946,
+    "ast_hash": "852e76e913a10420eb9baf44432bc65c",
+    "semantic_hash": ""
+  },
+  "packages/standard-library/valves/valve_control_globe.json": {
+    "mtime": 1788657215.6402946,
+    "ast_hash": "22b93c69081661289c1c4f09173621ab",
+    "semantic_hash": ""
+  },
+  "packages/standard-library/vessels/vessel_vertical_separator.json": {
+    "mtime": 1788657215.6402946,
+    "ast_hash": "784241b3464eb6b01878f7356850e79b",
     "semantic_hash": ""
   }
 }

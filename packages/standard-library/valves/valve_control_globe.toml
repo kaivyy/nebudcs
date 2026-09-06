@@ -1,0 +1,116 @@
+id = "standard.valve.control_globe"
+name = "Globe Control Valve"
+version = "1.0.0"
+category = "valve"
+source = "standard"
+
+[metadata]
+author = "NebuDCS Standard Library"
+description = "Pneumatic globe control valve with equal-percentage trim"
+tags = [
+    "valve",
+    "control",
+]
+icon_hint = "valve"
+created_at = "2026-09-06T00:00:00Z"
+schema_version = "1.0.0"
+
+[metadata.custom_attributes]
+
+[definition]
+id = "standard.valve.control_globe"
+name = "Globe Control Valve"
+version = "1.0.0"
+category = "valve"
+tier = "level1_declarative"
+description = "Pneumatically actuated globe control valve with equal-percentage trim"
+alarm_definitions = []
+trips = []
+interlocks = []
+
+[definition.parameters.rated_cv]
+name = "rated_cv"
+description = "Flow coefficient Cv at 100% stroke"
+quantity_kind = "volumetric_flow"
+default_value = 65.0
+min_value = 0.1
+max_value = 1000.0
+required = false
+
+[[definition.ports]]
+id = "01M1T4ZBRK0ZNE46C9K9N424G1"
+name = "inlet"
+domain = "material"
+direction = "inlet"
+phase_compatibility = [
+    "liquid",
+    "gas",
+    "two_phase",
+]
+required = true
+cardinality = "zero_or_more"
+description = "Port inlet"
+
+[[definition.ports]]
+id = "01M1T4ZBRKFQNT4QGN7T9BSCRV"
+name = "outlet"
+domain = "material"
+direction = "outlet"
+phase_compatibility = [
+    "liquid",
+    "gas",
+    "two_phase",
+]
+required = true
+cardinality = "zero_or_more"
+description = "Port outlet"
+
+[[definition.ports]]
+id = "01M1T4ZBRKVYRP28KE931ZJT19"
+name = "demand_signal"
+domain = "signal"
+direction = "inlet"
+phase_compatibility = []
+required = true
+cardinality = "zero_or_more"
+description = "Port demand_signal"
+
+[definition.curves.cv_travel]
+name = "cv_travel"
+input_var = "travel"
+output_var = "cv_fraction"
+points = [
+    [
+    0.0,
+    0.02,
+],
+    [
+    0.2,
+    0.05,
+],
+    [
+    0.4,
+    0.12,
+],
+    [
+    0.6,
+    0.27,
+],
+    [
+    0.8,
+    0.55,
+],
+    [
+    1.0,
+    1.0,
+],
+]
+interpolation = "monotonic_cubic"
+extrapolation = "clamp"
+
+[definition.curves_2d]
+
+[definition.operating_envelope]
+dimensions = []
+
+[definition.metadata]

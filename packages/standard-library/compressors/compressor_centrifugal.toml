@@ -1,0 +1,131 @@
+id = "standard.compressor.centrifugal"
+name = "Centrifugal Compressor"
+version = "1.0.0"
+category = "rotating"
+source = "standard"
+
+[metadata]
+author = "NebuDCS Standard Library"
+description = "Generic API 617 centrifugal gas compressor"
+tags = [
+    "compressor",
+    "gas",
+]
+icon_hint = "rotating"
+created_at = "2026-09-06T00:00:00Z"
+schema_version = "1.0.0"
+
+[metadata.custom_attributes]
+
+[definition]
+id = "standard.compressor.centrifugal"
+name = "Standard Centrifugal Compressor"
+version = "1.0.0"
+category = "rotating"
+tier = "level1_declarative"
+description = "High-speed barrel-type centrifugal gas compressor"
+alarm_definitions = []
+interlocks = []
+
+[definition.parameters.design_speed]
+name = "design_speed"
+description = "Design speed (rpm)"
+quantity_kind = "speed"
+default_value = 10500.0
+min_value = 3000.0
+max_value = 15000.0
+required = false
+
+[definition.parameters.rated_mass_flow]
+name = "rated_mass_flow"
+description = "Rated gas flow (kg/s)"
+quantity_kind = "mass_flow"
+default_value = 25.0
+min_value = 1.0
+max_value = 150.0
+required = false
+
+[[definition.ports]]
+id = "01M1T4ZBRK5DH7K6FHYCVSMK4P"
+name = "suction"
+domain = "material"
+direction = "inlet"
+phase_compatibility = ["gas"]
+required = true
+cardinality = "zero_or_more"
+description = "Port suction"
+
+[[definition.ports]]
+id = "01M1T4ZBRK9YYJBSV496MRBNM4"
+name = "discharge"
+domain = "material"
+direction = "outlet"
+phase_compatibility = ["gas"]
+required = true
+cardinality = "zero_or_more"
+description = "Port discharge"
+
+[[definition.ports]]
+id = "01M1T4ZBRKK75CK2CDMENF27X4"
+name = "recycle"
+domain = "material"
+direction = "inlet"
+phase_compatibility = ["gas"]
+required = true
+cardinality = "zero_or_more"
+description = "Port recycle"
+
+[[definition.ports]]
+id = "01M1T4ZBRKD3X261TQPV5G7YT5"
+name = "shaft_drive"
+domain = "mechanical"
+direction = "inlet"
+phase_compatibility = []
+required = true
+cardinality = "zero_or_more"
+description = "Port shaft_drive"
+
+[definition.curves.head_flow]
+name = "head_flow"
+input_var = "flow"
+output_var = "delta_p"
+points = [
+    [
+    10.0,
+    1250000.0,
+],
+    [
+    20.0,
+    1180000.0,
+],
+    [
+    30.0,
+    1080000.0,
+],
+    [
+    40.0,
+    920000.0,
+],
+    [
+    50.0,
+    700000.0,
+],
+]
+interpolation = "monotonic_cubic"
+extrapolation = "clamp"
+
+[definition.curves_2d]
+
+[definition.operating_envelope]
+dimensions = []
+
+[[definition.trips]]
+id = "trip_overspeed"
+name = "Rotor Overspeed Trip"
+condition_var = "speed"
+operator = "greater_than"
+threshold = 12100.0
+fail_safe_state = "tripped"
+latched = true
+
+[definition.metadata]

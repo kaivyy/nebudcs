@@ -1,0 +1,86 @@
+id = "standard.mixer.static_inline"
+name = "Static Mixer"
+version = "1.0.0"
+category = "process"
+source = "standard"
+
+[metadata]
+author = "NebuDCS Standard Library"
+description = "Motionless pipeline mixing element"
+tags = [
+    "mixer",
+    "blending",
+]
+icon_hint = "process"
+created_at = "2026-09-06T00:00:00Z"
+schema_version = "1.0.0"
+
+[metadata.custom_attributes]
+
+[definition]
+id = "standard.mixer.static_inline"
+name = "Static In-Line Mixer"
+version = "1.0.0"
+category = "process"
+tier = "level1_declarative"
+description = "Motionless in-line turbulent static mixer"
+alarm_definitions = []
+trips = []
+interlocks = []
+
+[definition.parameters.pressure_loss_factor]
+name = "pressure_loss_factor"
+description = "Pressure loss factor (Pa)"
+quantity_kind = "pressure"
+default_value = 1450.0
+min_value = 10.0
+max_value = 100000.0
+required = false
+
+[[definition.ports]]
+id = "01M1T4ZBRKM4ZET75RGE639SJ7"
+name = "primary_in"
+domain = "material"
+direction = "inlet"
+phase_compatibility = [
+    "liquid",
+    "gas",
+]
+required = true
+cardinality = "zero_or_more"
+description = "Port primary_in"
+
+[[definition.ports]]
+id = "01M1T4ZBRKDGJX6WQ2XGZV08B6"
+name = "secondary_in"
+domain = "material"
+direction = "inlet"
+phase_compatibility = [
+    "liquid",
+    "gas",
+]
+required = true
+cardinality = "zero_or_more"
+description = "Port secondary_in"
+
+[[definition.ports]]
+id = "01M1T4ZBRKA49EE9YPHD6K1Q8M"
+name = "mixture_out"
+domain = "material"
+direction = "outlet"
+phase_compatibility = [
+    "liquid",
+    "gas",
+]
+required = true
+cardinality = "zero_or_more"
+description = "Port mixture_out"
+
+[definition.curves]
+
+[definition.curves_2d]
+
+[definition.operating_envelope]
+dimensions = []
+
+[definition.metadata]

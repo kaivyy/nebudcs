@@ -1,0 +1,99 @@
+id = "standard.heat_exchanger.shell_and_tube"
+name = "Shell and Tube Exchanger"
+version = "1.0.0"
+category = "heat_transfer"
+source = "standard"
+
+[metadata]
+author = "NebuDCS Standard Library"
+description = "Shell and tube thermal exchange unit"
+tags = [
+    "exchanger",
+    "heat",
+]
+icon_hint = "heattransfer"
+created_at = "2026-09-06T00:00:00Z"
+schema_version = "1.0.0"
+
+[metadata.custom_attributes]
+
+[definition]
+id = "standard.heat_exchanger.shell_and_tube"
+name = "Shell and Tube Exchanger"
+version = "1.0.0"
+category = "heat_transfer"
+tier = "level1_declarative"
+description = "TEMA-type shell and tube process heat exchanger"
+alarm_definitions = []
+trips = []
+interlocks = []
+
+[definition.parameters.area_m2]
+name = "area_m2"
+description = "Heat transfer surface area (m2)"
+quantity_kind = "volume"
+default_value = 150.0
+min_value = 1.0
+max_value = 3000.0
+required = false
+
+[[definition.ports]]
+id = "01M1T4ZBRK066M4V84TNJVPBRP"
+name = "tube_in"
+domain = "material"
+direction = "inlet"
+phase_compatibility = [
+    "liquid",
+    "gas",
+]
+required = true
+cardinality = "zero_or_more"
+description = "Port tube_in"
+
+[[definition.ports]]
+id = "01M1T4ZBRK0CKHT1XM6NRMZEBV"
+name = "tube_out"
+domain = "material"
+direction = "outlet"
+phase_compatibility = [
+    "liquid",
+    "gas",
+]
+required = true
+cardinality = "zero_or_more"
+description = "Port tube_out"
+
+[[definition.ports]]
+id = "01M1T4ZBRKZEZ0Y8651YEQ0CJT"
+name = "shell_in"
+domain = "material"
+direction = "inlet"
+phase_compatibility = [
+    "liquid",
+    "gas",
+]
+required = true
+cardinality = "zero_or_more"
+description = "Port shell_in"
+
+[[definition.ports]]
+id = "01M1T4ZBRKN2YDXHFMEWXH4783"
+name = "shell_out"
+domain = "material"
+direction = "outlet"
+phase_compatibility = [
+    "liquid",
+    "gas",
+]
+required = true
+cardinality = "zero_or_more"
+description = "Port shell_out"
+
+[definition.curves]
+
+[definition.curves_2d]
+
+[definition.operating_envelope]
+dimensions = []
+
+[definition.metadata]

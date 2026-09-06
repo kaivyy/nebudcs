@@ -172,5 +172,10 @@
   "170": "NebuApp",
   "171": "AlarmError",
   "172": "alarm_tests.rs",
-  "173": ".alarms"
+  "173": ".alarms",
+  "174": "22. Implementation Order (Historical Note & Authoritative Roadmap Reference)",
+  "175": "Vertical Slice 1: End-to-End Architecture Proof",
+  "176": "NebuDCS: Industrial Process Simulation & DCS Training Platform",
+  "177": ".subscribe_broadcast",
+  "178": "mod.rs"
 }

@@ -1,0 +1,91 @@
+{
+  "id": "standard.splitter.flow_splitter",
+  "name": "Flow Splitter",
+  "version": "1.0.0",
+  "category": "process",
+  "source": "standard",
+  "metadata": {
+    "author": "NebuDCS Standard Library",
+    "description": "Dual-branch stream dividing junction",
+    "tags": [
+      "splitter",
+      "flow"
+    ],
+    "icon_hint": "process",
+    "documentation": null,
+    "created_at": "2026-09-06T00:00:00Z",
+    "schema_version": "1.0.0",
+    "custom_attributes": {}
+  },
+  "definition": {
+    "id": "standard.splitter.flow_splitter",
+    "name": "Flow Splitter",
+    "version": "1.0.0",
+    "category": "process",
+    "tier": "level1_declarative",
+    "description": "Controllable dual-branch manifold flow splitter",
+    "parameters": {
+      "max_flow": {
+        "name": "max_flow",
+        "description": "Max inlet flow (kg/s)",
+        "quantity_kind": "mass_flow",
+        "default_value": 100.0,
+        "min_value": 0.0,
+        "max_value": 1000.0,
+        "required": false
+      }
+    },
+    "ports": [
+      {
+        "id": "01M1T4ZBRKNRMVZ4REJANYW3JN",
+        "name": "feed_in",
+        "domain": "material",
+        "direction": "inlet",
+        "phase_compatibility": [
+          "liquid",
+          "gas"
+        ],
+        "required": true,
+        "cardinality": "zero_or_more",
+        "description": "Port feed_in"
+      },
+      {
+        "id": "01M1T4ZBRKAQNXPJEE63PQC5YS",
+        "name": "branch_a",
+        "domain": "material",
+        "direction": "outlet",
+        "phase_compatibility": [
+          "liquid",
+          "gas"
+        ],
+        "required": true,
+        "cardinality": "zero_or_more",
+        "description": "Port branch_a"
+      },
+      {
+        "id": "01M1T4ZBRK5TGJJ1FW0KPFF0NR",
+        "name": "branch_b",
+        "domain": "material",
+        "direction": "outlet",
+        "phase_compatibility": [
+          "liquid",
+          "gas"
+        ],
+        "required": true,
+        "cardinality": "zero_or_more",
+        "description": "Port branch_b"
+      }
+    ],
+    "curves": {},
+    "curves_2d": {},
+    "operating_envelope": {
+      "dimensions": []
+    },
+    "alarm_definitions": [],
+    "trips": [],
+    "interlocks": [],
+    "script": null,
+    "composition": null,
+    "metadata": {}
+  }
+}

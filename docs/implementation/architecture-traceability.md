@@ -53,7 +53,7 @@ This audit validates complete coherence between the PRD, the architecture docume
 | Section 19: End-to-End Dynamic Vertical Slice | `vertical-slice-01.md` | Full Stack Proof | **Phase 8** | **PHASE 8 VERIFIED** |
 | Section 20: Scenario Engine & Fault Injection | `scenario-engine.md`, `training.md` | `nebudcs-scenario` | **Phase 9** | **PHASE 9 VERIFIED** |
 | Section 6 & 21: Data-Driven Custom Equipment & Rhai | `custom-equipment.md`, ADR-003, ADR-007 | `nebudcs-scripting` | **Phase 10** | **`PHASE 10 VERIFIED`** |
-| Section 6: Standard Equipment Package Library | `equipment-sdk.md` | `packages/standard-library/` | **Phase 11** | **PLANNED** |
+| Section 6: Standard Equipment Package Library | `equipment-sdk.md`, `custom-equipment.md` | `nebudcs-scripting`, `packages/standard-library/` | **Phase 11** | **`PHASE 11 VERIFIED`** |
 | Section 22: Advanced Thermodynamics & DAE Solvers | `thermodynamics.md`, `physics.md` | `nebudcs-physics` (extensions) | **Phase 12** | **PLANNED** |
 | Section 23: Desktop Engineering Studio (P&ID Editor) | `hmi-pid.md`, ADR-004 | `apps/nebudcs-desktop` | **Phase 13** | **PLANNED** |
 | Section 24: Web Operator / DCS Station Console | `hmi-pid.md`, ADR-005 | `apps/nebudcs-web` | **Phase 14** | **PLANNED** |

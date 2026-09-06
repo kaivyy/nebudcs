@@ -83,6 +83,39 @@ pub enum RuntimeCommand {
 
     /// Custom equipment runtime controls.
     Equipment(EquipmentCommand),
+
+    /// Equipment library and template package commands.
+    Library(LibraryCommand),
+}
+
+/// Equipment library and template package commands.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(tag = "action", rename_all = "snake_case")]
+pub enum LibraryCommand {
+    RegisterTemplate {
+        template_json: String,
+    },
+    InstantiateTemplate {
+        template_id: String,
+        #[serde(default)]
+        version: Option<String>,
+        name: String,
+        #[serde(default)]
+        instance_id: Option<String>,
+        #[serde(default)]
+        parameter_overrides: std::collections::BTreeMap<String, f64>,
+    },
+    RegisterPackage {
+        package_json: String,
+    },
+    InstantiatePackage {
+        package_id: String,
+        #[serde(default)]
+        version: Option<String>,
+        instance_prefix: String,
+        #[serde(default)]
+        parameter_overrides: std::collections::BTreeMap<String, f64>,
+    },
 }
 
 /// Custom equipment runtime commands.

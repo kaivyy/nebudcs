@@ -1,0 +1,119 @@
+{
+  "id": "standard.package.two_stage_compressor_skid",
+  "name": "Two-Stage Compression Skid",
+  "version": "1.0.0",
+  "description": "Two-stage centrifugal gas compressor package with intercooler and anti-surge loop",
+  "author": "NebuDCS Standard Library",
+  "dependencies": [
+    {
+      "id": "standard.compressor.centrifugal",
+      "version_req": "^1.0.0"
+    },
+    {
+      "id": "standard.heat_exchanger.shell_and_tube",
+      "version_req": "^1.0.0"
+    },
+    {
+      "id": "standard.valve.control_globe",
+      "version_req": "^1.0.0"
+    }
+  ],
+  "sub_components": [
+    {
+      "id": "stage1",
+      "template_id": "standard.compressor.centrifugal",
+      "template_version": "1.0.0",
+      "parameter_overrides": {}
+    },
+    {
+      "id": "intercooler",
+      "template_id": "standard.heat_exchanger.shell_and_tube",
+      "template_version": "1.0.0",
+      "parameter_overrides": {}
+    },
+    {
+      "id": "stage2",
+      "template_id": "standard.compressor.centrifugal",
+      "template_version": "1.0.0",
+      "parameter_overrides": {}
+    },
+    {
+      "id": "anti_surge_valve",
+      "template_id": "standard.valve.control_globe",
+      "template_version": "1.0.0",
+      "parameter_overrides": {}
+    }
+  ],
+  "internal_streams": [
+    {
+      "id": "stage1_to_intercooler",
+      "from_component": "stage1",
+      "from_port": "discharge",
+      "to_component": "intercooler",
+      "to_port": "tube_in"
+    },
+    {
+      "id": "intercooler_to_stage2",
+      "from_component": "intercooler",
+      "from_port": "tube_out",
+      "to_component": "stage2",
+      "to_port": "suction"
+    },
+    {
+      "id": "stage2_to_anti_surge",
+      "from_component": "stage2",
+      "from_port": "discharge",
+      "to_component": "anti_surge_valve",
+      "to_port": "inlet"
+    }
+  ],
+  "external_ports": [
+    {
+      "external_port_name": "package_suction",
+      "direction": "inlet",
+      "domain": "material",
+      "internal_component": "stage1",
+      "internal_port": "suction"
+    },
+    {
+      "external_port_name": "package_discharge",
+      "direction": "outlet",
+      "domain": "material",
+      "internal_component": "stage2",
+      "internal_port": "discharge"
+    },
+    {
+      "external_port_name": "cooling_water_in",
+      "direction": "inlet",
+      "domain": "material",
+      "internal_component": "intercooler",
+      "internal_port": "shell_in"
+    },
+    {
+      "external_port_name": "cooling_water_out",
+      "direction": "outlet",
+      "domain": "material",
+      "internal_component": "intercooler",
+      "internal_port": "shell_out"
+    }
+  ],
+  "parameters": {
+    "skid_speed": {
+      "name": "skid_speed",
+      "description": "Common driver shaft speed (rpm)",
+      "quantity_kind": "speed",
+      "default_value": 10500.0,
+      "min_value": 4000.0,
+      "max_value": 15000.0,
+      "required": false
+    }
+  },
+  "parameter_mappings": [
+    {
+      "package_param": "skid_speed",
+      "target_component": "stage1",
+      "target_param": "design_speed"
+    }
+  ],
+  "metadata": {}
+}

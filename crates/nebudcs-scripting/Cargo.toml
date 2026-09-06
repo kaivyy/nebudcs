@@ -13,6 +13,7 @@ nebudcs-sim       = { path = "../nebudcs-sim" }
 nebudcs-physics   = { path = "../nebudcs-physics" }
 nebudcs-control   = { path = "../nebudcs-control" }
 nebudcs-alarm     = { path = "../nebudcs-alarm" }
+nebudcs-topology  = { path = "../nebudcs-topology" }
 rhai              = { workspace = true }
 serde             = { workspace = true }
 serde_json        = { workspace = true }
@@ -20,6 +21,3 @@ toml              = { workspace = true }
 thiserror         = { workspace = true }
 indexmap          = { workspace = true }
 ulid              = { workspace = true }
-
-[dev-dependencies]
-nebudcs-topology  = { path = "../nebudcs-topology" }

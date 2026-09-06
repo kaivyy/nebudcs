@@ -1,0 +1,110 @@
+id = "standard.vessel.vertical_separator"
+name = "Vertical Separator"
+version = "1.0.0"
+category = "process"
+source = "standard"
+
+[metadata]
+author = "NebuDCS Standard Library"
+description = "Vertical 2-phase gas-liquid separator"
+tags = [
+    "vessel",
+    "separator",
+]
+icon_hint = "process"
+created_at = "2026-09-06T00:00:00Z"
+schema_version = "1.0.0"
+
+[metadata.custom_attributes]
+
+[definition]
+id = "standard.vessel.vertical_separator"
+name = "Vertical Knockout Drum"
+version = "1.0.0"
+category = "process"
+tier = "level1_declarative"
+description = "Vertical two-phase gas/liquid separation vessel with demister pad"
+alarm_definitions = []
+interlocks = []
+
+[definition.parameters.volume_m3]
+name = "volume_m3"
+description = "Vessel internal volume (m3)"
+quantity_kind = "volume"
+default_value = 8.5
+min_value = 0.5
+max_value = 200.0
+required = false
+
+[definition.parameters.design_pressure_bar]
+name = "design_pressure_bar"
+description = "MAWP (Pa)"
+quantity_kind = "pressure"
+default_value = 2500000.0
+min_value = 100000.0
+max_value = 15000000.0
+required = false
+
+[[definition.ports]]
+id = "01M1T4ZBRKCHSYN76EAKYWCDZG"
+name = "feed"
+domain = "material"
+direction = "inlet"
+phase_compatibility = [
+    "two_phase",
+    "liquid",
+    "gas",
+]
+required = true
+cardinality = "zero_or_more"
+description = "Port feed"
+
+[[definition.ports]]
+id = "01M1T4ZBRKKR75R3QR3V5E3RYJ"
+name = "gas_out"
+domain = "material"
+direction = "outlet"
+phase_compatibility = ["gas"]
+required = true
+cardinality = "zero_or_more"
+description = "Port gas_out"
+
+[[definition.ports]]
+id = "01M1T4ZBRK2FADK6VVAVQD06NF"
+name = "liquid_out"
+domain = "material"
+direction = "outlet"
+phase_compatibility = ["liquid"]
+required = true
+cardinality = "zero_or_more"
+description = "Port liquid_out"
+
+[[definition.ports]]
+id = "01M1T4ZBRKTQJEYFGBJSKDVA2Q"
+name = "psv_relief"
+direction = "outlet"
+phase_compatibility = []
+required = true
+cardinality = "zero_or_more"
+description = "Port psv_relief"
+
+[definition.ports.domain]
+utility = "flare"
+
+[definition.curves]
+
+[definition.curves_2d]
+
+[definition.operating_envelope]
+dimensions = []
+
+[[definition.trips]]
+id = "trip_high_level"
+name = "High High Level Trip"
+condition_var = "level"
+operator = "greater_than"
+threshold = 0.92
+fail_safe_state = "tripped"
+latched = true
+
+[definition.metadata]

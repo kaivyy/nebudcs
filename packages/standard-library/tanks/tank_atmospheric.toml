@@ -1,0 +1,79 @@
+id = "standard.tank.atmospheric"
+name = "Atmospheric Storage Tank"
+version = "1.0.0"
+category = "process"
+source = "standard"
+
+[metadata]
+author = "NebuDCS Standard Library"
+description = "Atmospheric liquid storage tank"
+tags = [
+    "tank",
+    "storage",
+]
+icon_hint = "process"
+created_at = "2026-09-06T00:00:00Z"
+schema_version = "1.0.0"
+
+[metadata.custom_attributes]
+
+[definition]
+id = "standard.tank.atmospheric"
+name = "Atmospheric Storage Tank"
+version = "1.0.0"
+category = "process"
+tier = "level1_declarative"
+description = "Cylindrical vertical storage tank operating at atmospheric pressure"
+alarm_definitions = []
+trips = []
+interlocks = []
+
+[definition.parameters.capacity_m3]
+name = "capacity_m3"
+description = "Storage capacity (m3)"
+quantity_kind = "volume"
+default_value = 500.0
+min_value = 10.0
+max_value = 50000.0
+required = false
+
+[[definition.ports]]
+id = "01M1T4ZBRK4KVNK0WHX0SPSKKA"
+name = "inlet"
+domain = "material"
+direction = "inlet"
+phase_compatibility = ["liquid"]
+required = true
+cardinality = "zero_or_more"
+description = "Port inlet"
+
+[[definition.ports]]
+id = "01M1T4ZBRK92EHN8DFYDHH36NK"
+name = "outlet"
+domain = "material"
+direction = "outlet"
+phase_compatibility = ["liquid"]
+required = true
+cardinality = "zero_or_more"
+description = "Port outlet"
+
+[[definition.ports]]
+id = "01M1T4ZBRK9YB97TMDA2QGVW1Y"
+name = "drain_overflow"
+direction = "outlet"
+phase_compatibility = []
+required = true
+cardinality = "zero_or_more"
+description = "Port drain_overflow"
+
+[definition.ports.domain]
+utility = "plant_air"
+
+[definition.curves]
+
+[definition.curves_2d]
+
+[definition.operating_envelope]
+dimensions = []
+
+[definition.metadata]

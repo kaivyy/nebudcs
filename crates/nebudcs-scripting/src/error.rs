@@ -36,6 +36,21 @@ pub enum ScriptingError {
 
     #[error("Serialization error: {0}")]
     Serialization(String),
+
+    #[error("Template error: {0}")]
+    Template(String),
+
+    #[error("Package error: {0}")]
+    Package(String),
+
+    #[error("Dependency resolution failed: {0}")]
+    Dependency(String),
+
+    #[error("Versioning error: {0}")]
+    Version(String),
+
+    #[error("Import/Export error: {0}")]
+    ImportExport(String),
 }
 
 pub type ScriptingResult<T> = Result<T, ScriptingError>;

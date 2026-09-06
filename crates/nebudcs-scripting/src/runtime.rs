@@ -9,10 +9,13 @@ use std::sync::Arc;
 use nebudcs_control::signal::RuntimeTagStore;
 use nebudcs_model::tag::{TagQuality, TagValue};
 use nebudcs_sim::{SimError, SimulationSystem, StateReadView, StateWriteView, StepContext};
-use nebudcs_types::{EquipmentId, TagId};
+use nebudcs_types::{EquipmentId, SchemaVersion, TagId};
 use rhai::AST;
 
 use crate::error::{ScriptingError, ScriptingResult};
+use crate::library::{
+    EquipmentLibrary, EquipmentTemplate, PackageInstantiationResult, TemplateMetadata,
+};
 use crate::model::{CustomEquipmentDefinition, CustomizationTier};
 use crate::sandbox::{RhaiSandbox, ScriptExecutionContext};
 use crate::validation::validate_custom_equipment;
@@ -81,6 +84,8 @@ pub struct CustomEquipmentManager {
     sandbox: RhaiSandbox,
     /// Mapping of (EquipmentId, variable_name) -> TagId for tag synchronization.
     tag_bindings: HashMap<(EquipmentId, String), TagId>,
+    /// Equipment library storing standard and user templates and packages.
+    library: EquipmentLibrary,
 }
 
 impl Default for CustomEquipmentManager {
@@ -92,11 +97,14 @@ impl Default for CustomEquipmentManager {
 impl CustomEquipmentManager {
     /// Creates a new custom equipment manager.
     pub fn new() -> Self {
+        let mut library = EquipmentLibrary::new();
+        let _ = library.load_standard_catalog();
         Self {
             definitions: HashMap::new(),
             instances: HashMap::new(),
             sandbox: RhaiSandbox::new(),
             tag_bindings: HashMap::new(),
+            library,
         }
     }
 
@@ -161,6 +169,22 @@ impl CustomEquipmentManager {
                     "Parameter override for '{k}' is non-finite: {v}"
                 )));
             }
+            if let Some(param_def) = compiled.def.parameters.get(k) {
+                if let Some(min) = param_def.min_value {
+                    if *v < min {
+                        return Err(ScriptingError::Instance(format!(
+                            "Parameter override '{k}' = {v} is below minimum {min}"
+                        )));
+                    }
+                }
+                if let Some(max) = param_def.max_value {
+                    if *v > max {
+                        return Err(ScriptingError::Instance(format!(
+                            "Parameter override '{k}' = {v} exceeds maximum {max}"
+                        )));
+                    }
+                }
+            }
             parameters.insert(k.clone(), *v);
         }
 
@@ -190,6 +214,82 @@ impl CustomEquipmentManager {
 
         self.instances.insert(instance_id, instance);
         Ok(self.instances.get(&instance_id).unwrap())
+    }
+
+    /// Access reference to the equipment library.
+    pub fn library(&self) -> &EquipmentLibrary {
+        &self.library
+    }
+
+    /// Mutable reference to the equipment library.
+    pub fn library_mut(&mut self) -> &mut EquipmentLibrary {
+        &mut self.library
+    }
+
+    /// Instantiates an equipment template from the library into runtime simulation state.
+    pub fn instantiate_template(
+        &mut self,
+        template_id: &str,
+        version: Option<&SchemaVersion>,
+        instance_id: EquipmentId,
+        name: impl Into<String>,
+        param_overrides: &BTreeMap<String, f64>,
+    ) -> ScriptingResult<&CustomEquipmentInstance> {
+        let tmpl = self
+            .library
+            .get_template(template_id, version)
+            .cloned()
+            .ok_or_else(|| {
+                ScriptingError::NotFound(format!("Template '{template_id}' not found"))
+            })?;
+
+        let instance = tmpl.instantiate(instance_id, name, param_overrides)?;
+
+        // Ensure definition is registered
+        if !self.definitions.contains_key(&tmpl.definition.id) {
+            self.register_definition(tmpl.definition.clone())?;
+        }
+
+        self.instances.insert(instance_id, instance);
+        Ok(self.instances.get(&instance_id).unwrap())
+    }
+
+    /// Instantiates a composite package into runtime simulation state.
+    pub fn instantiate_package(
+        &mut self,
+        package_id: &str,
+        version: Option<&SchemaVersion>,
+        prefix: &str,
+        param_overrides: &BTreeMap<String, f64>,
+    ) -> ScriptingResult<PackageInstantiationResult> {
+        let result =
+            self.library
+                .instantiate_package(package_id, version, prefix, param_overrides)?;
+
+        for inst in &result.instances {
+            // Ensure child definitions are registered
+            if !self.definitions.contains_key(&inst.definition_id) {
+                if let Some(tmpl) = self.library.get_template(&inst.definition_id, None) {
+                    let def = tmpl.definition.clone();
+                    self.register_definition(def)?;
+                }
+            }
+            self.instances.insert(inst.id, inst.clone());
+        }
+
+        Ok(result)
+    }
+
+    /// Promotes a registered custom definition to a reusable user template in the library.
+    pub fn promote_to_user_template(
+        &mut self,
+        definition_id: &str,
+        metadata: Option<TemplateMetadata>,
+    ) -> ScriptingResult<EquipmentTemplate> {
+        let def = self.get_definition(definition_id).cloned().ok_or_else(|| {
+            ScriptingError::NotFound(format!("Definition '{definition_id}' not found"))
+        })?;
+        self.library.register_user_template(def, metadata)
     }
 
     /// Binds an equipment variable to a runtime tag for automated synchronization.

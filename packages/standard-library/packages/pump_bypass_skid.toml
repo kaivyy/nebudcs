@@ -1,0 +1,78 @@
+id = "standard.package.pump_bypass_skid"
+name = "Pumping Skid with Minimum Flow Bypass"
+version = "1.0.0"
+description = "Packaged centrifugal pumping station with automated spillback recirculation valve"
+author = "NebuDCS Standard Library"
+
+[[dependencies]]
+id = "standard.pump.centrifugal"
+version_req = "^1.0.0"
+
+[[dependencies]]
+id = "standard.valve.control_globe"
+version_req = "^1.0.0"
+
+[[sub_components]]
+id = "main_pump"
+template_id = "standard.pump.centrifugal"
+template_version = "1.0.0"
+
+[sub_components.parameter_overrides]
+
+[[sub_components]]
+id = "bypass_valve"
+template_id = "standard.valve.control_globe"
+template_version = "1.0.0"
+
+[sub_components.parameter_overrides]
+
+[[internal_streams]]
+id = "pump_to_bypass"
+from_component = "main_pump"
+from_port = "discharge"
+to_component = "bypass_valve"
+to_port = "inlet"
+
+[[external_ports]]
+external_port_name = "skid_suction"
+direction = "inlet"
+domain = "material"
+internal_component = "main_pump"
+internal_port = "suction"
+
+[[external_ports]]
+external_port_name = "skid_discharge"
+direction = "outlet"
+domain = "material"
+internal_component = "main_pump"
+internal_port = "discharge"
+
+[[external_ports]]
+external_port_name = "bypass_spillback"
+direction = "outlet"
+domain = "material"
+internal_component = "bypass_valve"
+internal_port = "outlet"
+
+[[external_ports]]
+external_port_name = "bypass_cmd"
+direction = "inlet"
+domain = "signal"
+internal_component = "bypass_valve"
+internal_port = "demand_signal"
+
+[parameters.skid_flow]
+name = "skid_flow"
+description = "Rated skid delivery flow (m3/h)"
+quantity_kind = "volumetric_flow"
+default_value = 120.0
+min_value = 10.0
+max_value = 400.0
+required = false
+
+[[parameter_mappings]]
+package_param = "skid_flow"
+target_component = "main_pump"
+target_param = "rated_flow"
+
+[metadata]

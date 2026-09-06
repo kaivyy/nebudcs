@@ -15,13 +15,17 @@ pub mod message;
 pub mod version;
 
 pub use command::{
-    EquipmentCommand, PidModeDto, RuntimeCommand, ScenarioCommand, SimControlCommand, TagValueDto,
+    EquipmentCommand, LibraryCommand, PidModeDto, RuntimeCommand, ScenarioCommand,
+    SimControlCommand, TagValueDto,
 };
 pub use dto::{
     ActiveFaultDto, AlarmSeverityDto, AlarmSnapshotDto, AlarmStateDto, DeltaUpdateDto,
     EquipmentControlRequestDto, EquipmentDefinitionSummaryDto, EquipmentInstanceSummaryDto,
-    HistoricalEventDto, InstantiateEquipmentRequestDto, ScenarioStatusDto, ServerHealthDto,
-    StateSnapshotDto, TagQualityDto, TagValueSampleDto, ValidateEquipmentResponseDto,
+    ExportLibraryItemResponseDto, HistoricalEventDto, ImportLibraryItemRequestDto,
+    InstantiateEquipmentRequestDto, InstantiatePackageRequestDto, InstantiateTemplateRequestDto,
+    PackageDetailDto, PackageSummaryDto, ScenarioStatusDto, ServerHealthDto, StateSnapshotDto,
+    TagQualityDto, TagValueSampleDto, TemplateDetailDto, TemplateSummaryDto,
+    ValidateEquipmentResponseDto, ValidatePackageResponseDto,
 };
 pub use error::{ProtocolError, ProtocolErrorCode, ProtocolResult};
 pub use message::{ClientCapabilities, ClientMessage, ServerMessage};

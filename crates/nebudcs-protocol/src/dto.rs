@@ -207,3 +207,118 @@ pub struct EquipmentControlRequestDto {
     #[serde(default)]
     pub value: Option<f64>,
 }
+
+// ---------------------------------------------------------------------------
+// Phase 11 Equipment Library & Template Package DTOs
+// ---------------------------------------------------------------------------
+
+/// High-level summary of an equipment template in the library catalog.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct TemplateSummaryDto {
+    pub id: String,
+    pub name: String,
+    pub version: String,
+    pub category: String,
+    pub source: String,
+    pub description: String,
+    pub parameter_count: usize,
+    pub port_count: usize,
+    pub curve_count: usize,
+    pub trip_count: usize,
+    pub author: String,
+}
+
+/// Detailed information about an equipment template.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct TemplateDetailDto {
+    pub id: String,
+    pub name: String,
+    pub version: String,
+    pub category: String,
+    pub source: String,
+    pub description: String,
+    pub author: String,
+    pub tags: Vec<String>,
+    pub icon_hint: Option<String>,
+    pub definition_json: String,
+}
+
+/// High-level summary of an equipment package in the library.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct PackageSummaryDto {
+    pub id: String,
+    pub name: String,
+    pub version: String,
+    pub description: String,
+    pub author: String,
+    pub sub_component_count: usize,
+    pub internal_stream_count: usize,
+    pub external_port_count: usize,
+    pub dependency_count: usize,
+}
+
+/// Detailed information about an equipment package.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct PackageDetailDto {
+    pub id: String,
+    pub name: String,
+    pub version: String,
+    pub description: String,
+    pub author: String,
+    pub package_json: String,
+}
+
+/// Pre-registration validation response for equipment packages.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ValidatePackageResponseDto {
+    pub valid: bool,
+    pub package_id: String,
+    pub resolved_dependencies: Vec<String>,
+    pub errors: Vec<String>,
+    pub warnings: Vec<String>,
+}
+
+/// Request payload to import a template or package from data.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ImportLibraryItemRequestDto {
+    pub content: String,
+    #[serde(default = "default_format_json")]
+    pub format: String,
+}
+
+fn default_format_json() -> String {
+    "json".to_string()
+}
+
+/// Request payload to instantiate an equipment template.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct InstantiateTemplateRequestDto {
+    pub template_id: String,
+    #[serde(default)]
+    pub version: Option<String>,
+    #[serde(default)]
+    pub instance_id: Option<String>,
+    pub name: String,
+    #[serde(default)]
+    pub parameter_overrides: std::collections::BTreeMap<String, f64>,
+}
+
+/// Request payload to instantiate an equipment package into the simulation.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct InstantiatePackageRequestDto {
+    pub package_id: String,
+    #[serde(default)]
+    pub version: Option<String>,
+    pub instance_prefix: String,
+    #[serde(default)]
+    pub parameter_overrides: std::collections::BTreeMap<String, f64>,
+}
+
+/// Export response payload containing serialized data.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ExportLibraryItemResponseDto {
+    pub id: String,
+    pub version: String,
+    pub format: String,
+    pub content: String,
+}

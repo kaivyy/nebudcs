@@ -5,6 +5,7 @@ pub mod control;
 pub mod equipment;
 pub mod health;
 pub mod history;
+pub mod library;
 pub mod scenario;
 pub mod sim;
 pub mod tags;
@@ -96,6 +97,45 @@ pub fn build_routes() -> Router<HostHandle> {
         .route(
             "/api/v1/equipment/control",
             post(equipment::control_equipment),
+        )
+        // Equipment Library & Template Packages
+        .route(
+            "/api/v1/library/templates",
+            get(library::list_templates).post(library::register_template),
+        )
+        .route(
+            "/api/v1/library/templates/import",
+            post(library::import_template_endpoint),
+        )
+        .route("/api/v1/library/templates/{id}", get(library::get_template))
+        .route(
+            "/api/v1/library/templates/{id}/export",
+            get(library::export_template_endpoint),
+        )
+        .route(
+            "/api/v1/library/templates/{id}/instantiate",
+            post(library::instantiate_template_endpoint),
+        )
+        .route(
+            "/api/v1/library/packages",
+            get(library::list_packages).post(library::register_package),
+        )
+        .route(
+            "/api/v1/library/packages/validate",
+            post(library::validate_package_endpoint),
+        )
+        .route(
+            "/api/v1/library/packages/import",
+            post(library::import_package_endpoint),
+        )
+        .route("/api/v1/library/packages/{id}", get(library::get_package))
+        .route(
+            "/api/v1/library/packages/{id}/export",
+            get(library::export_package_endpoint),
+        )
+        .route(
+            "/api/v1/library/packages/{id}/instantiate",
+            post(library::instantiate_package_endpoint),
         )
         // Realtime Streaming WebSocket
         .route("/ws", get(ws::ws_upgrade_handler))

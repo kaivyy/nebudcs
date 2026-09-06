@@ -223,6 +223,7 @@ This roadmap defines the definitive 17-phase lifecycle (Phases 0 through 16) for
 - **Upstream / Downstream**: Consumes Phases 1–5, 7; consumed by Phase 11 (Standard Library) and Phase 13 (Engineering Studio).
 
 ### Phase 11: Standard Equipment Library
+- **Status**: **`PHASE 11 VERIFIED`**
 - **Purpose**: Provide a comprehensive catalog of data-driven equipment definition packages covering industrial process engineering needs.
 - **Scope**:
   - Rotating equipment: Centrifugal pumps, positive displacement pumps, centrifugal compressors, reciprocating compressors, steam turbines, electric motors.
@@ -230,11 +231,14 @@ This roadmap defines the definitive 17-phase lifecycle (Phases 0 through 16) for
   - Separation equipment: Two-phase flash drums, three-phase separators, vertical accumulators, distillation column sections.
   - Piping & control elements: Control valves (globe, ball, butterfly), manual isolation valves, check valves, pressure safety relief valves (PSV), orifices, static mixers.
   - Utility consumers: Steam traps, cooling water jackets, fuel gas burners, electrical switchgear.
+  - Composite equipment packages: Multi-equipment packaged skids (pumping skid with bypass, two-stage compressor skid) mapping to Level 2 subgraphs.
+  - Safe import/export: Deterministic JSON/TOML serialization, strict 2 MB payload cap, 64 sub-component limit.
+  - Deterministic versioning: Semantic versioning, Kahn topological dependency resolution, cycle detection, content fingerprinting, published version immutability.
 - **Dependencies**: Phases 1, 4, 10.
 - **Non-Goals**: Hardcoding equipment as separate Rust structs in the simulation core.
-- **Architectural Outputs**: `packages/standard-library/` (validated TOML/JSON definition files and curves).
-- **Acceptance Criteria**: All standard equipment instantiable via data packages; operating envelopes correctly validated.
-- **Verification Requirements**: Full unit and verification test suite for every library package fixture.
+- **Architectural Outputs**: `crates/nebudcs-scripting::library`, `packages/standard-library/` (28 validated TOML/JSON definition files and curves), `nebudcs-protocol` library DTOs/commands, `apps/nebudcs-server` library routes.
+- **Acceptance Criteria**: All standard equipment instantiable via data packages; operating envelopes correctly validated; composite packages wired into Level 2 subgraphs without a second simulation engine.
+- **Verification Requirements**: 50 tests in `nebudcs-scripting` (including 14 independent verification tests, 9 library unit tests, 1 fixture export test), 34 tests in `nebudcs-server` (including 5 REST library integration tests), 100% passing across 326 workspace tests.
 - **Upstream / Downstream**: Consumes Phase 10; foundation for Phase 13 (Engineering Studio) and complex models.
 
 ### Phase 12: Advanced Process Physics & Pluggable Thermodynamics

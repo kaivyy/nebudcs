@@ -24,6 +24,7 @@ date: 2026-09-06
 | Server Host (`apps/nebudcs-server`) | APPLICATION | 7 | **PHASE 7 VERIFIED** | Headless Axum server hosting simulation engine and WebSockets. |
 | Scenario Engine (`nebudcs-scenario`) | TRAINING | 9 | **PHASE 9 VERIFIED** | Data-driven scenarios, fault injection, instructor controls. |
 | Scripting Sandbox (`nebudcs-scripting`) | EXTENSION | 10 | **PHASE 10 VERIFIED** | Custom equipment authoring, 1D/2D curves, package composition, sandboxed Rhai. |
+| Equipment Library (`nebudcs-scripting::library`) | EXTENSION | 11 | **`PHASE 11 VERIFIED`** | Standard templates, user templates, packages, import/export, dependency resolution. |
 | Desktop App (`apps/nebudcs-desktop`) | APPLICATION | 13/14 | **PLANNED** | Rust-native egui/wgpu engineering studio & operator console. |
 | Web Operator HMI (`apps/nebudcs-web`) | APPLICATION | 14 | **PLANNED** | Lightweight TypeScript + Web Components + SVG operator console. |
 

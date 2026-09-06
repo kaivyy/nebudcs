@@ -1,0 +1,33 @@
+[package]
+name = "nebudcs-server"
+version = "0.1.0"
+edition = "2021"
+description = "Production-grade realtime API & WebSocket server for NebuDCS simulation engine"
+
+[dependencies]
+nebudcs-types = { path = "../../crates/nebudcs-types" }
+nebudcs-units = { path = "../../crates/nebudcs-units" }
+nebudcs-model = { path = "../../crates/nebudcs-model" }
+nebudcs-sim = { path = "../../crates/nebudcs-sim" }
+nebudcs-control = { path = "../../crates/nebudcs-control" }
+nebudcs-alarm = { path = "../../crates/nebudcs-alarm" }
+nebudcs-historian = { path = "../../crates/nebudcs-historian" }
+nebudcs-protocol = { path = "../../crates/nebudcs-protocol" }
+nebudcs-scenario = { path = "../../crates/nebudcs-scenario" }
+
+tokio = { workspace = true }
+axum = { workspace = true }
+tower = { workspace = true }
+tower-http = { workspace = true }
+futures-util = { workspace = true }
+crossbeam-channel = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+ulid = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+
+[dev-dependencies]
+tempfile = "3"
+tokio-tungstenite = "0.26"

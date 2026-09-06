@@ -1,180 +1,155 @@
 ---
-title: Equipment SDK Architecture
-version: 0.1.0
-status: draft
-date: 2026-09-05
+title: Equipment SDK & Capability Architecture
+version: 2.0.0
+status: verified-baseline
+date: 2026-09-06
 ---
 
-# Equipment SDK Architecture
+# Equipment SDK & Capability Architecture
 
-This document defines the core architecture for the Equipment SDK in NebuDCS, ensuring that equipment is template-based, composable, and data-driven rather than implemented as hardcoded Rust structs for every variant.
+## 1. Core Architectural Distinction
 
-## 1. Separation of Concerns
-
-The architecture strictly separates equipment into three distinct layers:
-
-```rust
-// Pseudocode - Not final implementation
-
-/// Data-driven template defining the structure, capabilities, and parameters
-pub struct EquipmentDefinition {
-    pub id: String,
-    pub version: String,
-    pub name: String,
-    pub capabilities: Vec<CapabilityDef>,
-    pub ports: Vec<PortDef>,
-    pub parameters: Vec<ParameterDef>,
-    pub state_machine: StateMachineDef,
-    pub failure_modes: Vec<FailureModeDef>,
-    // Definition visual representation
-    pub graphics: GraphicDef,
-}
-
-/// A specific configured instance placed in the plant topology
-pub struct EquipmentInstance {
-    pub instance_id: String,
-    pub definition_id: String,
-    pub tags: Vec<TagMapping>,
-    pub configured_parameters: HashMap<String, ParameterValue>,
-    pub port_connections: HashMap<String, ConnectionId>,
-}
-
-/// The runtime simulation state updated every tick
-pub struct EquipmentRuntimeState {
-    pub instance_id: String,
-    pub active_state: StateId,
-    pub parameter_states: HashMap<String, ProcessValue>,
-    pub active_failures: Vec<FailureInstance>,
-    pub port_states: HashMap<String, PortState>,
-}
-```
-
-### Lifecycle Diagram
+NebuDCS enforces a strict conceptual separation across ten distinct equipment concerns to prevent monolithic, hardcoded equipment classes:
 
 ```mermaid
 graph TD
-    A[EquipmentDefinition<br>JSON/TOML Library] -->|Instantiate| B(EquipmentInstance<br>Project Config)
-    B -->|Initialize| C{EquipmentRuntimeState<br>Simulation Memory}
-    C -->|Tick Update| C
+    Def[1. EquipmentDefinition: Immutable Data Template] --> Inst[2. EquipmentInstance: Topology Placement]
+    Def --> Cap[3. Composable Capabilities]
+    Def --> Ports[4. Semantic Ports]
+    Def --> Params[5. Strongly Typed Parameters]
+    Def --> Env[6. Multi-Dimensional Operating Envelope]
+    Def --> Alarms[7. Alarm Definitions]
+    Def --> Fail[8. First-Class Failure Modes]
+    Def --> SM[9. State Machine]
+    Def --> Vis[10. Visual Representation: P&ID / HMI Graphics]
+
+    Inst --> RunState[Equipment Runtime State in Simulation Memory]
 ```
 
-## 2. Capability Trait System
+### The Ten Equipment Concerns
+1. **`EquipmentDefinition`**: Immutable, semantic-versioned data template defining the equipment catalog entry.
+2. **`EquipmentInstance`**: Specific plant instance placed into the hierarchy with unique `EquipmentId` and configured parameters.
+3. **`Capability`**: Composable functional traits (e.g., `FlowSource`, `PressureBoundary`, `RotatingEquipment`, `HeatTransfer`, `Separation`).
+4. **`Ports`**: Physical and signal interfaces defining domain, direction, media, and cardinality.
+5. **`Parameters`**: Unit-aware static values (diameter, displacement volume, rated power).
+6. **`OperatingEnvelope`**: Multidimensional operating bounds (e.g., RPM + Mass Flow + Head $\to$ valid region).
+7. **`Alarms`**: Configurable limits (HI, HIHI, LO, LOLO, deviation, rate-of-change).
+8. **`FailureModes`**: Data-driven physical faults (bearing seizure, valve stiction, tube leak).
+9. **`StateMachine`**: Operational states (`Stopped`, `Starting`, `Running`, `Stopping`, `Tripped`, `Faulted`, `Maintenance`).
+10. **`VisualRepresentation`**: P&ID vector symbols and HMI operator graphics bound to simulation tags, completely decoupled from physics code.
 
-Equipment is composed of capabilities rather than rigid hierarchies.
+---
 
+## 2. Current Extensibility vs. Future Runtime Authoring
+
+> [!IMPORTANT]
+> **Extensibility Status Clarification**:
+> - **Current Implementation (Phase 4 Verified)**: Extensibility is achieved via strongly typed Rust capability traits (`EquipmentCapability`, `GenericEquipmentPhysics`) and data-driven configuration of existing templates.
+> - **Future Extension (Phase 10)**: Dynamic data-driven authoring and sandboxed runtime Rhai scripting.
+> - **Runtime no-recompile custom behavior authoring is NOT currently implemented.**
+
+### Current Rust Capability System (`crates/nebudcs-physics/src/equipment.rs`)
 ```rust
-pub trait FlowSource { /* ... */ }
-pub trait FlowSink { /* ... */ }
-pub trait RotatingEquipment { /* ... */ }
-pub trait HeatTransfer { /* ... */ }
-pub trait PressureBoundary { /* ... */ }
-pub trait ControlElement { /* ... */ }
-pub trait MeasurementSource { /* ... */ }
-pub trait EnergyConsumer { /* ... */ }
-pub trait EnergyProducer { /* ... */ }
-pub trait Reaction { /* ... */ }
-pub trait Separation { /* ... */ }
-pub trait UtilityConsumer { /* ... */ }
-pub trait UtilityProvider { /* ... */ }
-pub trait ProtectiveDevice { /* ... */ }
-```
-
-### Capability Composition
-
-```mermaid
-graph LR
-    P[Pump] --> RE(RotatingEquipment)
-    P --> PB(PressureBoundary)
-    P --> EC(EnergyConsumer)
-    
-    C[Compressor] --> RE
-    C --> PB
-    C --> EC
-    C --> HT[HeatTransfer - Intercooler]
-```
-
-## 3. Port Definition
-
-Ports define the physical and logical interfaces of equipment.
-
-```rust
-pub struct PortDef {
-    pub id: String,
-    pub domain: PortDomain, // Process, Utility, Electrical, Mechanical, Signal
-    pub direction: Direction, // In, Out, Bidirectional
-    pub media_type: MediaType, // Liquid, Gas, TwoPhase, Steam, Electricity, Data
-    pub required: bool,
-    pub cardinality: Cardinality, // One, Many
-    pub pressure_domain: PressureDomain,
-    pub temperature_domain: TemperatureDomain,
-    pub electrical_characteristics: ElectricalCharacteristics,
-    pub signal_type: SignalType,
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub enum EquipmentCapability {
+    Pump {
+        rated_speed_rpm: f64,
+        shutoff_head_m: f64,
+        flow_coefficient: f64,
+        efficiency: f64,
+    },
+    Valve {
+        cv_max: f64,
+        characteristic: ValveCharacteristic,
+        fail_position: FailPosition,
+    },
+    Vessel {
+        total_volume_m3: f64,
+        cross_sectional_area_m2: f64,
+        design_pressure_pa: f64,
+    },
+    HeatExchanger {
+        overall_ua_w_per_k: f64,
+        fouling_factor: f64,
+    },
+    Pipe {
+        length_m: f64,
+        diameter_m: f64,
+        roughness_m: f64,
+        elevation_change_m: f64,
+    },
 }
 ```
 
-## 4. Performance Curves & Operating Envelopes
+---
 
-Performance is evaluated via multidimensional structures.
+## 3. Data-Driven Schemas & Types (`crates/nebudcs-model`)
 
-- **Pump Curve**: flow vs head, efficiency vs flow, power vs flow, NPSHR vs flow.
-- **Compressor Map**: speed/flow/pressure ratio/efficiency/surge margin.
-- **Valve Cv**: Valve Cv curve.
-- **Exchanger**: UA vs fouling.
-- **Operating Envelopes**: Defines valid region based on multiple dimensions (e.g. RPM + Flow + Pressure). NOT just scalar thresholds.
+Internal simulation state is strictly typed. Maps use ordered `IndexMap` for parameter definitions, and simulation state buffers use contiguous typed memory—never arbitrary untyped maps.
+
+```rust
+pub struct EquipmentDefinition {
+    pub id: EntityId,
+    pub name: String,
+    pub version: SchemaVersion,
+    pub category: EquipmentCategory,
+    pub capabilities: Vec<EquipmentCapability>,
+    pub ports: Vec<PortDefinition>,
+    pub parameters: IndexMap<String, ParameterDefinition>,
+    pub operating_envelope: Option<OperatingEnvelope>,
+    pub alarm_definitions: Vec<AlarmDefinition>,
+    pub failure_modes: Vec<FailureModeDefinition>,
+    pub state_machine: Option<StateMachineDefinition>,
+    pub metadata: IndexMap<String, String>,
+}
+```
+
+---
+
+## 4. Semantic Port Model
+
+Ports define strongly typed physical and logical interfaces:
+
+```rust
+pub struct PortDefinition {
+    pub id: PortId,
+    pub name: String,
+    pub domain: PortDomain,       // Material, Utility, Electrical, Mechanical, Signal, Energy
+    pub direction: PortDirection, // Inlet, Outlet, Bidirectional
+    pub media_type: PortMedia,    // Liquid, Gas, TwoPhase, Steam, Water, FuelGas, Air, Signal
+    pub required: bool,
+    pub cardinality: Cardinality, // Single (1:1), Multiple (1:N)
+}
+```
+
+Connection validation prevents physically incompatible connections (e.g., connecting a high-voltage electrical port to a liquid process nozzle, or connecting two inlets without a junction).
+
+---
 
 ## 5. Equipment State Machine
 
-Configurable transitions with guards and permissives.
+Every piece of equipment follows a standard operational lifecycle governed by guards and permissives:
 
 ```mermaid
 stateDiagram-v2
-    Stopped --> Starting : Start Cmd [Permissives OK]
-    Starting --> Running : Speed > Min
-    Running --> Stopping : Stop Cmd
-    Stopping --> Stopped : Speed == 0
-    Running --> Tripped : Trip Condition Met
-    Starting --> Tripped : Trip Condition Met
-    Tripped --> Stopped : Reset Cmd
-    [*] --> Unavailable : Maintenance
-    Unavailable --> Stopped : Reset
-    Tripped --> Faulted : Fault
-    Faulted --> Stopped : Reset
+    [*] --> Stopped: Initial
+    Stopped --> Starting: Start Command [Permissives OK]
+    Starting --> Running: Speed > Min Operating Speed
+    Running --> Stopping: Stop Command
+    Stopping --> Stopped: Speed == 0
+    Running --> Tripped: Interlock Trip Active
+    Starting --> Tripped: Permissive Lost / Trip Active
+    Tripped --> Stopped: Reset Command [Trip Conditions Clear]
+    Stopped --> Maintenance: Lockout / Tagout
+    Maintenance --> Stopped: Maintenance Cleared
+    Running --> Faulted: Equipment Degradation / Failure
+    Faulted --> Tripped: Protection Trip
 ```
 
-## 6. Instrument & Actuator Dynamics
+---
 
-- **Instrument Dynamics**: Models measurement range, noise, filtering, dead time, response time, bias, drift, frozen value, signal loss, calibration error, and bad quality.
-- **Actuator Dynamics**: Models command vs actual position, travel time, deadband, hysteresis, saturation, actuator failure, actuator pressure effects, and fail states (open/closed/last).
+## 6. Standard Equipment Library Architecture (Phase 11)
 
-## 7. Standard Equipment Library Architecture
+All standard equipment required by PRD Section 6 (Centrifugal/Reciprocating Pumps, Centrifugal/Reciprocating Compressors, Fired Heaters, Heat Exchangers, Drums, Columns, Valves) are defined as **data configurations** of generic capabilities.
 
-Standard equipment (from PRD Section 6) are defined as data configurations using the above primitives. Rotating Equipment (pumps, compressors, blowers, turbines), Heat Transfer (exchangers, fin fans, furnaces), Process Equipment (reactors, vessels, columns), Valves, and Utilities are constructed via definitions, not hardcoded branches.
-
-## 8. Feasibility Examples
-
-### Example 1: Pump Definition
-```json
-{
-  "id": "std_centrifugal_pump",
-  "capabilities": ["RotatingEquipment", "PressureBoundary", "EnergyConsumer"],
-  "parameters": [
-    {"name": "max_power", "unit": "kW", "default": 100},
-    {"name": "max_speed", "unit": "rpm", "default": 3600},
-    {"name": "rated_flow", "unit": "m3/h"},
-    {"name": "head_curve", "type": "curve_2d"},
-    {"name": "efficiency_curve", "type": "curve_2d"},
-    {"name": "npshr_curve", "type": "curve_2d"},
-    {"name": "vibration_limits", "type": "scalar_limit"},
-    {"name": "bearing_temp_limits", "type": "scalar_limit"},
-    {"name": "motor_limits", "type": "scalar_limit"},
-    {"name": "startup_permissive", "type": "logic"}
-  ],
-  "trip_conditions": ["vibration > HighHigh", "bearing_temp > HighHigh"]
-}
-```
-
-### Example 2: 3-Stage H2 Compressor
-A package composed of 3 compression stages (capabilities), intercoolers (HeatTransfer), recycle loops, compressor map, anti-surge controls, vibration model, and overspeed trip.
-
-### Example 3: Vessel
-Defined with geometry (vertical), volume, pressure limit, level limits, inlet/outlet ports, and attached PSV/temperature instrument capability links.
+No refinery-specific equipment types (e.g., "NHT Splitter Column" or "CCR Reactor") are baked into the Rust codebase. They are instantiated from reusable library packages loaded at project startup.

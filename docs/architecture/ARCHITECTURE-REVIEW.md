@@ -380,23 +380,32 @@ CI runs unit + property + integration on every commit. Performance benchmarks ru
 
 | # | Decision | Deferred To |
 |---|---|---|
-| D-01 | PID fallback behavior on instrument failure (hold MAN vs. interlock) | Phase 5 control engine implementation |
-| D-02 | Historian retention policy defaults (size-based vs time-based) | Phase 6 historian implementation |
-| D-03 | OPC UA / Modbus TCP integration for external PLC connectivity | Phase 15 or separate roadmap item |
-| D-04 | wgpu renderer compiled to WebAssembly for Web P&ID canvas | Phase 8 P&ID editor — evaluate SVG limits first |
-| D-05 | DAE solver selection (Sundials CVODE, etc.) | Phase 15 high-fidelity physics |
-| D-06 | CoolProp or alternative property library integration | Phase 15 |
+| D-01 | PID fallback behavior on instrument failure (hold MAN vs. interlock) | Phase 5 control engine (verified) |
+| D-02 | Historian retention policy defaults (size-based vs time-based) | Phase 6 historian (verified) |
+| D-03 | OPC UA / Modbus TCP integration for external PLC connectivity | Phase 16 or separate roadmap item |
+| D-04 | wgpu renderer compiled to WebAssembly for Web P&ID canvas | Phase 13 Engineering Studio — evaluate SVG limits first |
+| D-05 | DAE solver selection (Sundials CVODE, etc.) | Phase 12 high-fidelity physics |
+| D-06 | CoolProp or alternative property library integration | Phase 12 pluggable thermodynamics |
 | D-07 | Multi-user/collaboration features | Post-Phase 13 |
-| D-08 | Cloud/server deployment architecture (PostgreSQL, auth) | Phase 14+ |
-| D-09 | Separate TSDB for historian vs SQLite main file | Phase 6 — SQLite first, evaluate if needed |
+| D-08 | Cloud/server deployment architecture (PostgreSQL, auth) | Phase 16 production hardening |
+| D-09 | Separate TSDB for historian vs SQLite main file | Phase 6 — SQLite WAL implemented & verified |
 
 ---
 
-## 22. Implementation Order (Recommended)
+## 22. Implementation Order (Historical Note & Authoritative Roadmap Reference)
 
-Following PRD §34 and the vertical slice strategy from PRD §35:
+> [!IMPORTANT]
+> **Authoritative Roadmap Reference**:
+> The informal vertical slice breakdown below was the initial pre-implementation architectural sketch. The authoritative execution plan for NebuDCS is formally structured into the **17-Phase Roadmap (Phases 0 through 16)** documented in [docs/implementation/roadmap.md](../implementation/roadmap.md), which serves as the single source of truth for phase scoping, crate ownership, dependencies, and verification criteria.
 
-### Phase 0 — Repository & Tooling
+### Initial Pre-Implementation Proposal:
+- Phases 0–7: Engine & Protocol Foundations (Phases 0–6 VERIFIED, Phase 7 READY FOR INDEPENDENT VERIFICATION)
+- Phase 8: Minimal End-to-End Vertical Slice 1 (Physics to UI Proof)
+- Phase 12: Advanced Physics & Pluggable Thermodynamics
+- Phase 13: Engineering Studio Application
+- Phase 14: Operator / DCS Station Console
+- Phase 15: Training & Scenario Studio
+- Phase 16: Production Hardening, Performance & Deployment
 - Initialize Cargo workspace with all 15 crates + 4 apps (stubs)
 - CI pipeline: `cargo test`, `cargo clippy`, `cargo fmt --check`
 - `CONTRIBUTING.md`, `ARCHITECTURE.md` links, `cargo deny` for dependency audit

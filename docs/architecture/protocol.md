@@ -1,120 +1,236 @@
 ---
-title: Protocol Architecture
-version: 0.1.0
-status: draft
-date: 2026-09-05
+title: Protocol & Realtime API Architecture
+version: 1.0.0
+status: implemented
+date: 2026-09-06
+author: NebuDCS Architecture Team
 ---
 
-# Protocol Architecture
+# Protocol & Realtime API Architecture
 
-## 1. Overview
+## 1. Overview & Core Invariants
 
-The Protocol layer mediates all communication between the Simulation Core (Rust) and external clients (Web UI, Desktop UI, headless automation). It enforces performance boundaries to ensure high-frequency simulation runs smoothly while providing responsive telemetry to clients.
+The Realtime Protocol layer mediates all communication between the NebuDCS simulation engine and external clients (Web UI, Desktop UI, test harnesses, and headless automation). It enforces strict performance and architectural boundaries:
+
+1. **Observer-Only Simulation Hot Loop**: The simulation thread is never blocked by network I/O, socket writes, or asynchronous runtime tasks.
+2. **Deterministic Tick Boundary Mutation**: All mutations (tag writes, setpoint adjustments, mode transitions, simulation lifecycle commands) are enqueued in bounded, lock-free crossbeam channels and applied strictly at discrete simulation tick boundaries.
+3. **Decoupled Transport Representations**: Serialization schemas (`nebudcs-protocol`) are strictly decoupled from internal simulation types, protecting external clients from internal engine refactors.
+4. **Subscription-Based Telemetry**: Complete plant states are never broadcast per frame. Clients subscribe to specific tags, and the server broadcasts only tags whose values or qualities changed beyond configured deadbands.
+
+---
 
 ## 2. Communication Paradigms
 
-- **WebSocket:** Realtime, bidirectional, low-latency streaming of simulation states, events, and operator commands.
-- **REST/HTTP:** CRUD operations for projects, user authentication, static asset retrieval, and configuration.
+- **WebSocket (`/ws`):** Realtime, full-duplex, bidirectional streaming of telemetry deltas, alarm updates, discrete event notifications, heartbeats, and operator commands.
+- **REST/HTTP (`/api/v1/...`):** Deterministic commands, snapshot retrieval, individual tag inspection, alarm acknowledgement/shelving, PID tuning, and historian queries.
 
-## 3. Performance & Optimization
+---
 
-Sending the complete plant state (thousands of tags, pressures, flows, compositions) every 60Hz frame is impossible.
-- **Subscriptions:** Clients explicitly subscribe to specific tags, areas, or units currently in view.
-- **Delta Updates:** The server only transmits tag values that have changed beyond a configurable deadband.
-- **Batching:** Multiple tag updates are aggregated into a single payload per tick.
-- **Dirty State Tracking:** The simulation core maintains a dirty flag array to efficiently gather changed states without traversing the entire graph.
+## 3. Implemented REST API Endpoints
 
-## 4. Message Types (WebSocket)
+All REST endpoints are exposed under `/api/v1` on the configured HTTP server bind address (default `0.0.0.0:8080`):
 
-- **Commands:** Operator actions (e.g., `SetTagValue`, `AcknowledgeAlarm`, `StartScenario`).
-- **Events:** Discrete occurrences (e.g., `AlarmTriggered`, `ScenarioCompleted`, `ClientConnected`).
-- **Snapshots:** Large, full-state payloads sent upon initial connection or forced resynchronization.
-- **Delta Updates:** High-frequency partial state updates (e.g., `TagValuesChanged`).
-- **Errors:** Validation or execution failures.
+| Method | Path | Description | Request Body | Response Body |
+|---|---|---|---|---|
+| `GET` | `/api/v1/health` | Diagnostic server health | None | `ServerHealthDto` |
+| `GET` | `/api/v1/sim/snapshot` | Point-in-time full coherent snapshot | None | `StateSnapshotDto` |
+| `POST` | `/api/v1/sim/control` | Simulation lifecycle (play, pause, step, speed) | `SimControlCommand` | `{"status": "ok"}` |
+| `GET` | `/api/v1/tags` | List all registered process and control tags | None | `TagListResponse` |
+| `GET` | `/api/v1/tags/{tag_id}` | Inspect specific tag value and quality | None | `TagValueSampleDto` |
+| `POST` | `/api/v1/tags/write` | Mutate tag value (manual input or override) | `WriteTagRequest` | `{"status": "ok"}` |
+| `GET` | `/api/v1/alarms` | List all active and unacknowledged alarms | None | `AlarmListResponse` |
+| `POST` | `/api/v1/alarms/acknowledge` | Acknowledge active alarm per ANSI/ISA-18.2 | `AcknowledgeAlarmRequest` | `{"status": "ok"}` |
+| `POST` | `/api/v1/alarms/shelve` | Temporarily shelve alarm | `ShelveAlarmRequest` | `{"status": "ok"}` |
+| `POST` | `/api/v1/protection/reset` | Reset latched protective trip | `ResetProtectionRequest` | `{"status": "ok"}` |
+| `POST` | `/api/v1/control/pid/setpoint` | Update PID local setpoint (SP) | `SetPidSetpointRequest` | `{"status": "ok"}` |
+| `POST` | `/api/v1/control/pid/mode` | Set PID mode (Auto, Manual, Cascade) | `SetPidModeRequest` | `{"status": "ok"}` |
+| `POST` | `/api/v1/control/pid/output` | Set PID manual output (OUT) | `SetManualOutputRequest` | `{"status": "ok"}` |
+| `GET` | `/api/v1/history/query` | Query historical raw or aggregated samples | Query Params | `HistoryQueryResponse` |
+| `GET` | `/api/v1/history/events` | Query discrete alarm and operational events | Query Params | `Vec<HistoricalEventDto>` |
 
-## 5. Versioning and Capability Negotiation
+---
 
-Upon connection, the client and server exchange a `Handshake` payload containing:
-- Protocol version.
-- Client capabilities (e.g., supports MessagePack, max batch size).
-- Server capabilities.
-If incompatible, a clean downgrade or rejection occurs.
+## 4. Implemented WebSocket Protocol
 
-## 6. Binary Protocol Consideration
+Clients connect to `GET /ws` and establish a full-duplex session.
 
-While JSON is excellent for debugging and configuration, high-frequency delta updates over WebSocket should migrate to a binary format like **MessagePack** or **bincode** in production. The protocol should support both, determined during the handshake phase.
+### 4.1 Inbound Messages (`ClientMessage`)
 
-## 7. Reconnect and Resynchronization
+```json
+// Handshake
+{
+  "type": "handshake",
+  "protocol_version": "1.0.0",
+  "client_id": "operator-console-01",
+  "capabilities": { "supports_binary": false, "max_batch_size": 1000 }
+}
 
-If a client disconnects:
-1. Re-establish WebSocket.
-2. Handshake and negotiate.
-3. Client requests a full `Snapshot` for its active subscriptions to clear any missed deltas.
-4. Server resumes sending `Delta Updates`.
+// Subscribe
+{
+  "type": "subscribe",
+  "tags": ["TI-101", "PI-101", "FIC-101.PV"],
+  "all_tags": false,
+  "include_alarms": true
+}
 
-## 8. Security
+// Unsubscribe
+{
+  "type": "unsubscribe",
+  "tags": ["TI-101"]
+}
 
-- **Authentication:** JWT tokens via HTTP, passed in the WebSocket connection header or initial auth message.
-- **Authorization:** Role-based (e.g., Operator vs. Instructor vs. Engineer).
-- **Trusted vs. Untrusted:** The engine treats all client commands as untrusted. Every command is validated against the model (e.g., is this tag writable? is the user authorized to change this limit?).
+// Request Snapshot
+{
+  "type": "request_snapshot"
+}
 
-## 9. Architecture Diagrams
+// Command
+{
+  "type": "command",
+  "command_id": "cmd-001",
+  "command": {
+    "type": "write_tag",
+    "tag": "FIC-101.SP",
+    "value": 4650.0
+  }
+}
 
-### Protocol Architecture
+// Ping Heartbeat
+{
+  "type": "ping",
+  "nonce": 4242
+}
+```
+
+### 4.2 Outbound Messages (`ServerMessage`)
+
+```json
+// Handshake Acknowledgment
+{
+  "type": "handshake_ack",
+  "payload": {
+    "protocol_version": "1.0.0",
+    "server_version": "0.1.0",
+    "session_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV",
+    "model_version": "1.0.0"
+  }
+}
+
+// Point-in-time Snapshot
+{
+  "type": "snapshot",
+  "payload": {
+    "snapshot_id": "snap-2460",
+    "sim_time_sec": 123.0,
+    "tick_count": 2460,
+    "tags": [...],
+    "active_alarms": [...]
+  }
+}
+
+// Incremental Delta Update
+{
+  "type": "delta",
+  "payload": {
+    "seq": 105,
+    "sim_time_sec": 123.05,
+    "tick_count": 2461,
+    "changed_tags": [
+      {
+        "tag": "FIC-101.PV",
+        "value": 4650.2,
+        "quality": "GOOD",
+        "unit": "kg/h"
+      }
+    ]
+  }
+}
+
+// Alarm State Update
+{
+  "type": "alarm_update",
+  "payload": [
+    {
+      "alarm_name": "ALM_PI101_HI",
+      "state": "ACTIVE_UNACK",
+      "severity": "WARNING",
+      "pv": 36.2,
+      "trip_limit": 35.0
+    }
+  ]
+}
+
+// Command Acknowledgment
+{
+  "type": "command_ack",
+  "payload": {
+    "command_id": "cmd-001",
+    "success": true,
+    "message": null,
+    "error_code": null
+  }
+}
+
+// Heartbeat Pong
+{
+  "type": "pong",
+  "payload": {
+    "nonce": 4242
+  }
+}
+
+// Error Envelope
+{
+  "type": "error",
+  "payload": {
+    "code": "PROTOCOL_VERSION_MISMATCH",
+    "message": "Server protocol version is 1.0.0, client provided incompatible version 99.0.0",
+    "correlation_id": null,
+    "details": null
+  }
+}
+```
+
+---
+
+## 5. Security & Authentication
+
+- If `ServerConfig.auth_token` is `Some(ref secret)`:
+  - All mutating and protected REST endpoints require either `Authorization: Bearer <secret>` or `?token=<secret>`.
+  - The health check endpoint (`/api/v1/health`) is unauthenticated for readiness and liveness probes.
+  - WebSocket connections validate the token at HTTP upgrade before establishing full-duplex session communications.
+
+---
+
+## 6. Architecture & Sequence Diagrams
+
+### 6.1 Subsystem Boundaries
 
 ```mermaid
 graph TD
-    A[Web/Desktop Client] <-->|WebSocket: Realtime State & Cmds| B[Protocol Server]
-    A <-->|REST: Config & Auth| B
-    B <--> C[Authentication & Validation]
-    C <--> D[Simulation Core ECS / Graph]
-    D <--> E[Historian Database]
+    Client[Web / Desktop Operator Client] <-->|WebSocket: Realtime Deltas & Cmds| Server[nebudcs-server / Axum]
+    Client <-->|REST: Configuration & Queries| Server
+    Server -->|Auth Middleware| Auth[Authentication Validator]
+    Server <-->|Lock-free Channels| Host[SimulationHost Background Runner]
+    Host -->|Tick Execution| Engine[SimulationEngine / nebudcs-sim]
+    Host -->|Observer View| Historian[SqliteHistorianReader / nebudcs-historian]
 ```
 
-### Subscription and Delta Update Flow
+### 6.2 Deterministic WebSocket Command & Delta Sequence
 
 ```mermaid
 sequenceDiagram
-    participant Client
-    participant Server
-    participant Core
-    Client->>Server: Subscribe(Unit="CDU")
-    Server->>Core: Request Snapshot("CDU")
-    Core-->>Server: Full CDU State
-    Server-->>Client: Snapshot(CDU State)
-    loop Every Simulation Tick (e.g., 50ms)
-        Core->>Server: Dirty Tags Array
-        Server-->>Client: DeltaUpdate(Tag1=12.5, Tag2=400)
-    end
-```
-
-### Reconnect / Resync Sequence
-
-```mermaid
-sequenceDiagram
-    participant Client
-    participant Server
-    Client->>Server: Connection Dropped
-    note over Client,Server: Time passes (Sim continues)
-    Client->>Server: Reconnect(JWT)
-    Server-->>Client: Handshake OK
-    Client->>Server: Request Resync(Subscriptions)
-    Server-->>Client: Snapshot(Current State)
-    Server-->>Client: DeltaUpdate(...)
-```
-
-### Command Flow
-
-```mermaid
-sequenceDiagram
-    participant UI
-    participant Server
-    participant SimCore
-    UI->>Server: Command(WriteTag, K101.SP, 50.0)
-    Server->>Server: Validate Auth & Tag Type
-    Server->>SimCore: Execute Command
-    SimCore-->>Server: Ack / Error
-    SimCore->>SimCore: Physics Update
-    SimCore->>Server: Dirty Tags (K101.PV changed)
-    Server-->>UI: DeltaUpdate(K101.PV)
+    participant UI as Operator UI
+    participant WS as Server Session Task
+    participant Sim as Simulation Runner Thread
+    UI->>WS: Command(WriteTag, FIC-101.SP, 4650.0)
+    WS->>Sim: try_send(EnqueuedCommand)
+    Note over Sim: Awaits discrete tick boundary
+    Sim->>Sim: apply_command(&cmd)
+    Sim->>Sim: Update TagStore & Step Engine
+    Sim->>Sim: Commit Snapshot & Health Cache
+    Sim-->>WS: ACK(success: true)
+    WS-->>UI: CommandAck(cmd-001, success: true)
+    Sim->>WS: Broadcast Delta(changed_tags: [FIC-101.SP])
+    WS-->>UI: Delta(changed_tags: [FIC-101.SP])
 ```

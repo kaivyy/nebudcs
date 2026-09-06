@@ -7,6 +7,12 @@ members = [
     "crates/nebudcs-topology",
     "crates/nebudcs-sim",
     "crates/nebudcs-physics",
+    "crates/nebudcs-control",
+    "crates/nebudcs-alarm",
+    "crates/nebudcs-historian",
+    "crates/nebudcs-protocol",
+    "crates/nebudcs-scenario",
+    "apps/nebudcs-server",
 ]
 
 # Workspace-level dependency versions pinned here.
@@ -14,15 +20,27 @@ members = [
 # versions consistent across the repository.
 [workspace.dependencies]
 # Serialization — approved by ADR-006 and project-format.md
-serde      = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-toml       = "0.8"
+serde              = { version = "1.0", features = ["derive"] }
+serde_json         = "1.0"
+toml               = "0.8"
 # Error handling — approved by ADR-001
-thiserror  = "2.0"
+thiserror          = "2.0"
 # Unique identifier generation (ULID — sortable, compact Base32)
-ulid       = { version = "1.1", features = ["serde"] }
+ulid               = { version = "1.1", features = ["serde"] }
 # Ordered map preserving insertion order — used in EquipmentDefinition parameters
-indexmap   = { version = "2.7", features = ["serde"] }
+indexmap           = { version = "2.7", features = ["serde"] }
+# Channel communication for non-blocking simulation egress
+crossbeam-channel  = "0.5"
+# Embedded persistence — approved by ADR-006
+rusqlite           = { version = "0.32", features = ["bundled"] }
+# Async runtime and networking — approved by ADR-008 for API/Protocol layer
+tokio              = { version = "1.43", features = ["full"] }
+axum               = { version = "0.8", features = ["ws"] }
+tower              = "0.5"
+tower-http         = { version = "0.6", features = ["cors", "trace", "fs"] }
+futures-util       = "0.3"
+tracing            = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 
 [profile.dev]
 opt-level = 0

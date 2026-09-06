@@ -256,4 +256,22 @@ impl<'a> StateWriteView<'a> {
     pub fn set_tag_float(&mut self, id: TagId, value: f64) {
         self.set_tag(id, TagValue::Float(value), TagQuality::Good);
     }
+
+    /// Reads equipment state from State[N+1] (for intra-tick stage observation).
+    #[inline]
+    pub fn get_equipment(&self, id: EquipmentId) -> Option<&EquipmentState> {
+        self.buffer.get_equipment(id)
+    }
+
+    /// Reads tag value from State[N+1] (for intra-tick stage observation).
+    #[inline]
+    pub fn get_tag(&self, id: TagId) -> Option<&TagValue> {
+        self.buffer.get_tag(id)
+    }
+
+    /// Reads tag quality from State[N+1] (for intra-tick stage observation).
+    #[inline]
+    pub fn get_quality(&self, id: TagId) -> Option<TagQuality> {
+        self.buffer.get_quality(id)
+    }
 }

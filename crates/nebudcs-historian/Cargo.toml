@@ -1,0 +1,23 @@
+[package]
+name = "nebudcs-historian"
+version = "0.1.0"
+edition = "2021"
+description = "Deterministic timeseries and event persistence engine for NebuDCS using SQLite WAL"
+
+[dependencies]
+nebudcs-types = { path = "../nebudcs-types" }
+nebudcs-units = { path = "../nebudcs-units" }
+nebudcs-model = { path = "../nebudcs-model" }
+nebudcs-sim = { path = "../nebudcs-sim" }
+nebudcs-alarm = { path = "../nebudcs-alarm" }
+nebudcs-control = { path = "../nebudcs-control" }
+
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+ulid = { workspace = true }
+crossbeam-channel = { workspace = true }
+rusqlite = { workspace = true }
+
+[dev-dependencies]
+tempfile = "3.17"

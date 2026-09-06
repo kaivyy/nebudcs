@@ -1,0 +1,17 @@
+[package]
+name = "nebudcs-alarm"
+version = "0.1.0"
+edition = "2021"
+authors = ["NebuDCS Architecture Team"]
+description = "Industrial alarm engine, ANSI/ISA-18.2 lifecycle, shelving, deadbands, and detection for NebuDCS."
+
+[dependencies]
+nebudcs-types   = { path = "../nebudcs-types" }
+nebudcs-units   = { path = "../nebudcs-units" }
+nebudcs-model   = { path = "../nebudcs-model" }
+nebudcs-sim     = { path = "../nebudcs-sim" }
+nebudcs-control = { path = "../nebudcs-control" }
+serde           = { workspace = true }
+serde_json      = { workspace = true }
+thiserror       = { workspace = true }
+ulid            = { workspace = true }

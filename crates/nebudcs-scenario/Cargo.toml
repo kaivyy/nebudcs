@@ -1,0 +1,23 @@
+[package]
+name = "nebudcs-scenario"
+version = "0.1.0"
+edition = "2021"
+authors = ["NebuDCS Architecture Team"]
+description = "Deterministic scenario engine, timeline scheduling, fault injection, initial conditions, disturbances, and assessment hooks for NebuDCS."
+
+[dependencies]
+nebudcs-types     = { path = "../nebudcs-types" }
+nebudcs-units     = { path = "../nebudcs-units" }
+nebudcs-model     = { path = "../nebudcs-model" }
+nebudcs-sim       = { path = "../nebudcs-sim" }
+nebudcs-control   = { path = "../nebudcs-control" }
+nebudcs-alarm     = { path = "../nebudcs-alarm" }
+nebudcs-historian = { path = "../nebudcs-historian" }
+serde             = { workspace = true }
+serde_json        = { workspace = true }
+thiserror         = { workspace = true }
+ulid              = { workspace = true }
+
+[dev-dependencies]
+nebudcs-physics   = { path = "../nebudcs-physics" }
+nebudcs-topology  = { path = "../nebudcs-topology" }

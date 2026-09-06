@@ -11,3 +11,11 @@ Cargo.lock
 
 # Benchmark output
 criterion/
+
+# Web / Frontend artifacts
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Graphify AST cache
+graphify-out/cache/

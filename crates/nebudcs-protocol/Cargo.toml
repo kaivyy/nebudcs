@@ -1,0 +1,12 @@
+[package]
+name = "nebudcs-protocol"
+version = "0.1.0"
+edition = "2021"
+description = "Deterministic realtime WebSocket protocol, DTOs, and serialization contracts for NebuDCS"
+
+[dependencies]
+nebudcs-types = { path = "../nebudcs-types" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+ulid = { workspace = true }

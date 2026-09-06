@@ -1,69 +1,122 @@
 ---
-title: Custom Equipment Architecture
-version: 0.1.0
-status: draft
-date: 2026-09-05
+title: Custom Equipment & Runtime Authoring Architecture
+version: 2.0.0
+status: planned-specification
+date: 2026-09-06
 ---
 
-# Custom Equipment Architecture
+# Custom Equipment & Runtime Authoring Architecture
 
-This document describes how NebuDCS supports entirely custom equipment architectures through project data and sandboxed scripting without requiring recompilation of the Rust core.
+## 1. Three Levels of Equipment Customization
 
-## 1. Three Levels of Customization
-
-- **LEVEL 1: Configuration**: Modifying existing templates via project data (e.g., tweaking curves, parameters).
-- **LEVEL 2: Composition**: Combining existing equipment/capabilities into reusable packages (e.g., Turbine-driven Pump, Reactor Train).
-- **LEVEL 3: Custom Behavior**: Declarative equations, lookup tables, DSL, or sandboxed scripting for non-standard logic.
-
-## 2. Package Architecture
-
-Packages allow nesting. A `Compressor Package` can contain a motor, the compressor stages, intercoolers, and lube oil system. These are evaluated as a subgraph within the simulation tick. This avoids the need for new Rust classes per configuration.
+NebuDCS is architected to allow users to model custom and non-standard industrial equipment without altering the simulation engine core. Customization is structured into three progressive tiers:
 
 ```mermaid
 graph TD
-    Pkg[Compressor Package] --> M[Motor]
-    Pkg --> C[Compressor Stage]
-    Pkg --> I[Intercooler]
-    Pkg --> L[Lube Oil System]
+    subgraph "Level 1: Configuration (Implemented & Supported)"
+        L1[Parametric Configuration: Modify dimensions, curves, operating limits via TOML/JSON]
+    end
+
+    subgraph "Level 2: Composition (Implemented & Supported)"
+        L2[Package Composition: Combine existing capabilities into nested packages e.g. Pump + Motor + Seal]
+    end
+
+    subgraph "Level 3: Custom Behavior (Planned: Phase 10)"
+        L3[Sandboxed Runtime Scripting: Declarative equations & Rhai scripts without Rust recompilation]
+    end
+
+    L1 --> L2
+    L2 --> L3
 ```
 
-## 3. Scripting Sandbox Design
+### Tier Definitions
+1. **LEVEL 1: Configuration (Currently Implemented)**:
+   - Modifying parameters of existing standard equipment templates (e.g., impeller diameter, valve $C_v$ curve, vessel volume, heat transfer area).
+   - Authoring project data files in TOML or JSON.
+2. **LEVEL 2: Composition (Currently Implemented)**:
+   - Assembling multiple standard equipment capabilities and internal subgraphs into reusable compound packages (e.g., motor-driven centrifugal pump with minimum flow bypass and lube oil skid).
+3. **LEVEL 3: Custom Behavior (Planned for Phase 10)**:
+   - Defining non-standard thermodynamic equations, custom empirical reaction rate laws, or proprietary separator curves without recompiling the Rust simulation core.
+   - Evaluated dynamically within a sandboxed runtime environment.
 
-To evaluate custom behavior safely:
-- **Engine**: Rhai (or similar embedded scripting language).
-- **Security**: Capability whitelist, completely denied filesystem/network/OS access.
-- **Resource Limits**: CPU instruction counting, memory allocation limits, and execution time limits per tick.
-- **Execution**: Deterministic evaluation of inputs to outputs. Versioning of sandbox capabilities.
+> [!WARNING]
+> **Implementation Status**:
+> **Runtime no-recompile custom behavior authoring (Level 3) is NOT currently implemented.** It is formally scheduled for **Phase 10 (`nebudcs-scripting`)**. Currently, custom behavior must be defined using the compile-time Rust capability trait system (`EquipmentCapability` and `SimulationSystem`).
+
+---
+
+## 2. Future Level 3 Scripting Sandbox Architecture (Phase 10)
+
+When Level 3 runtime authoring is implemented in Phase 10, it will execute within a strictly fortified sandbox to preserve simulation determinism and host security:
 
 ```mermaid
 graph LR
-    Inputs[State/Ports/Tags] --> Val(Validation)
-    Val --> Sandbox[Rhai Sandbox Engine]
-    Sandbox -->|Limits Applied| Outputs[Next State/Alarms]
+    subgraph "Untrusted Script Input"
+        Script[Custom Rhai Script: calc_reaction()]
+    end
+
+    subgraph "Phase 10 Scripting Sandbox (crates/nebudcs-scripting)"
+        Validator[Syntax & AST Whitelist Validator]
+        Quota[Resource Quota: Max 50,000 Instructions]
+        MemLimit[Memory Limit: Max 1 MB Allocation]
+        Timeout[Tick Timeout Guard: Max 1 ms]
+    end
+
+    subgraph "Simulation Core"
+        Engine[Deterministic Simulation Tick Loop]
+    end
+
+    Script --> Validator
+    Validator --> Quota
+    Quota --> MemLimit
+    MemLimit --> Timeout
+    Timeout --> Engine
 ```
 
-## 4. Package Registry & Trust Boundaries
+### Security & Determinism Invariants
+1. **Zero System I/O Access**:
+   - Sandboxed scripts have **NO** access to the host operating system, filesystem, standard input/output, process spawning, or environment variables.
+   - Scripts cannot make network calls (no sockets, no HTTP, no IPC).
+2. **Deterministic Execution**:
+   - System clock lookups (`std::time::SystemTime`, `Instant::now()`) are completely disabled in the scripting environment.
+   - Calculations depend purely on immutable input vectors (`PhysicalState`, `Tags`, `dt`) and produce pure mathematical outputs.
+3. **Strict Resource Quotas**:
+   - **Instruction Limits**: Maximum instruction counter quota (e.g., 50,000 operations per equipment step). Infinite loops (`while true {}`) are trapped and aborted cleanly.
+   - **Memory Quotas**: Script allocations are strictly constrained to pre-allocated buffers ($< 1\text{ MB}$).
+   - **Time Quotas**: Any script exceeding its 1ms execution budget is terminated with a `ScriptTimeout` fault.
 
-Packages can be defined project-locally or imported from a global registry. Trust boundaries ensure that custom behavior cannot corrupt the simulation memory space or leak data outside the simulation context.
+---
+
+## 3. Package Architecture & Hierarchical Composition
+
+Equipment packages allow complex multi-stage machinery to be modeled as nested subgraphs:
 
 ```mermaid
 graph TD
-    Global[Global Registry] -->|Import| Local[Project-Local Definitions]
-    Local --> Core[Simulation Core]
+    subgraph "Compound Equipment Package: 3-Stage H2 Compressor"
+        Stage1[Stage 1 Compressor: Flow, Compression Ratio]
+        Cooler1[Intercooler 1: Heat Duty, Condensate Knockout]
+        Stage2[Stage 2 Compressor]
+        Cooler2[Intercooler 2]
+        Stage3[Stage 3 Compressor]
+        Recycle[Anti-Surge Recycle Loop & Valve]
+        Lube[Auxiliary Lube Oil Console]
+        Motor[Variable Frequency Electric Drive]
+    end
+
+    Motor --> Stage1
+    Motor --> Stage2
+    Motor --> Stage3
+    Stage1 --> Cooler1
+    Cooler1 --> Stage2
+    Stage2 --> Cooler2
+    Cooler2 --> Stage3
+    Stage3 --> Recycle
+    Lube --> Stage1
+    Lube --> Stage2
+    Lube --> Stage3
 ```
 
-## 5. Feasibility Example 4: Custom Equipment
-
-A custom generic separator constructed purely from project JSON data, specifying its port relationships and a Rhai script to handle a custom vapor-liquid separation curve that isn't provided by the default library. The Rust core simply loads this JSON, creates the `EquipmentInstance`, and delegates the dynamic calculation to the scripting sandbox during the tick.
-
-```json
-{
-  "id": "custom_separator_abc",
-  "capabilities": ["Separation"],
-  "script": {
-    "engine": "rhai",
-    "version": "1.0",
-    "source": "fn calc_separation(feed, p, t) { return my_custom_logic(feed, p, t); }"
-  }
-}
-```
+- In Level 2 composition, compound packages are evaluated as an internal subgraph.
+- The outer package exposes only primary process nozzles (suction, discharge, cooling water supply/return, electrical feeder).
+- Internal streams, intercoolers, and lube oil loops are solved internally, preventing visual canvas clutter while preserving full thermodynamic fidelity.

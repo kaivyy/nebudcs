@@ -1,129 +1,124 @@
 ---
-title: Protection System Architecture
-version: 0.1.0
-status: draft
-date: 2026-09-05
+title: Protection System & Safety Interlock Architecture
+version: 2.0.0
+status: planned-specification
+date: 2026-09-06
 ---
 
-# Protection System Architecture
+# Protection System & Safety Interlock Architecture
 
-This document defines the generic protection system for NebuDCS, encompassing permissives, interlocks, protective trips, Emergency Shutdown (ESD), and shutdown logic.
+## 1. Safety Disclaimer
 
-> **SAFETY DISCLAIMER:** These architectures represent simulation and training environments ONLY. They are NOT certified real-world safety systems (SIS) and must not be used for live plant control.
+> [!CAUTION]
+> **SIMULATION & TRAINING USE ONLY**:
+> All protection systems, interlocks, cause-and-effect matrices, and Emergency Shutdown (ESD) architectures in NebuDCS are designed solely for engineering simulation and operator training. They are **NOT** certified safety-instrumented systems (SIS/SIL) and must never be connected to or used for real-world plant safety control.
 
-## 1. Protection Layer Architecture
+---
 
-Protection logic shares the **same authoritative simulation model** as the rest of the simulation. It does not exist in a vacuum, but rather intercepts the control path with ultimate priority.
+## 2. Protection Layer Architecture & Priority Hierarchy
+
+Protection logic shares the exact same authoritative simulation model as process physics and control systems. It does not exist as an external script; rather, it intercepts the control path with **absolute override priority**:
 
 ```mermaid
 graph TD
-    SimState[Simulation State]
-    subgraph Control Layer
-        PID[PID Loops]
-        Seq[Sequences]
+    subgraph "Process Telemetry"
+        Phys[Physical State] --> Inst[Instruments / Transmitters]
+        Inst --> PVTags[Process Variable Tags]
     end
-    subgraph Protection Layer
-        Permissive[Permissives]
-        Interlock[Interlocks]
-        Trip[Equipment Trips]
-        ESD[ESD Systems]
+
+    subgraph "Control Layer (Phase 5)"
+        PVTags --> PID[PID Controllers: Normal Demands OUT]
     end
-    
-    SimState --> PID
-    SimState --> Protection Layer
-    PID --> Actuators[Actuators]
-    Protection Layer -- OVERRIDE --> Actuators
-    ESD -- HIGHEST PRIORITY OVERRIDE --> Actuators
+
+    subgraph "Protection Layer (Phase 5)"
+        PVTags --> Voting[Sensor Voting: 1oo2, 2oo3]
+        Voting --> Matrix[Cause & Effect Interlock Matrix]
+        Matrix --> TripLatch[Trip Latches]
+        ESD[ESD Pushbuttons / Zone Trips] --> TripLatch
+    end
+
+    subgraph "Actuator Arbitration"
+        PID --> Arbiter{Actuator Arbiter}
+        TripLatch -->|Safety Override (Highest Priority)| Arbiter
+        Arbiter --> Actuator[Physical Actuator / Valve Positioner]
+    end
 ```
 
-## 2. Cause-and-Effect Matrix Design
+### Actuator Command Priority Order
+1. **Priority 1 (Absolute Highest)**: Emergency Shutdown (ESD) zone trip.
+2. **Priority 2**: Protective safety interlock override (cause-and-effect matrix).
+3. **Priority 3**: Equipment state machine permissive guard (e.g., pump stopped forces isolation valve closed).
+4. **Priority 4**: Operator field manual override.
+5. **Priority 5 (Lowest)**: Modulating automatic PID controller demand ($MV / OUT$).
 
-Protection logic is fundamentally configured via Cause-and-Effect matrices, decoupling the detection of hazardous states from the actions taken.
+---
 
-| CAUSE (Inputs) | EFFECT 1 (Valve Close) | EFFECT 2 (Pump Stop) | EFFECT 3 (Trip Alarm) |
-|---|---|---|---|
-| LSHH-101 | X | X | X |
-| PSHH-202 | X |   | X |
-| ESD-PB-1 | X | X | X |
+## 3. Cause-and-Effect Matrix Design
 
-## 3. Trip and ESD Execution Sequence
+Protection logic decouples detection of hazardous conditions from protective actions using configurable Cause-and-Effect matrices:
 
-```mermaid
-sequenceDiagram
-    participant Instrument
-    participant VotingLogic
-    participant Latch
-    participant Actuator
-    
-    Instrument->>VotingLogic: PSHH-101 Exceeds Limit
-    Instrument->>VotingLogic: PSHH-102 Exceeds Limit
-    VotingLogic->>Latch: 2oo3 Triggered
-    Latch->>Actuator: Force State (Close/Stop)
-    Note over Latch, Actuator: Actuator remains overridden
-    Instrument->>VotingLogic: Pressure normalizes
-    Note over Latch, Actuator: Actuator STILL overridden (Latched)
-    Operator->>Latch: Issue Reset Command
-    Latch->>Actuator: Release Override
-```
+| CAUSE (Inputs / Conditions) | Voting Logic | EFFECT 1: Close Feed Valve XV-101 | EFFECT 2: Trip Pump P-101 | EFFECT 3: Trip Fired Heater B-101 | EFFECT 4: Sound Safety Siren |
+|---|---|---|---|---|---|
+| **Vessel V-101 Level HIHI (LSHH-101)** | 2oo3 Redundant | **X (Close)** | | | **X** |
+| **Vessel V-101 Level LOLO (LSLL-101)** | 1oo2 Redundant | | **X (Trip)** | | **X** |
+| **Reactor R-101 Pressure HIHI (PSHH-101)** | 2oo3 Redundant | **X (Close)** | **X (Trip)** | **X (Trip)** | **X** |
+| **Furnace Tube Temp HIHI (TSHH-101)** | 2oo4 Redundant | | | **X (Trip)** | **X** |
+| **Manual ESD Station 1 (ESD-PB-01)** | 1oo1 Discrete | **X (Close)** | **X (Trip)** | **X (Trip)** | **X** |
 
-## 4. Voting Logic
+---
 
-Advanced protection systems often require voting logic (e.g., 2oo3) to prevent spurious trips.
+## 4. Voting Logic (1oo1, 1oo2, 2oo3)
+
+To prevent spurious plant shutdowns from single-sensor failures while maintaining safety integrity, protection blocks support multi-channel sensor voting:
 
 ```mermaid
 graph LR
-    PT101A --> V[Voter 2oo3]
-    PT101B --> V
-    PT101C --> V
-    V -->|2 or more TRUE| Latch[Trip Latch]
+    PT101A[PT-101A: Pressure] --> Voter[2oo3 Voting Logic]
+    PT101B[PT-101B: Pressure] --> Voter
+    PT101C[PT-101C: Pressure] --> Voter
+
+    Voter -->|2 or more exceed limit| Latch[Trip Latch: Latched State]
+    Voter -. Diagnosed Sensor Fault .-> Degrade[Degrade to 1oo2 Voting]
 ```
 
-## 5. Latching and Reset Behavior
+### Voting Degradation on Sensor Failure
+- **Normal Operation**: 2-out-of-3 transmitters must exceed threshold to trigger trip.
+- **Single Transmitter Fault (`TagQuality::Bad`)**: The voter detects the faulty transmitter, alarms the operator, and automatically degrades the safety voting configuration to 1-out-of-2 (1oo2) to ensure safety protection remains active.
 
-A tripped protective function **must latch**. It requires two conditions to reset:
-1. The initiating condition has cleared (Reset Conditions met).
-2. An explicit Operator Reset action occurs.
+---
 
-## 6. ESD Architecture
+## 5. Latching and Reset Mechanics
 
-Emergency Shutdown (ESD) affects large sections of the plant simultaneously (Zones).
-- **Zones:** Logical grouping of equipment (e.g., Unit 100 ESD, Plant-wide ESD).
-- **Triggers:** Manual pushbuttons, critical multi-parameter failures.
-- **Actions:** Massive, coordinated fail-safe states (all feeds closed, all heat removed, depressurization valves opened).
+A tripped protective safety function **must latch**. Even if the initiating process variable returns to a normal, safe operating level, the equipment remains locked in its tripped state.
 
-### Rust Pseudocode
-
-```rust
-// pseudocode
-pub enum VoteConfig {
-    OneOfOne,
-    OneOfTwo,
-    TwoOfThree,
-}
-
-pub struct VotingLogic {
-    pub inputs: Vec<TagId>,
-    pub config: VoteConfig,
-}
-
-pub struct TripLatch {
-    pub is_tripped: bool,
-    pub initiating_causes: VotingLogic,
-}
-
-impl TripLatch {
-    pub fn evaluate(&mut self, state: &SimulationState) -> bool {
-        let condition_met = self.initiating_causes.eval(state);
-        if condition_met {
-            self.is_tripped = true;
-        }
-        self.is_tripped
-    }
-    
-    pub fn reset(&mut self, state: &SimulationState) {
-        if !self.initiating_causes.eval(state) {
-            self.is_tripped = false;
-        }
-    }
-}
+```mermaid
+stateDiagram-v2
+    [*] --> Armed: System Normal
+    Armed --> Tripped: Initiating Cause Active (Limit Exceeded)
+    Tripped --> Tripped: Cause Clears (PV Normalizes) [Still Latched]
+    Tripped --> Armed: Reset Command [Cause Clear AND Operator Reset]
 ```
+
+### Unlatching Conditions
+Resetting a tripped interlock requires two mandatory conditions:
+1. **Permissive Cleared**: The initiating process variables have returned within safe operating limits (outside the reset hysteresis band).
+2. **Explicit Operator Action**: An authorized operator must manually issue an explicit `Reset` command via the HMI faceplate.
+
+---
+
+## 6. Emergency Shutdown (ESD) Architecture
+
+Emergency Shutdown (ESD) operates at a plant-wide or unit-wide level, partitioning the facility into safety containment zones:
+- **ESD Zones**: Logical groupings of units (e.g., Zone 1: Hydrotreater Reaction Section, Zone 2: Fractionation, Zone 3: Tank Farm).
+- **Triggers**: Hardwired emergency pushbuttons, toxic gas detection, fire detection, critical multi-unit trip conditions.
+- **Actions**: Immediate fail-safe positioning of all boundary isolation valves, fuel gas shutoff, compressor emergency venting, and electrical motor de-energization.
+
+---
+
+## 7. Runtime Architecture & Execution Invariants
+
+In the deterministic simulation tick:
+- Protection blocks read committed state (`StateReadView`) or updated transmitter values.
+- If a trip condition evaluates to true, the trip latch is set in `StateWriteView`.
+- Protective override commands are written to actuator inputs with higher priority than PID controller outputs.
+- Protection evaluation is deterministic, zero-allocation, and executes on every simulation tick.

@@ -17,6 +17,7 @@ pub mod model;
 pub mod objective;
 pub mod random;
 pub mod timeline;
+pub mod training;
 pub mod validation;
 
 pub use disturbance::{ActiveDisturbance, DisturbanceManager};
@@ -32,4 +33,5 @@ pub use model::{
 pub use objective::{ObjectiveEvaluator, ObjectiveTrackerItem};
 pub use random::DeterministicPrng;
 pub use timeline::TimelineScheduler;
+pub use training::*;
 pub use validation::{validate_fault, validate_scenario};

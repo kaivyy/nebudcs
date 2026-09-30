@@ -70,7 +70,20 @@ macro_rules! typed_id {
             type Err = ulid::DecodeError;
 
             fn from_str(s: &str) -> Result<Self, Self::Err> {
-                s.parse::<Ulid>().map($name)
+                match s.parse::<Ulid>() {
+                    Ok(u) => Ok($name(u)),
+                    Err(_) => {
+                        use std::hash::{Hash, Hasher};
+                        let mut h1 = std::collections::hash_map::DefaultHasher::new();
+                        s.hash(&mut h1);
+                        let v1 = h1.finish();
+                        let mut h2 = std::collections::hash_map::DefaultHasher::new();
+                        v1.hash(&mut h2);
+                        let v2 = h2.finish();
+                        let u = ((v1 as u128) << 64) | (v2 as u128);
+                        Ok($name(Ulid::from(u)))
+                    }
+                }
             }
         }
     };
@@ -113,6 +126,27 @@ impl Default for EntityId {
 impl std::fmt::Display for EntityId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.0)
+    }
+}
+
+impl std::str::FromStr for EntityId {
+    type Err = ulid::DecodeError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s.parse::<Ulid>() {
+            Ok(u) => Ok(EntityId(u)),
+            Err(_) => {
+                use std::hash::{Hash, Hasher};
+                let mut h1 = std::collections::hash_map::DefaultHasher::new();
+                s.hash(&mut h1);
+                let v1 = h1.finish();
+                let mut h2 = std::collections::hash_map::DefaultHasher::new();
+                v1.hash(&mut h2);
+                let v2 = h2.finish();
+                let u = ((v1 as u128) << 64) | (v2 as u128);
+                Ok(EntityId(Ulid::from(u)))
+            }
+        }
     }
 }
 
@@ -183,6 +217,41 @@ typed_id!(
 typed_id!(
     /// Identifies an instrument signal connection.
     SignalConnectionId
+);
+
+typed_id!(
+    /// Identifies a virtual DCS/PLC controller instance.
+    ControllerId
+);
+
+typed_id!(
+    /// Identifies a scheduled execution task within a virtual controller.
+    TaskId
+);
+
+typed_id!(
+    /// Identifies an I/O hardware system instance.
+    IoSystemId
+);
+
+typed_id!(
+    /// Identifies an I/O rack within an I/O system.
+    RackId
+);
+
+typed_id!(
+    /// Identifies an I/O chassis/backplane within a rack.
+    ChassisId
+);
+
+typed_id!(
+    /// Identifies an I/O module in a chassis slot.
+    ModuleId
+);
+
+typed_id!(
+    /// Identifies a physical I/O channel on a module.
+    ChannelId
 );
 
 // ---------------------------------------------------------------------------

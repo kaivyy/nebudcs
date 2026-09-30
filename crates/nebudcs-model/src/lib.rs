@@ -21,7 +21,11 @@ pub use equipment::{
     OperatingEnvelope, ParameterDefinition, Phase, PortDefinition, PortDirection, PortDomain,
     Position2D, TagDefinition, TagSource, UtilityKind,
 };
-pub use project::{Area, Plant, Project, ProjectMetadata, Unit};
+pub use project::{
+    AlarmInstance, Area, BoundaryConditionInstance, ControlLoopInstance, InitialConditionInstance,
+    InstrumentInstance, InterlockInstance, Plant, Project, ProjectAdvancedControlStrategy,
+    ProjectMetadata, Unit,
+};
 pub use stream::{PortRef, StreamComposition, StreamDefinition, StreamType};
 pub use tag::{TagQuality, TagSnapshot, TagValue};
 pub use validation::{ValidationResult, ValidationSeverity};

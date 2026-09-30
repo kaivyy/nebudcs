@@ -320,11 +320,7 @@ fn test_actuator_signal_loss_and_power_air_failure() {
 
 #[test]
 fn test_protection_trip_latch_deadband_and_reset_refusal() {
-    let cfg = ProtectionConfig {
-        name: "HIGH_PRESSURE_ESD".to_string(),
-        threshold: 80.0,
-        reset_deadband: 5.0,
-    };
+    let cfg = ProtectionConfig::new("HIGH_PRESSURE_ESD", 80.0, 5.0);
     cfg.validate().expect("valid protection config");
 
     let mut block = ProtectionBlock::new(cfg);

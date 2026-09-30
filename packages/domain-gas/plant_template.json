@@ -1,0 +1,429 @@
+{
+  "id": "proj-domain-gas-compression",
+  "name": "Natural Gas Compression & Anti-Surge Train",
+  "schema_version": "0.1.0",
+  "description": "Multi-stage natural gas compression facility with suction knockout drum, aftercooler, discharge separator, and anti-surge recirculation loop.",
+  "author": "NebuDCS Standard Library",
+  "created": "2026-09-07T00:00:00Z",
+  "modified": "2026-09-06T00:00:00Z",
+  "equipment": [
+    {
+      "id": "01M24QAGJ3EN0EME781F43GEA3",
+      "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+      "definition_version": "1.0.0",
+      "name": "V-301",
+      "parameters": {
+        "operating_pressure": 450000.0,
+        "volume": 30.0,
+        "volume_m3": 30.0
+      },
+      "position": {
+        "x": 120.0,
+        "y": 180.0
+      },
+      "display_width": null,
+      "display_height": null,
+      "rotation": null
+    },
+    {
+      "id": "01M24QAGJ3AF490ZBXH2Q3VRR1",
+      "definition_id": "7PV7KKP3ZRGF3HHSBF1230WPP7",
+      "definition_version": "1.0.0",
+      "name": "C-301",
+      "parameters": {
+        "rated_flow": 25.0,
+        "rated_head": 140.0,
+        "rated_power": 600000.0,
+        "speed": 3600.0
+      },
+      "position": {
+        "x": 360.0,
+        "y": 180.0
+      },
+      "display_width": null,
+      "display_height": null,
+      "rotation": null
+    },
+    {
+      "id": "01M24QAGJ3VB76A7853AC3HRFY",
+      "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+      "definition_version": "1.0.0",
+      "name": "E-301",
+      "parameters": {
+        "area_m2": 200.0,
+        "design_duty": 1200000.0,
+        "overall_u": 500.0,
+        "process_inlet_t": 125.0
+      },
+      "position": {
+        "x": 600.0,
+        "y": 180.0
+      },
+      "display_width": null,
+      "display_height": null,
+      "rotation": null
+    },
+    {
+      "id": "01M24QAGJ3X81J1FK1Y5T6C1CG",
+      "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+      "definition_version": "1.0.0",
+      "name": "V-302",
+      "parameters": {
+        "operating_pressure": 3000000.0,
+        "volume": 45.0,
+        "volume_m3": 45.0
+      },
+      "position": {
+        "x": 840.0,
+        "y": 180.0
+      },
+      "display_width": null,
+      "display_height": null,
+      "rotation": null
+    },
+    {
+      "id": "01M24QAGJ357B70SYDRKSCZ899",
+      "definition_id": "47AQHQPS0ARBDTEWRCRZJWZBZ9",
+      "definition_version": "1.0.0",
+      "name": "FV-301",
+      "parameters": {
+        "cv": 100.0,
+        "position": 15.0,
+        "rated_cv": 100.0
+      },
+      "position": {
+        "x": 600.0,
+        "y": 340.0
+      },
+      "display_width": null,
+      "display_height": null,
+      "rotation": null
+    }
+  ],
+  "streams": [
+    {
+      "id": "01M24QAGJ3V037M4GRYBGADQ2P",
+      "name": "S-GAS-01",
+      "stream_type": "Material",
+      "source_equipment_id": "01M24QAGJ3EN0EME781F43GEA3",
+      "source_port_id": "6W06EDM06HWKQES92WSCG4RW65",
+      "sink_equipment_id": "01M24QAGJ3AF490ZBXH2Q3VRR1",
+      "sink_port_id": "2Z0TCSV15342N4G68500SBPH4T",
+      "composition": {},
+      "route_points": [],
+      "diameter": null,
+      "length": null,
+      "roughness": null,
+      "elevation_change": null,
+      "loss_k": null
+    },
+    {
+      "id": "01M24QAGJ39BA65WKM9V1VGG2Q",
+      "name": "S-GAS-02",
+      "stream_type": "Material",
+      "source_equipment_id": "01M24QAGJ3AF490ZBXH2Q3VRR1",
+      "source_port_id": "1NQHXSA59AXSTTAS8GQETNQXF7",
+      "sink_equipment_id": "01M24QAGJ3VB76A7853AC3HRFY",
+      "sink_port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA",
+      "composition": {},
+      "route_points": [],
+      "diameter": null,
+      "length": null,
+      "roughness": null,
+      "elevation_change": null,
+      "loss_k": null
+    },
+    {
+      "id": "01M24QAGJ3VXY8EECBEWWZ28NR",
+      "name": "S-GAS-03",
+      "stream_type": "Material",
+      "source_equipment_id": "01M24QAGJ3VB76A7853AC3HRFY",
+      "source_port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y",
+      "sink_equipment_id": "01M24QAGJ3X81J1FK1Y5T6C1CG",
+      "sink_port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A",
+      "composition": {},
+      "route_points": [],
+      "diameter": null,
+      "length": null,
+      "roughness": null,
+      "elevation_change": null,
+      "loss_k": null
+    },
+    {
+      "id": "01M24QAGJ3EYVWN8121JD7XM8Q",
+      "name": "S-SURGE-01",
+      "stream_type": "Material",
+      "source_equipment_id": "01M24QAGJ3X81J1FK1Y5T6C1CG",
+      "source_port_id": "6W06EDM06HWKQES92WSCG4RW65",
+      "sink_equipment_id": "01M24QAGJ357B70SYDRKSCZ899",
+      "sink_port_id": "68A3WN88ZB4Y0MYZWJAKSCKECP",
+      "composition": {},
+      "route_points": [],
+      "diameter": null,
+      "length": null,
+      "roughness": null,
+      "elevation_change": null,
+      "loss_k": null
+    },
+    {
+      "id": "01M24QAGJ3SDYQEM6CE834RXFJ",
+      "name": "S-SURGE-02",
+      "stream_type": "Material",
+      "source_equipment_id": "01M24QAGJ357B70SYDRKSCZ899",
+      "source_port_id": "20BW59F2XB37X5TYG8K1HMDYRS",
+      "sink_equipment_id": "01M24QAGJ3AF490ZBXH2Q3VRR1",
+      "sink_port_id": "497K3CFVVD9MZ583BNBW4J0A4N",
+      "composition": {},
+      "route_points": [],
+      "diameter": null,
+      "length": null,
+      "roughness": null,
+      "elevation_change": null,
+      "loss_k": null
+    }
+  ],
+  "instruments": [
+    {
+      "id": "01M24QAGJ36PFR9T13Z5QER5DC",
+      "tag": "PT-301",
+      "equipment_id": "01M24QAGJ3EN0EME781F43GEA3",
+      "port_id": "6W06EDM06HWKQES92WSCG4RW65",
+      "measurement_kind": "Pressure",
+      "range_min": 0.0,
+      "range_max": 10.0,
+      "unit": "bar",
+      "position": {
+        "x": 120.0,
+        "y": 100.0
+      }
+    },
+    {
+      "id": "01M24QAGJ35H6SJB0ESA2X6Y8N",
+      "tag": "FT-301",
+      "equipment_id": "01M24QAGJ3AF490ZBXH2Q3VRR1",
+      "port_id": "2Z0TCSV15342N4G68500SBPH4T",
+      "measurement_kind": "Flow",
+      "range_min": 0.0,
+      "range_max": 50.0,
+      "unit": "kg/s",
+      "position": {
+        "x": 260.0,
+        "y": 100.0
+      }
+    },
+    {
+      "id": "01M24QAGJ3Y9EWKGVDCWQVKPPC",
+      "tag": "PT-302",
+      "equipment_id": "01M24QAGJ3X81J1FK1Y5T6C1CG",
+      "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A",
+      "measurement_kind": "Pressure",
+      "range_min": 0.0,
+      "range_max": 50.0,
+      "unit": "bar",
+      "position": {
+        "x": 840.0,
+        "y": 100.0
+      }
+    },
+    {
+      "id": "01M24QAGJ3GX7FS07VHVP68NTV",
+      "tag": "TI-301",
+      "equipment_id": "01M24QAGJ3VB76A7853AC3HRFY",
+      "port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y",
+      "measurement_kind": "Temperature",
+      "range_min": 0.0,
+      "range_max": 150.0,
+      "unit": "°C",
+      "position": {
+        "x": 600.0,
+        "y": 100.0
+      }
+    },
+    {
+      "id": "01M24QAGJ3JCRXK6638BDMJWAR",
+      "tag": "LT-301",
+      "equipment_id": "01M24QAGJ3EN0EME781F43GEA3",
+      "port_id": null,
+      "measurement_kind": "Level",
+      "range_min": 0.0,
+      "range_max": 100.0,
+      "unit": "%",
+      "position": {
+        "x": 120.0,
+        "y": 260.0
+      }
+    }
+  ],
+  "control_loops": [
+    {
+      "id": "01M24QAGJ39H9V4XX2R14894QP",
+      "name": "FIC-301",
+      "pv_tag": "FT-301",
+      "sp": 15.0,
+      "out_tag": "FV-301.OPENING",
+      "kp": 1.5,
+      "ti": 8.0,
+      "td": 0.0,
+      "reverse_acting": true,
+      "mode": "AUTO",
+      "output_min": 0.0,
+      "output_max": 100.0,
+      "position": {
+        "x": 480.0,
+        "y": 40.0
+      }
+    },
+    {
+      "id": "01M24QAGJ3YF2KA0QWW5VGE1JG",
+      "name": "PIC-301",
+      "pv_tag": "PT-302",
+      "sp": 30.0,
+      "out_tag": "C-301.SPEED",
+      "kp": 1.0,
+      "ti": 15.0,
+      "td": 0.0,
+      "reverse_acting": false,
+      "mode": "AUTO",
+      "output_min": 0.0,
+      "output_max": 100.0,
+      "position": {
+        "x": 720.0,
+        "y": 40.0
+      }
+    },
+    {
+      "id": "01M24QAGJ3TYPVQM0T4XYYHFZT",
+      "name": "TIC-301",
+      "pv_tag": "TI-301",
+      "sp": 45.0,
+      "out_tag": "E-301.DUTY",
+      "kp": 1.2,
+      "ti": 20.0,
+      "td": 0.0,
+      "reverse_acting": false,
+      "mode": "AUTO",
+      "output_min": 0.0,
+      "output_max": 100.0,
+      "position": {
+        "x": 600.0,
+        "y": 40.0
+      }
+    }
+  ],
+  "alarms": [
+    {
+      "id": "01M24QAGJ3GG9AV36M377T0XJY",
+      "name": "PAL-301",
+      "pv_tag": "PT-301",
+      "alarm_type": "Lo",
+      "severity": "High",
+      "trip_limit": 2.0,
+      "deadband": 0.2,
+      "description": "Suction pressure low warning"
+    },
+    {
+      "id": "01M24QAGJ32MX5YB3JHHR2Z3DZ",
+      "name": "PAH-302",
+      "pv_tag": "PT-302",
+      "alarm_type": "Hi",
+      "severity": "Critical",
+      "trip_limit": 35.0,
+      "deadband": 0.5,
+      "description": "Compressor discharge overpressure"
+    },
+    {
+      "id": "01M24QAGJ3JZS49899EF7TEFQR",
+      "name": "TAH-301",
+      "pv_tag": "TI-301",
+      "alarm_type": "Hi",
+      "severity": "High",
+      "trip_limit": 140.0,
+      "deadband": 2.0,
+      "description": "Aftercooler outlet temperature high"
+    }
+  ],
+  "interlocks": [
+    {
+      "id": "01M24QAGJ3YGDEN8R76HP6S5RG",
+      "name": "TRIP-C301",
+      "source_tag": "LT-301",
+      "condition": ">",
+      "threshold": 85.0,
+      "target_action": "TRIP",
+      "target_equipment": "01M24QAGJ3AF490ZBXH2Q3VRR1",
+      "latched": true,
+      "description": "Liquid carryover prevention trip"
+    },
+    {
+      "id": "01M24QAGJ3KKYN9QGASBY8Q2Z3",
+      "name": "OPEN-SURGE",
+      "source_tag": "PT-301",
+      "condition": "<",
+      "threshold": 1.5,
+      "target_action": "OPEN",
+      "target_equipment": "01M24QAGJ357B70SYDRKSCZ899",
+      "latched": false,
+      "description": "Suction starvation anti-surge full opening"
+    }
+  ],
+  "controllers": [],
+  "io_systems": [],
+  "io_mappings": [],
+  "tags": [],
+  "advanced_control": [
+    {
+      "id": "strat-surge-301",
+      "name": "Compressor K-301 Anti-Surge Controller",
+      "description": "Surge Limit Line and Surge Control Line envelope protection with derivative kick",
+      "enabled": true,
+      "strategy_type": "AntiSurge",
+      "parameters": {
+        "derivative_kick_gain": "1.5",
+        "flow_tag": "FT-301.FLOW",
+        "kick_threshold_rate": "2.0",
+        "kp": "2.0",
+        "p_discharge_tag": "PT-302",
+        "p_suction_tag": "PT-301",
+        "recycle_valve_tag": "ASV-301.OUT",
+        "safety_margin": "0.10",
+        "sll_intercept_b": "0.50",
+        "sll_slope_a": "0.35",
+        "target_actuator": "FV-301",
+        "ti": "1.0"
+      }
+    }
+  ],
+  "communications": null,
+  "sis": null,
+  "plant_structure": null,
+  "areas": [],
+  "displays": [],
+  "navigation_links": [],
+  "boundary_conditions": [
+    {
+      "id": "01M24QAGJ3N55JX199808M2E2K",
+      "name": "Wellhead Raw Gas Feed",
+      "condition_type": "feed",
+      "target_equipment_id": null,
+      "target_port": null,
+      "target_stream_id": null,
+      "flow_value": 12000.0,
+      "flow_unit": "Nm3/h",
+      "pressure_value": 12.0,
+      "pressure_unit": "barg",
+      "temperature_value": 28.0,
+      "temperature_unit": "°C",
+      "phase": "Vapor",
+      "density": 0.85,
+      "molecular_weight": 0.0175,
+      "enthalpy": null,
+      "quality": null,
+      "composition": {},
+      "validity_min_flow": null,
+      "validity_max_flow": null,
+      "source_provenance": "Wellhead Gathering Manifold",
+      "enabled": true
+    }
+  ],
+  "initial_conditions": []
+}

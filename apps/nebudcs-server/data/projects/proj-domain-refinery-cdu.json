@@ -1,0 +1,590 @@
+{
+  "id": "3E2B8BJGR2EHKC9RC4CD2H180W",
+  "name": "Refinery Atmospheric Crude Distillation Unit (CDU)",
+  "schema_version": "0.1.0",
+  "plants": [
+    {
+      "id": "01M1X4HB0QZMA62CKX7EW8H6KA",
+      "name": "Refinery Area 10",
+      "areas": [
+        {
+          "id": "01M1X4HB0Q8KD2NWMKYA1FA6M1",
+          "name": "Crude Distillation Section",
+          "units": [
+            {
+              "id": "01M1X4HB0QMD3DB9AAZWRHYP1Z",
+              "name": "Unit 110 Crude Fractionation",
+              "equipment": [
+                {
+                  "id": "01M1X4HB0QRKSJ83TKDTGN0B69",
+                  "definition_id": "2KRSSVVX85BFH6EV6H5YR8Y85Z",
+                  "definition_version": "1.0.0",
+                  "name": "TK-101",
+                  "parameters": {
+                    "capacity_m3": 5000.0,
+                    "level": 75.0
+                  },
+                  "position": {
+                    "x": 100.0,
+                    "y": 180.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M1X4HB0QKD287BGYSKM39CG1",
+                  "definition_id": "0ATRCF671FM4B5GSSRFVNKC51R",
+                  "definition_version": "1.0.0",
+                  "name": "P-101",
+                  "parameters": {
+                    "rated_flow": 120.0,
+                    "rated_head": 120.0,
+                    "speed_rpm": 2950.0
+                  },
+                  "position": {
+                    "x": 260.0,
+                    "y": 180.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M1X4HB0QBM9VZNYCFJ4H6DVP",
+                  "definition_id": "47AQHQPS0ARBDTEWRCRZJWZBZ9",
+                  "definition_version": "1.0.0",
+                  "name": "FV-101",
+                  "parameters": {
+                    "rated_cv": 120.0,
+                    "cv": 120.0,
+                    "position": 65.0
+                  },
+                  "position": {
+                    "x": 420.0,
+                    "y": 180.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M1X4HB0Q7ZMP450XZ69NE76X",
+                  "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+                  "definition_version": "1.0.0",
+                  "name": "E-101",
+                  "parameters": {
+                    "area_m2": 250.0,
+                    "overall_u": 650.0,
+                    "design_duty": 2500000.0,
+                    "process_inlet_t": 35.0
+                  },
+                  "position": {
+                    "x": 580.0,
+                    "y": 180.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M1X4HB0QA193J8N0TDPNXARR",
+                  "definition_id": "6RPK1YYR4SVAPJCMK6R4ZG93TM",
+                  "definition_version": "1.0.0",
+                  "name": "H-101",
+                  "parameters": {
+                    "duty": 15000000.0,
+                    "design_duty": 15000000.0,
+                    "efficiency": 0.88,
+                    "process_inlet_t": 180.0
+                  },
+                  "position": {
+                    "x": 760.0,
+                    "y": 180.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M1X4HB0QV3PR2YNYAM7B6E24",
+                  "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+                  "definition_version": "1.0.0",
+                  "name": "T-101",
+                  "parameters": {
+                    "volume_m3": 150.0,
+                    "volume": 150.0,
+                    "operating_pressure": 150000.0
+                  },
+                  "position": {
+                    "x": 940.0,
+                    "y": 180.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M1X4HB0QAJNB5C61ENNNVHAG",
+                  "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+                  "definition_version": "1.0.0",
+                  "name": "E-102",
+                  "parameters": {
+                    "area_m2": 180.0,
+                    "overall_u": 550.0,
+                    "design_duty": 1800000.0,
+                    "process_inlet_t": 110.0
+                  },
+                  "position": {
+                    "x": 1120.0,
+                    "y": 100.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M1X4HB0Q2EE8CEC4EERKE4YC",
+                  "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+                  "definition_version": "1.0.0",
+                  "name": "V-102",
+                  "parameters": {
+                    "volume_m3": 30.0,
+                    "volume": 30.0,
+                    "operating_pressure": 130000.0
+                  },
+                  "position": {
+                    "x": 1280.0,
+                    "y": 140.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M1X4HB0QNSFT15ERZ360PNW2",
+                  "definition_id": "0ATRCF671FM4B5GSSRFVNKC51R",
+                  "definition_version": "1.0.0",
+                  "name": "P-102",
+                  "parameters": {
+                    "rated_flow": 60.0,
+                    "rated_head": 80.0,
+                    "speed_rpm": 2950.0
+                  },
+                  "position": {
+                    "x": 1440.0,
+                    "y": 180.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                }
+              ],
+              "streams": [
+                {
+                  "id": "01M1X4HB0QB58WB3RKQ6G31DN0",
+                  "name": "S-CRUDE-01",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M1X4HB0QRKSJ83TKDTGN0B69",
+                    "port_id": "20BW59F2XB37X5TYG8K1HMDYRS"
+                  },
+                  "sink": {
+                    "equipment_id": "01M1X4HB0QKD287BGYSKM39CG1",
+                    "port_id": "2Z0TCSV15342N4G68500SBPH4T"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M1X4HB0Q1E0DC4MDADSES831",
+                  "name": "S-CRUDE-02",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M1X4HB0QKD287BGYSKM39CG1",
+                    "port_id": "1NQHXSA59AXSTTAS8GQETNQXF7"
+                  },
+                  "sink": {
+                    "equipment_id": "01M1X4HB0QBM9VZNYCFJ4H6DVP",
+                    "port_id": "68A3WN88ZB4Y0MYZWJAKSCKECP"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M1X4HB0QKW417YZFWAQSR60W",
+                  "name": "S-CRUDE-03",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M1X4HB0QBM9VZNYCFJ4H6DVP",
+                    "port_id": "20BW59F2XB37X5TYG8K1HMDYRS"
+                  },
+                  "sink": {
+                    "equipment_id": "01M1X4HB0Q7ZMP450XZ69NE76X",
+                    "port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M1X4HB0QWF8V8JHVCM7T3YG1",
+                  "name": "S-CRUDE-04",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M1X4HB0Q7ZMP450XZ69NE76X",
+                    "port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y"
+                  },
+                  "sink": {
+                    "equipment_id": "01M1X4HB0QA193J8N0TDPNXARR",
+                    "port_id": "6B02X5387W3WQYBZ0CAP57R0YF"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M1X4HB0QQEGC0S44KV2PNK4B",
+                  "name": "S-CRUDE-05",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M1X4HB0QA193J8N0TDPNXARR",
+                    "port_id": "21PP3MM2206Y93A468WWFMDYN0"
+                  },
+                  "sink": {
+                    "equipment_id": "01M1X4HB0QV3PR2YNYAM7B6E24",
+                    "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M1X4HB0QTPSG7B6G3DRKPX34",
+                  "name": "S-OVHD-01",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M1X4HB0QV3PR2YNYAM7B6E24",
+                    "port_id": "6W06EDM06HWKQES92WSCG4RW65"
+                  },
+                  "sink": {
+                    "equipment_id": "01M1X4HB0QAJNB5C61ENNNVHAG",
+                    "port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M1X4HB0QKBV7QJGP5Y0QSH6Z",
+                  "name": "S-OVHD-02",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M1X4HB0QAJNB5C61ENNNVHAG",
+                    "port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y"
+                  },
+                  "sink": {
+                    "equipment_id": "01M1X4HB0Q2EE8CEC4EERKE4YC",
+                    "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M1X4HB0Q1A09NZBB5FPF3BDE",
+                  "name": "S-REFLUX-01",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M1X4HB0Q2EE8CEC4EERKE4YC",
+                    "port_id": "79KAB0B0B6SCFDAF3AST98A7D6"
+                  },
+                  "sink": {
+                    "equipment_id": "01M1X4HB0QNSFT15ERZ360PNW2",
+                    "port_id": "2Z0TCSV15342N4G68500SBPH4T"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                }
+              ],
+              "instruments": [
+                {
+                  "id": "01M1X4HB0Q7CTMRXXM6FWXFYAS",
+                  "tag": "FT-101",
+                  "equipment_id": "01M1X4HB0QBM9VZNYCFJ4H6DVP",
+                  "port_id": "68A3WN88ZB4Y0MYZWJAKSCKECP",
+                  "measurement_kind": "Flow",
+                  "range_min": 0.0,
+                  "range_max": 15000.0,
+                  "unit": "kg/h",
+                  "position": {
+                    "x": 420.0,
+                    "y": 100.0
+                  }
+                },
+                {
+                  "id": "01M1X4HB0QZ1AH5REACQAP3BFK",
+                  "tag": "TI-101",
+                  "equipment_id": "01M1X4HB0Q7ZMP450XZ69NE76X",
+                  "port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y",
+                  "measurement_kind": "Temperature",
+                  "range_min": 0.0,
+                  "range_max": 300.0,
+                  "unit": "°C",
+                  "position": {
+                    "x": 640.0,
+                    "y": 100.0
+                  }
+                },
+                {
+                  "id": "01M1X4HB0QGT3PX82YS5DGE2XE",
+                  "tag": "TI-102",
+                  "equipment_id": "01M1X4HB0QA193J8N0TDPNXARR",
+                  "port_id": "21PP3MM2206Y93A468WWFMDYN0",
+                  "measurement_kind": "Temperature",
+                  "range_min": 0.0,
+                  "range_max": 450.0,
+                  "unit": "°C",
+                  "position": {
+                    "x": 820.0,
+                    "y": 100.0
+                  }
+                },
+                {
+                  "id": "01M1X4HB0QTRGH94ZFF3X7ETZ3",
+                  "tag": "PT-101",
+                  "equipment_id": "01M1X4HB0QV3PR2YNYAM7B6E24",
+                  "port_id": "6W06EDM06HWKQES92WSCG4RW65",
+                  "measurement_kind": "Pressure",
+                  "range_min": 0.0,
+                  "range_max": 5.0,
+                  "unit": "bar",
+                  "position": {
+                    "x": 940.0,
+                    "y": 80.0
+                  }
+                },
+                {
+                  "id": "01M1X4HB0Q4898CHN50Q5CK1R0",
+                  "tag": "LT-101",
+                  "equipment_id": "01M1X4HB0QV3PR2YNYAM7B6E24",
+                  "port_id": null,
+                  "measurement_kind": "Level",
+                  "range_min": 0.0,
+                  "range_max": 100.0,
+                  "unit": "%",
+                  "position": {
+                    "x": 940.0,
+                    "y": 260.0
+                  }
+                },
+                {
+                  "id": "01M1X4HB0Q4JV0B3NSJQ44BAZS",
+                  "tag": "LT-102",
+                  "equipment_id": "01M1X4HB0Q2EE8CEC4EERKE4YC",
+                  "port_id": null,
+                  "measurement_kind": "Level",
+                  "range_min": 0.0,
+                  "range_max": 100.0,
+                  "unit": "%",
+                  "position": {
+                    "x": 1280.0,
+                    "y": 220.0
+                  }
+                }
+              ],
+              "control_loops": [
+                {
+                  "id": "01M1X4HB0Q7GRHY1JKK93A2BCR",
+                  "name": "FIC-101",
+                  "pv_tag": "FT-101",
+                  "sp": 12000.0,
+                  "out_tag": "FV-101.OPENING",
+                  "kp": 1.2,
+                  "ti": 10.0,
+                  "td": 0.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 420.0,
+                    "y": 40.0
+                  }
+                },
+                {
+                  "id": "01M1X4HB0Q9M6QA70RYJ1KHK1D",
+                  "name": "TIC-102",
+                  "pv_tag": "TI-102",
+                  "sp": 360.0,
+                  "out_tag": "H-101.DUTY",
+                  "kp": 2.0,
+                  "ti": 30.0,
+                  "td": 2.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 820.0,
+                    "y": 40.0
+                  }
+                },
+                {
+                  "id": "01M1X4HB0Q3G63MDDQ25NQT91K",
+                  "name": "LIC-101",
+                  "pv_tag": "LT-101",
+                  "sp": 50.0,
+                  "out_tag": "T-101.OPENING",
+                  "kp": 1.5,
+                  "ti": 25.0,
+                  "td": 0.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 940.0,
+                    "y": 320.0
+                  }
+                }
+              ],
+              "alarms": [
+                {
+                  "id": "01M1X4HB0QP4VBJ7W5RC77CVXE",
+                  "name": "TAH-102",
+                  "pv_tag": "TI-102",
+                  "alarm_type": "HI",
+                  "severity": "high",
+                  "trip_limit": 380.0,
+                  "deadband": 2.0,
+                  "description": "Furnace coil outlet temperature high"
+                },
+                {
+                  "id": "01M1X4HB0QN4F74HEWYBZVFVGF",
+                  "name": "LAH-101",
+                  "pv_tag": "LT-101",
+                  "alarm_type": "HI",
+                  "severity": "critical",
+                  "trip_limit": 85.0,
+                  "deadband": 1.0,
+                  "description": "Column bottom sump level high"
+                },
+                {
+                  "id": "01M1X4HB0Q0WSW45Y1N2C22R95",
+                  "name": "LAL-101",
+                  "pv_tag": "LT-101",
+                  "alarm_type": "LO",
+                  "severity": "high",
+                  "trip_limit": 20.0,
+                  "deadband": 1.0,
+                  "description": "Column bottom sump level low"
+                }
+              ],
+              "interlocks": [
+                {
+                  "id": "01M1X4HB0QX38VS8K5XZ801F4P",
+                  "name": "TRIP-H101",
+                  "source_tag": "FT-101",
+                  "condition": "<",
+                  "threshold": 2000.0,
+                  "target_action": "TRIP",
+                  "target_equipment": "01M1X4HB0QA193J8N0TDPNXARR",
+                  "latched": true,
+                  "description": "Furnace coil low flow trip"
+                },
+                {
+                  "id": "01M1X4HB0Q6VB45SZ4C9VF4HEX",
+                  "name": "TRIP-P101",
+                  "source_tag": "LT-101",
+                  "condition": "<",
+                  "threshold": 10.0,
+                  "target_action": "TRIP",
+                  "target_equipment": "01M1X4HB0QKD287BGYSKM39CG1",
+                  "latched": true,
+                  "description": "Charge pump suction dry-run protection"
+                }
+              ],
+              "boundary_conditions": [],
+              "initial_conditions": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "description": "Industrial refinery crude distillation flowsheet featuring crude preheat train, fired process furnace, fractional distillation column, overhead condenser, reflux accumulator, and reflux pump.",
+    "author": "NebuDCS Standard Library",
+    "created": "2026-09-07T00:00:00Z",
+    "modified": "2026-09-07T00:00:00Z"
+  },
+  "controllers": [],
+  "io_systems": [],
+  "io_mappings": [],
+  "tags": [],
+  "advanced_control": [
+    {
+      "id": "strat-ff-101",
+      "name": "Furnace COT Feedforward Disturbance Rejection",
+      "description": "Compensates crude feed rate disturbances dynamically before coil outlet temperature drifts",
+      "enabled": true,
+      "strategy_type": "FeedForward",
+      "parameters": {
+        "disturbance_tag": "FT-101.FLOW",
+        "gain": "0.8",
+        "kp": "1.5",
+        "output_max": "100.0",
+        "output_min": "0.0",
+        "output_tag": "TIC_101.OUT",
+        "pv_tag": "TT-101.TEMP",
+        "sp": "365.0",
+        "t_lag": "2.0",
+        "t_lead": "4.0",
+        "target_actuator": "FV-102",
+        "td": "0.5",
+        "ti": "8.0"
+      }
+    }
+  ],
+  "communications": null,
+  "sis": null,
+  "displays": [],
+  "navigation_links": [],
+  "plant_structure": null
+}

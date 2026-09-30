@@ -1,0 +1,14 @@
+{
+  "id": "scn-generic-feed-loss",
+  "name": "Generic Feed Flow Disturbance & Level Recovery",
+  "description": "Upstream supply disruption causes rapid inventory depletion in the separation vessel. Trainee must acknowledge alarm and stabilize level before low-level trip occurs.",
+  "author": "Chief Training Instructor",
+  "version": "1.0.0",
+  "compatible_project_id": null,
+  "duration_limit_sec": 300.0,
+  "random_seed": 283790213121,
+  "initial_conditions_json": "{\n  \"tags\": [],\n  \"controllers\": [],\n  \"equipment\": []\n}",
+  "timeline_json": "[]",
+  "objectives_json": "[]",
+  "criteria_json": "[\n  {\n    \"criterion_id\": \"crit-feed-alarm-ack\",\n    \"title\": \"Prompt Alarm Acknowledgment\",\n    \"description\": \"Operator must acknowledge low inventory or feed flow alarm within 30 seconds of activation.\",\n    \"kind\": {\n      \"kind\": \"alarm_response_time\",\n      \"alarm_name\": \"ALM-LVL-LO\",\n      \"max_allowed_response_sec\": 30.0\n    },\n    \"required\": true,\n    \"weight\": 30,\n    \"penalty\": 15,\n    \"severity\": \"STANDARD\"\n  },\n  {\n    \"criterion_id\": \"crit-feed-mode-ctrl\",\n    \"title\": \"Switch Controller to Manual or Adjust Valve\",\n    \"description\": \"Operator must intervene on level controller or feed valve to arrest vessel drainage.\",\n    \"kind\": {\n      \"kind\": \"required_action\",\n      \"target_entity\": \"LIC-101\",\n      \"action_type\": \"SET_MODE\",\n      \"expected_value\": null,\n      \"tolerance\": null,\n      \"within_sec\": 60.0\n    },\n    \"required\": false,\n    \"weight\": 30,\n    \"penalty\": 0,\n    \"severity\": \"STANDARD\"\n  },\n  {\n    \"criterion_id\": \"crit-no-low-trip\",\n    \"title\": \"Prevent Protective Low-Level Trip\",\n    \"description\": \"Vessel inventory must be protected to avoid automatic low-level emergency trip.\",\n    \"kind\": {\n      \"kind\": \"no_trip_occurred\"\n    },\n    \"required\": true,\n    \"weight\": 40,\n    \"penalty\": 40,\n    \"severity\": \"CRITICAL\"\n  }\n]"
+}

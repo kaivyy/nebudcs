@@ -189,3 +189,36 @@ pub struct CustomEquipmentDefinition {
     #[serde(default)]
     pub metadata: IndexMap<String, String>,
 }
+
+impl CustomEquipmentDefinition {
+    /// Returns the configured thermodynamic property package name if specified in metadata.
+    pub fn property_package(&self) -> Option<&str> {
+        self.metadata.get("property_package").map(|s| s.as_str())
+    }
+
+    /// Converts this custom equipment definition into a core domain EquipmentDefinition.
+    pub fn to_domain_definition(&self) -> nebudcs_model::equipment::EquipmentDefinition {
+        let def_id = std::str::FromStr::from_str(&self.id)
+            .unwrap_or_else(|_| nebudcs_types::EquipmentDefinitionId::new());
+        nebudcs_model::equipment::EquipmentDefinition {
+            id: def_id,
+            name: self.name.clone(),
+            version: self.version,
+            category: self.category,
+            capabilities: Vec::new(),
+            parameters: self.parameters.clone(),
+            ports: self.ports.clone(),
+            tags: Vec::new(),
+            operating_envelope: self.operating_envelope.clone(),
+            alarm_definitions: self.alarm_definitions.clone(),
+            failure_modes: Vec::new(),
+            state_machine: Default::default(),
+            metadata: nebudcs_model::equipment::EquipmentMetadata {
+                description: self.description.clone(),
+                manufacturer: None,
+                model_number: None,
+                tags: self.metadata.keys().cloned().collect(),
+            },
+        }
+    }
+}

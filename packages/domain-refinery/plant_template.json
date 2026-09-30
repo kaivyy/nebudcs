@@ -1,0 +1,564 @@
+{
+  "id": "proj-domain-refinery-cdu",
+  "name": "Refinery Atmospheric Crude Distillation Unit (CDU)",
+  "schema_version": "0.1.0",
+  "description": "Industrial refinery crude distillation flowsheet featuring crude preheat train, fired process furnace, fractional distillation column, overhead condenser, reflux accumulator, and reflux pump.",
+  "author": "NebuDCS Standard Library",
+  "created": "2026-09-07T00:00:00Z",
+  "modified": "2026-09-06T00:00:00Z",
+  "equipment": [
+    {
+      "id": "01M24QAGJ39HWJHQ4RGEDA87J7",
+      "definition_id": "2KRSSVVX85BFH6EV6H5YR8Y85Z",
+      "definition_version": "1.0.0",
+      "name": "TK-101",
+      "parameters": {
+        "capacity_m3": 5000.0,
+        "level": 75.0
+      },
+      "position": {
+        "x": 100.0,
+        "y": 180.0
+      },
+      "display_width": null,
+      "display_height": null,
+      "rotation": null
+    },
+    {
+      "id": "01M24QAGJ3BDTSEZ7VS4RTSCNS",
+      "definition_id": "0ATRCF671FM4B5GSSRFVNKC51R",
+      "definition_version": "1.0.0",
+      "name": "P-101",
+      "parameters": {
+        "rated_flow": 120.0,
+        "rated_head": 120.0,
+        "speed_rpm": 2950.0
+      },
+      "position": {
+        "x": 260.0,
+        "y": 180.0
+      },
+      "display_width": null,
+      "display_height": null,
+      "rotation": null
+    },
+    {
+      "id": "01M24QAGJ33EJEWFY1C28MKNZM",
+      "definition_id": "47AQHQPS0ARBDTEWRCRZJWZBZ9",
+      "definition_version": "1.0.0",
+      "name": "FV-101",
+      "parameters": {
+        "cv": 120.0,
+        "position": 65.0,
+        "rated_cv": 120.0
+      },
+      "position": {
+        "x": 420.0,
+        "y": 180.0
+      },
+      "display_width": null,
+      "display_height": null,
+      "rotation": null
+    },
+    {
+      "id": "01M24QAGJ3H3GN4P50EGKTTT51",
+      "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+      "definition_version": "1.0.0",
+      "name": "E-101",
+      "parameters": {
+        "area_m2": 250.0,
+        "design_duty": 2500000.0,
+        "overall_u": 650.0,
+        "process_inlet_t": 35.0
+      },
+      "position": {
+        "x": 580.0,
+        "y": 180.0
+      },
+      "display_width": null,
+      "display_height": null,
+      "rotation": null
+    },
+    {
+      "id": "01M24QAGJ3SYZVTG6HPTRF4750",
+      "definition_id": "6RPK1YYR4SVAPJCMK6R4ZG93TM",
+      "definition_version": "1.0.0",
+      "name": "H-101",
+      "parameters": {
+        "design_duty": 15000000.0,
+        "duty": 15000000.0,
+        "efficiency": 0.88,
+        "process_inlet_t": 180.0
+      },
+      "position": {
+        "x": 760.0,
+        "y": 180.0
+      },
+      "display_width": null,
+      "display_height": null,
+      "rotation": null
+    },
+    {
+      "id": "01M24QAGJ343GMHKSPJZ9XERKC",
+      "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+      "definition_version": "1.0.0",
+      "name": "T-101",
+      "parameters": {
+        "operating_pressure": 150000.0,
+        "volume": 150.0,
+        "volume_m3": 150.0
+      },
+      "position": {
+        "x": 940.0,
+        "y": 180.0
+      },
+      "display_width": null,
+      "display_height": null,
+      "rotation": null
+    },
+    {
+      "id": "01M24QAGJ3QXR32CSNVHNJ1N97",
+      "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+      "definition_version": "1.0.0",
+      "name": "E-102",
+      "parameters": {
+        "area_m2": 180.0,
+        "design_duty": 1800000.0,
+        "overall_u": 550.0,
+        "process_inlet_t": 110.0
+      },
+      "position": {
+        "x": 1120.0,
+        "y": 100.0
+      },
+      "display_width": null,
+      "display_height": null,
+      "rotation": null
+    },
+    {
+      "id": "01M24QAGJ387K0NHHAD5WEGXF7",
+      "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+      "definition_version": "1.0.0",
+      "name": "V-102",
+      "parameters": {
+        "operating_pressure": 130000.0,
+        "volume": 30.0,
+        "volume_m3": 30.0
+      },
+      "position": {
+        "x": 1280.0,
+        "y": 140.0
+      },
+      "display_width": null,
+      "display_height": null,
+      "rotation": null
+    },
+    {
+      "id": "01M24QAGJ31REEFWCKTYZT4BKV",
+      "definition_id": "0ATRCF671FM4B5GSSRFVNKC51R",
+      "definition_version": "1.0.0",
+      "name": "P-102",
+      "parameters": {
+        "rated_flow": 60.0,
+        "rated_head": 80.0,
+        "speed_rpm": 2950.0
+      },
+      "position": {
+        "x": 1440.0,
+        "y": 180.0
+      },
+      "display_width": null,
+      "display_height": null,
+      "rotation": null
+    }
+  ],
+  "streams": [
+    {
+      "id": "01M24QAGJ35KJD3S33K21CKD17",
+      "name": "S-CRUDE-01",
+      "stream_type": "Material",
+      "source_equipment_id": "01M24QAGJ39HWJHQ4RGEDA87J7",
+      "source_port_id": "20BW59F2XB37X5TYG8K1HMDYRS",
+      "sink_equipment_id": "01M24QAGJ3BDTSEZ7VS4RTSCNS",
+      "sink_port_id": "2Z0TCSV15342N4G68500SBPH4T",
+      "composition": {},
+      "route_points": [],
+      "diameter": null,
+      "length": null,
+      "roughness": null,
+      "elevation_change": null,
+      "loss_k": null
+    },
+    {
+      "id": "01M24QAGJ3NREJBXT6HYKGQGPR",
+      "name": "S-CRUDE-02",
+      "stream_type": "Material",
+      "source_equipment_id": "01M24QAGJ3BDTSEZ7VS4RTSCNS",
+      "source_port_id": "1NQHXSA59AXSTTAS8GQETNQXF7",
+      "sink_equipment_id": "01M24QAGJ33EJEWFY1C28MKNZM",
+      "sink_port_id": "68A3WN88ZB4Y0MYZWJAKSCKECP",
+      "composition": {},
+      "route_points": [],
+      "diameter": null,
+      "length": null,
+      "roughness": null,
+      "elevation_change": null,
+      "loss_k": null
+    },
+    {
+      "id": "01M24QAGJ3A57322G79RW83VT0",
+      "name": "S-CRUDE-03",
+      "stream_type": "Material",
+      "source_equipment_id": "01M24QAGJ33EJEWFY1C28MKNZM",
+      "source_port_id": "20BW59F2XB37X5TYG8K1HMDYRS",
+      "sink_equipment_id": "01M24QAGJ3H3GN4P50EGKTTT51",
+      "sink_port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA",
+      "composition": {},
+      "route_points": [],
+      "diameter": null,
+      "length": null,
+      "roughness": null,
+      "elevation_change": null,
+      "loss_k": null
+    },
+    {
+      "id": "01M24QAGJ31C95PGR68M779Z6Y",
+      "name": "S-CRUDE-04",
+      "stream_type": "Material",
+      "source_equipment_id": "01M24QAGJ3H3GN4P50EGKTTT51",
+      "source_port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y",
+      "sink_equipment_id": "01M24QAGJ3SYZVTG6HPTRF4750",
+      "sink_port_id": "6B02X5387W3WQYBZ0CAP57R0YF",
+      "composition": {},
+      "route_points": [],
+      "diameter": null,
+      "length": null,
+      "roughness": null,
+      "elevation_change": null,
+      "loss_k": null
+    },
+    {
+      "id": "01M24QAGJ3KM3MHM0BF82J8E1E",
+      "name": "S-CRUDE-05",
+      "stream_type": "Material",
+      "source_equipment_id": "01M24QAGJ3SYZVTG6HPTRF4750",
+      "source_port_id": "21PP3MM2206Y93A468WWFMDYN0",
+      "sink_equipment_id": "01M24QAGJ343GMHKSPJZ9XERKC",
+      "sink_port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A",
+      "composition": {},
+      "route_points": [],
+      "diameter": null,
+      "length": null,
+      "roughness": null,
+      "elevation_change": null,
+      "loss_k": null
+    },
+    {
+      "id": "01M24QAGJ3AV3BPKTMAZ6XK0Y1",
+      "name": "S-OVHD-01",
+      "stream_type": "Material",
+      "source_equipment_id": "01M24QAGJ343GMHKSPJZ9XERKC",
+      "source_port_id": "6W06EDM06HWKQES92WSCG4RW65",
+      "sink_equipment_id": "01M24QAGJ3QXR32CSNVHNJ1N97",
+      "sink_port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA",
+      "composition": {},
+      "route_points": [],
+      "diameter": null,
+      "length": null,
+      "roughness": null,
+      "elevation_change": null,
+      "loss_k": null
+    },
+    {
+      "id": "01M24QAGJ3FS0XDNYY2RJEYTNR",
+      "name": "S-OVHD-02",
+      "stream_type": "Material",
+      "source_equipment_id": "01M24QAGJ3QXR32CSNVHNJ1N97",
+      "source_port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y",
+      "sink_equipment_id": "01M24QAGJ387K0NHHAD5WEGXF7",
+      "sink_port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A",
+      "composition": {},
+      "route_points": [],
+      "diameter": null,
+      "length": null,
+      "roughness": null,
+      "elevation_change": null,
+      "loss_k": null
+    },
+    {
+      "id": "01M24QAGJ3M6CSDTFJE997P2GT",
+      "name": "S-REFLUX-01",
+      "stream_type": "Material",
+      "source_equipment_id": "01M24QAGJ387K0NHHAD5WEGXF7",
+      "source_port_id": "79KAB0B0B6SCFDAF3AST98A7D6",
+      "sink_equipment_id": "01M24QAGJ31REEFWCKTYZT4BKV",
+      "sink_port_id": "2Z0TCSV15342N4G68500SBPH4T",
+      "composition": {},
+      "route_points": [],
+      "diameter": null,
+      "length": null,
+      "roughness": null,
+      "elevation_change": null,
+      "loss_k": null
+    }
+  ],
+  "instruments": [
+    {
+      "id": "01M24QAGJ32JV2SV5VPF4XAHMD",
+      "tag": "FT-101",
+      "equipment_id": "01M24QAGJ33EJEWFY1C28MKNZM",
+      "port_id": "68A3WN88ZB4Y0MYZWJAKSCKECP",
+      "measurement_kind": "Flow",
+      "range_min": 0.0,
+      "range_max": 15000.0,
+      "unit": "kg/h",
+      "position": {
+        "x": 420.0,
+        "y": 100.0
+      }
+    },
+    {
+      "id": "01M24QAGJ3GBKPCWYVV6P64V0C",
+      "tag": "TI-101",
+      "equipment_id": "01M24QAGJ3H3GN4P50EGKTTT51",
+      "port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y",
+      "measurement_kind": "Temperature",
+      "range_min": 0.0,
+      "range_max": 300.0,
+      "unit": "°C",
+      "position": {
+        "x": 640.0,
+        "y": 100.0
+      }
+    },
+    {
+      "id": "01M24QAGJ3M9MAA3YRH40NWPZE",
+      "tag": "TI-102",
+      "equipment_id": "01M24QAGJ3SYZVTG6HPTRF4750",
+      "port_id": "21PP3MM2206Y93A468WWFMDYN0",
+      "measurement_kind": "Temperature",
+      "range_min": 0.0,
+      "range_max": 450.0,
+      "unit": "°C",
+      "position": {
+        "x": 820.0,
+        "y": 100.0
+      }
+    },
+    {
+      "id": "01M24QAGJ32HXNY3HXPM11S7JF",
+      "tag": "PT-101",
+      "equipment_id": "01M24QAGJ343GMHKSPJZ9XERKC",
+      "port_id": "6W06EDM06HWKQES92WSCG4RW65",
+      "measurement_kind": "Pressure",
+      "range_min": 0.0,
+      "range_max": 5.0,
+      "unit": "bar",
+      "position": {
+        "x": 940.0,
+        "y": 80.0
+      }
+    },
+    {
+      "id": "01M24QAGJ332WT82TQCKZ78JPV",
+      "tag": "LT-101",
+      "equipment_id": "01M24QAGJ343GMHKSPJZ9XERKC",
+      "port_id": null,
+      "measurement_kind": "Level",
+      "range_min": 0.0,
+      "range_max": 100.0,
+      "unit": "%",
+      "position": {
+        "x": 940.0,
+        "y": 260.0
+      }
+    },
+    {
+      "id": "01M24QAGJ394Y64ED15K6VH9XN",
+      "tag": "LT-102",
+      "equipment_id": "01M24QAGJ387K0NHHAD5WEGXF7",
+      "port_id": null,
+      "measurement_kind": "Level",
+      "range_min": 0.0,
+      "range_max": 100.0,
+      "unit": "%",
+      "position": {
+        "x": 1280.0,
+        "y": 220.0
+      }
+    }
+  ],
+  "control_loops": [
+    {
+      "id": "01M24QAGJ3WYS8N8E0PH3RTK4F",
+      "name": "FIC-101",
+      "pv_tag": "FT-101",
+      "sp": 12000.0,
+      "out_tag": "FV-101.OPENING",
+      "kp": 1.2,
+      "ti": 10.0,
+      "td": 0.0,
+      "reverse_acting": false,
+      "mode": "AUTO",
+      "output_min": 0.0,
+      "output_max": 100.0,
+      "position": {
+        "x": 420.0,
+        "y": 40.0
+      }
+    },
+    {
+      "id": "01M24QAGJ3Q131G4BG39VQ5J42",
+      "name": "TIC-102",
+      "pv_tag": "TI-102",
+      "sp": 360.0,
+      "out_tag": "H-101.DUTY",
+      "kp": 2.0,
+      "ti": 30.0,
+      "td": 2.0,
+      "reverse_acting": false,
+      "mode": "AUTO",
+      "output_min": 0.0,
+      "output_max": 100.0,
+      "position": {
+        "x": 820.0,
+        "y": 40.0
+      }
+    },
+    {
+      "id": "01M24QAGJ3DFV78QSDYZDYVYFH",
+      "name": "LIC-101",
+      "pv_tag": "LT-101",
+      "sp": 50.0,
+      "out_tag": "T-101.OPENING",
+      "kp": 1.5,
+      "ti": 25.0,
+      "td": 0.0,
+      "reverse_acting": false,
+      "mode": "AUTO",
+      "output_min": 0.0,
+      "output_max": 100.0,
+      "position": {
+        "x": 940.0,
+        "y": 320.0
+      }
+    }
+  ],
+  "alarms": [
+    {
+      "id": "01M24QAGJ3JX2PN16J82GEV527",
+      "name": "TAH-102",
+      "pv_tag": "TI-102",
+      "alarm_type": "Hi",
+      "severity": "High",
+      "trip_limit": 380.0,
+      "deadband": 2.0,
+      "description": "Furnace coil outlet temperature high"
+    },
+    {
+      "id": "01M24QAGJ3X5TGMYMW6MXVE25G",
+      "name": "LAH-101",
+      "pv_tag": "LT-101",
+      "alarm_type": "Hi",
+      "severity": "Critical",
+      "trip_limit": 85.0,
+      "deadband": 1.0,
+      "description": "Column bottom sump level high"
+    },
+    {
+      "id": "01M24QAGJ361XD1Z05TTC625JR",
+      "name": "LAL-101",
+      "pv_tag": "LT-101",
+      "alarm_type": "Lo",
+      "severity": "High",
+      "trip_limit": 20.0,
+      "deadband": 1.0,
+      "description": "Column bottom sump level low"
+    }
+  ],
+  "interlocks": [
+    {
+      "id": "01M24QAGJ3G3HVTE3A48WSRGZ8",
+      "name": "TRIP-H101",
+      "source_tag": "FT-101",
+      "condition": "<",
+      "threshold": 2000.0,
+      "target_action": "TRIP",
+      "target_equipment": "01M24QAGJ3SYZVTG6HPTRF4750",
+      "latched": true,
+      "description": "Furnace coil low flow trip"
+    },
+    {
+      "id": "01M24QAGJ3EB0VKRF58QW5990R",
+      "name": "TRIP-P101",
+      "source_tag": "LT-101",
+      "condition": "<",
+      "threshold": 10.0,
+      "target_action": "TRIP",
+      "target_equipment": "01M24QAGJ3BDTSEZ7VS4RTSCNS",
+      "latched": true,
+      "description": "Charge pump suction dry-run protection"
+    }
+  ],
+  "controllers": [],
+  "io_systems": [],
+  "io_mappings": [],
+  "tags": [],
+  "advanced_control": [
+    {
+      "id": "strat-ff-101",
+      "name": "Furnace COT Feedforward Disturbance Rejection",
+      "description": "Compensates crude feed rate disturbances dynamically before coil outlet temperature drifts",
+      "enabled": true,
+      "strategy_type": "FeedForward",
+      "parameters": {
+        "disturbance_tag": "FT-101.FLOW",
+        "gain": "0.8",
+        "kp": "1.5",
+        "output_max": "100.0",
+        "output_min": "0.0",
+        "output_tag": "TIC_101.OUT",
+        "pv_tag": "TT-101.TEMP",
+        "sp": "365.0",
+        "t_lag": "2.0",
+        "t_lead": "4.0",
+        "target_actuator": "FV-102",
+        "td": "0.5",
+        "ti": "8.0"
+      }
+    }
+  ],
+  "communications": null,
+  "sis": null,
+  "plant_structure": null,
+  "areas": [],
+  "displays": [],
+  "navigation_links": [],
+  "boundary_conditions": [
+    {
+      "id": "01M24QAGJ3RZAVC3TZ63JVA13F",
+      "name": "Crude Oil Feed",
+      "condition_type": "feed",
+      "target_equipment_id": null,
+      "target_port": null,
+      "target_stream_id": null,
+      "flow_value": 300.0,
+      "flow_unit": "m3/h",
+      "pressure_value": 4.5,
+      "pressure_unit": "barg",
+      "temperature_value": 35.0,
+      "temperature_unit": "°C",
+      "phase": "Liquid",
+      "density": 850.0,
+      "molecular_weight": 0.25,
+      "enthalpy": null,
+      "quality": null,
+      "composition": {},
+      "validity_min_flow": null,
+      "validity_max_flow": null,
+      "source_provenance": "Crude Storage Battery Limit",
+      "enabled": true
+    }
+  ],
+  "initial_conditions": []
+}

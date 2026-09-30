@@ -1,19 +1,38 @@
 //! NebuDCS Realtime API and WebSocket Server library.
 
+pub mod audit_manager;
 pub mod auth;
+pub mod backup;
+pub mod cluster_manager;
+pub mod communications_manager;
 pub mod config;
+pub mod diagnostics_manager;
 pub mod error;
 pub mod host;
+pub mod nht_seed;
+pub mod observability;
+pub mod persistence;
+pub mod project_manager;
 pub mod routes;
+pub mod scenario_manager;
+pub mod security;
 pub mod session;
+pub mod training_manager;
+pub mod validation_manager;
 
 use axum::Router;
 use tower_http::cors::CorsLayer;
 use tower_http::trace::TraceLayer;
 
+pub use audit_manager::AuditManager;
+pub use cluster_manager::ClusterManager;
+pub use communications_manager::CommunicationsManager;
 pub use config::ServerConfig;
+pub use diagnostics_manager::DiagnosticsManager;
 pub use error::{ServerError, ServerResult};
-pub use host::{HostHandle, SimulationHost};
+pub use host::{build_default_hal_system, HostHandle, SimulationHost};
+pub use project_manager::ProjectManager;
+pub use validation_manager::ValidationManager;
 
 /// Builds the production-grade Axum router configured with middleware, CORS, and routes.
 pub fn build_app(host: HostHandle) -> Router {

@@ -1,0 +1,442 @@
+{
+  "id": "3T007RD1S9FCDANGJ48BBX9AQ9",
+  "name": "Thermal Power & Steam Mechanical Drive Plant",
+  "schema_version": "0.1.0",
+  "plants": [
+    {
+      "id": "01M1X4HB0QB84QZ90FCT5QCT6P",
+      "name": "Power Area 20",
+      "areas": [
+        {
+          "id": "01M1X4HB0QKDJMSDGGH03FPPZN",
+          "name": "Turbine Island",
+          "units": [
+            {
+              "id": "01M1X4HB0Q341ZY1PV8DW4YVZ3",
+              "name": "Unit 200 Steam Drive Train",
+              "equipment": [
+                {
+                  "id": "01M1X4HB0Q0ADZ77ZANFPDZ9WC",
+                  "definition_id": "2KRSSVVX85BFH6EV6H5YR8Y85Z",
+                  "definition_version": "1.0.0",
+                  "name": "TK-201",
+                  "parameters": {
+                    "capacity_m3": 2000.0,
+                    "level": 80.0
+                  },
+                  "position": {
+                    "x": 100.0,
+                    "y": 180.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M1X4HB0QADHGT98641T16XJ0",
+                  "definition_id": "47AQHQPS0ARBDTEWRCRZJWZBZ9",
+                  "definition_version": "1.0.0",
+                  "name": "TV-201",
+                  "parameters": {
+                    "rated_cv": 150.0,
+                    "cv": 150.0,
+                    "position": 75.0
+                  },
+                  "position": {
+                    "x": 280.0,
+                    "y": 180.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M1X4HB0Q365DD2Z2ST7VJZYK",
+                  "definition_id": "45CF0MXJZXQCN20AY0G6GH56DB",
+                  "definition_version": "1.0.0",
+                  "name": "ST-201",
+                  "parameters": {
+                    "rated_power": 500000.0,
+                    "speed": 3000.0,
+                    "rated_head": 150.0
+                  },
+                  "position": {
+                    "x": 480.0,
+                    "y": 180.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M1X4HB0Q4JVTS2JZSXGXZH3G",
+                  "definition_id": "7PV7KKP3ZRGF3HHSBF1230WPP7",
+                  "definition_version": "1.0.0",
+                  "name": "C-201",
+                  "parameters": {
+                    "rated_head": 120.0,
+                    "rated_power": 450000.0,
+                    "speed": 3000.0
+                  },
+                  "position": {
+                    "x": 720.0,
+                    "y": 180.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M1X4HB0Q8TNDW0XKTD1BRNXB",
+                  "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+                  "definition_version": "1.0.0",
+                  "name": "V-201",
+                  "parameters": {
+                    "volume_m3": 40.0,
+                    "volume": 40.0,
+                    "operating_pressure": 101325.0
+                  },
+                  "position": {
+                    "x": 480.0,
+                    "y": 360.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M1X4HB0Q1KADE0VYJMHCPZKX",
+                  "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+                  "definition_version": "1.0.0",
+                  "name": "V-202",
+                  "parameters": {
+                    "volume_m3": 50.0,
+                    "volume": 50.0,
+                    "operating_pressure": 2500000.0
+                  },
+                  "position": {
+                    "x": 940.0,
+                    "y": 180.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                }
+              ],
+              "streams": [
+                {
+                  "id": "01M1X4HB0Q2HSXY4WZ8RNSDWJF",
+                  "name": "S-STM-01",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M1X4HB0Q0ADZ77ZANFPDZ9WC",
+                    "port_id": "20BW59F2XB37X5TYG8K1HMDYRS"
+                  },
+                  "sink": {
+                    "equipment_id": "01M1X4HB0QADHGT98641T16XJ0",
+                    "port_id": "68A3WN88ZB4Y0MYZWJAKSCKECP"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M1X4HB0QRP9YYBT81N6FQ5ZP",
+                  "name": "S-STM-02",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M1X4HB0QADHGT98641T16XJ0",
+                    "port_id": "20BW59F2XB37X5TYG8K1HMDYRS"
+                  },
+                  "sink": {
+                    "equipment_id": "01M1X4HB0Q365DD2Z2ST7VJZYK",
+                    "port_id": "7RVEZYDAZY11M1VQ5Y7YNN899Y"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M1X4HB0QSQ44X9MHN6MV0ZMN",
+                  "name": "S-STM-EXH",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M1X4HB0Q365DD2Z2ST7VJZYK",
+                    "port_id": "39B5QADN7M5Z89E8NVKF7YZP40"
+                  },
+                  "sink": {
+                    "equipment_id": "01M1X4HB0Q8TNDW0XKTD1BRNXB",
+                    "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M1X4HB0QPT63HWF7YRZNDJGA",
+                  "name": "S-SHAFT-01",
+                  "stream_type": "mechanical_shaft",
+                  "source": {
+                    "equipment_id": "01M1X4HB0Q365DD2Z2ST7VJZYK",
+                    "port_id": "09E3CR8TAD13DQQD7486A1VHVK"
+                  },
+                  "sink": {
+                    "equipment_id": "01M1X4HB0Q4JVTS2JZSXGXZH3G",
+                    "port_id": "5SDGS2F11RCBT09R1WK0PFBHF6"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M1X4HB0Q5SJQJQDRJ99EP38P",
+                  "name": "S-GAS-DISCH",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M1X4HB0Q4JVTS2JZSXGXZH3G",
+                    "port_id": "1NQHXSA59AXSTTAS8GQETNQXF7"
+                  },
+                  "sink": {
+                    "equipment_id": "01M1X4HB0Q1KADE0VYJMHCPZKX",
+                    "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                }
+              ],
+              "instruments": [
+                {
+                  "id": "01M1X4HB0QKZ2CTQG4G54S5Z5P",
+                  "tag": "PT-201",
+                  "equipment_id": "01M1X4HB0QADHGT98641T16XJ0",
+                  "port_id": "68A3WN88ZB4Y0MYZWJAKSCKECP",
+                  "measurement_kind": "Pressure",
+                  "range_min": 0.0,
+                  "range_max": 100.0,
+                  "unit": "bar",
+                  "position": {
+                    "x": 280.0,
+                    "y": 100.0
+                  }
+                },
+                {
+                  "id": "01M1X4HB0QQPB6YJVEWREN0R1M",
+                  "tag": "ST-201_SPEED",
+                  "equipment_id": "01M1X4HB0Q365DD2Z2ST7VJZYK",
+                  "port_id": null,
+                  "measurement_kind": "Speed",
+                  "range_min": 0.0,
+                  "range_max": 4500.0,
+                  "unit": "RPM",
+                  "position": {
+                    "x": 480.0,
+                    "y": 100.0
+                  }
+                },
+                {
+                  "id": "01M1X4HB0QSX3F0D1642WHCYHH",
+                  "tag": "WT-201",
+                  "equipment_id": "01M1X4HB0Q365DD2Z2ST7VJZYK",
+                  "port_id": null,
+                  "measurement_kind": "Power",
+                  "range_min": 0.0,
+                  "range_max": 600.0,
+                  "unit": "kW",
+                  "position": {
+                    "x": 480.0,
+                    "y": 40.0
+                  }
+                },
+                {
+                  "id": "01M1X4HB0Q7SRJVRTPYYG7259D",
+                  "tag": "VT-201",
+                  "equipment_id": "01M1X4HB0Q4JVTS2JZSXGXZH3G",
+                  "port_id": null,
+                  "measurement_kind": "Vibration",
+                  "range_min": 0.0,
+                  "range_max": 15.0,
+                  "unit": "mm/s",
+                  "position": {
+                    "x": 720.0,
+                    "y": 100.0
+                  }
+                },
+                {
+                  "id": "01M1X4HB0QFVF2TTVJ40NCBTQD",
+                  "tag": "PT-202",
+                  "equipment_id": "01M1X4HB0Q1KADE0VYJMHCPZKX",
+                  "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A",
+                  "measurement_kind": "Pressure",
+                  "range_min": 0.0,
+                  "range_max": 40.0,
+                  "unit": "bar",
+                  "position": {
+                    "x": 940.0,
+                    "y": 100.0
+                  }
+                }
+              ],
+              "control_loops": [
+                {
+                  "id": "01M1X4HB0QB79MQFC6ARESH125",
+                  "name": "SIC-201",
+                  "pv_tag": "ST-201_SPEED",
+                  "sp": 3000.0,
+                  "out_tag": "TV-201.OPENING",
+                  "kp": 1.8,
+                  "ti": 15.0,
+                  "td": 0.5,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 380.0,
+                    "y": 40.0
+                  }
+                },
+                {
+                  "id": "01M1X4HB0QM7X0TBNFPA3B4AJK",
+                  "name": "PIC-201",
+                  "pv_tag": "PT-202",
+                  "sp": 25.0,
+                  "out_tag": "TV-201.OPENING",
+                  "kp": 1.0,
+                  "ti": 20.0,
+                  "td": 0.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 840.0,
+                    "y": 40.0
+                  }
+                }
+              ],
+              "alarms": [
+                {
+                  "id": "01M1X4HB0QT2Y4YBNBC0RXN6SV",
+                  "name": "SAH-201",
+                  "pv_tag": "ST-201_SPEED",
+                  "alarm_type": "HI",
+                  "severity": "high",
+                  "trip_limit": 3300.0,
+                  "deadband": 20.0,
+                  "description": "Turbine high speed warning"
+                },
+                {
+                  "id": "01M1X4HB0QXGQ8BB4SK3XXWZ3E",
+                  "name": "SAHH-201",
+                  "pv_tag": "ST-201_SPEED",
+                  "alarm_type": "HI",
+                  "severity": "critical",
+                  "trip_limit": 3600.0,
+                  "deadband": 20.0,
+                  "description": "Turbine emergency overspeed hazard"
+                },
+                {
+                  "id": "01M1X4HB0QX67B22ZRR7EWCK9V",
+                  "name": "VAH-201",
+                  "pv_tag": "VT-201",
+                  "alarm_type": "HI",
+                  "severity": "high",
+                  "trip_limit": 4.5,
+                  "deadband": 0.2,
+                  "description": "Compressor vibration high"
+                }
+              ],
+              "interlocks": [
+                {
+                  "id": "01M1X4HB0QMMB2N7R05M2PXAB2",
+                  "name": "TRIP-OVERSPEED",
+                  "source_tag": "ST-201_SPEED",
+                  "condition": ">",
+                  "threshold": 3600.0,
+                  "target_action": "TRIP",
+                  "target_equipment": "01M1X4HB0Q365DD2Z2ST7VJZYK",
+                  "latched": true,
+                  "description": "Turbine overspeed quick shutoff"
+                },
+                {
+                  "id": "01M1X4HB0QDBSAXR56Q0QC1MQZ",
+                  "name": "TRIP-VIB",
+                  "source_tag": "VT-201",
+                  "condition": ">",
+                  "threshold": 8.0,
+                  "target_action": "TRIP",
+                  "target_equipment": "01M1X4HB0Q4JVTS2JZSXGXZH3G",
+                  "latched": true,
+                  "description": "High vibration compressor protection"
+                }
+              ],
+              "boundary_conditions": [],
+              "initial_conditions": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "description": "Industrial steam expansion turbine driver coupled via mechanical shaft to centrifugal process compressor with surface condenser.",
+    "author": "NebuDCS Standard Library",
+    "created": "2026-09-07T00:00:00Z",
+    "modified": "2026-09-07T00:00:00Z"
+  },
+  "controllers": [],
+  "io_systems": [],
+  "io_mappings": [],
+  "tags": [],
+  "advanced_control": [
+    {
+      "id": "strat-ovr-201",
+      "name": "Turbine Governor Speed/Exhaust Override",
+      "description": "Governs turbine speed while overriding valve position if exhaust backpressure reaches safety constraint",
+      "enabled": true,
+      "strategy_type": "Override",
+      "parameters": {
+        "constraint_direction": "reverse",
+        "constraint_kp": "1.5",
+        "constraint_limit": "5.0",
+        "constraint_pv": "PT-202",
+        "constraint_ti": "1.0",
+        "output_max": "100.0",
+        "output_min": "0.0",
+        "output_tag": "TCV_201.OUT",
+        "primary_kp": "0.05",
+        "primary_pv": "ST-201_SPEED",
+        "primary_sp": "3000.0",
+        "primary_ti": "2.0",
+        "selector_type": "low",
+        "target_actuator": "TV-201"
+      }
+    }
+  ],
+  "communications": null,
+  "sis": null,
+  "displays": [],
+  "navigation_links": [],
+  "plant_structure": null
+}

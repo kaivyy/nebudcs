@@ -86,6 +86,58 @@ pub enum RuntimeCommand {
 
     /// Equipment library and template package commands.
     Library(LibraryCommand),
+
+    /// Dynamically loads a complete project into the active simulation host,
+    /// resetting and configuring all equipment, instruments, control loops, alarms, and interlocks.
+    LoadProject {
+        project: Box<crate::dto::ProjectDetailDto>,
+    },
+
+    /// Controls lifecycle state transitions for virtual controllers.
+    ControllerAction {
+        controller_id: String,
+        action: String,
+    },
+
+    /// DCS Control Module command (set mode, SP, or manual output).
+    ControlModuleAction {
+        controller_id: String,
+        module_id: String,
+        mode: Option<String>,
+        sp: Option<f64>,
+        manual_out: Option<f64>,
+    },
+
+    /// Controlled fault injection or clearance for a virtual controller.
+    ControllerFaultAction {
+        controller_id: String,
+        fault_type: String,
+        description: String,
+        recoverable: bool,
+    },
+
+    /// Injects, modifies, or clears a hardware fault or forced value override on an I/O channel.
+    HalChannelFault {
+        channel_address: String,
+        fault: Option<String>,
+        forced_value: Option<f64>,
+    },
+
+    /// Safety Instrumented System SIF manual trip reset.
+    SifResetAction { sif_id: String, actor: String },
+
+    /// Safety Instrumented System SIF administrative bypass set or clear.
+    SifBypassAction {
+        sif_id: String,
+        bypass_type: String,
+        authorized_by: String,
+        reason: String,
+        duration_seconds: Option<f64>,
+        active: bool,
+    },
+
+    /// Safety Instrumented System SIF simulated proof test execution.
+    SifProofTestAction { sif_id: String, technician: String },
 }
 
 /// Equipment library and template package commands.

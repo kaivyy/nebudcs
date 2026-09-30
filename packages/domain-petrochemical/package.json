@@ -1,0 +1,93 @@
+{
+  "id": "domain.petrochemical.olefin",
+  "name": "Petrochemical Steam Cracking & Olefin Fractionation Package",
+  "version": "1.0.0",
+  "domain_kind": "petrochemical",
+  "description": "Petrochemical pyrolysis furnace and cryogenic olefin separation train: thermal cracking of hydrocarbon feed at 840°C, multi-stage cracked gas compression, cryogenic chilling train, demethanizer (-100°C), deethanizer, and C2 splitter with unreacted ethane recycle loop.",
+  "author": "NebuDCS Standard Library",
+  "thermodynamic_requirements": [
+    "Cryogenic Hydrocarbon Vapor-Liquid Equilibrium (Peng-Robinson EOS down to -120°C)",
+    "Thermal Cracking Pyrolysis Free-Radical Kinetics",
+    "Superfractionation Column Dynamics (High Reflux R > 3.5)"
+  ],
+  "utility_requirements": [
+    "HIGH_PRESSURE_STEAM",
+    "PROPYLENE_REFRIGERANT",
+    "ETHYLENE_REFRIGERANT",
+    "COOLING_WATER",
+    "INSTRUMENT_AIR"
+  ],
+  "composition_defaults": {
+    "Ethylene": 0.48,
+    "Ethane": 0.32,
+    "Methane_Hydrogen": 0.15,
+    "Propylene_C3": 0.05
+  },
+  "operating_ranges": {
+    "furnace_cot": {
+      "quantity": "Temperature",
+      "min_value": 780.0,
+      "max_value": 875.0,
+      "unit": "°C",
+      "normal_operating_value": 840.0
+    },
+    "demethanizer_overhead_temp": {
+      "quantity": "Temperature",
+      "min_value": -120.0,
+      "max_value": -70.0,
+      "unit": "°C",
+      "normal_operating_value": -98.0
+    },
+    "c2_splitter_purity": {
+      "quantity": "Purity",
+      "min_value": 0.985,
+      "max_value": 0.9998,
+      "unit": "fraction",
+      "normal_operating_value": 0.9995
+    },
+    "cracked_gas_compressor_pr": {
+      "quantity": "PressureRatio",
+      "min_value": 15.0,
+      "max_value": 38.0,
+      "unit": "ratio",
+      "normal_operating_value": 32.0
+    }
+  },
+  "control_strategies": [
+    "TIC-501 Pyrolysis Furnace Coil Outlet Temperature Control (COT)",
+    "PIC-501 Demethanizer Cryogenic Overhead Pressure Control via Chilling Condenser",
+    "AIC-501 C2 Splitter Overhead Polymer-Grade Ethylene Purity Control",
+    "FIC-501 Unreacted Ethane Recycle Flow Pacing to Furnace"
+  ],
+  "scenario_presets": [
+    "scn-olefin-cracking-furnace-flameout",
+    "scn-olefin-demethanizer-cryo-upset",
+    "scn-olefin-c2-splitter-reflux-pump-trip",
+    "scn-olefin-cracked-gas-compressor-surge"
+  ],
+  "equipment_templates": [
+    "standard.heater.fired_process",
+    "standard.compressor.centrifugal",
+    "standard.heat_exchanger.shell_and_tube",
+    "standard.vessel.vertical_separator",
+    "standard.valve.control_globe",
+    "standard.pump.centrifugal"
+  ],
+  "plant_template_ids": [
+    "proj-domain-petrochem-olefin"
+  ],
+  "validation_rules": [
+    "VLD-PET01: Demethanizer overhead requires cryogenic refrigerant utility supply",
+    "VLD-PET02: Ethane recycle stream must close the loop back to cracking furnace charge mixer"
+  ],
+  "scientific_references": [
+    "Chauvel, A. & Lefebvre, G., Petrochemical Processes: Technical and Economic Characteristics, Editions Technip",
+    "Zimmermann, H. & Walzl, R., Ethylene in Ullmann's Encyclopedia of Industrial Chemistry, Wiley-VCH",
+    "King, C.J., Separation Processes, 2nd Ed., McGraw-Hill"
+  ],
+  "model_classifications": [
+    "TheoreticalModel (Cryogenic low-temperature cubic EOS phase equilibrium)",
+    "IndustryCommonEngineeringModel (Radical cracking conversion and product yields)",
+    "TheoreticalModel (Wegstein recycle convergence closure)"
+  ]
+}

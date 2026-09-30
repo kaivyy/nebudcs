@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "audit_id": "NEBU-AUDIT-VIEWPORT-BOUNDS-2026-09-10",
+    "timestamp": "2026-09-10T02:58:05.119511+00:00",
+    "padding_margin_px": 40,
+    "minimum_viewport_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "status": "PASS"
+  },
+  "topologies_evaluated": [
+    {
+      "topology_type": "Standard NHT Unit Overview (32 Process Equipment Items)",
+      "content_bounds": {
+        "minX": 40,
+        "minY": 60,
+        "maxX": 1880,
+        "maxY": 980
+      },
+      "viewbox": "0 20 1960 1040",
+      "aspect_ratio_mode": "xMidYMid meet",
+      "deadspace_eliminated": true,
+      "clipping_detected": false
+    },
+    {
+      "topology_type": "Ultra-Wide Pipeline Flowsheet (>2500px Horizontal Span)",
+      "content_bounds": {
+        "minX": 50,
+        "minY": 200,
+        "maxX": 2850,
+        "maxY": 650
+      },
+      "viewbox": "10 160 2920 570",
+      "aspect_ratio_mode": "xMidYMid meet",
+      "deadspace_eliminated": true,
+      "clipping_detected": false
+    },
+    {
+      "topology_type": "Tall Fractionation Stack Flowsheet (>1600px Vertical Span)",
+      "content_bounds": {
+        "minX": 300,
+        "minY": 40,
+        "maxX": 950,
+        "maxY": 1750
+      },
+      "viewbox": "260 0 770 1830",
+      "aspect_ratio_mode": "xMidYMid meet",
+      "deadspace_eliminated": true,
+      "clipping_detected": false
+    },
+    {
+      "topology_type": "Custom Chemical Train (TK-001 -> P-001 -> HX-001 -> V-001 -> TK-002)",
+      "content_bounds": {
+        "minX": 100,
+        "minY": 150,
+        "maxX": 1050,
+        "maxY": 520
+      },
+      "viewbox": "60 110 1070 490",
+      "aspect_ratio_mode": "xMidYMid meet",
+      "deadspace_eliminated": true,
+      "clipping_detected": false
+    }
+  ]
+}

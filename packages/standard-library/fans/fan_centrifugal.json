@@ -46,7 +46,7 @@
     },
     "ports": [
       {
-        "id": "01M1T4ZBRKB2DWKEYCQX8NNJPB",
+        "id": "235HB9JD964PS6BHTFJHBGSP3B",
         "name": "air_inlet",
         "domain": "material",
         "direction": "inlet",
@@ -58,7 +58,7 @@
         "description": "Port air_inlet"
       },
       {
-        "id": "01M1T4ZBRKEEM55BHPYW2N75DT",
+        "id": "43TFF7RYEM2KPK1ZTS8N7CYE9A",
         "name": "air_outlet",
         "domain": "material",
         "direction": "outlet",
@@ -70,7 +70,7 @@
         "description": "Port air_outlet"
       },
       {
-        "id": "01M1T4ZBRKKA5K7PMNHM5G0SF9",
+        "id": "0YYZS7VD6FFZPH7DMF8MWDXQTW",
         "name": "power",
         "domain": "electrical",
         "direction": "inlet",

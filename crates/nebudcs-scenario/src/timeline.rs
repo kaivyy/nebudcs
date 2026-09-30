@@ -73,34 +73,7 @@ impl TimelineScheduler {
                 continue;
             }
 
-            let triggered = match &event.trigger {
-                EventTrigger::Time { elapsed_sec: t } => elapsed_sec >= *t,
-                EventTrigger::TagCondition {
-                    tag,
-                    operator,
-                    value,
-                } => {
-                    if let Some(tag_id) = tag_store.resolve_name(tag) {
-                        if let Some(tag_val) = tag_store.get_value(tag_id) {
-                            let curr_f = match tag_val {
-                                TagValue::Float(f) => Some(*f),
-                                TagValue::Integer(i) => Some(*i as f64),
-                                TagValue::Bool(b) => Some(if *b { 1.0 } else { 0.0 }),
-                                _ => None,
-                            };
-                            if let Some(val_f) = curr_f {
-                                operator.evaluate(val_f, *value)
-                            } else {
-                                false
-                            }
-                        } else {
-                            false
-                        }
-                    } else {
-                        false
-                    }
-                }
-            };
+            let triggered = evaluate_event_trigger(&event.trigger, elapsed_sec, tag_store);
 
             if triggered {
                 due_events.push(QueuedEvent {
@@ -138,5 +111,164 @@ impl TimelineScheduler {
 
     pub fn is_empty(&self) -> bool {
         self.all_events.is_empty()
+    }
+}
+
+/// Evaluates any supported EventTrigger against current simulation time and runtime tag store.
+fn evaluate_event_trigger(
+    trigger: &EventTrigger,
+    elapsed_sec: f64,
+    tag_store: &RuntimeTagStore,
+) -> bool {
+    match trigger {
+        EventTrigger::Time { elapsed_sec: t } => elapsed_sec >= *t,
+        EventTrigger::TagCondition {
+            tag,
+            operator,
+            value,
+        } => {
+            if let Some(tag_id) = tag_store.resolve_name(tag) {
+                if let Some(tag_val) = tag_store.get_value(tag_id) {
+                    let curr_f = match tag_val {
+                        TagValue::Float(f) => Some(*f),
+                        TagValue::Integer(i) => Some(*i as f64),
+                        TagValue::Bool(b) => Some(if *b { 1.0 } else { 0.0 }),
+                        _ => None,
+                    };
+                    if let Some(val_f) = curr_f {
+                        operator.evaluate(val_f, *value)
+                    } else {
+                        false
+                    }
+                } else {
+                    false
+                }
+            } else {
+                false
+            }
+        }
+        EventTrigger::PvDeviation {
+            tag,
+            target,
+            max_deviation,
+        } => {
+            if let Some(tag_id) = tag_store.resolve_name(tag) {
+                if let Some(tag_val) = tag_store.get_value(tag_id) {
+                    let curr_f = match tag_val {
+                        TagValue::Float(f) => Some(*f),
+                        TagValue::Integer(i) => Some(*i as f64),
+                        _ => None,
+                    };
+                    if let Some(val_f) = curr_f {
+                        (val_f - *target).abs() > *max_deviation
+                    } else {
+                        false
+                    }
+                } else {
+                    false
+                }
+            } else {
+                false
+            }
+        }
+        EventTrigger::EquipmentState {
+            equipment_name,
+            is_running,
+        } => {
+            let status_tag = format!("{}.STATUS", equipment_name);
+            let running_tag = format!("{}.RUNNING", equipment_name);
+            let speed_tag = format!("{}.SPEED", equipment_name);
+
+            let observed_running = [status_tag, running_tag, speed_tag].iter().any(|t| {
+                if let Some(tag_id) = tag_store.resolve_name(t) {
+                    if let Some(tag_val) = tag_store.get_value(tag_id) {
+                        match tag_val {
+                            TagValue::Bool(b) => *b,
+                            TagValue::Float(f) => *f > 0.5,
+                            TagValue::Integer(i) => *i > 0,
+                            _ => false,
+                        }
+                    } else {
+                        false
+                    }
+                } else {
+                    false
+                }
+            });
+
+            observed_running == *is_running
+        }
+        EventTrigger::AlarmActive { alarm_name } => {
+            let active_tag = format!("{}.ACTIVE", alarm_name);
+            let state_tag = format!("{}.STATE", alarm_name);
+
+            [active_tag, state_tag, alarm_name.clone()].iter().any(|t| {
+                if let Some(tag_id) = tag_store.resolve_name(t) {
+                    if let Some(tag_val) = tag_store.get_value(tag_id) {
+                        match tag_val {
+                            TagValue::Bool(b) => *b,
+                            TagValue::Float(f) => *f > 0.5,
+                            TagValue::Integer(i) => *i > 0,
+                            _ => false,
+                        }
+                    } else {
+                        false
+                    }
+                } else {
+                    false
+                }
+            })
+        }
+        EventTrigger::SisState { sif_id, is_tripped } => {
+            let trip_tag = format!("{}.TRIPPED", sif_id);
+            let status_tag = format!("{}.STATUS", sif_id);
+
+            let observed_tripped = [trip_tag, status_tag].iter().any(|t| {
+                if let Some(tag_id) = tag_store.resolve_name(t) {
+                    if let Some(tag_val) = tag_store.get_value(tag_id) {
+                        match tag_val {
+                            TagValue::Bool(b) => *b,
+                            TagValue::Float(f) => *f > 0.5,
+                            TagValue::Integer(i) => *i > 0,
+                            _ => false,
+                        }
+                    } else {
+                        false
+                    }
+                } else {
+                    false
+                }
+            });
+
+            observed_tripped == *is_tripped
+        }
+        EventTrigger::OperatorActionTrigger {
+            target_entity,
+            action_type,
+        } => {
+            let action_flag_tag = format!("{}.ACTION_{}", target_entity, action_type);
+            if let Some(tag_id) = tag_store.resolve_name(&action_flag_tag) {
+                if let Some(tag_val) = tag_store.get_value(tag_id) {
+                    match tag_val {
+                        TagValue::Bool(b) => *b,
+                        TagValue::Float(f) => *f > 0.5,
+                        _ => false,
+                    }
+                } else {
+                    false
+                }
+            } else {
+                false
+            }
+        }
+        EventTrigger::CompoundAnd { triggers } => {
+            !triggers.is_empty()
+                && triggers
+                    .iter()
+                    .all(|tr| evaluate_event_trigger(tr, elapsed_sec, tag_store))
+        }
+        EventTrigger::CompoundOr { triggers } => triggers
+            .iter()
+            .any(|tr| evaluate_event_trigger(tr, elapsed_sec, tag_store)),
     }
 }

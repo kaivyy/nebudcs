@@ -147,11 +147,7 @@ fn test_complete_causal_chain_with_faults_and_recovery() {
     ctrl.pid_mut(out_tag).unwrap().set_sp(0.50);
 
     // Protection Block (Interlock Trip on High-High level at 0.92, reset deadband 0.04)
-    let prot_cfg = ProtectionConfig {
-        name: "LSHH_TRIP".to_string(),
-        threshold: 0.92,
-        reset_deadband: 0.04,
-    };
+    let prot_cfg = ProtectionConfig::new("LSHH_TRIP", 0.92, 0.04);
     ctrl.register_protection(
         "LSHH_TRIP",
         level_tag,
@@ -233,11 +229,7 @@ fn test_complete_causal_chain_with_faults_and_recovery() {
     // =====================================================================
     // Stage C: Interlock Trip & Safety Override Tracking
     // =====================================================================
-    let mut prot_block = ProtectionBlock::new(ProtectionConfig {
-        name: "TRIP_TEST".to_string(),
-        threshold: 0.92,
-        reset_deadband: 0.04,
-    });
+    let mut prot_block = ProtectionBlock::new(ProtectionConfig::new("TRIP_TEST", 0.92, 0.04));
     assert!(!prot_block.step(0.85, false));
     assert_eq!(prot_block.state(), ProtectionState::Active);
 

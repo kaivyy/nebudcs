@@ -1,0 +1,1065 @@
+{
+  "id": "6ZB2SX2QQCW2TJ67ZBWB7A8VAY",
+  "name": "NebuDCS Closed-Loop Refinery Unit",
+  "schema_version": "0.1.0",
+  "plants": [
+    {
+      "id": "01M1XR3A5ZB889KJ90ADFXW0XJ",
+      "name": "Process Area 10",
+      "areas": [
+        {
+          "id": "01M1XR3A5Z6PE4D28GH0SS1XYJ",
+          "name": "Feed Fractionation",
+          "units": [
+            {
+              "id": "01M1XR3A5ZTVZABPKMW9K7CT60",
+              "name": "Unit 100 Surge & Separation",
+              "equipment": [
+                {
+                  "id": "01M1XR3A5ZSCF7XMS7547WJ6PH",
+                  "definition_id": "0ATRCF671FM4B5GSSRFVNKC51R",
+                  "definition_version": "1.0.0",
+                  "name": "K-101",
+                  "parameters": {
+                    "design_flow": 5000.0,
+                    "rated_head": 120.0,
+                    "speed_rpm": 2980.0
+                  },
+                  "position": {
+                    "x": 100.0,
+                    "y": 180.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M1XR3A5ZJ6ME089ZXQVSSS2N",
+                  "definition_id": "47AQHQPS0ARBDTEWRCRZJWZBZ9",
+                  "definition_version": "1.0.0",
+                  "name": "FV-101",
+                  "parameters": {
+                    "cv": 85.0,
+                    "position": 55.2
+                  },
+                  "position": {
+                    "x": 360.0,
+                    "y": 95.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M1XR3A5Z0YDPJ90V7F9D4S2D",
+                  "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+                  "definition_version": "1.0.0",
+                  "name": "V-101",
+                  "parameters": {
+                    "volume": 25.0,
+                    "operating_pressure": 101325.0
+                  },
+                  "position": {
+                    "x": 520.0,
+                    "y": 140.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                }
+              ],
+              "streams": [
+                {
+                  "id": "01M1XR3A5ZQS5WPJCG4KBVR44X",
+                  "name": "S-01",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M1XR3A5ZSCF7XMS7547WJ6PH",
+                    "port_id": "1NQHXSA59AXSTTAS8GQETNQXF7"
+                  },
+                  "sink": {
+                    "equipment_id": "01M1XR3A5ZJ6ME089ZXQVSSS2N",
+                    "port_id": "68A3WN88ZB4Y0MYZWJAKSCKECP"
+                  },
+                  "composition": null,
+                  "route_points": [
+                    {
+                      "x": 120.0,
+                      "y": 180.0
+                    },
+                    {
+                      "x": 120.0,
+                      "y": 120.0
+                    },
+                    {
+                      "x": 360.0,
+                      "y": 120.0
+                    }
+                  ],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M1XR3A5ZFCWTBHR3WHBD9GE1",
+                  "name": "S-02",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M1XR3A5ZJ6ME089ZXQVSSS2N",
+                    "port_id": "20BW59F2XB37X5TYG8K1HMDYRS"
+                  },
+                  "sink": {
+                    "equipment_id": "01M1XR3A5Z0YDPJ90V7F9D4S2D",
+                    "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A"
+                  },
+                  "composition": null,
+                  "route_points": [
+                    {
+                      "x": 400.0,
+                      "y": 120.0
+                    },
+                    {
+                      "x": 580.0,
+                      "y": 120.0
+                    },
+                    {
+                      "x": 580.0,
+                      "y": 150.0
+                    }
+                  ],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                }
+              ],
+              "instruments": [
+                {
+                  "id": "01M1XR3A5ZF08FYVV6DA28KF3X",
+                  "tag": "TI-101",
+                  "equipment_id": "01M1XR3A5ZSCF7XMS7547WJ6PH",
+                  "port_id": "1NQHXSA59AXSTTAS8GQETNQXF7",
+                  "measurement_kind": "Temperature",
+                  "range_min": 0.0,
+                  "range_max": 250.0,
+                  "unit": "°C",
+                  "position": {
+                    "x": 190.0,
+                    "y": 70.0
+                  }
+                },
+                {
+                  "id": "01M1XR3A5ZW6PPMFDFMHJ1EF93",
+                  "tag": "PT-101",
+                  "equipment_id": "01M1XR3A5ZSCF7XMS7547WJ6PH",
+                  "port_id": "1NQHXSA59AXSTTAS8GQETNQXF7",
+                  "measurement_kind": "Pressure",
+                  "range_min": 0.0,
+                  "range_max": 50.0,
+                  "unit": "bar",
+                  "position": {
+                    "x": 260.0,
+                    "y": 70.0
+                  }
+                },
+                {
+                  "id": "01M1XR3A5ZMWG15NZDFM2GA96N",
+                  "tag": "FT-101",
+                  "equipment_id": "01M1XR3A5ZJ6ME089ZXQVSSS2N",
+                  "port_id": "68A3WN88ZB4Y0MYZWJAKSCKECP",
+                  "measurement_kind": "Flow",
+                  "range_min": 0.0,
+                  "range_max": 6000.0,
+                  "unit": "kg/h",
+                  "position": {
+                    "x": 450.0,
+                    "y": 70.0
+                  }
+                },
+                {
+                  "id": "01M1XR3A5ZT2XB6EC2BWJTWMQ8",
+                  "tag": "LT-101",
+                  "equipment_id": "01M1XR3A5Z0YDPJ90V7F9D4S2D",
+                  "port_id": null,
+                  "measurement_kind": "Level",
+                  "range_min": 0.0,
+                  "range_max": 100.0,
+                  "unit": "%",
+                  "position": {
+                    "x": 520.0,
+                    "y": 90.0
+                  }
+                }
+              ],
+              "control_loops": [
+                {
+                  "id": "01M1XR3A5ZEZEFSR925KMP0TWC",
+                  "name": "LIC-101",
+                  "pv_tag": "V-101.LEVEL",
+                  "sp": 50.0,
+                  "out_tag": "FV-101.POS",
+                  "kp": 1.5,
+                  "ti": 20.0,
+                  "td": 2.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 450.0,
+                    "y": 20.0
+                  }
+                }
+              ],
+              "alarms": [
+                {
+                  "id": "01M1XR3A5Z5D2T2MTZ9FAZRBP8",
+                  "name": "LAH-101",
+                  "pv_tag": "V-101.LEVEL",
+                  "alarm_type": "HI",
+                  "severity": "critical",
+                  "trip_limit": 80.0,
+                  "deadband": 1.0,
+                  "description": "Accumulator level high warning"
+                },
+                {
+                  "id": "01M1XR3A5ZKRF6C13VXG38MAJT",
+                  "name": "LAL-101",
+                  "pv_tag": "V-101.LEVEL",
+                  "alarm_type": "LO",
+                  "severity": "high",
+                  "trip_limit": 20.0,
+                  "deadband": 1.0,
+                  "description": "Accumulator level low warning"
+                }
+              ],
+              "interlocks": [
+                {
+                  "id": "01M1XR3A5ZA2JZFKT11E3DXVN9",
+                  "name": "TRIP-K101",
+                  "source_tag": "V-101.LEVEL",
+                  "condition": "<",
+                  "threshold": 10.0,
+                  "target_action": "TRIP",
+                  "target_equipment": "01M1XR3A5ZSCF7XMS7547WJ6PH",
+                  "latched": true,
+                  "description": "Low level trip preventing pump cavitation and dry run"
+                }
+              ],
+              "boundary_conditions": [],
+              "initial_conditions": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "description": "Standard Level-Controlled Surge Loop: K-101 Pump feeding V-101 Vessel through FV-101 Control Valve",
+    "author": "NebuDCS Engineering Studio",
+    "created": "2026-09-06T00:00:00Z",
+    "modified": "2026-09-06T00:00:00Z"
+  },
+  "controllers": [
+    {
+      "id": "C-101",
+      "name": "Primary DCS Controller",
+      "description": "Surge & Separation Unit Master Process Controller",
+      "watchdog_timeout_seconds": 1.0,
+      "enabled": true,
+      "tasks": [
+        {
+          "id": "FastLogic",
+          "name": "Fast Control Scan",
+          "task_type": "periodic",
+          "period_seconds": 0.05,
+          "priority": 5,
+          "watchdog_seconds": 0.8,
+          "enabled": true,
+          "programs": [
+            {
+              "id": "FlowControlLogic",
+              "name": "Level & Flow Control Program",
+              "description": "IEC 61131-3 logic for automated surge control",
+              "program_type": "IEC",
+              "routines": [
+                {
+                  "id": "ST_CONTROL",
+                  "name": "ST_CONTROL",
+                  "language": "ST",
+                  "source_text": "VAR\n    PV_LEVEL : REAL := 50.0;\n    SP_LEVEL : REAL := 50.0;\n    VALVE_DEMAND : REAL := 50.0;\nEND_VAR\n\nIF PV_LEVEL < SP_LEVEL THEN\n    VALVE_DEMAND := VALVE_DEMAND + 0.5;\nELSIF PV_LEVEL > SP_LEVEL THEN\n    VALVE_DEMAND := VALVE_DEMAND - 0.5;\nEND_IF;\n",
+                  "enabled": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "cpu_profile": {
+        "execution_budget_us": 50000,
+        "max_scan_frequency_hz": 50.0,
+        "utilization_threshold_pct": 80.0,
+        "architecture": "VendorNeutral-VirtualVCPU-64"
+      },
+      "memory_profile": {
+        "program_memory_bytes": 16777216,
+        "data_memory_bytes": 33554432,
+        "retentive_memory_bytes": 4194304
+      },
+      "firmware_profile": {
+        "version": "v8.1.0",
+        "build": "2026.09",
+        "iec_standard": "IEC 61131-3:2013 Ed.3"
+      },
+      "redundancy": {
+        "role": "Primary",
+        "partner_controller_id": "C-101-STANDBY",
+        "sync_frequency_hz": 20.0,
+        "switchover_timeout_seconds": 0.1
+      },
+      "control_modules": [
+        {
+          "id": "LIC-101",
+          "name": "Surge Drum Level Control Module",
+          "description": "DCS regulatory loop regulating Vessel V-101 liquid level",
+          "mode": "AUTO",
+          "execution_rate_seconds": 0.05,
+          "pv_signal": "V-101.LEVEL",
+          "sp": 50.0,
+          "out_signal": "FV-101.DEMAND",
+          "strategy_type": "PID",
+          "kp": 2.0,
+          "ti": 10.0,
+          "td": 0.0,
+          "output_min": 0.0,
+          "output_max": 100.0,
+          "permissives": [],
+          "interlocks": [
+            "ESD.ACTIVE"
+          ],
+          "safe_position": 0.0
+        }
+      ]
+    }
+  ],
+  "io_systems": [
+    {
+      "id": "HAL-MAIN",
+      "name": "Main Process I/O Subsystem",
+      "racks": [
+        {
+          "rack_number": 1,
+          "name": "RACK-01",
+          "power_ok": true,
+          "chassis": [
+            {
+              "chassis_number": 1,
+              "name": "CHASSIS-01",
+              "bus_ok": true,
+              "modules": [
+                {
+                  "slot": 1,
+                  "name": "AI-01",
+                  "module_type": "AnalogInput8",
+                  "channels": [
+                    {
+                      "channel_number": 1,
+                      "address": "R01-C01-M01-AI01",
+                      "name": "AI-01",
+                      "kind": "AI",
+                      "engineering_unit": "%",
+                      "lrv": 0.0,
+                      "urv": 100.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 2,
+                      "address": "R01-C01-M01-AI02",
+                      "name": "AI-02",
+                      "kind": "AI",
+                      "engineering_unit": "%",
+                      "lrv": 0.0,
+                      "urv": 100.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 3,
+                      "address": "R01-C01-M01-AI03",
+                      "name": "AI-03",
+                      "kind": "AI",
+                      "engineering_unit": "%",
+                      "lrv": 0.0,
+                      "urv": 100.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 4,
+                      "address": "R01-C01-M01-AI04",
+                      "name": "AI-04",
+                      "kind": "AI",
+                      "engineering_unit": "%",
+                      "lrv": 0.0,
+                      "urv": 100.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 5,
+                      "address": "R01-C01-M01-AI05",
+                      "name": "AI-05",
+                      "kind": "AI",
+                      "engineering_unit": "%",
+                      "lrv": 0.0,
+                      "urv": 100.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 6,
+                      "address": "R01-C01-M01-AI06",
+                      "name": "AI-06",
+                      "kind": "AI",
+                      "engineering_unit": "%",
+                      "lrv": 0.0,
+                      "urv": 100.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 7,
+                      "address": "R01-C01-M01-AI07",
+                      "name": "AI-07",
+                      "kind": "AI",
+                      "engineering_unit": "%",
+                      "lrv": 0.0,
+                      "urv": 100.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 8,
+                      "address": "R01-C01-M01-AI08",
+                      "name": "AI-08",
+                      "kind": "AI",
+                      "engineering_unit": "%",
+                      "lrv": 0.0,
+                      "urv": 100.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    }
+                  ]
+                },
+                {
+                  "slot": 2,
+                  "name": "AO-01",
+                  "module_type": "AnalogOutput8",
+                  "channels": [
+                    {
+                      "channel_number": 1,
+                      "address": "R01-C01-M02-AO01",
+                      "name": "AO-01",
+                      "kind": "AO",
+                      "engineering_unit": "%",
+                      "lrv": 0.0,
+                      "urv": 100.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 2,
+                      "address": "R01-C01-M02-AO02",
+                      "name": "AO-02",
+                      "kind": "AO",
+                      "engineering_unit": "%",
+                      "lrv": 0.0,
+                      "urv": 100.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 3,
+                      "address": "R01-C01-M02-AO03",
+                      "name": "AO-03",
+                      "kind": "AO",
+                      "engineering_unit": "%",
+                      "lrv": 0.0,
+                      "urv": 100.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 4,
+                      "address": "R01-C01-M02-AO04",
+                      "name": "AO-04",
+                      "kind": "AO",
+                      "engineering_unit": "%",
+                      "lrv": 0.0,
+                      "urv": 100.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 5,
+                      "address": "R01-C01-M02-AO05",
+                      "name": "AO-05",
+                      "kind": "AO",
+                      "engineering_unit": "%",
+                      "lrv": 0.0,
+                      "urv": 100.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 6,
+                      "address": "R01-C01-M02-AO06",
+                      "name": "AO-06",
+                      "kind": "AO",
+                      "engineering_unit": "%",
+                      "lrv": 0.0,
+                      "urv": 100.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 7,
+                      "address": "R01-C01-M02-AO07",
+                      "name": "AO-07",
+                      "kind": "AO",
+                      "engineering_unit": "%",
+                      "lrv": 0.0,
+                      "urv": 100.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 8,
+                      "address": "R01-C01-M02-AO08",
+                      "name": "AO-08",
+                      "kind": "AO",
+                      "engineering_unit": "%",
+                      "lrv": 0.0,
+                      "urv": 100.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    }
+                  ]
+                },
+                {
+                  "slot": 3,
+                  "name": "DI-01",
+                  "module_type": "DigitalInput16",
+                  "channels": [
+                    {
+                      "channel_number": 1,
+                      "address": "R01-C01-M03-DI01",
+                      "name": "DI-01",
+                      "kind": "DI",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 2,
+                      "address": "R01-C01-M03-DI02",
+                      "name": "DI-02",
+                      "kind": "DI",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 3,
+                      "address": "R01-C01-M03-DI03",
+                      "name": "DI-03",
+                      "kind": "DI",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 4,
+                      "address": "R01-C01-M03-DI04",
+                      "name": "DI-04",
+                      "kind": "DI",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 5,
+                      "address": "R01-C01-M03-DI05",
+                      "name": "DI-05",
+                      "kind": "DI",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 6,
+                      "address": "R01-C01-M03-DI06",
+                      "name": "DI-06",
+                      "kind": "DI",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 7,
+                      "address": "R01-C01-M03-DI07",
+                      "name": "DI-07",
+                      "kind": "DI",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 8,
+                      "address": "R01-C01-M03-DI08",
+                      "name": "DI-08",
+                      "kind": "DI",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 9,
+                      "address": "R01-C01-M03-DI09",
+                      "name": "DI-09",
+                      "kind": "DI",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 10,
+                      "address": "R01-C01-M03-DI10",
+                      "name": "DI-10",
+                      "kind": "DI",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 11,
+                      "address": "R01-C01-M03-DI11",
+                      "name": "DI-11",
+                      "kind": "DI",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 12,
+                      "address": "R01-C01-M03-DI12",
+                      "name": "DI-12",
+                      "kind": "DI",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 13,
+                      "address": "R01-C01-M03-DI13",
+                      "name": "DI-13",
+                      "kind": "DI",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 14,
+                      "address": "R01-C01-M03-DI14",
+                      "name": "DI-14",
+                      "kind": "DI",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 15,
+                      "address": "R01-C01-M03-DI15",
+                      "name": "DI-15",
+                      "kind": "DI",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 16,
+                      "address": "R01-C01-M03-DI16",
+                      "name": "DI-16",
+                      "kind": "DI",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": null,
+                      "forced_value": null
+                    }
+                  ]
+                },
+                {
+                  "slot": 4,
+                  "name": "DO-01",
+                  "module_type": "DigitalOutput16",
+                  "channels": [
+                    {
+                      "channel_number": 1,
+                      "address": "R01-C01-M04-DO01",
+                      "name": "DO-01",
+                      "kind": "DO",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 2,
+                      "address": "R01-C01-M04-DO02",
+                      "name": "DO-02",
+                      "kind": "DO",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 3,
+                      "address": "R01-C01-M04-DO03",
+                      "name": "DO-03",
+                      "kind": "DO",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 4,
+                      "address": "R01-C01-M04-DO04",
+                      "name": "DO-04",
+                      "kind": "DO",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 5,
+                      "address": "R01-C01-M04-DO05",
+                      "name": "DO-05",
+                      "kind": "DO",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 6,
+                      "address": "R01-C01-M04-DO06",
+                      "name": "DO-06",
+                      "kind": "DO",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 7,
+                      "address": "R01-C01-M04-DO07",
+                      "name": "DO-07",
+                      "kind": "DO",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 8,
+                      "address": "R01-C01-M04-DO08",
+                      "name": "DO-08",
+                      "kind": "DO",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 9,
+                      "address": "R01-C01-M04-DO09",
+                      "name": "DO-09",
+                      "kind": "DO",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 10,
+                      "address": "R01-C01-M04-DO10",
+                      "name": "DO-10",
+                      "kind": "DO",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 11,
+                      "address": "R01-C01-M04-DO11",
+                      "name": "DO-11",
+                      "kind": "DO",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 12,
+                      "address": "R01-C01-M04-DO12",
+                      "name": "DO-12",
+                      "kind": "DO",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 13,
+                      "address": "R01-C01-M04-DO13",
+                      "name": "DO-13",
+                      "kind": "DO",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 14,
+                      "address": "R01-C01-M04-DO14",
+                      "name": "DO-14",
+                      "kind": "DO",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 15,
+                      "address": "R01-C01-M04-DO15",
+                      "name": "DO-15",
+                      "kind": "DO",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    },
+                    {
+                      "channel_number": 16,
+                      "address": "R01-C01-M04-DO16",
+                      "name": "DO-16",
+                      "kind": "DO",
+                      "engineering_unit": "",
+                      "lrv": 0.0,
+                      "urv": 1.0,
+                      "fallback_behavior": "FailClosed",
+                      "forced_value": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "io_mappings": [
+    {
+      "controller_id": "C-101",
+      "signal_key": "PV_LEVEL",
+      "channel_address": "R01-C01-M01-AI01",
+      "direction": "input",
+      "target_tag": "V-101.LEVEL",
+      "target_actuator": null,
+      "priority": 5
+    },
+    {
+      "controller_id": "C-101",
+      "signal_key": "VALVE_DEMAND",
+      "channel_address": "R01-C01-M02-AO01",
+      "direction": "output",
+      "target_tag": "FV-101.POS",
+      "target_actuator": "01M1XR3A5ZJ6ME089ZXQVSSS2N",
+      "priority": 3
+    }
+  ],
+  "tags": [
+    {
+      "id": "tag-v101-lvl",
+      "name": "V-101.LEVEL",
+      "description": "Accumulator Separator V-101 Liquid Level",
+      "data_type": "REAL",
+      "engineering_unit": "%",
+      "source": "field",
+      "direction": "input",
+      "controller_id": "C-101",
+      "channel_address": "R01-C01-M01-AI01",
+      "process_entity": "V-101",
+      "alarm_id": "LAH-101"
+    },
+    {
+      "id": "tag-fv101-pos",
+      "name": "FV-101.POS",
+      "description": "Control Valve FV-101 Stem Position Demand",
+      "data_type": "REAL",
+      "engineering_unit": "%",
+      "source": "controller",
+      "direction": "output",
+      "controller_id": "C-101",
+      "channel_address": "R01-C01-M02-AO01",
+      "process_entity": "FV-101",
+      "alarm_id": null
+    },
+    {
+      "id": "tag-p101-spd",
+      "name": "K-101.SPEED",
+      "description": "Centrifugal Pump K-101 Rotational Speed",
+      "data_type": "REAL",
+      "engineering_unit": "rpm",
+      "source": "field",
+      "direction": "input",
+      "controller_id": null,
+      "channel_address": null,
+      "process_entity": "K-101",
+      "alarm_id": null
+    },
+    {
+      "id": "tag-ft101-flw",
+      "name": "FT-101.FLOW",
+      "description": "Feed Discharge Mass Flow Rate",
+      "data_type": "REAL",
+      "engineering_unit": "kg/h",
+      "source": "field",
+      "direction": "input",
+      "controller_id": null,
+      "channel_address": null,
+      "process_entity": "K-101",
+      "alarm_id": null
+    }
+  ],
+  "advanced_control": [
+    {
+      "id": "strat-cas-101",
+      "name": "Tank Level - Feed Flow Cascade",
+      "description": "Primary level master driving secondary flow slave setpoint",
+      "enabled": true,
+      "strategy_type": "Cascade",
+      "parameters": {
+        "output_max": "100.0",
+        "output_min": "0.0",
+        "output_tag": "FIC_101.OUT",
+        "primary_kp": "1.5",
+        "primary_pv": "LT-101.LEVEL",
+        "primary_sp": "50.0",
+        "primary_ti": "10.0",
+        "secondary_kp": "1.0",
+        "secondary_pv": "FT-101.FLOW",
+        "secondary_sp_max": "100.0",
+        "secondary_sp_min": "0.0",
+        "secondary_ti": "2.0",
+        "target_actuator": "FV-101"
+      }
+    }
+  ],
+  "communications": null,
+  "sis": {
+    "enabled": true,
+    "sifs": [
+      {
+        "id": "SIF-101",
+        "name": "V-101 High-High Level ESD Trip",
+        "description": "Trips feed valve FV-101 to prevent separator vessel liquid overflow into gas outlet",
+        "hazard_id": "HAZ-OVF-101",
+        "hazard_scenario": "Liquid carryover into compressor suction causing severe mechanical damage",
+        "target_sil": "SIL-2",
+        "direction": "High",
+        "threshold": 90.0,
+        "reset_deadband": 2.0,
+        "trip_delay_seconds": 0.1,
+        "architecture": "2oo3",
+        "degradation_policy": "DegradeTo1oo2",
+        "sensor_tags": [
+          "V-101.LEVEL",
+          "LT-101.LEVEL",
+          "LT-101.PV"
+        ],
+        "final_elements": [
+          {
+            "target_equipment": "FV-101",
+            "actuator_var": "opening",
+            "safe_state": "ValveClosed",
+            "de_energize_to_trip": true,
+            "action_type": "EmergencyShutdown",
+            "feedback_tag": "FV-101.POS"
+          }
+        ],
+        "latched": true,
+        "reset_permissives": [],
+        "pfd_avg_estimate": 0.0035
+      }
+    ]
+  },
+  "displays": [],
+  "navigation_links": [],
+  "plant_structure": null
+}

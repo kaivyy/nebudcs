@@ -38,7 +38,7 @@ max_value = 1000.0
 required = false
 
 [[definition.ports]]
-id = "01M1T4ZBRKNRMVZ4REJANYW3JN"
+id = "2PPQGTCG2142FM77N0M0XN65DH"
 name = "feed_in"
 domain = "material"
 direction = "inlet"
@@ -51,7 +51,7 @@ cardinality = "zero_or_more"
 description = "Port feed_in"
 
 [[definition.ports]]
-id = "01M1T4ZBRKAQNXPJEE63PQC5YS"
+id = "5QWX9J16HDEWQANHNZCVTBRX1X"
 name = "branch_a"
 domain = "material"
 direction = "outlet"
@@ -64,7 +64,7 @@ cardinality = "zero_or_more"
 description = "Port branch_a"
 
 [[definition.ports]]
-id = "01M1T4ZBRK5TGJJ1FW0KPFF0NR"
+id = "3JBZZP9W3V3ZJ8N35175W10B7K"
 name = "branch_b"
 domain = "material"
 direction = "outlet"

@@ -139,11 +139,7 @@ fn build_simulation() -> (SimulationEngine, EquipmentId, EquipmentId, TagId, Tag
     ctrl.pid_mut(out_tag).unwrap().set_mode(PidMode::Auto);
     ctrl.pid_mut(out_tag).unwrap().set_sp(0.50);
 
-    let prot_cfg = ProtectionConfig {
-        name: "HIHI_TRIP".to_string(),
-        threshold: 0.95,
-        reset_deadband: 0.05,
-    };
+    let prot_cfg = ProtectionConfig::new("HIHI_TRIP", 0.95, 0.05);
     ctrl.register_protection(
         "HIHI_TRIP",
         level_tag,

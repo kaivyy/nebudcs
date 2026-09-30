@@ -21,6 +21,7 @@ pub mod pipe;
 pub mod port;
 pub mod scc;
 pub mod signal;
+pub mod validation;
 
 pub use error::TopologyError;
 pub use graph::TopologyGraph;
@@ -31,3 +32,4 @@ pub use port::{
 };
 pub use scc::{find_strongly_connected_components, SccAnalysisResult};
 pub use signal::{SignalConnection, SignalEndpoint, SignalMedium};
+pub use validation::{validate_project, validate_unit_contents, ProjectValidationSummary};

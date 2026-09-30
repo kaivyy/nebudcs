@@ -37,7 +37,7 @@
     },
     "ports": [
       {
-        "id": "01M1T4ZBRK0ZNE46C9K9N424G1",
+        "id": "68A3WN88ZB4Y0MYZWJAKSCKECP",
         "name": "inlet",
         "domain": "material",
         "direction": "inlet",
@@ -51,7 +51,7 @@
         "description": "Port inlet"
       },
       {
-        "id": "01M1T4ZBRKFQNT4QGN7T9BSCRV",
+        "id": "20BW59F2XB37X5TYG8K1HMDYRS",
         "name": "outlet",
         "domain": "material",
         "direction": "outlet",
@@ -65,7 +65,7 @@
         "description": "Port outlet"
       },
       {
-        "id": "01M1T4ZBRKVYRP28KE931ZJT19",
+        "id": "7YRV9N4WEP56ZC45FW623H9E8N",
         "name": "demand_signal",
         "domain": "signal",
         "direction": "inlet",

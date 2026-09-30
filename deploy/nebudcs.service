@@ -1,0 +1,44 @@
+[Unit]
+Description=NebuDCS Realtime Process Simulation & DCS Training Platform Server
+Documentation=https://github.com/nebudcs/nebudcs
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=nebudcs
+Group=nebudcs
+EnvironmentFile=-/etc/nebudcs/nebudcs.env
+ExecStart=/usr/local/bin/nebudcs-server
+WorkingDirectory=/var/lib/nebudcs
+
+# Automatic restart on crash or failure
+Restart=always
+RestartSec=5s
+
+# File descriptor limits for high-concurrency WebSocket subscriptions
+LimitNOFILE=65536
+
+# Linux Security Hardening & Sandboxing
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+NoNewPrivileges=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictRealtime=true
+RestrictNamespaces=true
+LockPersonality=true
+
+# Writable state directory for persistence and backups
+ReadWritePaths=/var/lib/nebudcs
+StateDirectory=nebudcs
+RuntimeDirectory=nebudcs
+
+# Logging configuration
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=nebudcs-server
+
+[Install]
+WantedBy=multi-user.target

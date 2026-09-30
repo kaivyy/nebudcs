@@ -14,6 +14,7 @@
 
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
+use std::sync::Arc;
 
 use nebudcs_types::{EquipmentId, TagId};
 use nebudcs_units::{Density, MassFlow, Pressure, SpecificEnthalpy, Temperature};
@@ -21,13 +22,14 @@ use nebudcs_units::{Density, MassFlow, Pressure, SpecificEnthalpy, Temperature};
 use crate::conservation::{EnergyBalance, MassBalance, SpeciesBalance};
 use crate::error::PhysicsError;
 use crate::hydraulics::ControlValveHydraulics;
-use crate::state::ComponentComposition;
+use crate::properties::PropertyPackage;
+use crate::state::{ComponentComposition, PhysicalState};
 
 /// Standard acceleration due to gravity ($g$) in $\text{m/s}^2$.
 pub const STANDARD_GRAVITY: f64 = 9.80665;
 
 /// Execution context provided to equipment capability evaluations during a simulation step.
-#[derive(Debug, Clone)]
+#[derive(Clone)]
 pub struct EquipmentExecutionContext<'a> {
     /// Simulation timestep $\Delta t$ in seconds.
     pub dt: f64,
@@ -39,6 +41,50 @@ pub struct EquipmentExecutionContext<'a> {
     pub heat_duty_watts: f64,
     /// Shaft work input to the equipment in Watts ($W_s$).
     pub shaft_work_watts: f64,
+    /// Upstream physical states for each inlet stream.
+    pub inlet_states: &'a [PhysicalState],
+    /// Pluggable thermodynamic property package context, if available.
+    pub property_package: Option<&'a dyn PropertyPackage>,
+}
+
+impl<'a> std::fmt::Debug for EquipmentExecutionContext<'a> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("EquipmentExecutionContext")
+            .field("dt", &self.dt)
+            .field("inlet_flows", &self.inlet_flows)
+            .field("outlet_flows", &self.outlet_flows)
+            .field("heat_duty_watts", &self.heat_duty_watts)
+            .field("shaft_work_watts", &self.shaft_work_watts)
+            .field("inlet_states", &self.inlet_states)
+            .field("property_package", &self.property_package.map(|p| p.name()))
+            .finish()
+    }
+}
+
+impl<'a> EquipmentExecutionContext<'a> {
+    /// Creates a basic execution context with hydraulic flows.
+    pub fn new(dt: f64, inlet_flows: &'a [MassFlow], outlet_flows: &'a [MassFlow]) -> Self {
+        Self {
+            dt,
+            inlet_flows,
+            outlet_flows,
+            heat_duty_watts: 0.0,
+            shaft_work_watts: 0.0,
+            inlet_states: &[],
+            property_package: None,
+        }
+    }
+
+    /// Builder to provide thermodynamic context.
+    pub fn with_thermodynamics(
+        mut self,
+        inlet_states: &'a [PhysicalState],
+        property_package: Option<&'a dyn PropertyPackage>,
+    ) -> Self {
+        self.inlet_states = inlet_states;
+        self.property_package = property_package;
+        self
+    }
 }
 
 /// Composable physical equipment capability trait.
@@ -73,10 +119,24 @@ pub struct HeadSourceModel {
     pub shutoff_delta_p: f64,
     /// Flow coefficient $a_2$ (negative for typical drooping centrifugal head curve).
     pub flow_coeff: f64,
+    /// Rotational speed (e.g. in RPM or native units).
+    pub speed: f64,
     /// Relative rotational speed fraction ($N / N_{rated}$).
     pub speed_fraction: f64,
     /// Last computed differential pressure in Pascal.
     pub last_delta_p: f64,
+    /// Last measured inlet mass flow.
+    pub last_flow: f64,
+    /// Upstream suction pressure in Pascal.
+    pub suction_pressure: f64,
+    /// Net Positive Suction Head Required in meters (NPSHR).
+    pub npsh_required: f64,
+    /// Net Positive Suction Head Available in meters (NPSHA).
+    pub npsh_available: f64,
+    /// RMS vibration velocity in mm/s.
+    pub vibration: f64,
+    /// Shaft power consumed in Watts.
+    pub power: f64,
 }
 
 impl HeadSourceModel {
@@ -85,8 +145,15 @@ impl HeadSourceModel {
         Self {
             shutoff_delta_p,
             flow_coeff,
+            speed: 3000.0,
             speed_fraction: 1.0,
             last_delta_p: shutoff_delta_p.max(0.0),
+            last_flow: 0.0,
+            suction_pressure: 101_325.0,
+            npsh_required: 3.2,
+            npsh_available: 10.0,
+            vibration: 1.2,
+            power: 0.0,
         }
     }
 
@@ -113,28 +180,82 @@ impl EquipmentCapability for HeadSourceModel {
 
     fn evaluate(&mut self, ctx: &EquipmentExecutionContext<'_>) -> Result<(), PhysicsError> {
         let total_flow: f64 = ctx.inlet_flows.iter().map(|f| f.value()).sum();
+        self.last_flow = total_flow;
         let dp = self.calculate_delta_p(total_flow, self.speed_fraction);
         self.last_delta_p = dp.value();
+
+        // Calculate shaft power: W = (dp * Q) / eta + mechanical idle loss
+        let rho = 1000.0;
+        let vol_flow = total_flow / rho;
+        let hydraulic_power = self.last_delta_p * vol_flow;
+        let mech_idle = 1500.0 * self.speed_fraction * self.speed_fraction;
+        self.power = (hydraulic_power / 0.75) + mech_idle;
+
+        // Calculate NPSHA: (P_suction - P_vap) / (rho * g)
+        let p_vap = 2340.0; // Pa at ~20°C water
+        let g = STANDARD_GRAVITY;
+        self.npsh_available = ((self.suction_pressure - p_vap) / (rho * g)).max(0.0);
+
+        // NPSH margin and Cavitation / Vibration evaluation
+        let speed_norm = self.speed_fraction.clamp(0.0, 2.0);
+        let base_vib = 1.2 * speed_norm;
+        if self.speed_fraction > 0.05 && self.npsh_available < self.npsh_required {
+            let deficit = self.npsh_required - self.npsh_available;
+            // Severe vibration surge due to cavitation collapse
+            self.vibration = base_vib + 2.5 * deficit + 0.8 * (deficit * deficit);
+        } else {
+            self.vibration = base_vib;
+        }
+
         Ok(())
     }
 
     fn get_variable(&self, name: &str) -> Option<f64> {
         match name {
+            "flow" => Some(self.last_flow),
             "delta_p" => Some(self.last_delta_p),
-            "speed" | "speed_fraction" => Some(self.speed_fraction),
+            "speed" => Some(self.speed),
+            "speed_fraction" => Some(self.speed_fraction),
             "shutoff_delta_p" => Some(self.shutoff_delta_p),
+            "suction_pressure" => Some(self.suction_pressure),
+            "npsha" => Some(self.npsh_available),
+            "npshr" => Some(self.npsh_required),
+            "vibration" => Some(self.vibration),
+            "power" => Some(self.power),
             _ => None,
         }
     }
 
     fn set_variable(&mut self, name: &str, value: f64) -> Result<(), PhysicsError> {
         match name {
-            "speed" | "speed_fraction" => {
+            "flow" => {
+                self.last_flow = value;
+                Ok(())
+            }
+            "speed" => {
+                self.speed = value;
+                if value > 10.0 {
+                    self.speed_fraction = (value / 3000.0).clamp(0.0, 2.0);
+                } else {
+                    self.speed_fraction = value.clamp(0.0, 2.0);
+                }
+                Ok(())
+            }
+            "speed_fraction" => {
                 self.speed_fraction = value.clamp(0.0, 2.0);
+                self.speed = self.speed_fraction * 3000.0;
                 Ok(())
             }
             "shutoff_delta_p" => {
                 self.shutoff_delta_p = value.max(0.0);
+                Ok(())
+            }
+            "suction_pressure" => {
+                self.suction_pressure = value.max(0.0);
+                Ok(())
+            }
+            "npsh_required" | "npshr" => {
+                self.npsh_required = value.max(0.1);
                 Ok(())
             }
             _ => Err(PhysicsError::InvalidOperatingCondition {
@@ -552,16 +673,382 @@ impl EquipmentCapability for HeatExchangeModel {
     }
 }
 
+/// Generic thermal and reaction process state capability (heaters, reactors, columns).
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ProcessThermalModel {
+    pub temperature: f64,
+    pub pressure: f64,
+    pub heat_duty: f64,
+    pub conversion: f64,
+    pub reaction_heat: f64,
+}
+
+impl ProcessThermalModel {
+    /// Creates a thermal and pressure state capability with initial temperature (°C) and pressure (bar or Pa).
+    pub fn new(initial_temperature: f64, initial_pressure: f64) -> Self {
+        Self {
+            temperature: initial_temperature,
+            pressure: initial_pressure,
+            heat_duty: 0.0,
+            conversion: 0.0,
+            reaction_heat: 0.0,
+        }
+    }
+}
+
+impl EquipmentCapability for ProcessThermalModel {
+    fn capability_name(&self) -> &str {
+        "ProcessThermal"
+    }
+
+    fn evaluate(&mut self, ctx: &EquipmentExecutionContext<'_>) -> Result<(), PhysicsError> {
+        let flow: f64 = ctx.inlet_flows.iter().map(|f| f.value()).sum();
+        if flow > 0.001 {
+            let cp = 2500.0;
+            let delta_t_duty = ctx.heat_duty_watts / (flow * cp);
+            let target_temp = 25.0 + delta_t_duty + self.reaction_heat;
+            let tau = 5.0;
+            let alpha = (ctx.dt / tau).clamp(0.0, 1.0);
+            self.temperature += alpha * (target_temp - self.temperature);
+        }
+        Ok(())
+    }
+
+    fn get_variable(&self, name: &str) -> Option<f64> {
+        match name {
+            "temperature" => Some(self.temperature),
+            "pressure" => Some(self.pressure),
+            "duty" | "heat_duty" => Some(self.heat_duty),
+            "conversion" => Some(self.conversion),
+            _ => None,
+        }
+    }
+
+    fn set_variable(&mut self, name: &str, value: f64) -> Result<(), PhysicsError> {
+        match name {
+            "temperature" => {
+                self.temperature = value;
+                self.reaction_heat = (value - 25.0).max(0.0);
+                Ok(())
+            }
+            "pressure" => {
+                self.pressure = value;
+                Ok(())
+            }
+            "duty" | "heat_duty" => {
+                self.heat_duty = value;
+                Ok(())
+            }
+            "conversion" => {
+                self.conversion = value.clamp(0.0, 1.0);
+                Ok(())
+            }
+            "reaction_heat" => {
+                self.reaction_heat = value;
+                Ok(())
+            }
+            _ => Err(PhysicsError::InvalidOperatingCondition {
+                message: format!("unknown variable {name} for ProcessThermalModel"),
+            }),
+        }
+    }
+}
+
+/// Generic steam or gas expansion turbine capability.
+///
+/// Converts thermodynamic fluid expansion across an enthalpy drop into shaft power and rotational speed.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct TurbineExpansionModel {
+    /// Rated shaft power in Watts at nominal steam flow.
+    pub rated_power_watts: f64,
+    /// Isentropic expansion efficiency fraction (0.0 to 1.0).
+    pub isentropic_efficiency: f64,
+    /// Live throttle steam inlet pressure in Pascal.
+    pub inlet_pressure_pa: f64,
+    /// Live exhaust condenser/header pressure in Pascal.
+    pub exhaust_pressure_pa: f64,
+    /// Rotational shaft speed in RPM.
+    pub speed: f64,
+    /// Live mechanical shaft power produced in Watts.
+    pub power_output_watts: f64,
+    /// Steam consumption mass flow in kg/s.
+    pub steam_flow: f64,
+    /// Governor valve opening fraction (0.0 to 1.0).
+    pub governor_opening: f64,
+}
+
+impl TurbineExpansionModel {
+    pub fn new(rated_power_watts: f64) -> Self {
+        Self {
+            rated_power_watts,
+            isentropic_efficiency: 0.78,
+            inlet_pressure_pa: 4_000_000.0, // 40 bar HP steam
+            exhaust_pressure_pa: 300_000.0, // 3 bar LP steam
+            speed: 3000.0,
+            power_output_watts: 0.0,
+            steam_flow: 0.0,
+            governor_opening: 1.0,
+        }
+    }
+}
+
+impl EquipmentCapability for TurbineExpansionModel {
+    fn capability_name(&self) -> &str {
+        "TurbineExpansion"
+    }
+
+    fn evaluate(&mut self, ctx: &EquipmentExecutionContext<'_>) -> Result<(), PhysicsError> {
+        let nominal_delta_h = 188_000.0;
+        let rated_steam_flow =
+            self.rated_power_watts / (self.isentropic_efficiency.max(0.1) * nominal_delta_h);
+        let flow: f64 = ctx.inlet_flows.iter().map(|f| f.value()).sum();
+        self.steam_flow = if flow > 0.001 {
+            flow
+        } else {
+            self.governor_opening * rated_steam_flow
+        };
+
+        let pr =
+            (self.exhaust_pressure_pa / self.inlet_pressure_pa.max(100_000.0)).clamp(0.01, 1.0);
+        let delta_h_is = 420_000.0 * (1.0 - pr.powf(0.23));
+        self.power_output_watts = self.steam_flow * self.isentropic_efficiency * delta_h_is;
+
+        if self.speed < 1.0 {
+            let p_ratio =
+                (self.power_output_watts / self.rated_power_watts.max(1000.0)).clamp(0.0, 2.5);
+            self.speed = 3000.0 * p_ratio.sqrt();
+        }
+        Ok(())
+    }
+
+    fn get_variable(&self, name: &str) -> Option<f64> {
+        match name {
+            "speed" => Some(self.speed),
+            "power" => Some(self.power_output_watts),
+            "flow" | "steam_flow" => Some(self.steam_flow),
+            "inlet_pressure" => Some(self.inlet_pressure_pa),
+            "exhaust_pressure" => Some(self.exhaust_pressure_pa),
+            "governor_opening" | "opening" => Some(self.governor_opening),
+            _ => None,
+        }
+    }
+
+    fn set_variable(&mut self, name: &str, value: f64) -> Result<(), PhysicsError> {
+        match name {
+            "speed" => {
+                self.speed = value.max(0.0);
+                Ok(())
+            }
+            "governor_opening" | "opening" => {
+                self.governor_opening = value.clamp(0.0, 1.0);
+                Ok(())
+            }
+            "inlet_pressure" => {
+                self.inlet_pressure_pa = value.max(101_325.0);
+                Ok(())
+            }
+            "exhaust_pressure" => {
+                self.exhaust_pressure_pa = value.max(10_000.0);
+                Ok(())
+            }
+            "flow" | "steam_flow" => {
+                self.steam_flow = value.max(0.0);
+                Ok(())
+            }
+            _ => Err(PhysicsError::InvalidOperatingCondition {
+                message: format!("unknown variable {name} for TurbineExpansionModel"),
+            }),
+        }
+    }
+}
+
+/// Generic directional flow check valve capability.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct CheckValveModel {
+    pub cracking_pressure_pa: f64,
+    pub forward_cv: f64,
+    pub is_open: bool,
+    pub last_flow: f64,
+}
+
+impl CheckValveModel {
+    pub fn new(forward_cv: f64, cracking_pressure_pa: f64) -> Self {
+        Self {
+            cracking_pressure_pa,
+            forward_cv,
+            is_open: true,
+            last_flow: 0.0,
+        }
+    }
+}
+
+impl EquipmentCapability for CheckValveModel {
+    fn capability_name(&self) -> &str {
+        "CheckValve"
+    }
+
+    fn evaluate(&mut self, ctx: &EquipmentExecutionContext<'_>) -> Result<(), PhysicsError> {
+        let flow: f64 = ctx.inlet_flows.iter().map(|f| f.value()).sum();
+        self.is_open = flow >= 0.0;
+        self.last_flow = if self.is_open { flow } else { 0.0 };
+        Ok(())
+    }
+
+    fn get_variable(&self, name: &str) -> Option<f64> {
+        match name {
+            "flow" => Some(self.last_flow),
+            "is_open" => Some(if self.is_open { 1.0 } else { 0.0 }),
+            "cv" => Some(if self.is_open { self.forward_cv } else { 0.0 }),
+            _ => None,
+        }
+    }
+
+    fn set_variable(&mut self, name: &str, value: f64) -> Result<(), PhysicsError> {
+        match name {
+            "is_open" => {
+                self.is_open = value > 0.5;
+                Ok(())
+            }
+            _ => Err(PhysicsError::InvalidOperatingCondition {
+                message: format!("unknown variable {name} for CheckValveModel"),
+            }),
+        }
+    }
+}
+
+/// Generic multi-stage distillation/fractionation column capability.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct DistillationColumnModel {
+    pub tray_count: usize,
+    pub top_pressure_pa: f64,
+    pub bottom_pressure_pa: f64,
+    pub top_temperature_c: f64,
+    pub bottom_temperature_c: f64,
+    pub reflux_ratio: f64,
+    pub boilup_duty_watts: f64,
+    pub bottom_level: f64,
+    pub distillate_flow: f64,
+    pub bottoms_flow: f64,
+    pub overhead_purity: f64,
+}
+
+impl DistillationColumnModel {
+    pub fn new(tray_count: usize) -> Self {
+        Self {
+            tray_count,
+            top_pressure_pa: 150_000.0,
+            bottom_pressure_pa: 190_000.0,
+            top_temperature_c: 65.0,
+            bottom_temperature_c: 110.0,
+            reflux_ratio: 2.5,
+            boilup_duty_watts: 500_000.0,
+            bottom_level: 0.50,
+            distillate_flow: 8.0,
+            bottoms_flow: 12.0,
+            overhead_purity: 0.985,
+        }
+    }
+}
+
+impl EquipmentCapability for DistillationColumnModel {
+    fn capability_name(&self) -> &str {
+        "DistillationColumn"
+    }
+
+    fn evaluate(&mut self, ctx: &EquipmentExecutionContext<'_>) -> Result<(), PhysicsError> {
+        let feed_flow: f64 = ctx.inlet_flows.iter().map(|f| f.value()).sum();
+        let effective_feed = if feed_flow > 0.001 { feed_flow } else { 20.0 };
+
+        let boilup_factor = (self.boilup_duty_watts / 500_000.0).clamp(0.1, 3.0);
+        let vapor_rate = effective_feed * 0.6 * boilup_factor;
+        self.distillate_flow = vapor_rate / (1.0 + self.reflux_ratio);
+        self.bottoms_flow = (effective_feed - self.distillate_flow).max(0.1);
+
+        let net_accumulation = effective_feed - self.distillate_flow - self.bottoms_flow;
+        self.bottom_level =
+            (self.bottom_level + net_accumulation * (ctx.dt / 10_000.0)).clamp(0.0, 1.0);
+
+        let n_stages = self.tray_count as f64;
+        self.overhead_purity =
+            (1.0 - (-0.08 * n_stages * self.reflux_ratio / boilup_factor).exp()).clamp(0.70, 0.999);
+
+        self.top_temperature_c = 60.0 + 15.0 * (1.0 - self.overhead_purity);
+        self.bottom_temperature_c = 105.0 + 10.0 * boilup_factor;
+        Ok(())
+    }
+
+    fn get_variable(&self, name: &str) -> Option<f64> {
+        match name {
+            "level" => Some(self.bottom_level),
+            "top_temperature" | "temperature" => Some(self.top_temperature_c),
+            "bottom_temperature" => Some(self.bottom_temperature_c),
+            "distillate_flow" => Some(self.distillate_flow),
+            "bottoms_flow" => Some(self.bottoms_flow),
+            "purity" | "conversion" => Some(self.overhead_purity),
+            "reflux_ratio" => Some(self.reflux_ratio),
+            "boilup_duty" | "duty" => Some(self.boilup_duty_watts),
+            "top_pressure" | "pressure" => Some(self.top_pressure_pa / 100_000.0),
+            _ => None,
+        }
+    }
+
+    fn set_variable(&mut self, name: &str, value: f64) -> Result<(), PhysicsError> {
+        match name {
+            "level" => {
+                self.bottom_level = value.clamp(0.0, 1.0);
+                Ok(())
+            }
+            "reflux_ratio" => {
+                self.reflux_ratio = value.clamp(0.1, 50.0);
+                Ok(())
+            }
+            "boilup_duty" | "duty" => {
+                self.boilup_duty_watts = value.max(0.0);
+                Ok(())
+            }
+            "top_pressure" | "pressure" => {
+                self.top_pressure_pa = (value * 100_000.0).max(10_000.0);
+                Ok(())
+            }
+            _ => Err(PhysicsError::InvalidOperatingCondition {
+                message: format!("unknown variable {name} for DistillationColumnModel"),
+            }),
+        }
+    }
+}
+
 /// A generic equipment instance composed of modular physics capabilities.
-#[derive(Debug)]
 pub struct GenericEquipmentPhysics {
     id: EquipmentId,
     capabilities: Vec<Box<dyn EquipmentCapability>>,
     tag_bindings: BTreeMap<String, TagId>,
+    extra_variables: BTreeMap<String, f64>,
     inlet_flows: Vec<MassFlow>,
     outlet_flows: Vec<MassFlow>,
     heat_duty_watts: f64,
     shaft_work_watts: f64,
+    inlet_states: Vec<PhysicalState>,
+    property_package: Option<Arc<dyn PropertyPackage>>,
+}
+
+impl std::fmt::Debug for GenericEquipmentPhysics {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("GenericEquipmentPhysics")
+            .field("id", &self.id)
+            .field("capabilities_count", &self.capabilities.len())
+            .field("tag_bindings", &self.tag_bindings)
+            .field("extra_variables", &self.extra_variables)
+            .field("inlet_flows", &self.inlet_flows)
+            .field("outlet_flows", &self.outlet_flows)
+            .field("heat_duty_watts", &self.heat_duty_watts)
+            .field("shaft_work_watts", &self.shaft_work_watts)
+            .field("inlet_states", &self.inlet_states)
+            .field(
+                "property_package",
+                &self.property_package.as_ref().map(|p| p.name()),
+            )
+            .finish()
+    }
 }
 
 impl GenericEquipmentPhysics {
@@ -571,10 +1058,13 @@ impl GenericEquipmentPhysics {
             id,
             capabilities: Vec::new(),
             tag_bindings: BTreeMap::new(),
+            extra_variables: BTreeMap::new(),
             inlet_flows: Vec::new(),
             outlet_flows: Vec::new(),
             heat_duty_watts: 0.0,
             shaft_work_watts: 0.0,
+            inlet_states: Vec::new(),
+            property_package: None,
         }
     }
 
@@ -603,6 +1093,16 @@ impl GenericEquipmentPhysics {
         self.outlet_flows = flows;
     }
 
+    /// Sets upstream inlet physical states.
+    pub fn set_inlet_states(&mut self, states: Vec<PhysicalState>) {
+        self.inlet_states = states;
+    }
+
+    /// Sets the active thermodynamic property package.
+    pub fn set_property_package(&mut self, package: Arc<dyn PropertyPackage>) {
+        self.property_package = Some(package);
+    }
+
     /// Sets the heat duty in Watts.
     pub fn set_heat_duty(&mut self, watts: f64) {
         self.heat_duty_watts = watts;
@@ -613,26 +1113,32 @@ impl GenericEquipmentPhysics {
         self.shaft_work_watts = watts;
     }
 
-    /// Queries a variable from the equipment by checking its capabilities in order.
+    /// Queries a variable from the equipment by checking its capabilities in order,
+    /// falling back to custom dynamic variables if not present on capabilities.
     pub fn get_variable(&self, name: &str) -> Option<f64> {
         for cap in &self.capabilities {
             if let Some(val) = cap.get_variable(name) {
                 return Some(val);
             }
         }
-        None
+        self.extra_variables.get(name).copied()
     }
 
-    /// Sets a variable on the first capability that accepts it.
+    /// Sets a variable on the first capability that accepts it, falling back to
+    /// storing the variable directly in extra_variables for arbitrary equipment state.
     pub fn set_variable(&mut self, name: &str, value: f64) -> Result<(), PhysicsError> {
         for cap in &mut self.capabilities {
             if cap.set_variable(name, value).is_ok() {
                 return Ok(());
             }
         }
-        Err(PhysicsError::InvalidOperatingCondition {
-            message: format!("variable {name} not recognized on equipment {}", self.id),
-        })
+        self.extra_variables.insert(name.to_string(), value);
+        Ok(())
+    }
+
+    /// Returns a reference to all custom dynamic variables registered on this equipment.
+    pub fn extra_variables(&self) -> &BTreeMap<String, f64> {
+        &self.extra_variables
     }
 
     /// Evaluates all capabilities belonging to this equipment over timestep $\Delta t$.
@@ -643,6 +1149,8 @@ impl GenericEquipmentPhysics {
             outlet_flows: &self.outlet_flows,
             heat_duty_watts: self.heat_duty_watts,
             shaft_work_watts: self.shaft_work_watts,
+            inlet_states: &self.inlet_states,
+            property_package: self.property_package.as_deref(),
         };
 
         for cap in &mut self.capabilities {

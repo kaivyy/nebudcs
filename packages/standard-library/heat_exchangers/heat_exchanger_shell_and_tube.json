@@ -37,7 +37,7 @@
     },
     "ports": [
       {
-        "id": "01M1T4ZBRK066M4V84TNJVPBRP",
+        "id": "56NZ1VCYYVHTB2FZKBXX7HE2VA",
         "name": "tube_in",
         "domain": "material",
         "direction": "inlet",
@@ -50,7 +50,7 @@
         "description": "Port tube_in"
       },
       {
-        "id": "01M1T4ZBRK0CKHT1XM6NRMZEBV",
+        "id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y",
         "name": "tube_out",
         "domain": "material",
         "direction": "outlet",
@@ -63,7 +63,7 @@
         "description": "Port tube_out"
       },
       {
-        "id": "01M1T4ZBRKZEZ0Y8651YEQ0CJT",
+        "id": "3FER1D23T6D9V6VRMZ4JHVJECE",
         "name": "shell_in",
         "domain": "material",
         "direction": "inlet",
@@ -76,7 +76,7 @@
         "description": "Port shell_in"
       },
       {
-        "id": "01M1T4ZBRKN2YDXHFMEWXH4783",
+        "id": "5XFYQX84Y5N59XJE3827JSGYGF",
         "name": "shell_out",
         "domain": "material",
         "direction": "outlet",

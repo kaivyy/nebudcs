@@ -37,7 +37,7 @@
     },
     "ports": [
       {
-        "id": "01M1T4ZBRKN44D2XZ5PFT5RRRG",
+        "id": "6B02X5387W3WQYBZ0CAP57R0YF",
         "name": "process_in",
         "domain": "material",
         "direction": "inlet",
@@ -50,7 +50,7 @@
         "description": "Port process_in"
       },
       {
-        "id": "01M1T4ZBRK12T1GZ5PV9AZTXGJ",
+        "id": "21PP3MM2206Y93A468WWFMDYN0",
         "name": "process_out",
         "domain": "material",
         "direction": "outlet",
@@ -63,7 +63,7 @@
         "description": "Port process_out"
       },
       {
-        "id": "01M1T4ZBRK5PP4YDGRCM902J3X",
+        "id": "7A8RCCWBG4XHF1PZ9CM76RVYWP",
         "name": "fuel_gas",
         "domain": {
           "utility": "fuel_gas"
@@ -77,7 +77,7 @@
         "description": "Port fuel_gas"
       },
       {
-        "id": "01M1T4ZBRK952GWXXVRHM86AVZ",
+        "id": "4W2JB8X5K2J8ZJ3GNK2ERPYE3H",
         "name": "flue_gas_stack",
         "domain": {
           "utility": "fuel_gas"

@@ -167,7 +167,7 @@ export class WsClient {
       }
 
       case "snapshot": {
-        this.lastSeq = msg.payload.tick_count;
+        this.lastSeq = 0;
         this.setState("synchronized");
         break;
       }
@@ -175,7 +175,10 @@ export class WsClient {
       case "delta": {
         const { seq } = msg.payload;
         if (this.state === "synchronized") {
-          if (seq > this.lastSeq + 1 && this.lastSeq > 0) {
+          if (this.lastSeq === 0) {
+            // First delta after snapshot establishes sequence baseline
+            this.lastSeq = seq;
+          } else if (seq > this.lastSeq + 1) {
             console.warn(`[nebudcs-ws] Sequence gap detected (expected ${this.lastSeq + 1}, got ${seq}); requesting snapshot resync`);
             this.setState("resynchronizing");
             this.requestSnapshot();

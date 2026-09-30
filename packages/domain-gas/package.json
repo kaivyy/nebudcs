@@ -1,0 +1,79 @@
+{
+  "id": "domain.gas.compression_train",
+  "name": "Gas Processing & Multi-Stage Compression Package",
+  "version": "1.0.0",
+  "domain_kind": "gas_processing",
+  "description": "Natural gas compression and conditioning train featuring suction knockout drum, high-ratio centrifugal gas compressor, shell-and-tube aftercooler, high-pressure separator, and automated anti-surge recycle loop.",
+  "author": "NebuDCS Standard Library",
+  "thermodynamic_requirements": [
+    "Real Gas Compressibility (Z-factor, Peng-Robinson)",
+    "Polytropic Head and Compression Work Curves",
+    "Two-Phase Liquid Knockout Separation"
+  ],
+  "utility_requirements": [
+    "COOLING_WATER",
+    "INSTRUMENT_AIR",
+    "FUEL_GAS"
+  ],
+  "composition_defaults": {
+    "Ethane_C2H6": 0.07,
+    "Methane_CH4": 0.88,
+    "Nitrogen_N2": 0.02,
+    "Propane_C3H8": 0.03
+  },
+  "operating_ranges": {
+    "compressor_vibration": {
+      "quantity": "Vibration",
+      "min_value": 0.0,
+      "max_value": 12.0,
+      "unit": "mm/s",
+      "normal_operating_value": 1.2
+    },
+    "discharge_pressure": {
+      "quantity": "Pressure",
+      "min_value": 10.0,
+      "max_value": 50.0,
+      "unit": "bar",
+      "normal_operating_value": 26.5
+    },
+    "discharge_temperature": {
+      "quantity": "Temperature",
+      "min_value": 30.0,
+      "max_value": 160.0,
+      "unit": "°C",
+      "normal_operating_value": 115.0
+    },
+    "suction_pressure": {
+      "quantity": "Pressure",
+      "min_value": 1.0,
+      "max_value": 10.0,
+      "unit": "bar",
+      "normal_operating_value": 4.2
+    }
+  },
+  "control_strategies": [
+    "PIC-301 Gas Header Discharge Pressure Control",
+    "FIC-301 Minimum-Flow Anti-Surge Recirculation Loop",
+    "TIC-301 Gas Aftercooler Outlet Temperature Control via Cooling Water",
+    "LIC-301 Suction Knockout Drum Condensate Drain Level Control"
+  ],
+  "scenario_presets": [
+    "scn-gas-loss-of-cooling",
+    "scn-gas-antisurge-valve-failure",
+    "scn-gas-high-vibration-trip",
+    "scn-gas-suction-blockage"
+  ],
+  "equipment_templates": [
+    "standard.vessel.vertical_separator",
+    "standard.compressor.centrifugal",
+    "standard.heat_exchanger.shell_and_tube",
+    "standard.valve.control_globe"
+  ],
+  "plant_template_ids": [
+    "proj-domain-gas-compression"
+  ],
+  "validation_rules": [
+    "VLD-GAS01: Gas compressor must have automated anti-surge recycle or bypass stream",
+    "VLD-GAS02: Gas compressor suction must be preceded by liquid knockout protection"
+  ]
+}

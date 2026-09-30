@@ -1,0 +1,461 @@
+{
+  "id": "5N39PQT8E4B74DZYJBR1G0FBGG",
+  "name": "Continuous Exothermic Reaction Train",
+  "schema_version": "0.1.0",
+  "plants": [
+    {
+      "id": "01M1X4HB0VGN9P8CW3MFJ2Y333",
+      "name": "Chemical Area 40",
+      "areas": [
+        {
+          "id": "01M1X4HB0VQER0FA2E20J3S50V",
+          "name": "Polymer Synthesis",
+          "units": [
+            {
+              "id": "01M1X4HB0VQ0HBDGPS75ED6FYX",
+              "name": "Unit 400 Exothermic Reactor Loop",
+              "equipment": [
+                {
+                  "id": "01M1X4HB0VWBHG1QNWHNJV50TD",
+                  "definition_id": "2KRSSVVX85BFH6EV6H5YR8Y85Z",
+                  "definition_version": "1.0.0",
+                  "name": "TK-401",
+                  "parameters": {
+                    "capacity_m3": 3000.0,
+                    "level": 70.0
+                  },
+                  "position": {
+                    "x": 80.0,
+                    "y": 180.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M1X4HB0V5XBWE6BXWSHGJHJ2",
+                  "definition_id": "0ATRCF671FM4B5GSSRFVNKC51R",
+                  "definition_version": "1.0.0",
+                  "name": "P-401",
+                  "parameters": {
+                    "rated_flow": 80.0,
+                    "rated_head": 100.0,
+                    "speed_rpm": 2950.0
+                  },
+                  "position": {
+                    "x": 240.0,
+                    "y": 180.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M1X4HB0V5PFKPX8BKXDTDG6R",
+                  "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+                  "definition_version": "1.0.0",
+                  "name": "E-401",
+                  "parameters": {
+                    "area_m2": 120.0,
+                    "overall_u": 600.0,
+                    "design_duty": 800000.0,
+                    "process_inlet_t": 25.0
+                  },
+                  "position": {
+                    "x": 420.0,
+                    "y": 180.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M1X4HB0V9CYH6RAY2D73CZFK",
+                  "definition_id": "7BPYAFPWAW44MEBAWA2QH50RX1",
+                  "definition_version": "1.0.0",
+                  "name": "R-401",
+                  "parameters": {
+                    "volume_m3": 20.0,
+                    "volume": 20.0,
+                    "thermal_duty": 450000.0,
+                    "tau": 5.0
+                  },
+                  "position": {
+                    "x": 620.0,
+                    "y": 180.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M1X4HB0VWHFZNXMMTYCMD4FC",
+                  "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+                  "definition_version": "1.0.0",
+                  "name": "V-401",
+                  "parameters": {
+                    "volume_m3": 35.0,
+                    "volume": 35.0,
+                    "operating_pressure": 1200000.0
+                  },
+                  "position": {
+                    "x": 840.0,
+                    "y": 180.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M1X4HB0VN93NKA1E1661J129",
+                  "definition_id": "0ATRCF671FM4B5GSSRFVNKC51R",
+                  "definition_version": "1.0.0",
+                  "name": "P-402",
+                  "parameters": {
+                    "rated_flow": 40.0,
+                    "rated_head": 90.0,
+                    "speed_rpm": 2950.0
+                  },
+                  "position": {
+                    "x": 620.0,
+                    "y": 340.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                }
+              ],
+              "streams": [
+                {
+                  "id": "01M1X4HB0VSE5MK4CNS31NHBKV",
+                  "name": "S-CHEM-01",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M1X4HB0VWBHG1QNWHNJV50TD",
+                    "port_id": "20BW59F2XB37X5TYG8K1HMDYRS"
+                  },
+                  "sink": {
+                    "equipment_id": "01M1X4HB0V5XBWE6BXWSHGJHJ2",
+                    "port_id": "2Z0TCSV15342N4G68500SBPH4T"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M1X4HB0VDXX8VCT1GJ8Q2YM9",
+                  "name": "S-CHEM-02",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M1X4HB0V5XBWE6BXWSHGJHJ2",
+                    "port_id": "1NQHXSA59AXSTTAS8GQETNQXF7"
+                  },
+                  "sink": {
+                    "equipment_id": "01M1X4HB0V5PFKPX8BKXDTDG6R",
+                    "port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M1X4HB0VCB70BEJGPX1PK6J4",
+                  "name": "S-CHEM-03",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M1X4HB0V5PFKPX8BKXDTDG6R",
+                    "port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y"
+                  },
+                  "sink": {
+                    "equipment_id": "01M1X4HB0V9CYH6RAY2D73CZFK",
+                    "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M1X4HB0VP9MMGQJ59XT0Y0XT",
+                  "name": "S-CHEM-04",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M1X4HB0V9CYH6RAY2D73CZFK",
+                    "port_id": "27NWW5RP2WM0FQBYS8YA51KJB0"
+                  },
+                  "sink": {
+                    "equipment_id": "01M1X4HB0VWHFZNXMMTYCMD4FC",
+                    "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M1X4HB0V5WHRJW77QZWCHY19",
+                  "name": "S-RECYCLE-01",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M1X4HB0VWHFZNXMMTYCMD4FC",
+                    "port_id": "79KAB0B0B6SCFDAF3AST98A7D6"
+                  },
+                  "sink": {
+                    "equipment_id": "01M1X4HB0VN93NKA1E1661J129",
+                    "port_id": "2Z0TCSV15342N4G68500SBPH4T"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                }
+              ],
+              "instruments": [
+                {
+                  "id": "01M1X4HB0VBXF01ZG83HXATJV0",
+                  "tag": "FT-401",
+                  "equipment_id": "01M1X4HB0V5XBWE6BXWSHGJHJ2",
+                  "port_id": "1NQHXSA59AXSTTAS8GQETNQXF7",
+                  "measurement_kind": "Flow",
+                  "range_min": 0.0,
+                  "range_max": 10000.0,
+                  "unit": "kg/h",
+                  "position": {
+                    "x": 240.0,
+                    "y": 100.0
+                  }
+                },
+                {
+                  "id": "01M1X4HB0VEAZ4HCD4RFZD2TG5",
+                  "tag": "TI-401",
+                  "equipment_id": "01M1X4HB0V9CYH6RAY2D73CZFK",
+                  "port_id": null,
+                  "measurement_kind": "Temperature",
+                  "range_min": 0.0,
+                  "range_max": 300.0,
+                  "unit": "°C",
+                  "position": {
+                    "x": 620.0,
+                    "y": 100.0
+                  }
+                },
+                {
+                  "id": "01M1X4HB0VXCTFSZM0FM7RKFJN",
+                  "tag": "PT-401",
+                  "equipment_id": "01M1X4HB0V9CYH6RAY2D73CZFK",
+                  "port_id": null,
+                  "measurement_kind": "Pressure",
+                  "range_min": 0.0,
+                  "range_max": 30.0,
+                  "unit": "bar",
+                  "position": {
+                    "x": 620.0,
+                    "y": 40.0
+                  }
+                },
+                {
+                  "id": "01M1X4HB0VWQKBWC4MW2CH3607",
+                  "tag": "LT-401",
+                  "equipment_id": "01M1X4HB0V9CYH6RAY2D73CZFK",
+                  "port_id": null,
+                  "measurement_kind": "Level",
+                  "range_min": 0.0,
+                  "range_max": 100.0,
+                  "unit": "%",
+                  "position": {
+                    "x": 620.0,
+                    "y": 260.0
+                  }
+                },
+                {
+                  "id": "01M1X4HB0VH51FDZXAEET08QZ9",
+                  "tag": "AT-401",
+                  "equipment_id": "01M1X4HB0VWHFZNXMMTYCMD4FC",
+                  "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A",
+                  "measurement_kind": "Purity",
+                  "range_min": 0.0,
+                  "range_max": 1.0,
+                  "unit": "fraction",
+                  "position": {
+                    "x": 840.0,
+                    "y": 100.0
+                  }
+                }
+              ],
+              "control_loops": [
+                {
+                  "id": "01M1X4HB0V610DM2H6TYQ8H4G9",
+                  "name": "TIC-401",
+                  "pv_tag": "TI-401",
+                  "sp": 165.0,
+                  "out_tag": "R-401.COOLING",
+                  "kp": 2.5,
+                  "ti": 15.0,
+                  "td": 1.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 520.0,
+                    "y": 40.0
+                  }
+                },
+                {
+                  "id": "01M1X4HB0V853BKKHH3SGEM0JP",
+                  "name": "LIC-401",
+                  "pv_tag": "LT-401",
+                  "sp": 65.0,
+                  "out_tag": "R-401.OPENING",
+                  "kp": 1.8,
+                  "ti": 20.0,
+                  "td": 0.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 720.0,
+                    "y": 40.0
+                  }
+                },
+                {
+                  "id": "01M1X4HB0VGKPMV8XNVX1A2K88",
+                  "name": "FIC-401",
+                  "pv_tag": "FT-401",
+                  "sp": 5000.0,
+                  "out_tag": "P-401.SPEED",
+                  "kp": 1.0,
+                  "ti": 10.0,
+                  "td": 0.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 320.0,
+                    "y": 40.0
+                  }
+                }
+              ],
+              "alarms": [
+                {
+                  "id": "01M1X4HB0VNH3GZBGMEQYWRGEV",
+                  "name": "TAH-401",
+                  "pv_tag": "TI-401",
+                  "alarm_type": "HI",
+                  "severity": "high",
+                  "trip_limit": 190.0,
+                  "deadband": 2.0,
+                  "description": "Reactor temperature high warning"
+                },
+                {
+                  "id": "01M1X4HB0VWYM3ZHT2CTTDAAFX",
+                  "name": "TAHH-401",
+                  "pv_tag": "TI-401",
+                  "alarm_type": "HI",
+                  "severity": "critical",
+                  "trip_limit": 210.0,
+                  "deadband": 2.0,
+                  "description": "Emergency thermal runaway condition"
+                },
+                {
+                  "id": "01M1X4HB0VB64TSP3PP304F55A",
+                  "name": "LAH-401",
+                  "pv_tag": "LT-401",
+                  "alarm_type": "HI",
+                  "severity": "high",
+                  "trip_limit": 85.0,
+                  "deadband": 1.0,
+                  "description": "Reactor high level warning"
+                }
+              ],
+              "interlocks": [
+                {
+                  "id": "01M1X4HB0VF9YKMQYMDA8XKGDS",
+                  "name": "TRIP-RUNAWAY",
+                  "source_tag": "TI-401",
+                  "condition": ">",
+                  "threshold": 210.0,
+                  "target_action": "TRIP",
+                  "target_equipment": "01M1X4HB0V5XBWE6BXWSHGJHJ2",
+                  "latched": true,
+                  "description": "Cut feed pump on thermal runaway"
+                },
+                {
+                  "id": "01M1X4HB0V11F0N2QBPJMS8TRA",
+                  "name": "TRIP-FEED-LOW",
+                  "source_tag": "TK-401.LEVEL",
+                  "condition": "<",
+                  "threshold": 15.0,
+                  "target_action": "TRIP",
+                  "target_equipment": "01M1X4HB0V5XBWE6BXWSHGJHJ2",
+                  "latched": true,
+                  "description": "Low level pump protection"
+                }
+              ],
+              "boundary_conditions": [],
+              "initial_conditions": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "description": "Exothermic chemical synthesis plant featuring reactant charge pump, feed preheater, jacketed CSTR, product degasser, and liquid recycle pump.",
+    "author": "NebuDCS Standard Library",
+    "created": "2026-09-07T00:00:00Z",
+    "modified": "2026-09-07T00:00:00Z"
+  },
+  "controllers": [],
+  "io_systems": [],
+  "io_mappings": [],
+  "tags": [],
+  "advanced_control": [
+    {
+      "id": "strat-ratio-401",
+      "name": "Reactant Stoichiometric Ratio Control",
+      "description": "Maintains Reactant B flow at stoichiometric ratio to wild Reactant A feed",
+      "enabled": true,
+      "strategy_type": "Ratio",
+      "parameters": {
+        "bias": "0.0",
+        "controlled_pv": "FT-402.FLOW",
+        "kp": "1.2",
+        "output_max": "100.0",
+        "output_min": "0.0",
+        "output_tag": "FIC_402.OUT",
+        "ratio": "0.50",
+        "ratio_max": "2.0",
+        "ratio_min": "0.10",
+        "target_actuator": "FV-402",
+        "td": "0.0",
+        "ti": "5.0",
+        "wild_pv": "FT-401.FLOW"
+      }
+    }
+  ],
+  "communications": null,
+  "sis": null,
+  "displays": [],
+  "navigation_links": [],
+  "plant_structure": null
+}

@@ -11,11 +11,21 @@
 
 pub mod catalog;
 pub mod dependency;
+pub mod domain;
 pub mod import_export;
 pub mod package;
 pub mod standard;
 pub mod template;
 pub mod versioning;
+
+pub use domain::{
+    load_all_standard_domain_packages, make_chemical_processing_domain_package,
+    make_gas_processing_domain_package, make_lng_refrigeration_domain_package,
+    make_petrochemical_olefin_domain_package, make_power_steam_domain_package,
+    make_refinery_cdu_domain_package, make_refinery_hydroprocessing_domain_package,
+    make_refinery_vdu_domain_package, standard_domain_equipment_definitions, DomainPackage,
+    IndustrialDomainKind, OperatingRangeDefinition,
+};
 
 pub use catalog::EquipmentLibrary;
 pub use dependency::{DependencyResolver, VersionConstraint};

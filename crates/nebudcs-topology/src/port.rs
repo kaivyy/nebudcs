@@ -138,6 +138,7 @@ pub fn validate_stream_type_domain(
                 PortDomain::Utility(UtilityKind::Flare)
             )
             | (StreamType::CatalystTransport, PortDomain::Catalyst)
+            | (StreamType::MechanicalShaft, PortDomain::Mechanical)
     );
 
     if matches {

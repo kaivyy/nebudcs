@@ -46,7 +46,7 @@ max_value = 150.0
 required = false
 
 [[definition.ports]]
-id = "01M1T4ZBRK5DH7K6FHYCVSMK4P"
+id = "2Z0TCSV15342N4G68500SBPH4T"
 name = "suction"
 domain = "material"
 direction = "inlet"
@@ -56,7 +56,7 @@ cardinality = "zero_or_more"
 description = "Port suction"
 
 [[definition.ports]]
-id = "01M1T4ZBRK9YYJBSV496MRBNM4"
+id = "1NQHXSA59AXSTTAS8GQETNQXF7"
 name = "discharge"
 domain = "material"
 direction = "outlet"
@@ -66,7 +66,7 @@ cardinality = "zero_or_more"
 description = "Port discharge"
 
 [[definition.ports]]
-id = "01M1T4ZBRKK75CK2CDMENF27X4"
+id = "497K3CFVVD9MZ583BNBW4J0A4N"
 name = "recycle"
 domain = "material"
 direction = "inlet"
@@ -76,7 +76,7 @@ cardinality = "zero_or_more"
 description = "Port recycle"
 
 [[definition.ports]]
-id = "01M1T4ZBRKD3X261TQPV5G7YT5"
+id = "5SDGS2F11RCBT09R1WK0PFBHF6"
 name = "shaft_drive"
 domain = "mechanical"
 direction = "inlet"

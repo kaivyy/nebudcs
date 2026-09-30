@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "audit_id": "NEBU-AUDIT-PROVENANCE-2026-09-10",
+    "timestamp": "2026-09-10T02:58:05.119458+00:00",
+    "target_plant": "30,033 BPSD Naphtha Hydrotreater (NHT) Unit",
+    "primary_benchmark": "HPCL Visakh Refinery / Engineers India Limited (EIL) Process Standard",
+    "status": "VERIFIED"
+  },
+  "benchmarks": [
+    {
+      "source_id": "REF-EIL-NHT-01",
+      "title": "Design Basis & Operating Manual for NHT Unit 72",
+      "organization": "Engineers India Limited (EIL) / HPCL Visakh",
+      "applicability": "Core heat & mass balance, operating pressures, temperatures, and vessel dimensions"
+    },
+    {
+      "source_id": "REF-PERRY-CHENG",
+      "title": "Perry's Chemical Engineers' Handbook (9th Ed.)",
+      "organization": "McGraw-Hill",
+      "applicability": "Thermodynamic coefficients, fluid heat capacities, Darcy friction factors"
+    },
+    {
+      "source_id": "REF-CRANE-TP410",
+      "title": "Flow of Fluids Through Valves, Fittings, and Pipe",
+      "organization": "Crane Co.",
+      "applicability": "Hydraulic piping network pressure loss, equivalent length calculations, valve Cv"
+    }
+  ],
+  "audited_parameters": [
+    {
+      "equipment_id": "72-FEED-BOUND",
+      "parameter": "feed_volumetric_flow",
+      "value": 199.0,
+      "unit": "m3/h",
+      "confidence": "HIGH",
+      "provenance": "HPCL Visakh NHT Operating Manual (30,033 BPSD design rating)",
+      "status": "MATCH_AUTHORITATIVE"
+    },
+    {
+      "equipment_id": "72-V-01",
+      "parameter": "surge_drum_volume",
+      "value": 85.0,
+      "unit": "m3",
+      "confidence": "HIGH",
+      "provenance": "EIL Equipment Specification Sheet 72-V-01",
+      "status": "MATCH_AUTHORITATIVE"
+    },
+    {
+      "equipment_id": "72-P-01A/B",
+      "parameter": "rated_differential_head",
+      "value": 380.0,
+      "unit": "m",
+      "confidence": "HIGH",
+      "provenance": "API 610 Centrifugal Pump Data Sheet",
+      "status": "MATCH_AUTHORITATIVE"
+    },
+    {
+      "equipment_id": "72-F-01",
+      "parameter": "design_firing_duty",
+      "value": 24.5,
+      "unit": "MW",
+      "confidence": "HIGH",
+      "provenance": "API 560 Fired Heater Process Data Sheet",
+      "status": "MATCH_AUTHORITATIVE"
+    },
+    {
+      "equipment_id": "72-R-01",
+      "parameter": "catalyst_bed_volume",
+      "value": 32.5,
+      "unit": "m3",
+      "confidence": "HIGH",
+      "provenance": "CoMo/Al2O3 Hydrotreating Catalyst Loading Sheet",
+      "status": "MATCH_AUTHORITATIVE"
+    },
+    {
+      "equipment_id": "72-V-02",
+      "parameter": "separator_operating_pressure",
+      "value": 31.5,
+      "unit": "barg",
+      "confidence": "HIGH",
+      "provenance": "HPCL Visakh HP Cold Separator Design Data",
+      "status": "MATCH_AUTHORITATIVE"
+    },
+    {
+      "equipment_id": "72-K-01A/B",
+      "parameter": "recycle_compressor_power",
+      "value": 2850.0,
+      "unit": "kW",
+      "confidence": "HIGH",
+      "provenance": "API 617 Centrifugal Compressor Package Datasheet",
+      "status": "MATCH_AUTHORITATIVE"
+    }
+  ]
+}

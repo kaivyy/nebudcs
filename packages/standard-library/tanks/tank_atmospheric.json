@@ -37,7 +37,7 @@
     },
     "ports": [
       {
-        "id": "01M1T4ZBRK4KVNK0WHX0SPSKKA",
+        "id": "68A3WN88ZB4Y0MYZWJAKSCKECP",
         "name": "inlet",
         "domain": "material",
         "direction": "inlet",
@@ -49,7 +49,7 @@
         "description": "Port inlet"
       },
       {
-        "id": "01M1T4ZBRK92EHN8DFYDHH36NK",
+        "id": "20BW59F2XB37X5TYG8K1HMDYRS",
         "name": "outlet",
         "domain": "material",
         "direction": "outlet",
@@ -61,7 +61,7 @@
         "description": "Port outlet"
       },
       {
-        "id": "01M1T4ZBRK9YB97TMDA2QGVW1Y",
+        "id": "358C40FZETRMYWEYDJF1JSX0T5",
         "name": "drain_overflow",
         "domain": {
           "utility": "plant_air"

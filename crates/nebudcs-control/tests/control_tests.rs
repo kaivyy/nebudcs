@@ -548,11 +548,7 @@ fn test_sensor_stale_and_frozen_detection() {
 fn test_protective_trip_latching_and_reset() {
     use nebudcs_control::protection::{ProtectionBlock, ProtectionConfig, ProtectionState};
 
-    let config = ProtectionConfig {
-        name: "HIGH_PRESSURE_TRIP".to_string(),
-        threshold: 100.0,
-        reset_deadband: 5.0, // must drop below 95.0 to reset
-    };
+    let config = ProtectionConfig::new("HIGH_PRESSURE_TRIP", 100.0, 5.0);
     let mut prot = ProtectionBlock::new(config);
     assert_eq!(prot.state(), ProtectionState::Armed);
 
@@ -863,4 +859,35 @@ fn test_benchmark_1000_tags_execution_budget() {
         "Tick duration must be well below 1.5ms budget, got {:?}",
         avg_tick_duration
     );
+}
+
+#[test]
+fn test_protective_trip_low_direction_and_reset() {
+    use nebudcs_control::protection::{
+        ProtectionBlock, ProtectionConfig, ProtectionState, TripDirection,
+    };
+
+    let config = ProtectionConfig::new_low("LOW_LEVEL_TRIP", 10.0, 2.0);
+    assert_eq!(config.direction, TripDirection::Low);
+
+    let mut prot = ProtectionBlock::new(config);
+    assert_eq!(prot.state(), ProtectionState::Armed);
+
+    // PV is 50.0 > 10.0 -> Normal active monitoring
+    assert!(!prot.step(50.0, false));
+    assert_eq!(prot.state(), ProtectionState::Active);
+
+    // PV drops to 9.5 <= 10.0 -> Trips!
+    assert!(prot.step(9.5, false));
+    assert_eq!(prot.state(), ProtectionState::Tripped);
+    assert!(prot.is_tripped());
+
+    // Still in trip condition (PV = 10.5 <= threshold + deadband 12.0) -> Reset rejected, remains tripped
+    assert!(prot.step(10.5, true));
+    assert_eq!(prot.state(), ProtectionState::Tripped);
+
+    // PV recovers to 13.0 >= 10.0 + 2.0 -> Reset succeeds with operator command
+    assert!(!prot.step(13.0, true));
+    assert_eq!(prot.state(), ProtectionState::Armed);
+    assert!(!prot.is_tripped());
 }

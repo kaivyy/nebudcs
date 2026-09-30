@@ -318,6 +318,12 @@ impl CustomEquipmentManager {
         self.instances.values().collect()
     }
 
+    /// Clears all runtime equipment instances and tag bindings.
+    pub fn clear_instances(&mut self) {
+        self.instances.clear();
+        self.tag_bindings.clear();
+    }
+
     /// Commands equipment start (permissives and trips checked).
     pub fn start(&mut self, id: EquipmentId) -> ScriptingResult<()> {
         let inst = self

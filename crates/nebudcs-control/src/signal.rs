@@ -35,6 +35,15 @@ impl RuntimeTagStore {
         Self::default()
     }
 
+    /// Clears all registered tags and pre-allocated buffers.
+    pub fn clear(&mut self) {
+        self.name_to_id.clear();
+        self.id_to_index.clear();
+        self.tags.clear();
+        self.values.clear();
+        self.qualities.clear();
+    }
+
     /// Registers a tag at configuration time, pre-allocating its runtime slot.
     pub fn register_tag(
         &mut self,

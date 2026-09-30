@@ -51,6 +51,13 @@ pub fn validate_scenario(scenario: &ScenarioDefinition) -> ScenarioResult<()> {
         })?;
     }
 
+    // Validate branches
+    for (idx, branch) in scenario.branches.iter().enumerate() {
+        validate_branch(branch).map_err(|e| {
+            ScenarioError::Validation(format!("Branch #{idx} ('{}'): {e}", branch.branch_id))
+        })?;
+    }
+
     Ok(())
 }
 
@@ -117,7 +124,34 @@ fn validate_event(event: &ScenarioEvent) -> ScenarioResult<()> {
         return Err(ScenarioError::Validation("Event ID cannot be empty".into()));
     }
 
-    match &event.trigger {
+    validate_trigger(&event.trigger)?;
+    validate_action(&event.action)?;
+
+    Ok(())
+}
+
+fn validate_branch(branch: &ScenarioBranch) -> ScenarioResult<()> {
+    if branch.branch_id.trim().is_empty() {
+        return Err(ScenarioError::Validation(
+            "Branch ID cannot be empty".into(),
+        ));
+    }
+    if branch.name.trim().is_empty() {
+        return Err(ScenarioError::Validation(
+            "Branch name cannot be empty".into(),
+        ));
+    }
+
+    validate_trigger(&branch.trigger)?;
+    for action in &branch.actions {
+        validate_action(action)?;
+    }
+
+    Ok(())
+}
+
+pub fn validate_trigger(trigger: &EventTrigger) -> ScenarioResult<()> {
+    match trigger {
         EventTrigger::Time { elapsed_sec } => {
             if !elapsed_sec.is_finite() || *elapsed_sec < 0.0 {
                 return Err(ScenarioError::Validation(
@@ -137,9 +171,69 @@ fn validate_event(event: &ScenarioEvent) -> ScenarioResult<()> {
                 ));
             }
         }
+        EventTrigger::PvDeviation {
+            tag,
+            target,
+            max_deviation,
+        } => {
+            if tag.trim().is_empty() {
+                return Err(ScenarioError::Validation(
+                    "PvDeviation tag name cannot be empty".into(),
+                ));
+            }
+            if !target.is_finite() || !max_deviation.is_finite() || *max_deviation < 0.0 {
+                return Err(ScenarioError::Validation(
+                    "PvDeviation target and max_deviation must be valid finite numbers".into(),
+                ));
+            }
+        }
+        EventTrigger::EquipmentState { equipment_name, .. } => {
+            if equipment_name.trim().is_empty() {
+                return Err(ScenarioError::Validation(
+                    "EquipmentState equipment_name cannot be empty".into(),
+                ));
+            }
+        }
+        EventTrigger::AlarmActive { alarm_name } => {
+            if alarm_name.trim().is_empty() {
+                return Err(ScenarioError::Validation(
+                    "AlarmActive alarm_name cannot be empty".into(),
+                ));
+            }
+        }
+        EventTrigger::SisState { sif_id, .. } => {
+            if sif_id.trim().is_empty() {
+                return Err(ScenarioError::Validation(
+                    "SisState sif_id cannot be empty".into(),
+                ));
+            }
+        }
+        EventTrigger::OperatorActionTrigger {
+            target_entity,
+            action_type,
+        } => {
+            if target_entity.trim().is_empty() || action_type.trim().is_empty() {
+                return Err(ScenarioError::Validation(
+                    "OperatorActionTrigger target_entity and action_type cannot be empty".into(),
+                ));
+            }
+        }
+        EventTrigger::CompoundAnd { triggers } | EventTrigger::CompoundOr { triggers } => {
+            if triggers.is_empty() {
+                return Err(ScenarioError::Validation(
+                    "Compound trigger list cannot be empty".into(),
+                ));
+            }
+            for tr in triggers {
+                validate_trigger(tr)?;
+            }
+        }
     }
+    Ok(())
+}
 
-    match &event.action {
+fn validate_action(action: &ScenarioAction) -> ScenarioResult<()> {
+    match action {
         ScenarioAction::InjectFault(fault) => validate_fault(fault)?,
         ScenarioAction::ClearFault { fault_id } => {
             if fault_id.trim().is_empty() {
@@ -158,7 +252,6 @@ fn validate_event(event: &ScenarioEvent) -> ScenarioResult<()> {
             }
         }
     }
-
     Ok(())
 }
 

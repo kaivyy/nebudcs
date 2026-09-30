@@ -1,0 +1,168 @@
+{
+  "session": {
+    "id": "tsess-01m207b8czn4dk0610jzaapp3f",
+    "project_id": "",
+    "scenario_id": "",
+    "scenario_version": null,
+    "name": "Stage 11 OTS Lifecycle Drill",
+    "description": "Comprehensive test of OTS state machine",
+    "instructor_id": "inst-lead",
+    "trainee_id": "trainee-alpha",
+    "state": "COMPLETED",
+    "created_at_ms": 1788861587871,
+    "started_at_ms": 1788861587967,
+    "completed_at_ms": 1788861588167,
+    "simulation_start_time_sec": 0.1,
+    "current_simulation_time_sec": 0.30000000000000004,
+    "abort_reason": null,
+    "runtime_snapshot": null,
+    "score": 100.0,
+    "completion_state": "PASS",
+    "metadata": {}
+  },
+  "scenario": null,
+  "criteria": [],
+  "actions": [
+    {
+      "action_id": "tact-01m207b8k37ec704peabsfzjbf",
+      "session_id": "tsess-01m207b8czn4dk0610jzaapp3f",
+      "sim_time_sec": 0.2,
+      "wall_clock_ms": 1788861588067,
+      "actor": "trainee-alpha",
+      "target_entity": "TAH-101",
+      "action_type": "ACK_ALARM",
+      "requested_value": null,
+      "action": {
+        "type": "acknowledge_alarm",
+        "alarm_name": "TAH-101"
+      },
+      "status": {
+        "status": "accepted"
+      },
+      "error_classification": "CORRECT"
+    }
+  ],
+  "samples": [
+    [
+      0.1,
+      "PT-101",
+      40.0
+    ],
+    [
+      0.1,
+      "PIC-101",
+      0.0
+    ],
+    [
+      0.30000000000000004,
+      "PT-101",
+      40.0
+    ],
+    [
+      0.30000000000000004,
+      "PIC-101",
+      0.0
+    ],
+    [
+      0.30000000000000004,
+      "PT-101",
+      40.0
+    ],
+    [
+      0.30000000000000004,
+      "PIC-101",
+      0.0
+    ]
+  ],
+  "events": [],
+  "evaluation_report": {
+    "session_id": "tsess-01m207b8czn4dk0610jzaapp3f",
+    "scenario_id": "",
+    "trainee_id": "trainee-alpha",
+    "total_score": 0,
+    "max_possible_score": 0,
+    "percentage": 100.0,
+    "passed": true,
+    "results": [],
+    "evaluated_at_ms": 1788861588167,
+    "debrief": {
+      "process_performance": "Process variables stabilized within normal operating envelope (100.0% score).",
+      "operator_performance": "Operator executed procedural interventions within acceptable response windows.",
+      "safety_assessment": "Safety Instrumented System (SIS) integrity preserved with zero unprevented trips.",
+      "outcome_verdict": "STAGE 11 OTS ASSESSMENT: SATISFACTORY / PASS",
+      "recommendations": [
+        "Operations conformed to standard DCS operating procedures and safety envelopes."
+      ]
+    }
+  },
+  "replay_data": {
+    "session_id": "tsess-01m207b8czn4dk0610jzaapp3f",
+    "project_id": "",
+    "scenario_id": "",
+    "start_sim_time_sec": 0.1,
+    "end_sim_time_sec": 0.30000000000000004,
+    "duration_sec": 0.20000000000000004,
+    "tag_trajectories": {
+      "PIC-101": [
+        [
+          0.1,
+          0.0
+        ],
+        [
+          0.30000000000000004,
+          0.0
+        ],
+        [
+          0.30000000000000004,
+          0.0
+        ]
+      ],
+      "PT-101": [
+        [
+          0.1,
+          40.0
+        ],
+        [
+          0.30000000000000004,
+          40.0
+        ],
+        [
+          0.30000000000000004,
+          40.0
+        ]
+      ]
+    },
+    "events": [],
+    "actions": [
+      {
+        "action_id": "tact-01m207b8k37ec704peabsfzjbf",
+        "session_id": "tsess-01m207b8czn4dk0610jzaapp3f",
+        "sim_time_sec": 0.2,
+        "wall_clock_ms": 1788861588067,
+        "actor": "trainee-alpha",
+        "target_entity": "TAH-101",
+        "action_type": "ACK_ALARM",
+        "requested_value": null,
+        "action": {
+          "type": "acknowledge_alarm",
+          "alarm_name": "TAH-101"
+        },
+        "status": {
+          "status": "accepted"
+        },
+        "error_classification": "CORRECT"
+      }
+    ],
+    "markers": [
+      {
+        "marker_id": "marker-act-1",
+        "sim_time_sec": 0.2,
+        "kind": "OPERATOR_ACTION",
+        "source_id": "TAH-101",
+        "label": "Action: ACK_ALARM",
+        "details": "Trainee trainee-alpha commanded TAH-101",
+        "severity": 2
+      }
+    ]
+  }
+}

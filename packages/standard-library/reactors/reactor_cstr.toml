@@ -37,7 +37,7 @@ max_value = 100.0
 required = false
 
 [[definition.ports]]
-id = "01M1T4ZBRK1YER97SD242N8RCZ"
+id = "3AWM1X0D9W8KPD9RV20P0FTH3A"
 name = "feed"
 domain = "material"
 direction = "inlet"
@@ -47,7 +47,7 @@ cardinality = "zero_or_more"
 description = "Port feed"
 
 [[definition.ports]]
-id = "01M1T4ZBRKRTZDRANJMBSZN097"
+id = "27NWW5RP2WM0FQBYS8YA51KJB0"
 name = "effluent"
 domain = "material"
 direction = "outlet"
@@ -57,7 +57,7 @@ cardinality = "zero_or_more"
 description = "Port effluent"
 
 [[definition.ports]]
-id = "01M1T4ZBRKTMPDDYE2B2Q7X1BP"
+id = "1DJRXN5X4YCP4MPTBPCRH4GKYE"
 name = "coolant_in"
 direction = "inlet"
 phase_compatibility = ["liquid"]
@@ -69,7 +69,7 @@ description = "Port coolant_in"
 utility = "cooling_water"
 
 [[definition.ports]]
-id = "01M1T4ZBRKWNQVKWAX5DA2SHXF"
+id = "63QG0RMX85YMHESE7A7KRBXZ5S"
 name = "coolant_out"
 direction = "outlet"
 phase_compatibility = ["liquid"]

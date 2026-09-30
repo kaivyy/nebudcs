@@ -55,4 +55,56 @@ pub enum PhysicsError {
 
     #[error("missing component or property: {name}")]
     MissingProperty { name: String },
+
+    #[error("cubic EOS root selection error: {message}")]
+    EosRootError { message: String },
+
+    #[error("VLE flash convergence failed after {iterations}/{max_iterations} iterations (residual: {residual}, tolerance: {tolerance})")]
+    FlashConvergenceFailed {
+        iterations: usize,
+        max_iterations: usize,
+        residual: f64,
+        tolerance: f64,
+    },
+
+    #[error("phase stability analysis error: {message}")]
+    PhaseStabilityError { message: String },
+
+    #[error("singular Jacobian in nonlinear solver: {detail}")]
+    SingularJacobian { detail: String },
+
+    #[error("stiff solver {method} failed: {reason}")]
+    StiffSolverFailed { method: String, reason: String },
+
+    #[error("compressor map error: {message}")]
+    CompressorMapError { message: String },
+
+    #[error("pump cavitation calculation error: {message}")]
+    CavitationError { message: String },
+
+    #[error("scientific data validation error: {detail}")]
+    ScientificDataError { detail: String },
+
+    #[error(
+        "property calculation out of range: {variable}={value} outside [{min}, {max}] ({context})"
+    )]
+    PropertyOutOfRange {
+        variable: String,
+        value: f64,
+        min: f64,
+        max: f64,
+        context: String,
+    },
+
+    #[error("unsupported capability {capability} in package {package}")]
+    UnsupportedCapability { capability: String, package: String },
+
+    #[error("thermodynamic inconsistency: {detail}")]
+    ThermodynamicInconsistency { detail: String },
+
+    #[error("reaction kinetics error: {message}")]
+    ReactionKineticsError { message: String },
+
+    #[error("heat transfer calculation error: {message}")]
+    HeatTransferError { message: String },
 }

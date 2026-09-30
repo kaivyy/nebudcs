@@ -1,0 +1,77 @@
+{
+  "id": "domain.power.steam_turbine",
+  "name": "Thermal Power & Steam Mechanical Drive Package",
+  "version": "1.0.0",
+  "domain_kind": "power_steam",
+  "description": "Industrial steam power generation and mechanical shaft drive package with HP steam boiler, electro-hydraulic throttle valve, multi-stage expansion turbine, mechanical shaft torque transmission, driven centrifugal compressor, and surface condenser.",
+  "author": "NebuDCS Standard Library",
+  "thermodynamic_requirements": [
+    "Steam Enthalpy-Entropy State Functions (IAPWS-IF97)",
+    "Isentropic Turbine Expansion Efficiency",
+    "Rankine Cycle Thermodynamics"
+  ],
+  "utility_requirements": [
+    "STEAM_PRESSURE",
+    "COOLING_WATER",
+    "INSTRUMENT_AIR",
+    "ELECTRICITY"
+  ],
+  "composition_defaults": {
+    "Steam_H2O": 1.0
+  },
+  "operating_ranges": {
+    "compressor_discharge_pressure": {
+      "quantity": "Pressure",
+      "min_value": 1.0,
+      "max_value": 35.0,
+      "unit": "bar",
+      "normal_operating_value": 18.5
+    },
+    "steam_header_pressure": {
+      "quantity": "Pressure",
+      "min_value": 20.0,
+      "max_value": 65.0,
+      "unit": "bar",
+      "normal_operating_value": 42.0
+    },
+    "turbine_shaft_power": {
+      "quantity": "Power",
+      "min_value": 0.0,
+      "max_value": 600.0,
+      "unit": "kW",
+      "normal_operating_value": 480.0
+    },
+    "turbine_shaft_speed": {
+      "quantity": "Speed",
+      "min_value": 0.0,
+      "max_value": 4200.0,
+      "unit": "RPM",
+      "normal_operating_value": 3600.0
+    }
+  },
+  "control_strategies": [
+    "SIC-201 Electronic Governor Speed Regulation via Throttle Valve",
+    "PIC-201 Downstream Compressor Discharge Pressure Regulation",
+    "Emergency Overspeed Quick-Trip Latch (> 3800 RPM shutoff)",
+    "PIC-202 Surface Condenser Vacuum Pressure Control"
+  ],
+  "scenario_presets": [
+    "scn-power-steam-loss",
+    "scn-power-turbine-overspeed",
+    "scn-power-compressor-surge",
+    "scn-power-condenser-vacuum-loss"
+  ],
+  "equipment_templates": [
+    "standard.valve.control_globe",
+    "standard.compressor.centrifugal",
+    "standard.heat_exchanger.shell_and_tube",
+    "standard.vessel.vertical_separator"
+  ],
+  "plant_template_ids": [
+    "proj-domain-power-turbine"
+  ],
+  "validation_rules": [
+    "VLD-PWR01: Steam turbine shaft_out must connect to rotating load with PortDomain::Mechanical",
+    "VLD-PWR02: Turbine throttle valve must fail closed (FailClosed) upon trip or loss of signal"
+  ]
+}

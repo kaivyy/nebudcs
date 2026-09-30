@@ -1,18 +1,19 @@
 //! Binary entrypoint for the NebuDCS realtime server.
+//!
+//! Runtime state (tags, alarms, PID controllers) is project-driven: tags are
+//! seeded by the simulation engine when a project is loaded via
+//! `POST /api/v1/projects/:id/load-sim`.  The server starts with an empty
+//! tag store so that no project-specific identifiers are hard-wired here.
 
 use std::net::SocketAddr;
 use tokio::signal;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
-use nebudcs_alarm::block::AlarmBlockConfig;
-use nebudcs_alarm::types::{AlarmSeverity, AlarmType};
 use nebudcs_alarm::AlarmSystem;
 use nebudcs_control::signal::RuntimeTagStore;
 use nebudcs_control::ControlSystem;
-use nebudcs_model::tag::{TagQuality, TagValue};
 use nebudcs_server::{build_app, ServerConfig, SimulationHost};
 use nebudcs_sim::SimulationEngine;
-use nebudcs_types::{EquipmentId, TagId};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -24,7 +25,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .with(tracing_subscriber::fmt::layer())
         .init();
 
-    tracing::info!("Starting NebuDCS Realtime Server (Phase 7)...");
+    tracing::info!("Starting NebuDCS Realtime Server (Phase 14 — generic model-driven runtime)...");
 
     let port: u16 = std::env::var("PORT")
         .ok()
@@ -39,156 +40,62 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     if let Ok(token) = std::env::var("AUTH_TOKEN") {
         if !token.is_empty() {
-            tracing::info!("Server authentication enabled");
+            tracing::info!("Server authentication enabled (legacy shared token)");
             config.auth_token = Some(token);
         }
     }
+    if let Ok(token) = std::env::var("ADMIN_TOKEN") {
+        if !token.is_empty() {
+            config.admin_token = Some(token);
+        }
+    }
+    if let Ok(token) = std::env::var("INSTRUCTOR_TOKEN") {
+        if !token.is_empty() {
+            config.instructor_token = Some(token);
+        }
+    }
+    if let Ok(token) = std::env::var("OPERATOR_TOKEN") {
+        if !token.is_empty() {
+            config.operator_token = Some(token);
+        }
+    }
+    if let Ok(token) = std::env::var("TRAINEE_TOKEN") {
+        if !token.is_empty() {
+            config.trainee_token = Some(token);
+        }
+    }
+    if let Ok(dir) = std::env::var("DATA_DIR") {
+        if !dir.is_empty() {
+            config.data_dir = std::path::PathBuf::from(dir);
+        }
+    }
+    if let Ok(dir) = std::env::var("STATIC_DIR") {
+        if !dir.is_empty() {
+            config.static_dir = Some(std::path::PathBuf::from(dir));
+        }
+    }
+    if let Ok(burst) = std::env::var("RATE_LIMIT_BURST") {
+        if let Ok(b) = burst.parse::<u32>() {
+            config.rate_limit_burst = b;
+        }
+    }
+    if let Ok(rps) = std::env::var("RATE_LIMIT_RPS") {
+        if let Ok(r) = rps.parse::<f64>() {
+            config.rate_limit_rps = r;
+        }
+    }
 
-    // Initialize simulation engine baseline
+    // Initialize simulation engine with an empty runtime store.
+    // Tags, alarms, and PID controllers are registered when the operator loads
+    // a project via the Engineering Studio (POST /api/v1/projects/:id/load-sim).
+    // The baseline demonstration project (K-101 / FV-101 / V-101) exists only
+    // as project model data in ProjectManager — it is not auto-activated here.
     let engine = SimulationEngine::new(config.simulation_dt)?;
+    let tag_store = RuntimeTagStore::new();
+    let alarm_sys = AlarmSystem::new();
+    let ctrl_sys = ControlSystem::new();
 
-    // Initialize baseline demonstration tags
-    let mut tag_store = RuntimeTagStore::new();
-    let ti101_id = TagId::new();
-    let pi101_id = TagId::new();
-    let ft101_flow_id = TagId::new();
-    let fic101_pv_id = TagId::new();
-    let fic101_sp_id = TagId::new();
-    let fic101_out_id = TagId::new();
-    let lic101_pv_id = TagId::new();
-    let lic101_sp_id = TagId::new();
-    let lic101_out_id = TagId::new();
-    let v101_level_id = TagId::new();
-    let fv101_pos_id = TagId::new();
-    let k101_speed_id = TagId::new();
-    let k101_status_id = TagId::new();
-
-    let fv101_eq_id = EquipmentId::new();
-
-    tag_store.register_tag("TI-101", ti101_id, TagValue::Float(185.4), TagQuality::Good);
-    tag_store.register_tag("PI-101", pi101_id, TagValue::Float(32.5), TagQuality::Good);
-    tag_store.register_tag(
-        "FT-101.FLOW",
-        ft101_flow_id,
-        TagValue::Float(4500.0),
-        TagQuality::Good,
-    );
-    tag_store.register_tag(
-        "FIC-101.PV",
-        fic101_pv_id,
-        TagValue::Float(4500.0),
-        TagQuality::Good,
-    );
-    tag_store.register_tag(
-        "FIC-101.SP",
-        fic101_sp_id,
-        TagValue::Float(4500.0),
-        TagQuality::Good,
-    );
-    tag_store.register_tag(
-        "FIC-101.OUT",
-        fic101_out_id,
-        TagValue::Float(55.2),
-        TagQuality::Good,
-    );
-    tag_store.register_tag(
-        "LIC-101.PV",
-        lic101_pv_id,
-        TagValue::Float(50.0),
-        TagQuality::Good,
-    );
-    tag_store.register_tag(
-        "LIC-101.SP",
-        lic101_sp_id,
-        TagValue::Float(50.0),
-        TagQuality::Good,
-    );
-    tag_store.register_tag(
-        "LIC-101.OUT",
-        lic101_out_id,
-        TagValue::Float(55.2),
-        TagQuality::Good,
-    );
-    tag_store.register_tag(
-        "V-101.LEVEL",
-        v101_level_id,
-        TagValue::Float(50.0),
-        TagQuality::Good,
-    );
-    tag_store.register_tag(
-        "FV-101.POS",
-        fv101_pos_id,
-        TagValue::Float(55.2),
-        TagQuality::Good,
-    );
-    tag_store.register_tag(
-        "K-101.SPEED",
-        k101_speed_id,
-        TagValue::Float(2950.0),
-        TagQuality::Good,
-    );
-    tag_store.register_tag(
-        "K-101.STATUS",
-        k101_status_id,
-        TagValue::Integer(1),
-        TagQuality::Good,
-    );
-
-    // Initialize alarm and control systems
-    let mut alarm_sys = AlarmSystem::new();
-    alarm_sys.add_alarm(AlarmBlockConfig {
-        name: "ALM_PI101_HI".to_string(),
-        tag_id: pi101_id,
-        alarm_type: AlarmType::Hi,
-        severity: AlarmSeverity::Warning,
-        limit: 35.0,
-        deadband: 0.5,
-        default_shelve_duration: 60.0,
-    });
-    alarm_sys.add_alarm(AlarmBlockConfig {
-        name: "ALM_LIC101_HI".to_string(),
-        tag_id: lic101_pv_id,
-        alarm_type: AlarmType::Hi,
-        severity: AlarmSeverity::Warning,
-        limit: 75.0,
-        deadband: 1.0,
-        default_shelve_duration: 120.0,
-    });
-    alarm_sys.add_alarm(AlarmBlockConfig {
-        name: "ALM_LIC101_HIHI".to_string(),
-        tag_id: lic101_pv_id,
-        alarm_type: AlarmType::Hi,
-        severity: AlarmSeverity::Critical,
-        limit: 85.0,
-        deadband: 1.0,
-        default_shelve_duration: 120.0,
-    });
-
-    let mut ctrl_sys = ControlSystem::new();
-    ctrl_sys.register_pid(
-        lic101_pv_id,
-        lic101_out_id,
-        fv101_eq_id,
-        nebudcs_control::pid::PidConfig {
-            kp: 1.5,
-            ti: 20.0,
-            td: 0.5,
-            ..Default::default()
-        },
-    );
-    ctrl_sys.register_pid(
-        fic101_pv_id,
-        fic101_out_id,
-        fv101_eq_id,
-        nebudcs_control::pid::PidConfig {
-            kp: 0.8,
-            ti: 10.0,
-            td: 0.0,
-            ..Default::default()
-        },
-    );
-
-    // Start simulation host
+    // Start simulation host with clean runtime state
     let mut host = SimulationHost::start(
         config.clone(),
         engine,

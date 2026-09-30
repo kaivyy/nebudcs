@@ -129,4 +129,11 @@ impl SimulationClock {
         self.time = self.time.advance(self.dt);
         self.tick_count = self.tick_count.saturating_add(1);
     }
+
+    /// Resets the clock to zero simulation time and zero tick count in `Paused` state.
+    pub fn reset(&mut self) {
+        self.time = SimulationTime::ZERO;
+        self.tick_count = 0;
+        self.state = ClockState::Paused;
+    }
 }

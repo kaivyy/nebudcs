@@ -1,0 +1,325 @@
+{
+  "id": "2TG9GKVS35S95ACC4ATD5ZHYN1",
+  "name": "Alpha Hydroprocessing Model",
+  "schema_version": "0.1.0",
+  "plants": [
+    {
+      "id": "01M2322YXSBX69DC6KF9TDJ4N3",
+      "name": "Plant (Alpha Hydroprocessing Model)",
+      "areas": [
+        {
+          "id": "01M2322YXSR2VB9JYDNYKBXZQ8",
+          "name": "Main Area",
+          "units": [
+            {
+              "id": "01M2322YXS2XBWRAABD90C0AC7",
+              "name": "Main Unit",
+              "equipment": [
+                {
+                  "id": "3JNRP8DZNGZZK0734E5NPQW6BJ",
+                  "definition_id": "7PV7KKP3ZRGF3HHSBF1230WPP7",
+                  "definition_version": "1.0.0",
+                  "name": "C-101",
+                  "parameters": {},
+                  "position": {
+                    "x": 100.0,
+                    "y": 150.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "0VVD6HP2W843D1231CM1DK0BJJ",
+                  "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+                  "definition_version": "1.0.0",
+                  "name": "V-101",
+                  "parameters": {},
+                  "position": {
+                    "x": 400.0,
+                    "y": 150.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                }
+              ],
+              "streams": [
+                {
+                  "id": "06DNBRR9NE728VQP30N4R1274S",
+                  "name": "Recycle Discharge",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "3JNRP8DZNGZZK0734E5NPQW6BJ",
+                    "port_id": "1NQHXSA59AXSTTAS8GQETNQXF7"
+                  },
+                  "sink": {
+                    "equipment_id": "0VVD6HP2W843D1231CM1DK0BJJ",
+                    "port_id": "68A3WN88ZB4Y0MYZWJAKSCKECP"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                }
+              ],
+              "instruments": [],
+              "control_loops": [],
+              "alarms": [],
+              "interlocks": [],
+              "boundary_conditions": [],
+              "initial_conditions": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "description": "Stage 14 Full Plant Model acceptance fixture",
+    "author": "Automated Verification Test",
+    "created": "2026-09-06T00:00:00Z",
+    "modified": "2026-09-06T00:00:00Z"
+  },
+  "controllers": [],
+  "io_systems": [],
+  "io_mappings": [],
+  "tags": [],
+  "advanced_control": [],
+  "communications": null,
+  "sis": null,
+  "displays": [
+    {
+      "id": "disp-plant",
+      "name": "Plant Overview",
+      "display_type": "plant_overview",
+      "area_id": null,
+      "system_id": null,
+      "subsystem_id": null,
+      "unit_id": null,
+      "equipment_ids": [
+        "eq-c101",
+        "eq-v101"
+      ],
+      "instrument_ids": [],
+      "stream_ids": [
+        "st-01"
+      ],
+      "viewport_x": 0.0,
+      "viewport_y": 0.0,
+      "viewport_width": 1920.0,
+      "viewport_height": 1080.0,
+      "viewport_zoom": 0.85,
+      "is_default": true,
+      "order": 1,
+      "description": "Global plant overview",
+      "placements": []
+    },
+    {
+      "id": "disp-sys-101",
+      "name": "Reactor Loop Overview",
+      "display_type": "system_overview",
+      "area_id": "area-100",
+      "system_id": "sys-101",
+      "subsystem_id": null,
+      "unit_id": null,
+      "equipment_ids": [
+        "eq-c101",
+        "eq-v101"
+      ],
+      "instrument_ids": [],
+      "stream_ids": [
+        "st-01"
+      ],
+      "viewport_x": 100.0,
+      "viewport_y": 50.0,
+      "viewport_width": 1920.0,
+      "viewport_height": 1080.0,
+      "viewport_zoom": 1.0,
+      "is_default": false,
+      "order": 2,
+      "description": "System-level graphic",
+      "placements": []
+    },
+    {
+      "id": "disp-c101",
+      "name": "C-101 Compressor Detail",
+      "display_type": "unit_process_graphic",
+      "area_id": "area-100",
+      "system_id": "sys-101",
+      "subsystem_id": "subsys-101a",
+      "unit_id": "unit-101a",
+      "equipment_ids": [
+        "eq-c101"
+      ],
+      "instrument_ids": [],
+      "stream_ids": [
+        "st-01"
+      ],
+      "viewport_x": 50.0,
+      "viewport_y": 50.0,
+      "viewport_width": 1920.0,
+      "viewport_height": 1080.0,
+      "viewport_zoom": 1.25,
+      "is_default": false,
+      "order": 3,
+      "description": "Recycle compressor unit graphic",
+      "placements": [
+        {
+          "equipment_id": "eq-c101",
+          "x": 250.0,
+          "y": 350.0,
+          "width": 120.0,
+          "height": 90.0,
+          "rotation": 0.0
+        }
+      ]
+    }
+  ],
+  "navigation_links": [
+    {
+      "id": "nav-c101-to-sys",
+      "source_display_id": "disp-c101",
+      "source_element_id": "eq-c101",
+      "target_display_id": "disp-sys-101",
+      "target_element_id": "eq-v101",
+      "label": "To HP Separator V-101",
+      "behavior": "focus_and_center",
+      "description": "Downstream process continuation link"
+    }
+  ],
+  "plant_structure": {
+    "plant_name": "Refinery & Petrochemical Complex Alpha",
+    "areas": [
+      {
+        "id": "area-100",
+        "name": "Hydroprocessing Complex",
+        "systems": [
+          {
+            "id": "sys-101",
+            "name": "Reactor Loop System",
+            "area_id": "area-100",
+            "subsystems": [
+              {
+                "id": "subsys-101a",
+                "name": "Recycle Gas Subsystem",
+                "system_id": "sys-101",
+                "units": [
+                  {
+                    "id": "unit-101a",
+                    "name": "Compression Unit",
+                    "subsystem_id": "subsys-101a",
+                    "system_id": "sys-101",
+                    "area_id": "area-100",
+                    "equipment_ids": [
+                      "eq-c101"
+                    ],
+                    "display_ids": [
+                      "disp-c101"
+                    ],
+                    "description": "Recycle compressor unit"
+                  }
+                ],
+                "description": null
+              }
+            ],
+            "default_display_id": "disp-sys-101",
+            "description": "Reaction loop and separation"
+          }
+        ],
+        "description": "High Pressure Reaction & Treatment"
+      }
+    ],
+    "displays": [
+      {
+        "id": "disp-plant",
+        "name": "Plant Overview",
+        "display_type": "plant_overview",
+        "area_id": null,
+        "system_id": null,
+        "subsystem_id": null,
+        "unit_id": null,
+        "equipment_ids": [
+          "eq-c101",
+          "eq-v101"
+        ],
+        "instrument_ids": [],
+        "stream_ids": [
+          "st-01"
+        ],
+        "viewport_x": 0.0,
+        "viewport_y": 0.0,
+        "viewport_width": 1920.0,
+        "viewport_height": 1080.0,
+        "viewport_zoom": 0.85,
+        "is_default": true,
+        "order": 1,
+        "description": "Global plant overview",
+        "placements": []
+      },
+      {
+        "id": "disp-sys-101",
+        "name": "Reactor Loop Overview",
+        "display_type": "system_overview",
+        "area_id": "area-100",
+        "system_id": "sys-101",
+        "subsystem_id": null,
+        "unit_id": null,
+        "equipment_ids": [
+          "eq-c101",
+          "eq-v101"
+        ],
+        "instrument_ids": [],
+        "stream_ids": [
+          "st-01"
+        ],
+        "viewport_x": 100.0,
+        "viewport_y": 50.0,
+        "viewport_width": 1920.0,
+        "viewport_height": 1080.0,
+        "viewport_zoom": 1.0,
+        "is_default": false,
+        "order": 2,
+        "description": "System-level graphic",
+        "placements": []
+      },
+      {
+        "id": "disp-c101",
+        "name": "C-101 Compressor Detail",
+        "display_type": "unit_process_graphic",
+        "area_id": "area-100",
+        "system_id": "sys-101",
+        "subsystem_id": "subsys-101a",
+        "unit_id": "unit-101a",
+        "equipment_ids": [
+          "eq-c101"
+        ],
+        "instrument_ids": [],
+        "stream_ids": [
+          "st-01"
+        ],
+        "viewport_x": 50.0,
+        "viewport_y": 50.0,
+        "viewport_width": 1920.0,
+        "viewport_height": 1080.0,
+        "viewport_zoom": 1.25,
+        "is_default": false,
+        "order": 3,
+        "description": "Recycle compressor unit graphic",
+        "placements": [
+          {
+            "equipment_id": "eq-c101",
+            "x": 250.0,
+            "y": 350.0,
+            "width": 120.0,
+            "height": 90.0,
+            "rotation": 0.0
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "id": "3HVC6AMZF31Y78EM49W9NBMCDG",
+  "name": "Ammonia Synthesis Loop",
+  "schema_version": "0.1.0",
+  "plants": [
+    {
+      "id": "01M1XY0M5662GY9YVNZ0GZK3N9",
+      "name": "Plant (Ammonia Synthesis Loop)",
+      "areas": [
+        {
+          "id": "01M1XY0M56X7053DP1V9E1N3VA",
+          "name": "Main Area",
+          "units": [
+            {
+              "id": "01M1XY0M56BY2HJQXES9TSFNYN",
+              "name": "Main Unit",
+              "equipment": [
+                {
+                  "id": "2YJ3J9XQ34VE88S2KSD39RGP0M",
+                  "definition_id": "0ATRCF671FM4B5GSSRFVNKC51R",
+                  "definition_version": "1.0.0",
+                  "name": "P-201",
+                  "parameters": {
+                    "power_kw": 250.0
+                  },
+                  "position": {
+                    "x": 150.0,
+                    "y": 300.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "1ZP6N4788NZPJRB13HY8RNAMJ1",
+                  "definition_id": "7PV7KKP3ZRGF3HHSBF1230WPP7",
+                  "definition_version": "1.0.0",
+                  "name": "C-201",
+                  "parameters": {},
+                  "position": {
+                    "x": 450.0,
+                    "y": 300.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                }
+              ],
+              "streams": [
+                {
+                  "id": "2F4B7SWDVD3WSQKQDR061F5BCC",
+                  "name": "S-201",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "2YJ3J9XQ34VE88S2KSD39RGP0M",
+                    "port_id": "1NQHXSA59AXSTTAS8GQETNQXF7"
+                  },
+                  "sink": {
+                    "equipment_id": "1ZP6N4788NZPJRB13HY8RNAMJ1",
+                    "port_id": "2Z0TCSV15342N4G68500SBPH4T"
+                  },
+                  "composition": null,
+                  "route_points": [
+                    {
+                      "x": 150.0,
+                      "y": 300.0
+                    },
+                    {
+                      "x": 450.0,
+                      "y": 300.0
+                    }
+                  ],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                }
+              ],
+              "instruments": [],
+              "control_loops": [],
+              "alarms": [],
+              "interlocks": [],
+              "boundary_conditions": [],
+              "initial_conditions": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "description": "High-pressure Haber-Bosch reaction and recycle loop",
+    "author": "Chemical Process Engineer",
+    "created": "2026-09-06T00:00:00Z",
+    "modified": "2026-09-06T00:00:00Z"
+  },
+  "controllers": [],
+  "io_systems": [],
+  "io_mappings": [],
+  "tags": [],
+  "advanced_control": [],
+  "communications": null,
+  "sis": null,
+  "displays": [],
+  "navigation_links": [],
+  "plant_structure": null
+}

@@ -22,8 +22,9 @@ pub mod version;
 // Re-export the most commonly used items at the crate root for ergonomics.
 pub use error::{NebuError, NebuResult};
 pub use ids::{
-    AlarmDefinitionId, AreaId, EntityId, EquipmentDefinitionId, EquipmentId, FailureModeId,
-    PipeSegmentId, PlantId, PortId, ProjectId, SignalConnectionId, StreamId, TagId, UnitId,
+    AlarmDefinitionId, AreaId, ChannelId, ChassisId, ControllerId, EntityId, EquipmentDefinitionId,
+    EquipmentId, FailureModeId, IoSystemId, ModuleId, PipeSegmentId, PlantId, PortId, ProjectId,
+    RackId, SignalConnectionId, StreamId, TagId, TaskId, UnitId,
 };
 pub use time::SimulationTime;
 pub use version::SchemaVersion;

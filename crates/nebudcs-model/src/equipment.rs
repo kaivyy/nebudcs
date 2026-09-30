@@ -432,6 +432,15 @@ pub struct EquipmentInstance {
     /// Optional 2-D position on a P&ID canvas.  Stored separately from the
     /// model — layout is not topology.
     pub position: Option<Position2D>,
+    /// Optional schematic display width override.
+    #[serde(default)]
+    pub display_width: Option<f64>,
+    /// Optional schematic display height override.
+    #[serde(default)]
+    pub display_height: Option<f64>,
+    /// Optional schematic rotation in degrees (0, 90, 180, 270).
+    #[serde(default)]
+    pub rotation: Option<f64>,
 }
 
 /// A 2-D point in the P&ID canvas coordinate system.
@@ -689,6 +698,9 @@ mod tests {
                 m
             },
             position: Some(Position2D { x: 100.0, y: 200.0 }),
+            display_width: None,
+            display_height: None,
+            rotation: None,
         };
         assert_eq!(instance.definition_id, pump_def.id);
         assert_eq!(instance.definition_version, pump_def.version);

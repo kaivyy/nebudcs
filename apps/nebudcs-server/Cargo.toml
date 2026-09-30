@@ -15,6 +15,9 @@ nebudcs-historian = { path = "../../crates/nebudcs-historian" }
 nebudcs-protocol = { path = "../../crates/nebudcs-protocol" }
 nebudcs-scenario = { path = "../../crates/nebudcs-scenario" }
 nebudcs-scripting = { path = "../../crates/nebudcs-scripting" }
+nebudcs-topology = { path = "../../crates/nebudcs-topology" }
+nebudcs-physics = { path = "../../crates/nebudcs-physics" }
+indexmap = { workspace = true }
 
 tokio = { workspace = true }
 axum = { workspace = true }

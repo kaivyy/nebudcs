@@ -11,6 +11,7 @@ use nebudcs_types::{EquipmentId, SchemaVersion};
 
 use crate::error::{ScriptingError, ScriptingResult};
 use crate::library::dependency::DependencyResolver;
+use crate::library::domain::{load_all_standard_domain_packages, DomainPackage};
 use crate::library::import_export::{
     export_package, export_template, import_package, import_template, SerializationFormat,
 };
@@ -32,6 +33,8 @@ pub struct EquipmentLibrary {
     packages: HashMap<(String, SchemaVersion), EquipmentPackage>,
     /// Latest stable version for each package ID.
     latest_package: HashMap<String, SchemaVersion>,
+    /// Domain packages keyed by domain package ID.
+    domain_packages: HashMap<String, DomainPackage>,
     /// Content fingerprints to enforce immutability of published versions.
     fingerprints: HashMap<(String, SchemaVersion), String>,
 }
@@ -60,6 +63,11 @@ impl EquipmentLibrary {
         let packages = load_all_standard_packages();
         for pkg in packages {
             self.register_package(pkg)?;
+        }
+
+        let domains = load_all_standard_domain_packages();
+        for dom in domains {
+            self.register_domain_package(dom);
         }
 
         Ok(count)
@@ -212,6 +220,23 @@ impl EquipmentLibrary {
     pub fn list_packages(&self) -> Vec<&EquipmentPackage> {
         let mut list: Vec<&EquipmentPackage> = self.packages.values().collect();
         list.sort_by(|a, b| a.id.cmp(&b.id).then_with(|| a.version.cmp(&b.version)));
+        list
+    }
+
+    /// Registers an industrial domain package.
+    pub fn register_domain_package(&mut self, package: DomainPackage) {
+        self.domain_packages.insert(package.id.clone(), package);
+    }
+
+    /// Queries an industrial domain package by ID.
+    pub fn get_domain_package(&self, id: &str) -> Option<&DomainPackage> {
+        self.domain_packages.get(id)
+    }
+
+    /// Lists all registered industrial domain packages.
+    pub fn list_domain_packages(&self) -> Vec<&DomainPackage> {
+        let mut list: Vec<&DomainPackage> = self.domain_packages.values().collect();
+        list.sort_by(|a, b| a.id.cmp(&b.id));
         list
     }
 

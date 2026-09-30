@@ -1,0 +1,248 @@
+{
+  "id": "proj-domain-petrochem-olefin",
+  "name": "Petrochemical Olefin Cracking & Separation Plant",
+  "schema_version": "0.1.0",
+  "description": "Ethane/naphtha steam cracking pyrolysis furnace with cracked gas compressor, chiller heat exchanger, demethanizer separator, C2 splitter fractionation column, and ethane recycle return.",
+  "author": "NebuDCS Standard Library",
+  "created": "2026-09-08T00:00:00Z",
+  "modified": "2026-09-08T00:00:00Z",
+  "equipment": [
+    {
+      "id": "01M2088PETFURNACE0000000001",
+      "definition_id": "standard.heater.fired_process",
+      "definition_version": "1.0.0",
+      "name": "F-501",
+      "parameters": {
+        "design_duty": 25000000.0,
+        "efficiency": 0.92,
+        "coil_outlet_temp": 840.0
+      },
+      "position": {
+        "x": 100.0,
+        "y": 200.0
+      }
+    },
+    {
+      "id": "01M2088PETCOMPRESS0000000002",
+      "definition_id": "standard.compressor.centrifugal",
+      "definition_version": "1.0.0",
+      "name": "K-501",
+      "parameters": {
+        "rated_power": 12000000.0,
+        "speed_rpm": 6500.0,
+        "rated_pr": 32.0
+      },
+      "position": {
+        "x": 300.0,
+        "y": 200.0
+      }
+    },
+    {
+      "id": "01M2088PETCHILLER00000000003",
+      "definition_id": "standard.heat_exchanger.shell_and_tube",
+      "definition_version": "1.0.0",
+      "name": "E-501",
+      "parameters": {
+        "area_m2": 450.0,
+        "design_duty": 8000000.0,
+        "overall_u": 750.0
+      },
+      "position": {
+        "x": 500.0,
+        "y": 200.0
+      }
+    },
+    {
+      "id": "01M2088PETDEMETH000000000004",
+      "definition_id": "standard.vessel.vertical_separator",
+      "definition_version": "1.0.0",
+      "name": "V-501",
+      "parameters": {
+        "volume_m3": 45.0,
+        "operating_pressure": 32.0,
+        "level": 0.55
+      },
+      "position": {
+        "x": 700.0,
+        "y": 200.0
+      }
+    },
+    {
+      "id": "01M2088PETSPLITTER00000000005",
+      "definition_id": "standard.vessel.vertical_separator",
+      "definition_version": "1.0.0",
+      "name": "C-501",
+      "parameters": {
+        "volume_m3": 120.0,
+        "operating_pressure": 18.0,
+        "level": 0.60
+      },
+      "position": {
+        "x": 900.0,
+        "y": 200.0
+      }
+    },
+    {
+      "id": "01M2088PETRECYCLEPUMP00000006",
+      "definition_id": "standard.pump.centrifugal",
+      "definition_version": "1.0.0",
+      "name": "P-501",
+      "parameters": {
+        "rated_flow": 65.0,
+        "rated_head": 120.0,
+        "speed_rpm": 2980.0
+      },
+      "position": {
+        "x": 700.0,
+        "y": 380.0
+      }
+    },
+    {
+      "id": "01M2088PETRECYCLEVALV00000007",
+      "definition_id": "standard.valve.control_globe",
+      "definition_version": "1.0.0",
+      "name": "FV-501",
+      "parameters": {
+        "cv_rating": 85.0,
+        "opening": 0.45
+      },
+      "position": {
+        "x": 400.0,
+        "y": 380.0
+      }
+    }
+  ],
+  "streams": [
+    {
+      "id": "01M2088STRM001PET0000000001",
+      "name": "Cracked_Gas_Feed",
+      "source": {
+        "equipment_id": "01M2088PETFURNACE0000000001",
+        "port_id": "outlet"
+      },
+      "target": {
+        "equipment_id": "01M2088PETCOMPRESS0000000002",
+        "port_id": "suction"
+      }
+    },
+    {
+      "id": "01M2088STRM002PET0000000002",
+      "name": "Compressed_Gas",
+      "source": {
+        "equipment_id": "01M2088PETCOMPRESS0000000002",
+        "port_id": "discharge"
+      },
+      "target": {
+        "equipment_id": "01M2088PETCHILLER00000000003",
+        "port_id": "tube_inlet"
+      }
+    },
+    {
+      "id": "01M2088STRM003PET0000000003",
+      "name": "Chilled_Gas_To_Demeth",
+      "source": {
+        "equipment_id": "01M2088PETCHILLER00000000003",
+        "port_id": "tube_outlet"
+      },
+      "target": {
+        "equipment_id": "01M2088PETDEMETH000000000004",
+        "port_id": "inlet"
+      }
+    },
+    {
+      "id": "01M2088STRM004PET0000000004",
+      "name": "Demeth_Bottoms_To_Splitter",
+      "source": {
+        "equipment_id": "01M2088PETDEMETH000000000004",
+        "port_id": "liquid_outlet"
+      },
+      "target": {
+        "equipment_id": "01M2088PETSPLITTER00000000005",
+        "port_id": "inlet"
+      }
+    },
+    {
+      "id": "01M2088STRM005PET0000000005",
+      "name": "Splitter_Bottoms_Ethane_To_Pump",
+      "source": {
+        "equipment_id": "01M2088PETSPLITTER00000000005",
+        "port_id": "liquid_outlet"
+      },
+      "target": {
+        "equipment_id": "01M2088PETRECYCLEPUMP00000006",
+        "port_id": "suction"
+      }
+    },
+    {
+      "id": "01M2088STRM006PET0000000006",
+      "name": "Pumped_Ethane_To_Valve",
+      "source": {
+        "equipment_id": "01M2088PETRECYCLEPUMP00000006",
+        "port_id": "discharge"
+      },
+      "target": {
+        "equipment_id": "01M2088PETRECYCLEVALV00000007",
+        "port_id": "inlet"
+      }
+    },
+    {
+      "id": "01M2088STRM007PET0000000007",
+      "name": "Ethane_Recycle_To_Furnace",
+      "source": {
+        "equipment_id": "01M2088PETRECYCLEVALV00000007",
+        "port_id": "outlet"
+      },
+      "target": {
+        "equipment_id": "01M2088PETFURNACE0000000001",
+        "port_id": "process_inlet"
+      }
+    }
+  ],
+  "control_loops": [
+    {
+      "id": "TIC-501",
+      "name": "Furnace COT Controller",
+      "type": "PID",
+      "pv_tag": "F501_COT",
+      "sp_tag": "F501_COT_SP",
+      "out_tag": "F501_FUEL_VALVE",
+      "kp": 1.2,
+      "ti": 25.0,
+      "td": 4.0
+    },
+    {
+      "id": "PIC-501",
+      "name": "Demethanizer Pressure Controller",
+      "type": "PID",
+      "pv_tag": "V501_PRESS",
+      "sp_tag": "V501_PRESS_SP",
+      "out_tag": "V501_VENT_VALVE",
+      "kp": 2.5,
+      "ti": 15.0,
+      "td": 0.0
+    },
+    {
+      "id": "FIC-501",
+      "name": "Ethane Recycle Flow Controller",
+      "type": "PID",
+      "pv_tag": "P501_FLOW",
+      "sp_tag": "P501_FLOW_SP",
+      "out_tag": "FV501_CMD",
+      "kp": 1.8,
+      "ti": 10.0,
+      "td": 0.0
+    }
+  ],
+  "protection": [
+    {
+      "id": "ESD-501",
+      "name": "Cracking Furnace High COT Emergency Fuel Trip",
+      "sif_id": "SIF-PET-01",
+      "input_tags": ["F501_COT"],
+      "threshold": 875.0,
+      "condition": "GreaterThan",
+      "action_tags": ["F501_FUEL_SOV"],
+      "action_values": [0.0]
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "id": "domain.refinery.cdu",
+  "name": "Refinery Atmospheric Crude Distillation Package",
+  "version": "1.0.0",
+  "domain_kind": "refinery",
+  "description": "Standard petroleum refinery crude distillation unit (CDU) flowsheet featuring crude preheat train, fired process heater, 30-tray fractional distillation column, overhead condenser, reflux accumulator, and bottom reboiler circulation.",
+  "author": "NebuDCS Standard Library",
+  "thermodynamic_requirements": [
+    "Hydrocarbon Characterization (TBP/ASTM D86)",
+    "Vapor-Liquid Equilibrium (Peng-Robinson / Chao-Seader)",
+    "LMTD / NTU Heat Transfer"
+  ],
+  "utility_requirements": [
+    "STEAM_PRESSURE",
+    "COOLING_WATER",
+    "FUEL_GAS",
+    "INSTRUMENT_AIR"
+  ],
+  "composition_defaults": {
+    "Atmospheric_Residue": 0.25,
+    "Diesel": 0.3,
+    "Kerosene": 0.25,
+    "Naphtha": 0.2
+  },
+  "operating_ranges": {
+    "column_bottom_temp": {
+      "quantity": "Temperature",
+      "min_value": 280.0,
+      "max_value": 385.0,
+      "unit": "°C",
+      "normal_operating_value": 345.0
+    },
+    "column_overhead_pressure": {
+      "quantity": "Pressure",
+      "min_value": 1.0,
+      "max_value": 3.5,
+      "unit": "bar",
+      "normal_operating_value": 1.5
+    },
+    "column_top_temp": {
+      "quantity": "Temperature",
+      "min_value": 60.0,
+      "max_value": 130.0,
+      "unit": "°C",
+      "normal_operating_value": 85.0
+    },
+    "furnace_coil_outlet_temp": {
+      "quantity": "Temperature",
+      "min_value": 300.0,
+      "max_value": 385.0,
+      "unit": "°C",
+      "normal_operating_value": 360.0
+    },
+    "reflux_ratio": {
+      "quantity": "Ratio",
+      "min_value": 1.0,
+      "max_value": 6.0,
+      "unit": "fraction",
+      "normal_operating_value": 2.5
+    }
+  },
+  "control_strategies": [
+    "PIC-101 Column Head Pressure Control via Overhead Vapor/Condenser",
+    "TIC-101 Column Top Temperature Control via Reflux Flow",
+    "LIC-101 Column Bottoms Sump Level Control via Residue Draw",
+    "TIC-102 Furnace Coil Outlet Temperature Control via Fuel Gas Throttle",
+    "LIC-102 Reflux Drum Level Control via Overhead Distillate Take-off"
+  ],
+  "scenario_presets": [
+    "scn-refinery-feed-loss",
+    "scn-refinery-furnace-flameout",
+    "scn-refinery-reflux-pump-trip",
+    "scn-refinery-column-overpressure"
+  ],
+  "equipment_templates": [
+    "standard.tank.atmospheric",
+    "standard.pump.centrifugal",
+    "standard.valve.control_globe",
+    "standard.heat_exchanger.shell_and_tube",
+    "standard.heater.fired_process",
+    "standard.vessel.vertical_separator"
+  ],
+  "plant_template_ids": [
+    "proj-domain-refinery-cdu"
+  ],
+  "validation_rules": [
+    "VLD-REF01: Distillation column requires connected overhead condenser and reflux return",
+    "VLD-REF02: Fired heater fuel gas supply must be interlocked with process coil minimum flow",
+    "VLD-REF03: Atmospheric crude charge pump must maintain positive NPSH margin > 1.5m"
+  ]
+}

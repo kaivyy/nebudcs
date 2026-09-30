@@ -21,6 +21,11 @@ impl AlarmEngine {
         Self::default()
     }
 
+    /// Clears all registered alarms.
+    pub fn clear(&mut self) {
+        self.alarms.clear();
+    }
+
     /// Registers a new alarm block.
     pub fn add_alarm(&mut self, config: AlarmBlockConfig) {
         let name = config.name.clone();

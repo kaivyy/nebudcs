@@ -1,0 +1,447 @@
+{
+  "id": "proj-domain-chem-reaction",
+  "name": "Continuous Exothermic Reaction Train",
+  "schema_version": "0.1.0",
+  "description": "Exothermic chemical synthesis plant featuring reactant charge pump, feed preheater, jacketed CSTR, product degasser, and liquid recycle pump.",
+  "author": "NebuDCS Standard Library",
+  "created": "2026-09-07T00:00:00Z",
+  "modified": "2026-09-06T00:00:00Z",
+  "equipment": [
+    {
+      "id": "01M24QAGJ3B400YBPQ5SMKSF2T",
+      "definition_id": "2KRSSVVX85BFH6EV6H5YR8Y85Z",
+      "definition_version": "1.0.0",
+      "name": "TK-401",
+      "parameters": {
+        "capacity_m3": 3000.0,
+        "level": 70.0
+      },
+      "position": {
+        "x": 80.0,
+        "y": 180.0
+      },
+      "display_width": null,
+      "display_height": null,
+      "rotation": null
+    },
+    {
+      "id": "01M24QAGJ37S66C2S8CTVD1RSF",
+      "definition_id": "0ATRCF671FM4B5GSSRFVNKC51R",
+      "definition_version": "1.0.0",
+      "name": "P-401",
+      "parameters": {
+        "rated_flow": 80.0,
+        "rated_head": 100.0,
+        "speed_rpm": 2950.0
+      },
+      "position": {
+        "x": 240.0,
+        "y": 180.0
+      },
+      "display_width": null,
+      "display_height": null,
+      "rotation": null
+    },
+    {
+      "id": "01M24QAGJ3K4AR022SEAQ3J382",
+      "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+      "definition_version": "1.0.0",
+      "name": "E-401",
+      "parameters": {
+        "area_m2": 120.0,
+        "design_duty": 800000.0,
+        "overall_u": 600.0,
+        "process_inlet_t": 25.0
+      },
+      "position": {
+        "x": 420.0,
+        "y": 180.0
+      },
+      "display_width": null,
+      "display_height": null,
+      "rotation": null
+    },
+    {
+      "id": "01M24QAGJ3XW96GKC87N5KC8R4",
+      "definition_id": "7BPYAFPWAW44MEBAWA2QH50RX1",
+      "definition_version": "1.0.0",
+      "name": "R-401",
+      "parameters": {
+        "tau": 5.0,
+        "thermal_duty": 450000.0,
+        "volume": 20.0,
+        "volume_m3": 20.0
+      },
+      "position": {
+        "x": 620.0,
+        "y": 180.0
+      },
+      "display_width": null,
+      "display_height": null,
+      "rotation": null
+    },
+    {
+      "id": "01M24QAGJ346KDREXQYVJN1J42",
+      "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+      "definition_version": "1.0.0",
+      "name": "V-401",
+      "parameters": {
+        "operating_pressure": 1200000.0,
+        "volume": 35.0,
+        "volume_m3": 35.0
+      },
+      "position": {
+        "x": 840.0,
+        "y": 180.0
+      },
+      "display_width": null,
+      "display_height": null,
+      "rotation": null
+    },
+    {
+      "id": "01M24QAGJ377TJ825B817K6HMD",
+      "definition_id": "0ATRCF671FM4B5GSSRFVNKC51R",
+      "definition_version": "1.0.0",
+      "name": "P-402",
+      "parameters": {
+        "rated_flow": 40.0,
+        "rated_head": 90.0,
+        "speed_rpm": 2950.0
+      },
+      "position": {
+        "x": 620.0,
+        "y": 340.0
+      },
+      "display_width": null,
+      "display_height": null,
+      "rotation": null
+    }
+  ],
+  "streams": [
+    {
+      "id": "01M24QAGJ30ZE4H0F5WDR0GB01",
+      "name": "S-CHEM-01",
+      "stream_type": "Material",
+      "source_equipment_id": "01M24QAGJ3B400YBPQ5SMKSF2T",
+      "source_port_id": "20BW59F2XB37X5TYG8K1HMDYRS",
+      "sink_equipment_id": "01M24QAGJ37S66C2S8CTVD1RSF",
+      "sink_port_id": "2Z0TCSV15342N4G68500SBPH4T",
+      "composition": {},
+      "route_points": [],
+      "diameter": null,
+      "length": null,
+      "roughness": null,
+      "elevation_change": null,
+      "loss_k": null
+    },
+    {
+      "id": "01M24QAGJ3CZ5KJPYNFNAD76MW",
+      "name": "S-CHEM-02",
+      "stream_type": "Material",
+      "source_equipment_id": "01M24QAGJ37S66C2S8CTVD1RSF",
+      "source_port_id": "1NQHXSA59AXSTTAS8GQETNQXF7",
+      "sink_equipment_id": "01M24QAGJ3K4AR022SEAQ3J382",
+      "sink_port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA",
+      "composition": {},
+      "route_points": [],
+      "diameter": null,
+      "length": null,
+      "roughness": null,
+      "elevation_change": null,
+      "loss_k": null
+    },
+    {
+      "id": "01M24QAGJ3KA71ECGZE8SCMAND",
+      "name": "S-CHEM-03",
+      "stream_type": "Material",
+      "source_equipment_id": "01M24QAGJ3K4AR022SEAQ3J382",
+      "source_port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y",
+      "sink_equipment_id": "01M24QAGJ3XW96GKC87N5KC8R4",
+      "sink_port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A",
+      "composition": {},
+      "route_points": [],
+      "diameter": null,
+      "length": null,
+      "roughness": null,
+      "elevation_change": null,
+      "loss_k": null
+    },
+    {
+      "id": "01M24QAGJ3F074PY70ZJEZQ73X",
+      "name": "S-CHEM-04",
+      "stream_type": "Material",
+      "source_equipment_id": "01M24QAGJ3XW96GKC87N5KC8R4",
+      "source_port_id": "27NWW5RP2WM0FQBYS8YA51KJB0",
+      "sink_equipment_id": "01M24QAGJ346KDREXQYVJN1J42",
+      "sink_port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A",
+      "composition": {},
+      "route_points": [],
+      "diameter": null,
+      "length": null,
+      "roughness": null,
+      "elevation_change": null,
+      "loss_k": null
+    },
+    {
+      "id": "01M24QAGJ3PDFVGD6022DQVYGY",
+      "name": "S-RECYCLE-01",
+      "stream_type": "Material",
+      "source_equipment_id": "01M24QAGJ346KDREXQYVJN1J42",
+      "source_port_id": "79KAB0B0B6SCFDAF3AST98A7D6",
+      "sink_equipment_id": "01M24QAGJ377TJ825B817K6HMD",
+      "sink_port_id": "2Z0TCSV15342N4G68500SBPH4T",
+      "composition": {},
+      "route_points": [],
+      "diameter": null,
+      "length": null,
+      "roughness": null,
+      "elevation_change": null,
+      "loss_k": null
+    }
+  ],
+  "instruments": [
+    {
+      "id": "01M24QAGJ3MF4XTMH3NXHBDB21",
+      "tag": "FT-401",
+      "equipment_id": "01M24QAGJ37S66C2S8CTVD1RSF",
+      "port_id": "1NQHXSA59AXSTTAS8GQETNQXF7",
+      "measurement_kind": "Flow",
+      "range_min": 0.0,
+      "range_max": 10000.0,
+      "unit": "kg/h",
+      "position": {
+        "x": 240.0,
+        "y": 100.0
+      }
+    },
+    {
+      "id": "01M24QAGJ371FENPFVE7H2A31E",
+      "tag": "TI-401",
+      "equipment_id": "01M24QAGJ3XW96GKC87N5KC8R4",
+      "port_id": null,
+      "measurement_kind": "Temperature",
+      "range_min": 0.0,
+      "range_max": 300.0,
+      "unit": "°C",
+      "position": {
+        "x": 620.0,
+        "y": 100.0
+      }
+    },
+    {
+      "id": "01M24QAGJ3P7Z3HM9WJ80DZMXZ",
+      "tag": "PT-401",
+      "equipment_id": "01M24QAGJ3XW96GKC87N5KC8R4",
+      "port_id": null,
+      "measurement_kind": "Pressure",
+      "range_min": 0.0,
+      "range_max": 30.0,
+      "unit": "bar",
+      "position": {
+        "x": 620.0,
+        "y": 40.0
+      }
+    },
+    {
+      "id": "01M24QAGJ3DDTZMTGDK4T9Z65E",
+      "tag": "LT-401",
+      "equipment_id": "01M24QAGJ3XW96GKC87N5KC8R4",
+      "port_id": null,
+      "measurement_kind": "Level",
+      "range_min": 0.0,
+      "range_max": 100.0,
+      "unit": "%",
+      "position": {
+        "x": 620.0,
+        "y": 260.0
+      }
+    },
+    {
+      "id": "01M24QAGJ3CXBZA3M8H4YMPP52",
+      "tag": "AT-401",
+      "equipment_id": "01M24QAGJ346KDREXQYVJN1J42",
+      "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A",
+      "measurement_kind": "Purity",
+      "range_min": 0.0,
+      "range_max": 1.0,
+      "unit": "fraction",
+      "position": {
+        "x": 840.0,
+        "y": 100.0
+      }
+    }
+  ],
+  "control_loops": [
+    {
+      "id": "01M24QAGJ34PHRMPRM59W47MS5",
+      "name": "TIC-401",
+      "pv_tag": "TI-401",
+      "sp": 165.0,
+      "out_tag": "R-401.COOLING",
+      "kp": 2.5,
+      "ti": 15.0,
+      "td": 1.0,
+      "reverse_acting": false,
+      "mode": "AUTO",
+      "output_min": 0.0,
+      "output_max": 100.0,
+      "position": {
+        "x": 520.0,
+        "y": 40.0
+      }
+    },
+    {
+      "id": "01M24QAGJ3AKWM4RZH0JXCJE54",
+      "name": "LIC-401",
+      "pv_tag": "LT-401",
+      "sp": 65.0,
+      "out_tag": "R-401.OPENING",
+      "kp": 1.8,
+      "ti": 20.0,
+      "td": 0.0,
+      "reverse_acting": false,
+      "mode": "AUTO",
+      "output_min": 0.0,
+      "output_max": 100.0,
+      "position": {
+        "x": 720.0,
+        "y": 40.0
+      }
+    },
+    {
+      "id": "01M24QAGJ3PYK1GXF9SMM13NXT",
+      "name": "FIC-401",
+      "pv_tag": "FT-401",
+      "sp": 5000.0,
+      "out_tag": "P-401.SPEED",
+      "kp": 1.0,
+      "ti": 10.0,
+      "td": 0.0,
+      "reverse_acting": false,
+      "mode": "AUTO",
+      "output_min": 0.0,
+      "output_max": 100.0,
+      "position": {
+        "x": 320.0,
+        "y": 40.0
+      }
+    }
+  ],
+  "alarms": [
+    {
+      "id": "01M24QAGJ33BHHC9N26EAE9J1Q",
+      "name": "TAH-401",
+      "pv_tag": "TI-401",
+      "alarm_type": "Hi",
+      "severity": "High",
+      "trip_limit": 190.0,
+      "deadband": 2.0,
+      "description": "Reactor temperature high warning"
+    },
+    {
+      "id": "01M24QAGJ37RVEH54XCSH5ECMK",
+      "name": "TAHH-401",
+      "pv_tag": "TI-401",
+      "alarm_type": "Hi",
+      "severity": "Critical",
+      "trip_limit": 210.0,
+      "deadband": 2.0,
+      "description": "Emergency thermal runaway condition"
+    },
+    {
+      "id": "01M24QAGJ3V8ZVA1KN1JG2FX20",
+      "name": "LAH-401",
+      "pv_tag": "LT-401",
+      "alarm_type": "Hi",
+      "severity": "High",
+      "trip_limit": 85.0,
+      "deadband": 1.0,
+      "description": "Reactor high level warning"
+    }
+  ],
+  "interlocks": [
+    {
+      "id": "01M24QAGJ3NGK0RTHVYMDAAH10",
+      "name": "TRIP-RUNAWAY",
+      "source_tag": "TI-401",
+      "condition": ">",
+      "threshold": 210.0,
+      "target_action": "TRIP",
+      "target_equipment": "01M24QAGJ37S66C2S8CTVD1RSF",
+      "latched": true,
+      "description": "Cut feed pump on thermal runaway"
+    },
+    {
+      "id": "01M24QAGJ398EN9GM9300TEH59",
+      "name": "TRIP-FEED-LOW",
+      "source_tag": "TK-401.LEVEL",
+      "condition": "<",
+      "threshold": 15.0,
+      "target_action": "TRIP",
+      "target_equipment": "01M24QAGJ37S66C2S8CTVD1RSF",
+      "latched": true,
+      "description": "Low level pump protection"
+    }
+  ],
+  "controllers": [],
+  "io_systems": [],
+  "io_mappings": [],
+  "tags": [],
+  "advanced_control": [
+    {
+      "id": "strat-ratio-401",
+      "name": "Reactant Stoichiometric Ratio Control",
+      "description": "Maintains Reactant B flow at stoichiometric ratio to wild Reactant A feed",
+      "enabled": true,
+      "strategy_type": "Ratio",
+      "parameters": {
+        "bias": "0.0",
+        "controlled_pv": "FT-402.FLOW",
+        "kp": "1.2",
+        "output_max": "100.0",
+        "output_min": "0.0",
+        "output_tag": "FIC_402.OUT",
+        "ratio": "0.50",
+        "ratio_max": "2.0",
+        "ratio_min": "0.10",
+        "target_actuator": "FV-402",
+        "td": "0.0",
+        "ti": "5.0",
+        "wild_pv": "FT-401.FLOW"
+      }
+    }
+  ],
+  "communications": null,
+  "sis": null,
+  "plant_structure": null,
+  "areas": [],
+  "displays": [],
+  "navigation_links": [],
+  "boundary_conditions": [
+    {
+      "id": "01M24QAGJ3FT8VB8AA84DYGZM8",
+      "name": "Reactant A Chemical Feed",
+      "condition_type": "feed",
+      "target_equipment_id": null,
+      "target_port": null,
+      "target_stream_id": null,
+      "flow_value": 20.0,
+      "flow_unit": "m3/h",
+      "pressure_value": 3.5,
+      "pressure_unit": "barg",
+      "temperature_value": 20.0,
+      "temperature_unit": "°C",
+      "phase": "Liquid",
+      "density": 1050.0,
+      "molecular_weight": 0.092,
+      "enthalpy": null,
+      "quality": null,
+      "composition": {},
+      "validity_min_flow": null,
+      "validity_max_flow": null,
+      "source_provenance": "Chemical Storage Farm",
+      "enabled": true
+    }
+  ],
+  "initial_conditions": []
+}

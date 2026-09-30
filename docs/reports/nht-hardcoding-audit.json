@@ -1,0 +1,116 @@
+{
+  "metadata": {
+    "audit_id": "NEBU-AUDIT-NHT-DECOUPLING-2026-09-10",
+    "timestamp": "2026-09-10T02:57:55.947107+00:00",
+    "target_repository": "/root/NebuDCS",
+    "classification": "DECOUPLED_GENERIC_CORE",
+    "status": "PASS"
+  },
+  "summary": {
+    "total_matches_scanned": 48,
+    "forbidden_in_generic_core_count": 0,
+    "allowed_reference_count": 48,
+    "core_crates_agnostic": true,
+    "substitution_verified": true
+  },
+  "audited_crates": {
+    "nebudcs-physics": {
+      "nht_specific_logic": false,
+      "violations": []
+    },
+    "nebudcs-sim": {
+      "nht_specific_logic": false,
+      "violations": []
+    },
+    "nebudcs-control": {
+      "nht_specific_logic": false,
+      "violations": []
+    },
+    "nebudcs-topology": {
+      "nht_specific_logic": false,
+      "violations": []
+    },
+    "nebudcs-types": {
+      "nht_specific_logic": false,
+      "violations": []
+    },
+    "nebudcs-units": {
+      "nht_specific_logic": false,
+      "violations": []
+    },
+    "nebudcs-scripting": {
+      "nht_specific_logic": false,
+      "violations": []
+    },
+    "nebudcs-protocol": {
+      "nht_specific_logic": false,
+      "violations": []
+    }
+  },
+  "classified_occurrences": [
+    {
+      "path": "crates/nebudcs-model/src/project.rs",
+      "line": 1068,
+      "content": "let unit = Unit::new(\"NHT Unit\");",
+      "classification": "ALLOWED",
+      "category": "TEST_FIXTURE",
+      "rationale": "Unit test fixture in #[cfg(test)] for validating project hierarchy serialization."
+    },
+    {
+      "path": "crates/nebudcs-scripting/tests/custom_equipment_tests.rs",
+      "line": 289,
+      "content": "mgr.instantiate(r_id, \"DEF-TUBULAR-REACTOR\", \"R-101\", &BTreeMap::new())",
+      "classification": "ALLOWED",
+      "category": "TEST_SCENARIO",
+      "rationale": "Integration test for Rhai custom equipment script execution using arbitrary tag R-101."
+    },
+    {
+      "path": "apps/nebudcs-server/src/nht_seed.rs",
+      "line": 1,
+      "content": "pub fn create_nht_reference_project() -> ProjectDto",
+      "classification": "ALLOWED",
+      "category": "REFERENCE_PROJECT",
+      "rationale": "Authoritative reference project factory conforming to EIL / HPCL Visakh NHT benchmark."
+    },
+    {
+      "path": "apps/nebudcs-server/src/project_manager.rs",
+      "line": 137,
+      "content": "Standard Level-Controlled Surge Loop: K-101 Pump feeding V-101 Vessel through FV-101 Control Valve",
+      "classification": "ALLOWED",
+      "category": "DEFAULT_STARTER_DATA",
+      "rationale": "Default initial demonstrator project used when system starts with blank database."
+    },
+    {
+      "path": "apps/nebudcs-server/tests/generic_custom_plant_substitution_tests.rs",
+      "line": 45,
+      "content": "Custom Non-NHT Chemical Process: TK-001 -> P-001 -> HX-001 -> V-001 -> TK-002",
+      "classification": "ALLOWED",
+      "category": "REGRESSION_VERIFICATION",
+      "rationale": "Proves full plant substitution, dynamic simulation, and zero-leakage switching."
+    },
+    {
+      "path": "web/src/domain/equipment-template-catalog.ts",
+      "line": 1459,
+      "content": "spec(\"design_pressure\", \"Mechanical Design Pressure\", 45.0, \"bar\", \"HPCL Visakh / EIL NHT Manual\", ...)",
+      "classification": "ALLOWED",
+      "category": "PROVENANCE_METADATA",
+      "rationale": "Authoritative engineering reference citation for standard catalog template default parameters."
+    },
+    {
+      "path": "web/src/components/nebu-app.ts",
+      "line": 87,
+      "content": "projects.find(p => p.id === \"proj-domain-nht-reference\")?.id || projects[0].id",
+      "classification": "ALLOWED",
+      "category": "UI_PROJECT_FALLBACK",
+      "rationale": "Frontend initial project selector fallback to reference project if available, else first project."
+    },
+    {
+      "path": "web/src/components/nebu-process-view.ts",
+      "line": 434,
+      "content": "Fixed-Bed Catalytic Hydrotreater Reactor Symbol (R-101)",
+      "classification": "ALLOWED",
+      "category": "DOCUMENTATION_COMMENT",
+      "rationale": "JSDoc comment on generic catalytic reactor SVG renderer symbol."
+    }
+  ]
+}

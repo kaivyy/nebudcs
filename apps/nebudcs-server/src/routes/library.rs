@@ -7,9 +7,10 @@ use serde_json::{json, Value};
 
 use nebudcs_model::equipment::EquipmentCategory;
 use nebudcs_protocol::{
-    ExportLibraryItemResponseDto, ImportLibraryItemRequestDto, InstantiatePackageRequestDto,
-    InstantiateTemplateRequestDto, LibraryCommand, PackageDetailDto, PackageSummaryDto,
-    RuntimeCommand, TemplateDetailDto, TemplateSummaryDto, ValidatePackageResponseDto,
+    DomainPackageDetailDto, DomainPackageSummaryDto, ExportLibraryItemResponseDto,
+    ImportLibraryItemRequestDto, InstantiatePackageRequestDto, InstantiateTemplateRequestDto,
+    LibraryCommand, OperatingRangeDto, PackageDetailDto, PackageSummaryDto, RuntimeCommand,
+    TemplateDetailDto, TemplatePortDto, TemplateSummaryDto, ValidatePackageResponseDto,
 };
 use nebudcs_scripting::{
     CustomEquipmentDefinition, EquipmentPackage, EquipmentTemplate, SerializationFormat,
@@ -82,6 +83,17 @@ pub async fn list_templates(
             curve_count: t.definition.curves.len() + t.definition.curves_2d.len(),
             trip_count: t.definition.trips.len(),
             author: t.metadata.author.clone(),
+            ports: t
+                .definition
+                .ports
+                .iter()
+                .map(|p| TemplatePortDto {
+                    id: p.id.to_string(),
+                    name: p.name.clone(),
+                    domain: format!("{:?}", p.domain).to_lowercase(),
+                    direction: format!("{:?}", p.direction).to_lowercase(),
+                })
+                .collect(),
         })
         .collect();
 
@@ -230,6 +242,17 @@ pub async fn import_template_endpoint(
         curve_count: template.definition.curves.len() + template.definition.curves_2d.len(),
         trip_count: template.definition.trips.len(),
         author: template.metadata.author.clone(),
+        ports: template
+            .definition
+            .ports
+            .iter()
+            .map(|p| TemplatePortDto {
+                id: p.id.to_string(),
+                name: p.name.clone(),
+                domain: format!("{:?}", p.domain).to_lowercase(),
+                direction: format!("{:?}", p.direction).to_lowercase(),
+            })
+            .collect(),
     };
 
     let tmpl_json = serde_json::to_string(&template)
@@ -489,4 +512,85 @@ pub async fn instantiate_package_endpoint(
         "status": "ok",
         "instance_prefix": req.instance_prefix,
     })))
+}
+
+/// Lists all registered industrial domain packages.
+pub async fn list_domains(
+    State(host): State<HostHandle>,
+) -> ServerResult<Json<Vec<DomainPackageSummaryDto>>> {
+    let eq_mgr = host
+        .equipment_manager()
+        .read()
+        .map_err(|_| ServerError::Internal("Equipment manager lock poisoned".to_string()))?;
+
+    let domains = eq_mgr.library().list_domain_packages();
+    let summaries = domains
+        .into_iter()
+        .map(|d| DomainPackageSummaryDto {
+            id: d.id.clone(),
+            name: d.name.clone(),
+            version: d.version.to_string(),
+            domain_kind: format!("{:?}", d.domain_kind),
+            description: d.description.clone(),
+            author: d.author.clone(),
+            plant_template_ids: d.plant_template_ids.clone(),
+            control_strategy_count: d.control_strategies.len(),
+            scenario_preset_count: d.scenario_presets.len(),
+            equipment_template_count: d.equipment_templates.len(),
+            scientific_references: d.scientific_references.clone(),
+            model_classifications: d.model_classifications.clone(),
+        })
+        .collect();
+
+    Ok(Json(summaries))
+}
+
+/// Retrieves detailed information for a specific industrial domain package.
+pub async fn get_domain(
+    State(host): State<HostHandle>,
+    Path(id): Path<String>,
+) -> ServerResult<Json<DomainPackageDetailDto>> {
+    let eq_mgr = host
+        .equipment_manager()
+        .read()
+        .map_err(|_| ServerError::Internal("Equipment manager lock poisoned".to_string()))?;
+
+    let d = eq_mgr
+        .library()
+        .get_domain_package(&id)
+        .ok_or_else(|| ServerError::NotFound(format!("Domain package '{id}' not found")))?;
+
+    let mut ranges = std::collections::BTreeMap::new();
+    for (k, r) in &d.operating_ranges {
+        ranges.insert(
+            k.clone(),
+            OperatingRangeDto {
+                quantity: r.quantity.clone(),
+                min_value: r.min_value,
+                max_value: r.max_value,
+                unit: r.unit.clone(),
+                normal_operating_value: r.normal_operating_value,
+            },
+        );
+    }
+
+    Ok(Json(DomainPackageDetailDto {
+        id: d.id.clone(),
+        name: d.name.clone(),
+        version: d.version.to_string(),
+        domain_kind: format!("{:?}", d.domain_kind),
+        description: d.description.clone(),
+        author: d.author.clone(),
+        thermodynamic_requirements: d.thermodynamic_requirements.clone(),
+        utility_requirements: d.utility_requirements.clone(),
+        composition_defaults: d.composition_defaults.clone(),
+        operating_ranges: ranges,
+        control_strategies: d.control_strategies.clone(),
+        scenario_presets: d.scenario_presets.clone(),
+        equipment_templates: d.equipment_templates.clone(),
+        plant_template_ids: d.plant_template_ids.clone(),
+        validation_rules: d.validation_rules.clone(),
+        scientific_references: d.scientific_references.clone(),
+        model_classifications: d.model_classifications.clone(),
+    }))
 }

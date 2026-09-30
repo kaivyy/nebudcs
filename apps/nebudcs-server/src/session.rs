@@ -274,7 +274,6 @@ pub async fn handle_ws_session(socket: WebSocket, host: HostHandle) {
                 Ok(msg) => match msg {
                     ServerMessage::Delta(delta) => {
                         let subs = bcast_subs.read().await;
-                        // If no specific subscriptions or wildcard, send all
                         let filtered_delta = if subs.is_empty() || subs.contains("*") {
                             Some(delta)
                         } else {
@@ -284,6 +283,8 @@ pub async fn handle_ws_session(socket: WebSocket, host: HostHandle) {
                                 .filter(|tag| subs.contains(&tag.tag))
                                 .collect();
 
+                            // Even if no specific subscribed tag changed, if this was an empty heartbeat delta,
+                            // don't send to tag-specific subscribers, but send if tags were matched
                             if filtered_tags.is_empty() {
                                 None
                             } else {

@@ -81,8 +81,22 @@ pub async fn reset_scenario(State(host): State<HostHandle>) -> ServerResult<Json
 /// Injects an ad-hoc fault into the simulation.
 pub async fn inject_fault(
     State(host): State<HostHandle>,
+    role: crate::security::UserRole,
     Json(fault): Json<FaultDefinition>,
 ) -> ServerResult<Json<Value>> {
+    if !role.can_instruct() {
+        crate::security::audit_log(
+            "FAULT_INJECT",
+            &format!("{role}"),
+            "/api/v1/scenario/fault/inject",
+            "Unauthorized fault injection attempt",
+            false,
+        );
+        return Err(crate::error::ServerError::Forbidden(
+            "Instructor or Admin role required to inject faults".to_string(),
+        ));
+    }
+
     let fault_json = serde_json::to_string(&fault)
         .map_err(|e| crate::error::ServerError::InvalidRequest(e.to_string()))?;
     let cmd = RuntimeCommand::Scenario(ScenarioCommand::InjectFault { fault_json });
@@ -93,8 +107,15 @@ pub async fn inject_fault(
 /// Manually clears an active fault.
 pub async fn clear_fault(
     State(host): State<HostHandle>,
+    role: crate::security::UserRole,
     Json(req): Json<ClearFaultRequest>,
 ) -> ServerResult<Json<Value>> {
+    if !role.can_instruct() {
+        return Err(crate::error::ServerError::Forbidden(
+            "Instructor or Admin role required to clear faults".to_string(),
+        ));
+    }
+
     let cmd = RuntimeCommand::Scenario(ScenarioCommand::ClearFault {
         fault_id: req.fault_id,
     });

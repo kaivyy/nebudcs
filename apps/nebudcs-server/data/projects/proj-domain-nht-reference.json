@@ -1,0 +1,5323 @@
+{
+  "id": "506JH2YHCKYS53A0HJH79CK30J",
+  "name": "Naphtha Hydrotreater (NHT) Reference Plant",
+  "schema_version": "0.1.0",
+  "plants": [
+    {
+      "id": "01M264NWGYXXPXPSVNDSH4BSVC",
+      "name": "Refinery Complex Area 72",
+      "areas": [
+        {
+          "id": "01M264NWGYZPMXF5WG3J0SFZXK",
+          "name": "Hydroprocessing Section",
+          "units": [
+            {
+              "id": "01M264NWGY4D0XJ4KBNVGDNVBZ",
+              "name": "Unit 720 Naphtha Hydrotreater",
+              "equipment": [
+                {
+                  "id": "01M264NWGY2Y34228GKMWTPSWQ",
+                  "definition_id": "2KRSSVVX85BFH6EV6H5YR8Y85Z",
+                  "definition_version": "1.0.0",
+                  "name": "TK-101",
+                  "parameters": {
+                    "capacity_m3": 10000.0,
+                    "level": 72.5
+                  },
+                  "position": {
+                    "x": 80.0,
+                    "y": 360.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYD3EYGQB2CA6B2BH5",
+                  "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+                  "definition_version": "1.0.0",
+                  "name": "V-101",
+                  "parameters": {
+                    "volume_m3": 45.0,
+                    "operating_pressure": 350000.0,
+                    "level": 50.0
+                  },
+                  "position": {
+                    "x": 200.0,
+                    "y": 360.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGY938XXVJ3WYWDS46E",
+                  "definition_id": "0ATRCF671FM4B5GSSRFVNKC51R",
+                  "definition_version": "1.0.0",
+                  "name": "P-101A",
+                  "parameters": {
+                    "rated_flow": 199.0,
+                    "rated_head": 2800000.0,
+                    "speed_rpm": 2980.0
+                  },
+                  "position": {
+                    "x": 320.0,
+                    "y": 360.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYWWE0SP8Z9GKHTE88",
+                  "definition_id": "0ATRCF671FM4B5GSSRFVNKC51R",
+                  "definition_version": "1.0.0",
+                  "name": "P-101B",
+                  "parameters": {
+                    "rated_flow": 199.0,
+                    "rated_head": 2800000.0,
+                    "speed_rpm": 0.0
+                  },
+                  "position": {
+                    "x": 320.0,
+                    "y": 480.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYN0S92JCTFGXWXYQA",
+                  "definition_id": "47AQHQPS0ARBDTEWRCRZJWZBZ9",
+                  "definition_version": "1.0.0",
+                  "name": "FV-101",
+                  "parameters": {
+                    "cv": 250.0,
+                    "travel": 0.65
+                  },
+                  "position": {
+                    "x": 440.0,
+                    "y": 360.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYEE4RHAZTFQA0R53Y",
+                  "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+                  "definition_version": "1.0.0",
+                  "name": "X-101",
+                  "parameters": {
+                    "volume_m3": 8.5,
+                    "operating_pressure": 2700000.0
+                  },
+                  "position": {
+                    "x": 560.0,
+                    "y": 360.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYEQZ4B7BGFEN0ZQ29",
+                  "definition_id": "54NRXZQNTENXNZQ8WEKMBYWK7M",
+                  "definition_version": "1.0.0",
+                  "name": "MIX-101",
+                  "parameters": {
+                    "pressure_loss_factor": 15000.0
+                  },
+                  "position": {
+                    "x": 680.0,
+                    "y": 360.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGY15BXMWYRWKYZF36M",
+                  "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+                  "definition_version": "1.0.0",
+                  "name": "E-101A",
+                  "parameters": {
+                    "area_m2": 420.0,
+                    "overall_u": 380.0,
+                    "design_duty": 3200000.0
+                  },
+                  "position": {
+                    "x": 800.0,
+                    "y": 360.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGY9GXXAJJ2W5XV6S7Z",
+                  "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+                  "definition_version": "1.0.0",
+                  "name": "E-101B",
+                  "parameters": {
+                    "area_m2": 420.0,
+                    "overall_u": 380.0,
+                    "design_duty": 3200000.0
+                  },
+                  "position": {
+                    "x": 910.0,
+                    "y": 360.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYH4SEVX8VZEF1N02C",
+                  "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+                  "definition_version": "1.0.0",
+                  "name": "E-101C",
+                  "parameters": {
+                    "area_m2": 420.0,
+                    "overall_u": 380.0,
+                    "design_duty": 3200000.0
+                  },
+                  "position": {
+                    "x": 1020.0,
+                    "y": 360.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYDMMMYVS0BQCWWB1Z",
+                  "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+                  "definition_version": "1.0.0",
+                  "name": "E-101D",
+                  "parameters": {
+                    "area_m2": 420.0,
+                    "overall_u": 380.0,
+                    "design_duty": 3200000.0
+                  },
+                  "position": {
+                    "x": 1130.0,
+                    "y": 360.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGY7SAF927VQHRJ6AE9",
+                  "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+                  "definition_version": "1.0.0",
+                  "name": "E-101E",
+                  "parameters": {
+                    "area_m2": 420.0,
+                    "overall_u": 380.0,
+                    "design_duty": 3200000.0
+                  },
+                  "position": {
+                    "x": 1240.0,
+                    "y": 360.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYDG93JK0EPQ4KBNTE",
+                  "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+                  "definition_version": "1.0.0",
+                  "name": "E-101F",
+                  "parameters": {
+                    "area_m2": 420.0,
+                    "overall_u": 380.0,
+                    "design_duty": 3200000.0
+                  },
+                  "position": {
+                    "x": 1350.0,
+                    "y": 360.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGY27A3FQ6WP68DHJ25",
+                  "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+                  "definition_version": "1.0.0",
+                  "name": "E-101G",
+                  "parameters": {
+                    "area_m2": 420.0,
+                    "overall_u": 380.0,
+                    "design_duty": 3200000.0
+                  },
+                  "position": {
+                    "x": 1460.0,
+                    "y": 360.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "definition_id": "6RPK1YYR4SVAPJCMK6R4ZG93TM",
+                  "definition_version": "1.0.0",
+                  "name": "F-101",
+                  "parameters": {
+                    "duty_w": 4800000.0,
+                    "efficiency": 0.88
+                  },
+                  "position": {
+                    "x": 1600.0,
+                    "y": 360.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYG62E714H80WNYR3B",
+                  "definition_id": "0PH9VTZ12Q1F5GT43Q54JT6226",
+                  "definition_version": "1.0.0",
+                  "name": "R-101",
+                  "parameters": {
+                    "catalyst_volume_m3": 19.9,
+                    "catalyst_mass_kg": 15503.0,
+                    "lhsv": 10.0,
+                    "operating_pressure": 2442000.0,
+                    "operating_temp": 332.0,
+                    "max_bed_delta_t": 10.0
+                  },
+                  "position": {
+                    "x": 1740.0,
+                    "y": 360.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYN01ETKFS0PNF7Z85",
+                  "definition_id": "54NRXZQNTENXNZQ8WEKMBYWK7M",
+                  "definition_version": "1.0.0",
+                  "name": "MIX-102",
+                  "parameters": {
+                    "pressure_loss_factor": 5000.0
+                  },
+                  "position": {
+                    "x": 800.0,
+                    "y": 600.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYKNA0HEDAMS6R944N",
+                  "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+                  "definition_version": "1.0.0",
+                  "name": "A-101",
+                  "parameters": {
+                    "area_m2": 1250.0,
+                    "overall_u": 420.0,
+                    "design_duty": 5800000.0
+                  },
+                  "position": {
+                    "x": 940.0,
+                    "y": 600.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGY0HRW7SFC8T3V8XK3",
+                  "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+                  "definition_version": "1.0.0",
+                  "name": "E-101_TRIM",
+                  "parameters": {
+                    "area_m2": 180.0,
+                    "overall_u": 550.0,
+                    "design_duty": 900000.0
+                  },
+                  "position": {
+                    "x": 1080.0,
+                    "y": 600.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYC9Y9N44EH8YV0EJX",
+                  "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+                  "definition_version": "1.0.0",
+                  "name": "V-102",
+                  "parameters": {
+                    "volume_m3": 42.0,
+                    "operating_pressure": 2069000.0,
+                    "level": 0.5
+                  },
+                  "position": {
+                    "x": 1220.0,
+                    "y": 600.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYB0FSYW9FPH3XHA5H",
+                  "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+                  "definition_version": "1.0.0",
+                  "name": "V-103",
+                  "parameters": {
+                    "volume_m3": 22.0,
+                    "operating_pressure": 2060000.0,
+                    "level": 0.3
+                  },
+                  "position": {
+                    "x": 1220.0,
+                    "y": 760.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYSWRP39SEERE9SC0Z",
+                  "definition_id": "7PV7KKP3ZRGF3HHSBF1230WPP7",
+                  "definition_version": "1.0.0",
+                  "name": "K-101A",
+                  "parameters": {
+                    "rated_flow": 14.5,
+                    "rated_mass_flow": 14.5,
+                    "speed_rpm": 10450.0,
+                    "rated_power": 680000.0
+                  },
+                  "position": {
+                    "x": 1380.0,
+                    "y": 760.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYVWMMKQ50CQMHE99T",
+                  "definition_id": "64S6T0NAQMVXBXF7WAARW9B3E1",
+                  "definition_version": "1.0.0",
+                  "name": "SPLIT-101",
+                  "parameters": {
+                    "max_flow": 50.0
+                  },
+                  "position": {
+                    "x": 1520.0,
+                    "y": 760.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGY49YSH2F8GM696A7Z",
+                  "definition_id": "47AQHQPS0ARBDTEWRCRZJWZBZ9",
+                  "definition_version": "1.0.0",
+                  "name": "PV-102",
+                  "parameters": {
+                    "cv": 65.0,
+                    "travel": 0.25
+                  },
+                  "position": {
+                    "x": 1660.0,
+                    "y": 760.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYXMFQ6G5ZCFB97RV2",
+                  "definition_id": "2KRSSVVX85BFH6EV6H5YR8Y85Z",
+                  "definition_version": "1.0.0",
+                  "name": "V-104",
+                  "parameters": {
+                    "capacity_m3": 80.0,
+                    "level": 65.0
+                  },
+                  "position": {
+                    "x": 440.0,
+                    "y": 740.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYP2YWBE9BAZ7DY1QE",
+                  "definition_id": "0ATRCF671FM4B5GSSRFVNKC51R",
+                  "definition_version": "1.0.0",
+                  "name": "P-102A",
+                  "parameters": {
+                    "rated_flow": 6.0,
+                    "rated_head": 2800000.0,
+                    "speed_rpm": 2950.0
+                  },
+                  "position": {
+                    "x": 560.0,
+                    "y": 740.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYQBS6Q7TPNHQT8Q6Q",
+                  "definition_id": "47AQHQPS0ARBDTEWRCRZJWZBZ9",
+                  "definition_version": "1.0.0",
+                  "name": "FV-103",
+                  "parameters": {
+                    "cv": 15.0,
+                    "travel": 0.5
+                  },
+                  "position": {
+                    "x": 680.0,
+                    "y": 740.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGY6NQDSY2F4RYVWB0T",
+                  "definition_id": "47AQHQPS0ARBDTEWRCRZJWZBZ9",
+                  "definition_version": "1.0.0",
+                  "name": "LV-101",
+                  "parameters": {
+                    "cv": 180.0,
+                    "travel": 0.48
+                  },
+                  "position": {
+                    "x": 1360.0,
+                    "y": 600.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGY270D19ER7H5T4ZDN",
+                  "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+                  "definition_version": "1.0.0",
+                  "name": "E-102A",
+                  "parameters": {
+                    "area_m2": 240.0,
+                    "overall_u": 450.0,
+                    "design_duty": 1600000.0
+                  },
+                  "position": {
+                    "x": 1480.0,
+                    "y": 600.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYGEQ3HB28PTXJ9WDB",
+                  "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+                  "definition_version": "1.0.0",
+                  "name": "E-102B",
+                  "parameters": {
+                    "area_m2": 240.0,
+                    "overall_u": 450.0,
+                    "design_duty": 1600000.0
+                  },
+                  "position": {
+                    "x": 1600.0,
+                    "y": 600.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYVD8X6PVT691KM41M",
+                  "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+                  "definition_version": "1.0.0",
+                  "name": "C-101",
+                  "parameters": {
+                    "volume_m3": 65.0,
+                    "operating_pressure": 850000.0,
+                    "level": 50.0
+                  },
+                  "position": {
+                    "x": 1740.0,
+                    "y": 600.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYW9VA3HK6MJ94T5XV",
+                  "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+                  "definition_version": "1.0.0",
+                  "name": "E-103",
+                  "parameters": {
+                    "area_m2": 310.0,
+                    "overall_u": 520.0,
+                    "design_duty": 2200000.0
+                  },
+                  "position": {
+                    "x": 1880.0,
+                    "y": 520.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGY1J7JAJFTZRMYXVVC",
+                  "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+                  "definition_version": "1.0.0",
+                  "name": "V-105",
+                  "parameters": {
+                    "volume_m3": 20.0,
+                    "operating_pressure": 750000.0,
+                    "level": 45.0
+                  },
+                  "position": {
+                    "x": 2000.0,
+                    "y": 520.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYDSSC6PJE4MFCGQ01",
+                  "definition_id": "0ATRCF671FM4B5GSSRFVNKC51R",
+                  "definition_version": "1.0.0",
+                  "name": "P-104A",
+                  "parameters": {
+                    "rated_flow": 25.0,
+                    "rated_head": 350000.0,
+                    "speed_rpm": 2950.0
+                  },
+                  "position": {
+                    "x": 2120.0,
+                    "y": 520.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYXWX7VXYDPVZ8VN4P",
+                  "definition_id": "0ATRCF671FM4B5GSSRFVNKC51R",
+                  "definition_version": "1.0.0",
+                  "name": "P-103A",
+                  "parameters": {
+                    "rated_flow": 185.0,
+                    "rated_head": 850000.0,
+                    "speed_rpm": 2950.0
+                  },
+                  "position": {
+                    "x": 1880.0,
+                    "y": 680.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYG71P2XMNKVQ9HF7H",
+                  "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+                  "definition_version": "1.0.0",
+                  "name": "C-102",
+                  "parameters": {
+                    "volume_m3": 90.0,
+                    "operating_pressure": 250000.0,
+                    "level": 50.0
+                  },
+                  "position": {
+                    "x": 2020.0,
+                    "y": 680.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYP5DNT9G85BX8HTS2",
+                  "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+                  "definition_version": "1.0.0",
+                  "name": "E-104",
+                  "parameters": {
+                    "area_m2": 280.0,
+                    "overall_u": 480.0,
+                    "design_duty": 1900000.0
+                  },
+                  "position": {
+                    "x": 2160.0,
+                    "y": 620.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYHJHV3WZ81FZ63663",
+                  "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+                  "definition_version": "1.0.0",
+                  "name": "V-106",
+                  "parameters": {
+                    "volume_m3": 18.0,
+                    "operating_pressure": 200000.0,
+                    "level": 45.0
+                  },
+                  "position": {
+                    "x": 2280.0,
+                    "y": 620.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGY72R7T3JNS36E64HS",
+                  "definition_id": "0ATRCF671FM4B5GSSRFVNKC51R",
+                  "definition_version": "1.0.0",
+                  "name": "P-105A",
+                  "parameters": {
+                    "rated_flow": 45.0,
+                    "rated_head": 320000.0,
+                    "speed_rpm": 2950.0
+                  },
+                  "position": {
+                    "x": 2400.0,
+                    "y": 620.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYEJHNJ83G0VSN314F",
+                  "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+                  "definition_version": "1.0.0",
+                  "name": "E-105",
+                  "parameters": {
+                    "area_m2": 85.0,
+                    "overall_u": 450.0,
+                    "design_duty": 650000.0
+                  },
+                  "position": {
+                    "x": 2520.0,
+                    "y": 620.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "01M264NWGYW5X8JWEER25H26FK",
+                  "definition_id": "104DF0QQNQCN5DNVWCKW74C6T6",
+                  "definition_version": "1.0.0",
+                  "name": "E-106",
+                  "parameters": {
+                    "area_m2": 160.0,
+                    "overall_u": 480.0,
+                    "design_duty": 1400000.0
+                  },
+                  "position": {
+                    "x": 2160.0,
+                    "y": 780.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                }
+              ],
+              "streams": [
+                {
+                  "id": "01M264NWGYBNVBQHATSHM6BBG6",
+                  "name": "STR-NHT-00",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGY2Y34228GKMWTPSWQ",
+                    "port_id": "20BW59F2XB37X5TYG8K1HMDYRS"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYD3EYGQB2CA6B2BH5",
+                    "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYP3SK4FCA7XBPQA56",
+                  "name": "STR-NHT-01",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYD3EYGQB2CA6B2BH5",
+                    "port_id": "79KAB0B0B6SCFDAF3AST98A7D6"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGY938XXVJ3WYWDS46E",
+                    "port_id": "2Z0TCSV15342N4G68500SBPH4T"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYM6GWX8R0P1WDKE6F",
+                  "name": "STR-NHT-02",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGY938XXVJ3WYWDS46E",
+                    "port_id": "1NQHXSA59AXSTTAS8GQETNQXF7"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYN0S92JCTFGXWXYQA",
+                    "port_id": "68A3WN88ZB4Y0MYZWJAKSCKECP"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGY77E3A8JCMF3QF554",
+                  "name": "STR-NHT-03",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYN0S92JCTFGXWXYQA",
+                    "port_id": "20BW59F2XB37X5TYG8K1HMDYRS"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYEE4RHAZTFQA0R53Y",
+                    "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYH4AAD7R9YJFQD6BR",
+                  "name": "STR-NHT-04",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYEE4RHAZTFQA0R53Y",
+                    "port_id": "79KAB0B0B6SCFDAF3AST98A7D6"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYEQZ4B7BGFEN0ZQ29",
+                    "port_id": "51G577P091BGTBZGBMXF00MCQ6"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYM4GBZDDPCBEKDBM7",
+                  "name": "STR-NHT-05",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYEQZ4B7BGFEN0ZQ29",
+                    "port_id": "5166ZW6PYZRVCYP21HBRCS04R9"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGY15BXMWYRWKYZF36M",
+                    "port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYG879KCECB1EG01RK",
+                  "name": "STR-NHT-06",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGY15BXMWYRWKYZF36M",
+                    "port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGY9GXXAJJ2W5XV6S7Z",
+                    "port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYW58PBARTM66465J0",
+                  "name": "STR-NHT-07",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGY9GXXAJJ2W5XV6S7Z",
+                    "port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYH4SEVX8VZEF1N02C",
+                    "port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGY8QN8K4ZD2E4N1CFE",
+                  "name": "STR-NHT-08",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYH4SEVX8VZEF1N02C",
+                    "port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYDMMMYVS0BQCWWB1Z",
+                    "port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGY46GDFAAHE60H3MHC",
+                  "name": "STR-NHT-09",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYDMMMYVS0BQCWWB1Z",
+                    "port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGY7SAF927VQHRJ6AE9",
+                    "port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYJS5KDHE9RC217J3C",
+                  "name": "STR-NHT-10",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGY7SAF927VQHRJ6AE9",
+                    "port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYDG93JK0EPQ4KBNTE",
+                    "port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYS1XTX2XF8SYKHPTN",
+                  "name": "STR-NHT-11",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYDG93JK0EPQ4KBNTE",
+                    "port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGY27A3FQ6WP68DHJ25",
+                    "port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYDAEQXQPZ8TSHQY3V",
+                  "name": "STR-NHT-12",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGY27A3FQ6WP68DHJ25",
+                    "port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                    "port_id": "6B02X5387W3WQYBZ0CAP57R0YF"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYE7RFYS99FRBNRGBN",
+                  "name": "STR-NHT-13",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                    "port_id": "21PP3MM2206Y93A468WWFMDYN0"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYG62E714H80WNYR3B",
+                    "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGY9QTK9JFC3X9TY45M",
+                  "name": "STR-NHT-14",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYG62E714H80WNYR3B",
+                    "port_id": "27NWW5RP2WM0FQBYS8YA51KJB0"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGY27A3FQ6WP68DHJ25",
+                    "port_id": "3FER1D23T6D9V6VRMZ4JHVJECE"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGY547S6PGYMEG8S6R8",
+                  "name": "STR-NHT-15",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGY27A3FQ6WP68DHJ25",
+                    "port_id": "5XFYQX84Y5N59XJE3827JSGYGF"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYDG93JK0EPQ4KBNTE",
+                    "port_id": "3FER1D23T6D9V6VRMZ4JHVJECE"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGY56MBF9BRZ49WRR8D",
+                  "name": "STR-NHT-16",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYDG93JK0EPQ4KBNTE",
+                    "port_id": "5XFYQX84Y5N59XJE3827JSGYGF"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGY7SAF927VQHRJ6AE9",
+                    "port_id": "3FER1D23T6D9V6VRMZ4JHVJECE"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGY7G8XQ2JTNJGBC9ME",
+                  "name": "STR-NHT-17",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGY7SAF927VQHRJ6AE9",
+                    "port_id": "5XFYQX84Y5N59XJE3827JSGYGF"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYDMMMYVS0BQCWWB1Z",
+                    "port_id": "3FER1D23T6D9V6VRMZ4JHVJECE"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYS8C29R0PSZNJBBRA",
+                  "name": "STR-NHT-18",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYDMMMYVS0BQCWWB1Z",
+                    "port_id": "5XFYQX84Y5N59XJE3827JSGYGF"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYH4SEVX8VZEF1N02C",
+                    "port_id": "3FER1D23T6D9V6VRMZ4JHVJECE"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYK4QAKCD96P4K6KDJ",
+                  "name": "STR-NHT-19",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYH4SEVX8VZEF1N02C",
+                    "port_id": "5XFYQX84Y5N59XJE3827JSGYGF"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGY9GXXAJJ2W5XV6S7Z",
+                    "port_id": "3FER1D23T6D9V6VRMZ4JHVJECE"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGY55TMWGE2FAXZKM88",
+                  "name": "STR-NHT-20",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGY9GXXAJJ2W5XV6S7Z",
+                    "port_id": "5XFYQX84Y5N59XJE3827JSGYGF"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGY15BXMWYRWKYZF36M",
+                    "port_id": "3FER1D23T6D9V6VRMZ4JHVJECE"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYAYHD5HB4S02Q9S0C",
+                  "name": "STR-NHT-21",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGY15BXMWYRWKYZF36M",
+                    "port_id": "5XFYQX84Y5N59XJE3827JSGYGF"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYN01ETKFS0PNF7Z85",
+                    "port_id": "51G577P091BGTBZGBMXF00MCQ6"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYSY9CR4CA173HKM0Z",
+                  "name": "STR-NHT-22",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYXMFQ6G5ZCFB97RV2",
+                    "port_id": "20BW59F2XB37X5TYG8K1HMDYRS"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYP2YWBE9BAZ7DY1QE",
+                    "port_id": "2Z0TCSV15342N4G68500SBPH4T"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGY5GADSWWF8EDZ979T",
+                  "name": "STR-NHT-23",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYP2YWBE9BAZ7DY1QE",
+                    "port_id": "1NQHXSA59AXSTTAS8GQETNQXF7"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYQBS6Q7TPNHQT8Q6Q",
+                    "port_id": "68A3WN88ZB4Y0MYZWJAKSCKECP"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYPMRVF3F0BBS9GY73",
+                  "name": "STR-NHT-24",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYQBS6Q7TPNHQT8Q6Q",
+                    "port_id": "20BW59F2XB37X5TYG8K1HMDYRS"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYN01ETKFS0PNF7Z85",
+                    "port_id": "00T3ZVG186HQAZG7YEDGFR4ZNA"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYSGQW6HAZHTY94CG7",
+                  "name": "STR-NHT-25",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYN01ETKFS0PNF7Z85",
+                    "port_id": "5166ZW6PYZRVCYP21HBRCS04R9"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYKNA0HEDAMS6R944N",
+                    "port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYVYZFKX3W9WHQ3WYP",
+                  "name": "STR-NHT-26",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYKNA0HEDAMS6R944N",
+                    "port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGY0HRW7SFC8T3V8XK3",
+                    "port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYCAY8AX0DW7KC6XHR",
+                  "name": "STR-NHT-27",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGY0HRW7SFC8T3V8XK3",
+                    "port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYC9Y9N44EH8YV0EJX",
+                    "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYSYZJFD0550SQ9329",
+                  "name": "STR-NHT-28",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYC9Y9N44EH8YV0EJX",
+                    "port_id": "6W06EDM06HWKQES92WSCG4RW65"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYB0FSYW9FPH3XHA5H",
+                    "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGY660D56ETAHH8SKMY",
+                  "name": "STR-NHT-29",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYB0FSYW9FPH3XHA5H",
+                    "port_id": "6W06EDM06HWKQES92WSCG4RW65"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYSWRP39SEERE9SC0Z",
+                    "port_id": "2Z0TCSV15342N4G68500SBPH4T"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYG1DN4F1H6HKFC26J",
+                  "name": "STR-NHT-30",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYSWRP39SEERE9SC0Z",
+                    "port_id": "1NQHXSA59AXSTTAS8GQETNQXF7"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYVWMMKQ50CQMHE99T",
+                    "port_id": "2PPQGTCG2142FM77N0M0XN65DH"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYN9YDT3R59N06AF8D",
+                  "name": "STR-NHT-31",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYVWMMKQ50CQMHE99T",
+                    "port_id": "5QWX9J16HDEWQANHNZCVTBRX1X"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYEQZ4B7BGFEN0ZQ29",
+                    "port_id": "00T3ZVG186HQAZG7YEDGFR4ZNA"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGY275A0S6BSZAEMK7K",
+                  "name": "STR-NHT-32",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYVWMMKQ50CQMHE99T",
+                    "port_id": "3JBZZP9W3V3ZJ8N35175W10B7K"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGY49YSH2F8GM696A7Z",
+                    "port_id": "68A3WN88ZB4Y0MYZWJAKSCKECP"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYC82VG2GMET3HGKQZ",
+                  "name": "STR-NHT-33",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYC9Y9N44EH8YV0EJX",
+                    "port_id": "79KAB0B0B6SCFDAF3AST98A7D6"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGY6NQDSY2F4RYVWB0T",
+                    "port_id": "68A3WN88ZB4Y0MYZWJAKSCKECP"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGY99XAJB5NZ4YT6KTS",
+                  "name": "STR-NHT-34",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGY6NQDSY2F4RYVWB0T",
+                    "port_id": "20BW59F2XB37X5TYG8K1HMDYRS"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGY270D19ER7H5T4ZDN",
+                    "port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYGVHH8HXSAK0FCB0A",
+                  "name": "STR-NHT-35",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGY270D19ER7H5T4ZDN",
+                    "port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYGEQ3HB28PTXJ9WDB",
+                    "port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYF9MMRXXGXYAVPEAX",
+                  "name": "STR-NHT-36",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYGEQ3HB28PTXJ9WDB",
+                    "port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYVD8X6PVT691KM41M",
+                    "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYENEHXDDXH53KPR1J",
+                  "name": "STR-NHT-37",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYVD8X6PVT691KM41M",
+                    "port_id": "6W06EDM06HWKQES92WSCG4RW65"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYW9VA3HK6MJ94T5XV",
+                    "port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGY8ZWY203PF3J7PK0Y",
+                  "name": "STR-NHT-38",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYW9VA3HK6MJ94T5XV",
+                    "port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGY1J7JAJFTZRMYXVVC",
+                    "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYNGC6XYXRHJ32B1F3",
+                  "name": "STR-NHT-39",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGY1J7JAJFTZRMYXVVC",
+                    "port_id": "79KAB0B0B6SCFDAF3AST98A7D6"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYDSSC6PJE4MFCGQ01",
+                    "port_id": "2Z0TCSV15342N4G68500SBPH4T"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYXRDC9XQWZC9SK58N",
+                  "name": "STR-NHT-40",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYVD8X6PVT691KM41M",
+                    "port_id": "79KAB0B0B6SCFDAF3AST98A7D6"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYXWX7VXYDPVZ8VN4P",
+                    "port_id": "2Z0TCSV15342N4G68500SBPH4T"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYRWSNJ6QY2C58HR29",
+                  "name": "STR-NHT-41",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYXWX7VXYDPVZ8VN4P",
+                    "port_id": "1NQHXSA59AXSTTAS8GQETNQXF7"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYGEQ3HB28PTXJ9WDB",
+                    "port_id": "3FER1D23T6D9V6VRMZ4JHVJECE"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYWEXJQK951819267S",
+                  "name": "STR-NHT-42",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYGEQ3HB28PTXJ9WDB",
+                    "port_id": "5XFYQX84Y5N59XJE3827JSGYGF"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGY270D19ER7H5T4ZDN",
+                    "port_id": "3FER1D23T6D9V6VRMZ4JHVJECE"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYC9J2NPMB0P9BJKTA",
+                  "name": "STR-NHT-43",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGY270D19ER7H5T4ZDN",
+                    "port_id": "5XFYQX84Y5N59XJE3827JSGYGF"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYG71P2XMNKVQ9HF7H",
+                    "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGY2NDH0RM8MNJ00CM6",
+                  "name": "STR-NHT-44",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYG71P2XMNKVQ9HF7H",
+                    "port_id": "6W06EDM06HWKQES92WSCG4RW65"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYP5DNT9G85BX8HTS2",
+                    "port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYZ8P2CJ6A1R9Z0Z6V",
+                  "name": "STR-NHT-45",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYP5DNT9G85BX8HTS2",
+                    "port_id": "1ZJA3ZZ4W3APWFND5YEVRKEN4Y"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYHJHV3WZ81FZ63663",
+                    "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGYW6Z9NRVXSAH2W4QP",
+                  "name": "STR-NHT-46",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYHJHV3WZ81FZ63663",
+                    "port_id": "79KAB0B0B6SCFDAF3AST98A7D6"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGY72R7T3JNS36E64HS",
+                    "port_id": "2Z0TCSV15342N4G68500SBPH4T"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGY9X8T7WDAWC4W0A5K",
+                  "name": "STR-NHT-47",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGY72R7T3JNS36E64HS",
+                    "port_id": "1NQHXSA59AXSTTAS8GQETNQXF7"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYEJHNJ83G0VSN314F",
+                    "port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "01M264NWGY161ZDKHZ2ZSJQE9Q",
+                  "name": "STR-NHT-48",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "01M264NWGYG71P2XMNKVQ9HF7H",
+                    "port_id": "79KAB0B0B6SCFDAF3AST98A7D6"
+                  },
+                  "sink": {
+                    "equipment_id": "01M264NWGYW5X8JWEER25H26FK",
+                    "port_id": "56NZ1VCYYVHTB2FZKBXX7HE2VA"
+                  },
+                  "composition": null,
+                  "route_points": [],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                }
+              ],
+              "instruments": [
+                {
+                  "id": "01M264NWGYF7BNQGCT8ZD63NA8",
+                  "tag": "FT-101",
+                  "equipment_id": "01M264NWGYN0S92JCTFGXWXYQA",
+                  "port_id": "68A3WN88ZB4Y0MYZWJAKSCKECP",
+                  "measurement_kind": "Flow",
+                  "range_min": 0.0,
+                  "range_max": 250.0,
+                  "unit": "m3/h",
+                  "position": {
+                    "x": 440.0,
+                    "y": 300.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYDMBTR5Q5Q0RYJXAQ",
+                  "tag": "TT-101",
+                  "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "port_id": "21PP3MM2206Y93A468WWFMDYN0",
+                  "measurement_kind": "Temperature",
+                  "range_min": 0.0,
+                  "range_max": 450.0,
+                  "unit": "°C",
+                  "position": {
+                    "x": 1720.0,
+                    "y": 330.0
+                  }
+                },
+                {
+                  "id": "01M264NWGY89X0SZCCG5XRQRFG",
+                  "tag": "TI-101-CIT",
+                  "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "port_id": "6B02X5387W3WQYBZ0CAP57R0YF",
+                  "measurement_kind": "Temperature",
+                  "range_min": 0.0,
+                  "range_max": 450.0,
+                  "unit": "°C",
+                  "position": {
+                    "x": 1480.0,
+                    "y": 310.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYZ02T921MVCD7RKJK",
+                  "tag": "TI-101-SK1",
+                  "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "port_id": null,
+                  "measurement_kind": "Temperature",
+                  "range_min": 0.0,
+                  "range_max": 600.0,
+                  "unit": "°C",
+                  "position": {
+                    "x": 1550.0,
+                    "y": 440.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYMKZSM5CMZTKAVPG7",
+                  "tag": "TI-101-SK2",
+                  "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "port_id": null,
+                  "measurement_kind": "Temperature",
+                  "range_min": 0.0,
+                  "range_max": 600.0,
+                  "unit": "°C",
+                  "position": {
+                    "x": 1650.0,
+                    "y": 440.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYZGF7YA18E89N6SM2",
+                  "tag": "PT-104",
+                  "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "port_id": null,
+                  "measurement_kind": "Pressure",
+                  "range_min": 0.0,
+                  "range_max": 10.0,
+                  "unit": "kg/cm2g",
+                  "position": {
+                    "x": 1600.0,
+                    "y": 510.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYJKVB8XVVNSDFT8XD",
+                  "tag": "FT-105",
+                  "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "port_id": null,
+                  "measurement_kind": "Flow",
+                  "range_min": 0.0,
+                  "range_max": 3000.0,
+                  "unit": "Nm3/h",
+                  "position": {
+                    "x": 1660.0,
+                    "y": 510.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYT9GARAKMZWRV5FP0",
+                  "tag": "PT-105",
+                  "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "port_id": null,
+                  "measurement_kind": "Pressure",
+                  "range_min": 0.0,
+                  "range_max": 15.0,
+                  "unit": "kg/cm2g",
+                  "position": {
+                    "x": 1720.0,
+                    "y": 510.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYZZ6DQ2H9W9KYZE6B",
+                  "tag": "PDT-101",
+                  "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "port_id": null,
+                  "measurement_kind": "DifferentialPressure",
+                  "range_min": -20.0,
+                  "range_max": 10.0,
+                  "unit": "mmH2O",
+                  "position": {
+                    "x": 1480.0,
+                    "y": 370.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYR5PGJMFQ53SZ72Z8",
+                  "tag": "TI-104",
+                  "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "port_id": null,
+                  "measurement_kind": "Temperature",
+                  "range_min": 0.0,
+                  "range_max": 400.0,
+                  "unit": "°C",
+                  "position": {
+                    "x": 1540.0,
+                    "y": 200.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYAKVSJ9WC2NWXX08N",
+                  "tag": "AI-101",
+                  "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "port_id": null,
+                  "measurement_kind": "Concentration",
+                  "range_min": 0.0,
+                  "range_max": 10.0,
+                  "unit": "%",
+                  "position": {
+                    "x": 1660.0,
+                    "y": 200.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYD345Y0WKCY4MTYY5",
+                  "tag": "TI-101-RIT",
+                  "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "port_id": null,
+                  "measurement_kind": "Temperature",
+                  "range_min": 0.0,
+                  "range_max": 450.0,
+                  "unit": "°C",
+                  "position": {
+                    "x": 1530.0,
+                    "y": 400.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYRWQ5CKGAQFNKRCC2",
+                  "tag": "TI-101-ROT",
+                  "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "port_id": null,
+                  "measurement_kind": "Temperature",
+                  "range_min": 0.0,
+                  "range_max": 450.0,
+                  "unit": "°C",
+                  "position": {
+                    "x": 1670.0,
+                    "y": 400.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYTY018ZX3RJE8F5X4",
+                  "tag": "FT-Air",
+                  "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "port_id": null,
+                  "measurement_kind": "Flow",
+                  "range_min": 0.0,
+                  "range_max": 30000.0,
+                  "unit": "Nm3/h",
+                  "position": {
+                    "x": 1360.0,
+                    "y": 510.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYDTQZGVJCGWW8ZKWG",
+                  "tag": "PT-Air",
+                  "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "port_id": null,
+                  "measurement_kind": "Pressure",
+                  "range_min": 0.0,
+                  "range_max": 50.0,
+                  "unit": "mbar",
+                  "position": {
+                    "x": 1420.0,
+                    "y": 510.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYATPS1XB904P48QG5",
+                  "tag": "FZ-101",
+                  "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "port_id": null,
+                  "measurement_kind": "Position",
+                  "range_min": 0.0,
+                  "range_max": 100.0,
+                  "unit": "%",
+                  "position": {
+                    "x": 1480.0,
+                    "y": 510.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYGBGYTNFYVGM07EH6",
+                  "tag": "FFC-101",
+                  "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "port_id": null,
+                  "measurement_kind": "Ratio",
+                  "range_min": 0.0,
+                  "range_max": 3.0,
+                  "unit": "ratio",
+                  "position": {
+                    "x": 1540.0,
+                    "y": 510.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYDZY6KMVDR34WTQXX",
+                  "tag": "PT-107",
+                  "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "port_id": null,
+                  "measurement_kind": "Pressure",
+                  "range_min": 0.0,
+                  "range_max": 15.0,
+                  "unit": "kg/cm2g",
+                  "position": {
+                    "x": 1780.0,
+                    "y": 510.0
+                  }
+                },
+                {
+                  "id": "01M264NWGY5DZC15BGH7PQJGJV",
+                  "tag": "FT-107",
+                  "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "port_id": null,
+                  "measurement_kind": "Flow",
+                  "range_min": 0.0,
+                  "range_max": 500.0,
+                  "unit": "kg/h",
+                  "position": {
+                    "x": 1840.0,
+                    "y": 510.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYZCHCWHQJ235KE0Q4",
+                  "tag": "AI-102",
+                  "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "port_id": null,
+                  "measurement_kind": "Concentration",
+                  "range_min": 0.0,
+                  "range_max": 100.0,
+                  "unit": "ppm",
+                  "position": {
+                    "x": 1660.0,
+                    "y": 150.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYQNCB13P7P789T4AM",
+                  "tag": "TT-102",
+                  "equipment_id": "01M264NWGYG62E714H80WNYR3B",
+                  "port_id": "27NWW5RP2WM0FQBYS8YA51KJB0",
+                  "measurement_kind": "Temperature",
+                  "range_min": 0.0,
+                  "range_max": 450.0,
+                  "unit": "°C",
+                  "position": {
+                    "x": 1740.0,
+                    "y": 300.0
+                  }
+                },
+                {
+                  "id": "01M264NWGY2DY76FZ4283DKXN1",
+                  "tag": "PT-102",
+                  "equipment_id": "01M264NWGYC9Y9N44EH8YV0EJX",
+                  "port_id": "6W06EDM06HWKQES92WSCG4RW65",
+                  "measurement_kind": "Pressure",
+                  "range_min": 0.0,
+                  "range_max": 35.0,
+                  "unit": "kg/cm2g",
+                  "position": {
+                    "x": 1220.0,
+                    "y": 520.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYGVT2EEB7CMWWH6TQ",
+                  "tag": "LT-101",
+                  "equipment_id": "01M264NWGYC9Y9N44EH8YV0EJX",
+                  "port_id": null,
+                  "measurement_kind": "Level",
+                  "range_min": 0.0,
+                  "range_max": 1.0,
+                  "unit": "fraction",
+                  "position": {
+                    "x": 1220.0,
+                    "y": 660.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYDTNJ7BMVJDVZHV2E",
+                  "tag": "FT-102",
+                  "equipment_id": "01M264NWGYSWRP39SEERE9SC0Z",
+                  "port_id": "1NQHXSA59AXSTTAS8GQETNQXF7",
+                  "measurement_kind": "Flow",
+                  "range_min": 0.0,
+                  "range_max": 60000.0,
+                  "unit": "Nm3/h",
+                  "position": {
+                    "x": 1380.0,
+                    "y": 700.0
+                  }
+                },
+                {
+                  "id": "01M264NWGY996FKSCKEEVG45J7",
+                  "tag": "FT-103",
+                  "equipment_id": "01M264NWGYQBS6Q7TPNHQT8Q6Q",
+                  "port_id": "68A3WN88ZB4Y0MYZWJAKSCKECP",
+                  "measurement_kind": "Flow",
+                  "range_min": 0.0,
+                  "range_max": 15.0,
+                  "unit": "m3/h",
+                  "position": {
+                    "x": 680.0,
+                    "y": 700.0
+                  }
+                },
+                {
+                  "id": "01M264NWGY0H33NWNHRPMNW6KP",
+                  "tag": "LT-102",
+                  "equipment_id": "01M264NWGYVD8X6PVT691KM41M",
+                  "port_id": null,
+                  "measurement_kind": "Level",
+                  "range_min": 0.0,
+                  "range_max": 100.0,
+                  "unit": "%",
+                  "position": {
+                    "x": 1740.0,
+                    "y": 660.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYNSKM2FSSECRM94ZK",
+                  "tag": "PT-103",
+                  "equipment_id": "01M264NWGY1J7JAJFTZRMYXVVC",
+                  "port_id": "6W06EDM06HWKQES92WSCG4RW65",
+                  "measurement_kind": "Pressure",
+                  "range_min": 0.0,
+                  "range_max": 15.0,
+                  "unit": "kg/cm2g",
+                  "position": {
+                    "x": 2000.0,
+                    "y": 460.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYEZPMKTK9D7CRPPTT",
+                  "tag": "FT-104",
+                  "equipment_id": "01M264NWGYDSSC6PJE4MFCGQ01",
+                  "port_id": "1NQHXSA59AXSTTAS8GQETNQXF7",
+                  "measurement_kind": "Flow",
+                  "range_min": 0.0,
+                  "range_max": 50.0,
+                  "unit": "m3/h",
+                  "position": {
+                    "x": 2120.0,
+                    "y": 460.0
+                  }
+                },
+                {
+                  "id": "01M264NWGY13G8YXK65BRC4B5P",
+                  "tag": "LT-103",
+                  "equipment_id": "01M264NWGYG71P2XMNKVQ9HF7H",
+                  "port_id": null,
+                  "measurement_kind": "Level",
+                  "range_min": 0.0,
+                  "range_max": 100.0,
+                  "unit": "%",
+                  "position": {
+                    "x": 2020.0,
+                    "y": 740.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYA1V14SRX8VNZNDH7",
+                  "tag": "TT-103",
+                  "equipment_id": "01M264NWGYG71P2XMNKVQ9HF7H",
+                  "port_id": "6W06EDM06HWKQES92WSCG4RW65",
+                  "measurement_kind": "Temperature",
+                  "range_min": 0.0,
+                  "range_max": 200.0,
+                  "unit": "°C",
+                  "position": {
+                    "x": 2020.0,
+                    "y": 620.0
+                  }
+                }
+              ],
+              "control_loops": [
+                {
+                  "id": "01M264NWGY0GNDESJANG4CG0B0",
+                  "name": "FIC-101",
+                  "pv_tag": "FT-101",
+                  "sp": 199.0,
+                  "out_tag": "FV-101.OPENING",
+                  "kp": 0.8,
+                  "ti": 6.0,
+                  "td": 0.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 440.0,
+                    "y": 240.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYVAE5M0MTDY2MQWG8",
+                  "name": "TIC-101",
+                  "pv_tag": "TT-101",
+                  "sp": 332.0,
+                  "out_tag": "F-101.DUTY",
+                  "kp": 1.5,
+                  "ti": 25.0,
+                  "td": 2.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 1720.0,
+                    "y": 270.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYM1TKFPCR5W96EHQ0",
+                  "name": "PIC-101",
+                  "pv_tag": "PT-102",
+                  "sp": 21.1,
+                  "out_tag": "PV-102.OPENING",
+                  "kp": 1.8,
+                  "ti": 15.0,
+                  "td": 0.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 1220.0,
+                    "y": 460.0
+                  }
+                },
+                {
+                  "id": "01M264NWGY6Y3A9MN6AHE6D44Q",
+                  "name": "LIC-101",
+                  "pv_tag": "LT-101",
+                  "sp": 50.0,
+                  "out_tag": "LV-101.OPENING",
+                  "kp": 1.2,
+                  "ti": 12.0,
+                  "td": 0.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 1360.0,
+                    "y": 520.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYHX2KES44CJ16TR7D",
+                  "name": "FIC-102",
+                  "pv_tag": "FT-102",
+                  "sp": 39302.0,
+                  "out_tag": "K-101A.SPEED",
+                  "kp": 1.0,
+                  "ti": 8.0,
+                  "td": 0.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 1380.0,
+                    "y": 640.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYA24NNSACSYYSAJ6F",
+                  "name": "FIC-103",
+                  "pv_tag": "FT-103",
+                  "sp": 6.0,
+                  "out_tag": "FV-103.OPENING",
+                  "kp": 0.9,
+                  "ti": 5.0,
+                  "td": 0.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 680.0,
+                    "y": 640.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYRWWQ4MGBS25297FX",
+                  "name": "LIC-102",
+                  "pv_tag": "LT-102",
+                  "sp": 50.0,
+                  "out_tag": "P-103A.FLOW",
+                  "kp": 1.4,
+                  "ti": 15.0,
+                  "td": 0.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 1740.0,
+                    "y": 720.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYDJSHN4DFAPJP9PCB",
+                  "name": "PIC-103",
+                  "pv_tag": "PT-103",
+                  "sp": 8.5,
+                  "out_tag": "V-105.PRESSURE",
+                  "kp": 1.6,
+                  "ti": 10.0,
+                  "td": 0.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 2000.0,
+                    "y": 400.0
+                  }
+                },
+                {
+                  "id": "01M264NWGY034NZDB7XTJ8MN5Q",
+                  "name": "TIC-102",
+                  "pv_tag": "TT-102",
+                  "sp": 215.0,
+                  "out_tag": "C-101.REBOILER_DUTY",
+                  "kp": 1.8,
+                  "ti": 20.0,
+                  "td": 1.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 1740.0,
+                    "y": 240.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYGQGGBAG10F1ASFWB",
+                  "name": "FIC-104",
+                  "pv_tag": "FT-104",
+                  "sp": 25.0,
+                  "out_tag": "P-104A.FLOW",
+                  "kp": 0.9,
+                  "ti": 6.0,
+                  "td": 0.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 2120.0,
+                    "y": 400.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYVVC0BF8R00ANS5B3",
+                  "name": "LIC-103",
+                  "pv_tag": "LT-103",
+                  "sp": 50.0,
+                  "out_tag": "E-106.FLOW",
+                  "kp": 1.3,
+                  "ti": 14.0,
+                  "td": 0.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 2020.0,
+                    "y": 800.0
+                  }
+                },
+                {
+                  "id": "01M264NWGYDMN5MMCQDRTTWK8M",
+                  "name": "TIC-103",
+                  "pv_tag": "TT-103",
+                  "sp": 85.0,
+                  "out_tag": "E-104.DUTY",
+                  "kp": 1.5,
+                  "ti": 18.0,
+                  "td": 1.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 2020.0,
+                    "y": 560.0
+                  }
+                }
+              ],
+              "alarms": [
+                {
+                  "id": "01M264NWGY6GC3Y17G2NFVNY1T",
+                  "name": "PAH-101",
+                  "pv_tag": "PT-102",
+                  "alarm_type": "HI",
+                  "severity": "high",
+                  "trip_limit": 22.0,
+                  "deadband": 0.2,
+                  "description": "HP Separator high pressure warning"
+                },
+                {
+                  "id": "01M264NWGYAY64Y49TDDK9DP89",
+                  "name": "PAHH-101",
+                  "pv_tag": "PT-102",
+                  "alarm_type": "HI_HI",
+                  "severity": "critical",
+                  "trip_limit": 23.0,
+                  "deadband": 0.2,
+                  "description": "HP Separator high high pressure emergency trip"
+                },
+                {
+                  "id": "01M264NWGYNRYHCDFAX3YP7TMZ",
+                  "name": "TAH-101",
+                  "pv_tag": "TT-102",
+                  "alarm_type": "HI",
+                  "severity": "high",
+                  "trip_limit": 340.0,
+                  "deadband": 1.0,
+                  "description": "Reactor bed high temperature warning"
+                },
+                {
+                  "id": "01M264NWGYANQ1XGNEPQZ83ZH5",
+                  "name": "TAHH-101",
+                  "pv_tag": "TT-102",
+                  "alarm_type": "HI_HI",
+                  "severity": "critical",
+                  "trip_limit": 343.3,
+                  "deadband": 0.5,
+                  "description": "Reactor maximum allowable temperature trip (343.3 C HPCL Visakh limit)"
+                },
+                {
+                  "id": "01M264NWGYNMTXZHNDK53WJJT9",
+                  "name": "TDAH-101",
+                  "pv_tag": "TT-102",
+                  "alarm_type": "DEVIATION",
+                  "severity": "high",
+                  "trip_limit": 10.0,
+                  "deadband": 0.5,
+                  "description": "Reactor bed temperature rise exceeds max Delta T limit (10 C limit)"
+                },
+                {
+                  "id": "01M264NWGYCHMSEZJ20MQT2QAT",
+                  "name": "FAL-103",
+                  "pv_tag": "FT-103",
+                  "alarm_type": "LO",
+                  "severity": "high",
+                  "trip_limit": 4.5,
+                  "deadband": 0.2,
+                  "description": "Wash water injection flow low - risk of ammonium salt deposition"
+                },
+                {
+                  "id": "01M264NWGYNTPN951P1XS4EZT1",
+                  "name": "LAHH-101",
+                  "pv_tag": "LT-101",
+                  "alarm_type": "HI_HI",
+                  "severity": "critical",
+                  "trip_limit": 0.85,
+                  "deadband": 0.01,
+                  "description": "HP Separator high high level trip - compressor liquid carryover protection"
+                },
+                {
+                  "id": "01M264NWGYE6M0GAHXK2MFR9S1",
+                  "name": "LAL-101",
+                  "pv_tag": "LT-101",
+                  "alarm_type": "LO",
+                  "severity": "high",
+                  "trip_limit": 0.2,
+                  "deadband": 0.01,
+                  "description": "HP Separator low level alarm - gas blowthrough prevention"
+                }
+              ],
+              "interlocks": [
+                {
+                  "id": "01M264NWGYGZFBWB63NJ00ZCND",
+                  "name": "ESD-R101-TEMP",
+                  "source_tag": "TT-102",
+                  "condition": ">",
+                  "threshold": 343.3,
+                  "target_action": "TRIP",
+                  "target_equipment": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "latched": true,
+                  "description": "Reactor thermal runaway - cut fuel to Charge Heater F-101"
+                },
+                {
+                  "id": "01M264NWGYJG1AA660K8HQG8F5",
+                  "name": "ESD-V102-LAHH",
+                  "source_tag": "LT-101",
+                  "condition": ">",
+                  "threshold": 0.85,
+                  "target_action": "TRIP",
+                  "target_equipment": "01M264NWGYSWRP39SEERE9SC0Z",
+                  "latched": true,
+                  "description": "HP Separator liquid carryover - trip Recycle Gas Compressor K-101A"
+                }
+              ],
+              "boundary_conditions": [
+                {
+                  "id": "01M264NWGYZ692MVET0D9T0JX0",
+                  "name": "NHT Fresh Naphtha Feed",
+                  "condition_type": "feed",
+                  "target_equipment_id": "01M264NWGY2Y34228GKMWTPSWQ",
+                  "target_port_id": "68A3WN88ZB4Y0MYZWJAKSCKECP",
+                  "target_stream_id": null,
+                  "flow_value": 199.0,
+                  "flow_unit": "m3/h",
+                  "pressure_value": 5.0,
+                  "pressure_unit": "barg",
+                  "temperature_value": 68.0,
+                  "temperature_unit": "°C",
+                  "phase": "Liquid",
+                  "density": 740.0,
+                  "molecular_weight": 0.11,
+                  "enthalpy": 150000.0,
+                  "quality": 0.0,
+                  "composition": {
+                    "paraffins": 0.55,
+                    "naphthenes": 0.33,
+                    "aromatics": 0.12
+                  },
+                  "validity_min_flow": 50.0,
+                  "validity_max_flow": 260.0,
+                  "source_provenance": "HPCL Visakh NHT Operating Manual (30,033 BPSD design benchmark)",
+                  "enabled": true
+                },
+                {
+                  "id": "01M264NWGYS6VF6SK4KAP05SNP",
+                  "name": "H2 Makeup Gas Supply",
+                  "condition_type": "utility",
+                  "target_equipment_id": "01M264NWGYEQZ4B7BGFEN0ZQ29",
+                  "target_port_id": "00T3ZVG186HQAZG7YEDGFR4ZNA",
+                  "target_stream_id": null,
+                  "flow_value": 2500.0,
+                  "flow_unit": "Nm3/h",
+                  "pressure_value": 32.0,
+                  "pressure_unit": "barg",
+                  "temperature_value": 40.0,
+                  "temperature_unit": "°C",
+                  "phase": "Vapor",
+                  "density": 2.1,
+                  "molecular_weight": 0.002016,
+                  "enthalpy": 450000.0,
+                  "quality": 1.0,
+                  "composition": {
+                    "H2": 0.995,
+                    "CH4": 0.005
+                  },
+                  "validity_min_flow": 500.0,
+                  "validity_max_flow": 4000.0,
+                  "source_provenance": "Refinery High Pressure Hydrogen Network",
+                  "enabled": true
+                },
+                {
+                  "id": "01M264NWGYSVZP8J2YWKGW9YAV",
+                  "name": "Reactor Effluent Wash Water",
+                  "condition_type": "utility",
+                  "target_equipment_id": "01M264NWGYXMFQ6G5ZCFB97RV2",
+                  "target_port_id": "68A3WN88ZB4Y0MYZWJAKSCKECP",
+                  "target_stream_id": null,
+                  "flow_value": 6.0,
+                  "flow_unit": "m3/h",
+                  "pressure_value": 3.5,
+                  "pressure_unit": "barg",
+                  "temperature_value": 30.0,
+                  "temperature_unit": "°C",
+                  "phase": "Liquid",
+                  "density": 1000.0,
+                  "molecular_weight": 0.018015,
+                  "enthalpy": 125000.0,
+                  "quality": 0.0,
+                  "composition": {
+                    "H2O": 1.0
+                  },
+                  "validity_min_flow": 1.0,
+                  "validity_max_flow": 15.0,
+                  "source_provenance": "Demineralized Wash Water Utility",
+                  "enabled": true
+                },
+                {
+                  "id": "01M264NWGYAC8FNQEXWPS7WAQK",
+                  "name": "Charge Heater Fuel Gas",
+                  "condition_type": "utility",
+                  "target_equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+                  "target_port_id": null,
+                  "target_stream_id": null,
+                  "flow_value": 1200.0,
+                  "flow_unit": "kg/h",
+                  "pressure_value": 3.0,
+                  "pressure_unit": "barg",
+                  "temperature_value": 40.0,
+                  "temperature_unit": "°C",
+                  "phase": "Vapor",
+                  "density": 0.85,
+                  "molecular_weight": 0.0185,
+                  "enthalpy": 500000.0,
+                  "quality": 1.0,
+                  "composition": {
+                    "CH4": 0.85,
+                    "C2H6": 0.1,
+                    "N2": 0.05
+                  },
+                  "validity_min_flow": 200.0,
+                  "validity_max_flow": 2500.0,
+                  "source_provenance": "Refinery Fuel Gas Header",
+                  "enabled": true
+                },
+                {
+                  "id": "01M264NWGY3D652QWRA9PMDCZH",
+                  "name": "Cooling Water Supply",
+                  "condition_type": "utility",
+                  "target_equipment_id": "01M264NWGY0HRW7SFC8T3V8XK3",
+                  "target_port_id": null,
+                  "target_stream_id": null,
+                  "flow_value": 150.0,
+                  "flow_unit": "m3/h",
+                  "pressure_value": 4.0,
+                  "pressure_unit": "barg",
+                  "temperature_value": 32.0,
+                  "temperature_unit": "°C",
+                  "phase": "Liquid",
+                  "density": 1000.0,
+                  "molecular_weight": 0.018015,
+                  "enthalpy": 134000.0,
+                  "quality": 0.0,
+                  "composition": {},
+                  "validity_min_flow": 50.0,
+                  "validity_max_flow": 300.0,
+                  "source_provenance": "Cooling Water Utility Network",
+                  "enabled": true
+                },
+                {
+                  "id": "01M264NWGYJ4H1QV9S7ZBWHC24",
+                  "name": "Stripper Stripping Steam HP",
+                  "condition_type": "utility",
+                  "target_equipment_id": "01M264NWGYVD8X6PVT691KM41M",
+                  "target_port_id": null,
+                  "target_stream_id": null,
+                  "flow_value": 1500.0,
+                  "flow_unit": "kg/h",
+                  "pressure_value": 10.5,
+                  "pressure_unit": "barg",
+                  "temperature_value": 210.0,
+                  "temperature_unit": "°C",
+                  "phase": "Vapor",
+                  "density": 5.8,
+                  "molecular_weight": 0.018015,
+                  "enthalpy": 2800000.0,
+                  "quality": 1.0,
+                  "composition": {},
+                  "validity_min_flow": 200.0,
+                  "validity_max_flow": 3000.0,
+                  "source_provenance": "Medium Pressure Superheated Steam Header",
+                  "enabled": true
+                }
+              ],
+              "initial_conditions": [
+                {
+                  "id": "01M264NWGYS30NY3P9D82VTYXY",
+                  "entity_id": "TK-101",
+                  "variable": "level",
+                  "value": 0.725,
+                  "unit": "fraction",
+                  "description": "Feed storage tank initial level"
+                },
+                {
+                  "id": "01M264NWGY07QEVC9GTN13TTD0",
+                  "entity_id": "V-101",
+                  "variable": "level",
+                  "value": 0.5,
+                  "unit": "fraction",
+                  "description": "Feed surge drum initial level"
+                },
+                {
+                  "id": "01M264NWGYQAPYSMCT5PTF0758",
+                  "entity_id": "V-102",
+                  "variable": "level",
+                  "value": 0.52,
+                  "unit": "fraction",
+                  "description": "High pressure separator initial level"
+                },
+                {
+                  "id": "01M264NWGYMPZ5H3R4J5QACH30",
+                  "entity_id": "V-103",
+                  "variable": "level",
+                  "value": 0.3,
+                  "unit": "fraction",
+                  "description": "Recycle compressor KO drum level"
+                },
+                {
+                  "id": "01M264NWH5J1AH0DEAXTFKSNFE",
+                  "entity_id": "V-104",
+                  "variable": "level",
+                  "value": 0.6,
+                  "unit": "fraction",
+                  "description": "Wash water surge drum level"
+                },
+                {
+                  "id": "01M264NWH5J3ZY6PRZT4TGSSMB",
+                  "entity_id": "V-105",
+                  "variable": "level",
+                  "value": 0.48,
+                  "unit": "fraction",
+                  "description": "Stripper reflux drum level"
+                },
+                {
+                  "id": "01M264NWH54D19AZNCW70DTND9",
+                  "entity_id": "V-106",
+                  "variable": "level",
+                  "value": 0.5,
+                  "unit": "fraction",
+                  "description": "Splitter reflux drum level"
+                },
+                {
+                  "id": "01M264NWH529VE6HNJCVNMXQ0K",
+                  "entity_id": "P-101A",
+                  "variable": "speed",
+                  "value": 2950.0,
+                  "unit": "rpm",
+                  "description": "Charge pump P-101A operating speed"
+                },
+                {
+                  "id": "01M264NWH577CV4XFMEGY7F2KB",
+                  "entity_id": "FV-101",
+                  "variable": "opening",
+                  "value": 55.0,
+                  "unit": "%",
+                  "description": "Feed flow control valve initial opening"
+                },
+                {
+                  "id": "01M264NWH56QX6TMH7CSZNJGM3",
+                  "entity_id": "F-101",
+                  "variable": "temperature",
+                  "value": 325.0,
+                  "unit": "°C",
+                  "description": "Charge heater coil outlet temperature"
+                },
+                {
+                  "id": "01M264NWH53JFTVBSCGFRZP5VN",
+                  "entity_id": "R-101",
+                  "variable": "temperature",
+                  "value": 335.0,
+                  "unit": "°C",
+                  "description": "Reactor bed temperature with exotherm"
+                },
+                {
+                  "id": "01M264NWH5RDXZ4D3XG50B8PPT",
+                  "entity_id": "K-101A",
+                  "variable": "speed",
+                  "value": 10450.0,
+                  "unit": "rpm",
+                  "description": "Recycle gas compressor operating speed"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "description": "Industrial 30,033 BPSD Naphtha Hydrotreater reference plant reconstruction based on HPCL Visakh NHT Operating Manual and EIL engineering standards. Features 7-shell Combined Feed Exchanger train (72-E-01A..G), Charge Heater (72-F-01), Fixed-Bed Catalytic Reactor (72-R-01), Recycle Gas Compressor (72-K-01A/B), Wash Water Injection System, Stripper (72-C-01), and Naphtha Splitter (72-C-02) with full multi-display operational hierarchy and cross-display navigation.",
+    "author": "NebuDCS Engineering Reference Library (HPCL/EIL Benchmark)",
+    "created": "2026-09-09T00:00:00Z",
+    "modified": "2026-09-09T00:00:00Z"
+  },
+  "controllers": [],
+  "io_systems": [],
+  "io_mappings": [],
+  "tags": [],
+  "advanced_control": [],
+  "communications": null,
+  "sis": null,
+  "displays": [
+    {
+      "id": "disp-nht-overview",
+      "name": "NHT Overall Process Overview",
+      "display_type": "overview",
+      "area_id": "area-nht",
+      "system_id": null,
+      "subsystem_id": null,
+      "unit_id": null,
+      "equipment_ids": [
+        "01M264NWGY2Y34228GKMWTPSWQ",
+        "01M264NWGYD3EYGQB2CA6B2BH5",
+        "01M264NWGY938XXVJ3WYWDS46E",
+        "01M264NWGYN0S92JCTFGXWXYQA",
+        "01M264NWGYEE4RHAZTFQA0R53Y",
+        "01M264NWGYEQZ4B7BGFEN0ZQ29",
+        "01M264NWGYSWRP39SEERE9SC0Z",
+        "01M264NWGY15BXMWYRWKYZF36M",
+        "01M264NWGYZ4H6JGATGRK4XW8N",
+        "01M264NWGYG62E714H80WNYR3B",
+        "01M264NWGYKNA0HEDAMS6R944N",
+        "01M264NWGYC9Y9N44EH8YV0EJX",
+        "01M264NWGYXMFQ6G5ZCFB97RV2",
+        "01M264NWGYVD8X6PVT691KM41M",
+        "01M264NWGYG71P2XMNKVQ9HF7H"
+      ],
+      "instrument_ids": [
+        "FT-101",
+        "TT-101",
+        "PT-102"
+      ],
+      "stream_ids": [
+        "STR-NHT-00",
+        "STR-NHT-01",
+        "STR-NHT-02",
+        "STR-NHT-03",
+        "STR-NHT-04",
+        "STR-NHT-05",
+        "STR-NHT-12",
+        "STR-NHT-13",
+        "STR-NHT-14",
+        "STR-NHT-21",
+        "STR-NHT-25",
+        "STR-NHT-28",
+        "STR-NHT-29",
+        "STR-NHT-33",
+        "STR-NHT-40",
+        "STR-NHT-43"
+      ],
+      "viewport_x": 0.0,
+      "viewport_y": 0.0,
+      "viewport_width": 1920.0,
+      "viewport_height": 1080.0,
+      "viewport_zoom": 1.0,
+      "is_default": true,
+      "order": 1,
+      "description": "Global overview of the 30,033 BPSD Naphtha Hydrotreater flowsheet",
+      "placements": [
+        {
+          "equipment_id": "01M264NWGY2Y34228GKMWTPSWQ",
+          "x": 140.0,
+          "y": 220.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYD3EYGQB2CA6B2BH5",
+          "x": 360.0,
+          "y": 220.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGY938XXVJ3WYWDS46E",
+          "x": 560.0,
+          "y": 220.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYN0S92JCTFGXWXYQA",
+          "x": 720.0,
+          "y": 220.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYEE4RHAZTFQA0R53Y",
+          "x": 880.0,
+          "y": 220.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYEQZ4B7BGFEN0ZQ29",
+          "x": 1060.0,
+          "y": 220.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYSWRP39SEERE9SC0Z",
+          "x": 1500.0,
+          "y": 220.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGY15BXMWYRWKYZF36M",
+          "x": 360.0,
+          "y": 520.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+          "x": 720.0,
+          "y": 520.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYG62E714H80WNYR3B",
+          "x": 1080.0,
+          "y": 500.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYKNA0HEDAMS6R944N",
+          "x": 1360.0,
+          "y": 520.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYC9Y9N44EH8YV0EJX",
+          "x": 1500.0,
+          "y": 820.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYXMFQ6G5ZCFB97RV2",
+          "x": 1160.0,
+          "y": 840.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYVD8X6PVT691KM41M",
+          "x": 760.0,
+          "y": 800.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYG71P2XMNKVQ9HF7H",
+          "x": 360.0,
+          "y": 800.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        }
+      ]
+    },
+    {
+      "id": "disp-nht-feed",
+      "name": "NHT Feed Preparation & Surge",
+      "display_type": "process",
+      "area_id": "area-nht",
+      "system_id": "sys-nht-feed",
+      "subsystem_id": null,
+      "unit_id": "unit-nht-feed",
+      "equipment_ids": [
+        "01M264NWGY2Y34228GKMWTPSWQ",
+        "01M264NWGYD3EYGQB2CA6B2BH5",
+        "01M264NWGY938XXVJ3WYWDS46E",
+        "01M264NWGYWWE0SP8Z9GKHTE88",
+        "01M264NWGYN0S92JCTFGXWXYQA",
+        "01M264NWGYEE4RHAZTFQA0R53Y",
+        "01M264NWGYEQZ4B7BGFEN0ZQ29"
+      ],
+      "instrument_ids": [
+        "FT-101"
+      ],
+      "stream_ids": [
+        "STR-NHT-00",
+        "STR-NHT-01",
+        "STR-NHT-02",
+        "STR-NHT-03",
+        "STR-NHT-04"
+      ],
+      "viewport_x": 0.0,
+      "viewport_y": 0.0,
+      "viewport_width": 1920.0,
+      "viewport_height": 1080.0,
+      "viewport_zoom": 1.0,
+      "is_default": false,
+      "order": 2,
+      "description": "Feed storage, booster charge pumps, and coalescing filter system",
+      "placements": [
+        {
+          "equipment_id": "01M264NWGY2Y34228GKMWTPSWQ",
+          "x": 140.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYD3EYGQB2CA6B2BH5",
+          "x": 300.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGY938XXVJ3WYWDS46E",
+          "x": 460.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYWWE0SP8Z9GKHTE88",
+          "x": 460.0,
+          "y": 520.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYN0S92JCTFGXWXYQA",
+          "x": 620.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYEE4RHAZTFQA0R53Y",
+          "x": 760.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYEQZ4B7BGFEN0ZQ29",
+          "x": 900.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        }
+      ]
+    },
+    {
+      "id": "disp-nht-rx",
+      "name": "NHT Reactor Train & Combined Feed Exchangers",
+      "display_type": "process",
+      "area_id": "area-nht",
+      "system_id": "sys-nht-rx",
+      "subsystem_id": null,
+      "unit_id": "unit-nht-rx",
+      "equipment_ids": [
+        "01M264NWGYEQZ4B7BGFEN0ZQ29",
+        "01M264NWGY15BXMWYRWKYZF36M",
+        "01M264NWGY9GXXAJJ2W5XV6S7Z",
+        "01M264NWGYH4SEVX8VZEF1N02C",
+        "01M264NWGYDMMMYVS0BQCWWB1Z",
+        "01M264NWGY7SAF927VQHRJ6AE9",
+        "01M264NWGYDG93JK0EPQ4KBNTE",
+        "01M264NWGY27A3FQ6WP68DHJ25",
+        "01M264NWGYZ4H6JGATGRK4XW8N",
+        "01M264NWGYG62E714H80WNYR3B"
+      ],
+      "instrument_ids": [
+        "TT-101",
+        "TI-101-CIT",
+        "TI-101-SK1",
+        "TI-101-SK2",
+        "PT-104",
+        "FT-105",
+        "PT-105",
+        "PDT-101",
+        "TI-104",
+        "AI-101",
+        "TT-102"
+      ],
+      "stream_ids": [
+        "STR-NHT-05",
+        "STR-NHT-12",
+        "STR-NHT-13",
+        "STR-NHT-14"
+      ],
+      "viewport_x": 0.0,
+      "viewport_y": 0.0,
+      "viewport_width": 1920.0,
+      "viewport_height": 1080.0,
+      "viewport_zoom": 1.0,
+      "is_default": false,
+      "order": 3,
+      "description": "7-shell Combined Feed Exchanger train (72-E-01A..G), Charge Heater, and 72-R-01",
+      "placements": [
+        {
+          "equipment_id": "01M264NWGYEQZ4B7BGFEN0ZQ29",
+          "x": 100.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGY15BXMWYRWKYZF36M",
+          "x": 260.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGY9GXXAJJ2W5XV6S7Z",
+          "x": 430.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYH4SEVX8VZEF1N02C",
+          "x": 600.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYDMMMYVS0BQCWWB1Z",
+          "x": 770.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGY7SAF927VQHRJ6AE9",
+          "x": 940.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYDG93JK0EPQ4KBNTE",
+          "x": 1110.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGY27A3FQ6WP68DHJ25",
+          "x": 1280.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+          "x": 1480.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYG62E714H80WNYR3B",
+          "x": 1680.0,
+          "y": 360.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        }
+      ]
+    },
+    {
+      "id": "disp-nht-sep",
+      "name": "NHT High Pressure Separation",
+      "display_type": "process",
+      "area_id": "area-nht",
+      "system_id": "sys-nht-sep",
+      "subsystem_id": null,
+      "unit_id": "unit-nht-sep",
+      "equipment_ids": [
+        "01M264NWGYN01ETKFS0PNF7Z85",
+        "01M264NWGYKNA0HEDAMS6R944N",
+        "01M264NWGY0HRW7SFC8T3V8XK3",
+        "01M264NWGYC9Y9N44EH8YV0EJX",
+        "01M264NWGY6NQDSY2F4RYVWB0T",
+        "01M264NWGYB0FSYW9FPH3XHA5H"
+      ],
+      "instrument_ids": [
+        "PT-102",
+        "LT-101"
+      ],
+      "stream_ids": [
+        "STR-NHT-25",
+        "STR-NHT-27",
+        "STR-NHT-28",
+        "STR-NHT-33"
+      ],
+      "viewport_x": 0.0,
+      "viewport_y": 0.0,
+      "viewport_width": 1920.0,
+      "viewport_height": 1080.0,
+      "viewport_zoom": 1.0,
+      "is_default": false,
+      "order": 4,
+      "description": "Product Condenser A-101, Trim Cooler, and High Pressure Separator 72-V-02",
+      "placements": [
+        {
+          "equipment_id": "01M264NWGYN01ETKFS0PNF7Z85",
+          "x": 140.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYKNA0HEDAMS6R944N",
+          "x": 320.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGY0HRW7SFC8T3V8XK3",
+          "x": 500.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYC9Y9N44EH8YV0EJX",
+          "x": 700.0,
+          "y": 360.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGY6NQDSY2F4RYVWB0T",
+          "x": 880.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYB0FSYW9FPH3XHA5H",
+          "x": 700.0,
+          "y": 180.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        }
+      ]
+    },
+    {
+      "id": "disp-nht-h2-recycle",
+      "name": "NHT Hydrogen & Recycle Compression",
+      "display_type": "process",
+      "area_id": "area-nht",
+      "system_id": "sys-nht-recycle",
+      "subsystem_id": null,
+      "unit_id": "unit-nht-recycle",
+      "equipment_ids": [
+        "01M264NWGYB0FSYW9FPH3XHA5H",
+        "01M264NWGYSWRP39SEERE9SC0Z",
+        "01M264NWGYVWMMKQ50CQMHE99T",
+        "01M264NWGY49YSH2F8GM696A7Z",
+        "01M264NWGYEQZ4B7BGFEN0ZQ29"
+      ],
+      "instrument_ids": [
+        "FT-102"
+      ],
+      "stream_ids": [
+        "STR-NHT-29",
+        "STR-NHT-30",
+        "STR-NHT-31"
+      ],
+      "viewport_x": 0.0,
+      "viewport_y": 0.0,
+      "viewport_width": 1920.0,
+      "viewport_height": 1080.0,
+      "viewport_zoom": 1.0,
+      "is_default": false,
+      "order": 5,
+      "description": "Recycle Gas Compressor 72-K-01A/B and Make-up H2 injection header",
+      "placements": [
+        {
+          "equipment_id": "01M264NWGYB0FSYW9FPH3XHA5H",
+          "x": 220.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYSWRP39SEERE9SC0Z",
+          "x": 420.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYVWMMKQ50CQMHE99T",
+          "x": 620.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGY49YSH2F8GM696A7Z",
+          "x": 800.0,
+          "y": 260.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYEQZ4B7BGFEN0ZQ29",
+          "x": 800.0,
+          "y": 500.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        }
+      ]
+    },
+    {
+      "id": "disp-nht-strip",
+      "name": "NHT Naphtha Stripper Column",
+      "display_type": "process",
+      "area_id": "area-nht",
+      "system_id": "sys-nht-strip",
+      "subsystem_id": null,
+      "unit_id": "unit-nht-strip",
+      "equipment_ids": [
+        "01M264NWGY270D19ER7H5T4ZDN",
+        "01M264NWGYGEQ3HB28PTXJ9WDB",
+        "01M264NWGYVD8X6PVT691KM41M",
+        "01M264NWGYW9VA3HK6MJ94T5XV",
+        "01M264NWGY1J7JAJFTZRMYXVVC",
+        "01M264NWGYDSSC6PJE4MFCGQ01",
+        "01M264NWGYXWX7VXYDPVZ8VN4P"
+      ],
+      "instrument_ids": [
+        "LT-102",
+        "PT-103",
+        "FT-104"
+      ],
+      "stream_ids": [
+        "STR-NHT-34",
+        "STR-NHT-36",
+        "STR-NHT-37",
+        "STR-NHT-40"
+      ],
+      "viewport_x": 0.0,
+      "viewport_y": 0.0,
+      "viewport_width": 1920.0,
+      "viewport_height": 1080.0,
+      "viewport_zoom": 1.0,
+      "is_default": false,
+      "order": 6,
+      "description": "Stripper Column 72-C-01, Overhead Condenser E-103, and Bottoms Reboiling",
+      "placements": [
+        {
+          "equipment_id": "01M264NWGY270D19ER7H5T4ZDN",
+          "x": 180.0,
+          "y": 420.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYGEQ3HB28PTXJ9WDB",
+          "x": 340.0,
+          "y": 420.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYVD8X6PVT691KM41M",
+          "x": 540.0,
+          "y": 360.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYW9VA3HK6MJ94T5XV",
+          "x": 760.0,
+          "y": 200.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGY1J7JAJFTZRMYXVVC",
+          "x": 940.0,
+          "y": 220.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYDSSC6PJE4MFCGQ01",
+          "x": 1100.0,
+          "y": 240.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYXWX7VXYDPVZ8VN4P",
+          "x": 760.0,
+          "y": 540.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        }
+      ]
+    },
+    {
+      "id": "disp-nht-split",
+      "name": "NHT Naphtha Splitter & Rundown",
+      "display_type": "process",
+      "area_id": "area-nht",
+      "system_id": "sys-nht-split",
+      "subsystem_id": null,
+      "unit_id": "unit-nht-split",
+      "equipment_ids": [
+        "01M264NWGYG71P2XMNKVQ9HF7H",
+        "01M264NWGYP5DNT9G85BX8HTS2",
+        "01M264NWGYHJHV3WZ81FZ63663",
+        "01M264NWGY72R7T3JNS36E64HS",
+        "01M264NWGYEJHNJ83G0VSN314F",
+        "01M264NWGYW5X8JWEER25H26FK"
+      ],
+      "instrument_ids": [
+        "LT-103",
+        "TT-103"
+      ],
+      "stream_ids": [
+        "STR-NHT-43",
+        "STR-NHT-44",
+        "STR-NHT-46",
+        "STR-NHT-48"
+      ],
+      "viewport_x": 0.0,
+      "viewport_y": 0.0,
+      "viewport_width": 1920.0,
+      "viewport_height": 1080.0,
+      "viewport_zoom": 1.0,
+      "is_default": false,
+      "order": 7,
+      "description": "Fractionation into Light Hydrotreated Naphtha (Isom) and Heavy Naphtha (Platformer)",
+      "placements": [
+        {
+          "equipment_id": "01M264NWGYG71P2XMNKVQ9HF7H",
+          "x": 360.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYP5DNT9G85BX8HTS2",
+          "x": 580.0,
+          "y": 200.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYHJHV3WZ81FZ63663",
+          "x": 760.0,
+          "y": 220.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGY72R7T3JNS36E64HS",
+          "x": 920.0,
+          "y": 240.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYEJHNJ83G0VSN314F",
+          "x": 1100.0,
+          "y": 240.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYW5X8JWEER25H26FK",
+          "x": 620.0,
+          "y": 540.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        }
+      ]
+    },
+    {
+      "id": "disp-nht-util",
+      "name": "NHT Wash Water & Utility Distribution",
+      "display_type": "process",
+      "area_id": "area-nht",
+      "system_id": "sys-nht-water",
+      "subsystem_id": null,
+      "unit_id": "unit-nht-util",
+      "equipment_ids": [
+        "01M264NWGYXMFQ6G5ZCFB97RV2",
+        "01M264NWGYP2YWBE9BAZ7DY1QE",
+        "01M264NWGYQBS6Q7TPNHQT8Q6Q",
+        "01M264NWGYN01ETKFS0PNF7Z85"
+      ],
+      "instrument_ids": [
+        "FT-103"
+      ],
+      "stream_ids": [
+        "STR-NHT-22",
+        "STR-NHT-23",
+        "STR-NHT-24"
+      ],
+      "viewport_x": 0.0,
+      "viewport_y": 0.0,
+      "viewport_width": 1920.0,
+      "viewport_height": 1080.0,
+      "viewport_zoom": 1.0,
+      "is_default": false,
+      "order": 8,
+      "description": "Wash water break tank 72-V-04, injection pumps, and salt wash circuit",
+      "placements": [
+        {
+          "equipment_id": "01M264NWGYXMFQ6G5ZCFB97RV2",
+          "x": 220.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYP2YWBE9BAZ7DY1QE",
+          "x": 420.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYQBS6Q7TPNHQT8Q6Q",
+          "x": 600.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYN01ETKFS0PNF7Z85",
+          "x": 780.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        }
+      ]
+    },
+    {
+      "id": "disp-nht-comp-detail",
+      "name": "Recycle Gas Compressor 72-K-01 Detail",
+      "display_type": "detail",
+      "area_id": "area-nht",
+      "system_id": "sys-nht-recycle",
+      "subsystem_id": null,
+      "unit_id": "unit-nht-recycle",
+      "equipment_ids": [
+        "01M264NWGYB0FSYW9FPH3XHA5H",
+        "01M264NWGYSWRP39SEERE9SC0Z",
+        "01M264NWGYVWMMKQ50CQMHE99T"
+      ],
+      "instrument_ids": [
+        "FT-102"
+      ],
+      "stream_ids": [
+        "STR-NHT-29",
+        "STR-NHT-30"
+      ],
+      "viewport_x": 0.0,
+      "viewport_y": 0.0,
+      "viewport_width": 1920.0,
+      "viewport_height": 1080.0,
+      "viewport_zoom": 1.0,
+      "is_default": false,
+      "order": 9,
+      "description": "Recycle Compressor performance curve, anti-surge line, and seal oil system",
+      "placements": [
+        {
+          "equipment_id": "01M264NWGYB0FSYW9FPH3XHA5H",
+          "x": 260.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYSWRP39SEERE9SC0Z",
+          "x": 540.0,
+          "y": 360.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYVWMMKQ50CQMHE99T",
+          "x": 820.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        }
+      ]
+    },
+    {
+      "id": "disp-nht-rx-detail",
+      "name": "Reactor 72-R-01 Bed Profile & Multi-Point Temperatures",
+      "display_type": "detail",
+      "area_id": "area-nht",
+      "system_id": "sys-nht-rx",
+      "subsystem_id": null,
+      "unit_id": "unit-nht-rx",
+      "equipment_ids": [
+        "01M264NWGYZ4H6JGATGRK4XW8N",
+        "01M264NWGYG62E714H80WNYR3B"
+      ],
+      "instrument_ids": [
+        "TT-101",
+        "TI-101-CIT",
+        "TI-101-SK1",
+        "TI-101-SK2",
+        "PDT-101",
+        "TI-104",
+        "AI-101",
+        "TT-102"
+      ],
+      "stream_ids": [
+        "STR-NHT-13",
+        "STR-NHT-14"
+      ],
+      "viewport_x": 0.0,
+      "viewport_y": 0.0,
+      "viewport_width": 1920.0,
+      "viewport_height": 1080.0,
+      "viewport_zoom": 1.0,
+      "is_default": false,
+      "order": 10,
+      "description": "Detailed axial/radial multi-thermocouple temperature profiles across catalyst bed",
+      "placements": [
+        {
+          "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+          "x": 260.0,
+          "y": 380.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYG62E714H80WNYR3B",
+          "x": 620.0,
+          "y": 340.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        }
+      ]
+    },
+    {
+      "id": "disp-nht-alarm-summary",
+      "name": "NHT Plant Alarm Summary & Matrix",
+      "display_type": "alarm_summary",
+      "area_id": "area-nht",
+      "system_id": null,
+      "subsystem_id": null,
+      "unit_id": null,
+      "equipment_ids": [
+        "01M264NWGYG62E714H80WNYR3B",
+        "01M264NWGYC9Y9N44EH8YV0EJX",
+        "01M264NWGYSWRP39SEERE9SC0Z",
+        "01M264NWGYVD8X6PVT691KM41M"
+      ],
+      "instrument_ids": [],
+      "stream_ids": [],
+      "viewport_x": 0.0,
+      "viewport_y": 0.0,
+      "viewport_width": 1920.0,
+      "viewport_height": 1080.0,
+      "viewport_zoom": 1.0,
+      "is_default": false,
+      "order": 11,
+      "description": "First-out alarm priority matrix and emergency shutdown state overview",
+      "placements": [
+        {
+          "equipment_id": "01M264NWGYG62E714H80WNYR3B",
+          "x": 300.0,
+          "y": 300.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYC9Y9N44EH8YV0EJX",
+          "x": 600.0,
+          "y": 300.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYSWRP39SEERE9SC0Z",
+          "x": 900.0,
+          "y": 300.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYVD8X6PVT691KM41M",
+          "x": 1200.0,
+          "y": 300.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        }
+      ]
+    },
+    {
+      "id": "disp-nht-ctl-summary",
+      "name": "NHT Plant Control Loops & PID Overview",
+      "display_type": "control_overview",
+      "area_id": "area-nht",
+      "system_id": null,
+      "subsystem_id": null,
+      "unit_id": null,
+      "equipment_ids": [
+        "01M264NWGYN0S92JCTFGXWXYQA",
+        "01M264NWGYZ4H6JGATGRK4XW8N",
+        "01M264NWGY6NQDSY2F4RYVWB0T",
+        "01M264NWGYQBS6Q7TPNHQT8Q6Q",
+        "01M264NWGY49YSH2F8GM696A7Z"
+      ],
+      "instrument_ids": [],
+      "stream_ids": [],
+      "viewport_x": 0.0,
+      "viewport_y": 0.0,
+      "viewport_width": 1920.0,
+      "viewport_height": 1080.0,
+      "viewport_zoom": 1.0,
+      "is_default": false,
+      "order": 12,
+      "description": "Multi-loop faceplate overview of all 12 plantwide regulatory controllers",
+      "placements": [
+        {
+          "equipment_id": "01M264NWGYN0S92JCTFGXWXYQA",
+          "x": 200.0,
+          "y": 300.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+          "x": 450.0,
+          "y": 300.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGY6NQDSY2F4RYVWB0T",
+          "x": 700.0,
+          "y": 300.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGYQBS6Q7TPNHQT8Q6Q",
+          "x": 950.0,
+          "y": 300.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        },
+        {
+          "equipment_id": "01M264NWGY49YSH2F8GM696A7Z",
+          "x": 1200.0,
+          "y": 300.0,
+          "width": 80.0,
+          "height": 80.0,
+          "rotation": 0.0
+        }
+      ]
+    }
+  ],
+  "navigation_links": [
+    {
+      "id": "nav-nht-01",
+      "source_display_id": "disp-nht-overview",
+      "source_element_id": "01M264NWGY938XXVJ3WYWDS46E",
+      "target_display_id": "disp-nht-feed",
+      "target_element_id": "01M264NWGY938XXVJ3WYWDS46E",
+      "label": "Open Feed System",
+      "behavior": "focus_and_center",
+      "description": "Drill down from overview into Feed Preparation graphic"
+    },
+    {
+      "id": "nav-nht-02",
+      "source_display_id": "disp-nht-overview",
+      "source_element_id": "01M264NWGYG62E714H80WNYR3B",
+      "target_display_id": "disp-nht-rx",
+      "target_element_id": "01M264NWGYG62E714H80WNYR3B",
+      "label": "Open Reaction Train",
+      "behavior": "focus_and_center",
+      "description": "Drill down into Combined Feed Exchanger and Reactor section"
+    },
+    {
+      "id": "nav-nht-03",
+      "source_display_id": "disp-nht-overview",
+      "source_element_id": "01M264NWGYC9Y9N44EH8YV0EJX",
+      "target_display_id": "disp-nht-sep",
+      "target_element_id": "01M264NWGYC9Y9N44EH8YV0EJX",
+      "label": "Open HP Separation",
+      "behavior": "focus_and_center",
+      "description": "Drill down into High Pressure Separator 72-V-02 graphic"
+    },
+    {
+      "id": "nav-nht-04",
+      "source_display_id": "disp-nht-overview",
+      "source_element_id": "01M264NWGYSWRP39SEERE9SC0Z",
+      "target_display_id": "disp-nht-h2-recycle",
+      "target_element_id": "01M264NWGYSWRP39SEERE9SC0Z",
+      "label": "Open Recycle Gas System",
+      "behavior": "focus_and_center",
+      "description": "Drill down into Recycle Gas Compression 72-K-01 graphic"
+    },
+    {
+      "id": "nav-nht-05",
+      "source_display_id": "disp-nht-overview",
+      "source_element_id": "01M264NWGYVD8X6PVT691KM41M",
+      "target_display_id": "disp-nht-strip",
+      "target_element_id": "01M264NWGYVD8X6PVT691KM41M",
+      "label": "Open Stripper Section",
+      "behavior": "focus_and_center",
+      "description": "Drill down into Stripper Column 72-C-01 graphic"
+    },
+    {
+      "id": "nav-nht-06",
+      "source_display_id": "disp-nht-overview",
+      "source_element_id": "01M264NWGYG71P2XMNKVQ9HF7H",
+      "target_display_id": "disp-nht-split",
+      "target_element_id": "01M264NWGYG71P2XMNKVQ9HF7H",
+      "label": "Open Splitter Section",
+      "behavior": "focus_and_center",
+      "description": "Drill down into Naphtha Splitter 72-C-02 graphic"
+    },
+    {
+      "id": "nav-nht-07",
+      "source_display_id": "disp-nht-feed",
+      "source_element_id": "01M264NWGYEQZ4B7BGFEN0ZQ29",
+      "target_display_id": "disp-nht-rx",
+      "target_element_id": "01M264NWGY15BXMWYRWKYZF36M",
+      "label": "Follow Stream to Combined Feed Exchangers",
+      "behavior": "focus_and_center",
+      "description": "Process stream continuation from Mix Tee into Exchanger Train"
+    },
+    {
+      "id": "nav-nht-08",
+      "source_display_id": "disp-nht-rx",
+      "source_element_id": "01M264NWGYG62E714H80WNYR3B",
+      "target_display_id": "disp-nht-rx-detail",
+      "target_element_id": "01M264NWGYG62E714H80WNYR3B",
+      "label": "Inspect Reactor 72-R-01 Bed Profile",
+      "behavior": "focus_and_center",
+      "description": "Detailed view of multi-point thermocouples and bed Delta T"
+    },
+    {
+      "id": "nav-nht-09",
+      "source_display_id": "disp-nht-rx",
+      "source_element_id": "01M264NWGYG62E714H80WNYR3B",
+      "target_display_id": "disp-nht-sep",
+      "target_element_id": "01M264NWGYC9Y9N44EH8YV0EJX",
+      "label": "Follow Effluent to HP Separator",
+      "behavior": "focus_and_center",
+      "description": "Follow cooled effluent stream into 72-V-02"
+    },
+    {
+      "id": "nav-nht-10",
+      "source_display_id": "disp-nht-sep",
+      "source_element_id": "01M264NWGYB0FSYW9FPH3XHA5H",
+      "target_display_id": "disp-nht-h2-recycle",
+      "target_element_id": "01M264NWGYSWRP39SEERE9SC0Z",
+      "label": "Follow Vapor to Recycle Compressor",
+      "behavior": "focus_and_center",
+      "description": "Follow separator overhead gas to Recycle Compressor suction"
+    },
+    {
+      "id": "nav-nht-11",
+      "source_display_id": "disp-nht-sep",
+      "source_element_id": "01M264NWGY6NQDSY2F4RYVWB0T",
+      "target_display_id": "disp-nht-strip",
+      "target_element_id": "01M264NWGY270D19ER7H5T4ZDN",
+      "label": "Follow Bottoms to Stripper Train",
+      "behavior": "focus_and_center",
+      "description": "Follow hydrocarbon liquid into Stripper Feed Exchanger E-102A"
+    },
+    {
+      "id": "nav-nht-12",
+      "source_display_id": "disp-nht-h2-recycle",
+      "source_element_id": "01M264NWGYSWRP39SEERE9SC0Z",
+      "target_display_id": "disp-nht-comp-detail",
+      "target_element_id": "01M264NWGYSWRP39SEERE9SC0Z",
+      "label": "Inspect 72-K-01 Compressor Performance",
+      "behavior": "focus_and_center",
+      "description": "Compressor map, anti-surge operating point, and vibration sensors"
+    },
+    {
+      "id": "nav-nht-13",
+      "source_display_id": "disp-nht-h2-recycle",
+      "source_element_id": "01M264NWGYVWMMKQ50CQMHE99T",
+      "target_display_id": "disp-nht-rx",
+      "target_element_id": "01M264NWGYEQZ4B7BGFEN0ZQ29",
+      "label": "Follow Recycle Gas to Mix Tee",
+      "behavior": "focus_and_center",
+      "description": "Recycle gas return loop to fresh feed injection"
+    },
+    {
+      "id": "nav-nht-14",
+      "source_display_id": "disp-nht-strip",
+      "source_element_id": "01M264NWGYVD8X6PVT691KM41M",
+      "target_display_id": "disp-nht-split",
+      "target_element_id": "01M264NWGYG71P2XMNKVQ9HF7H",
+      "label": "Follow Stripper Bottoms to Splitter",
+      "behavior": "focus_and_center",
+      "description": "Stabilized naphtha transfer to Naphtha Splitter Column 72-C-02"
+    },
+    {
+      "id": "nav-nht-15",
+      "source_display_id": "disp-nht-split",
+      "source_element_id": "01M264NWGYG71P2XMNKVQ9HF7H",
+      "target_display_id": "disp-nht-overview",
+      "target_element_id": "01M264NWGY2Y34228GKMWTPSWQ",
+      "label": "Return to NHT Overview",
+      "behavior": "focus_and_center",
+      "description": "Return to plantwide overview from Splitter graphic"
+    },
+    {
+      "id": "nav-nht-16",
+      "source_display_id": "disp-nht-comp-detail",
+      "source_element_id": "01M264NWGYSWRP39SEERE9SC0Z",
+      "target_display_id": "disp-nht-h2-recycle",
+      "target_element_id": "01M264NWGYSWRP39SEERE9SC0Z",
+      "label": "Return to Compression Overview",
+      "behavior": "focus_and_center",
+      "description": "Exit detail graphic back to Recycle System graphic"
+    },
+    {
+      "id": "nav-nht-17",
+      "source_display_id": "disp-nht-rx-detail",
+      "source_element_id": "01M264NWGYG62E714H80WNYR3B",
+      "target_display_id": "disp-nht-rx",
+      "target_element_id": "01M264NWGYG62E714H80WNYR3B",
+      "label": "Return to Reactor Section",
+      "behavior": "focus_and_center",
+      "description": "Exit detail graphic back to Reactor Train graphic"
+    }
+  ],
+  "plant_structure": {
+    "plant_name": "Naphtha Hydrotreater Complex",
+    "areas": [
+      {
+        "id": "area-nht",
+        "name": "Area 72 Hydroprocessing",
+        "systems": [
+          {
+            "id": "sys-nht-feed",
+            "name": "Naphtha Feed & Surge System",
+            "area_id": "area-nht",
+            "subsystems": [
+              {
+                "id": "sub-nht-feed-pumping",
+                "name": "Feed Pumping & Filtering",
+                "system_id": "sys-nht-feed",
+                "units": [
+                  {
+                    "id": "unit-nht-feed",
+                    "name": "Feed Preparation Unit",
+                    "subsystem_id": "sub-nht-feed-pumping",
+                    "system_id": "sys-nht-feed",
+                    "area_id": "area-nht",
+                    "equipment_ids": [
+                      "01M264NWGY2Y34228GKMWTPSWQ",
+                      "01M264NWGYD3EYGQB2CA6B2BH5",
+                      "01M264NWGY938XXVJ3WYWDS46E",
+                      "01M264NWGYWWE0SP8Z9GKHTE88",
+                      "01M264NWGYN0S92JCTFGXWXYQA",
+                      "01M264NWGYEE4RHAZTFQA0R53Y"
+                    ],
+                    "display_ids": [
+                      "disp-nht-feed",
+                      "disp-nht-overview"
+                    ],
+                    "description": "Feed inventory control and primary filtration"
+                  }
+                ],
+                "description": null
+              }
+            ],
+            "default_display_id": "disp-nht-feed",
+            "description": "Feed day storage, charge pumping, and micro-filtration train"
+          },
+          {
+            "id": "sys-nht-h2",
+            "name": "Hydrogen Supply & Make-up System",
+            "area_id": "area-nht",
+            "subsystems": [],
+            "default_display_id": "disp-nht-h2-recycle",
+            "description": "Make-up hydrogen metering and header pressure regulation"
+          },
+          {
+            "id": "sys-nht-rx",
+            "name": "Reactor & Charge Preheating System",
+            "area_id": "area-nht",
+            "subsystems": [
+              {
+                "id": "sub-nht-rx-train",
+                "name": "Reactor Train",
+                "system_id": "sys-nht-rx",
+                "units": [
+                  {
+                    "id": "unit-nht-rx",
+                    "name": "Reactor & Preheating Unit",
+                    "subsystem_id": "sub-nht-rx-train",
+                    "system_id": "sys-nht-rx",
+                    "area_id": "area-nht",
+                    "equipment_ids": [
+                      "01M264NWGYEQZ4B7BGFEN0ZQ29",
+                      "01M264NWGY15BXMWYRWKYZF36M",
+                      "01M264NWGY9GXXAJJ2W5XV6S7Z",
+                      "01M264NWGYH4SEVX8VZEF1N02C",
+                      "01M264NWGYDMMMYVS0BQCWWB1Z",
+                      "01M264NWGY7SAF927VQHRJ6AE9",
+                      "01M264NWGYDG93JK0EPQ4KBNTE",
+                      "01M264NWGY27A3FQ6WP68DHJ25",
+                      "01M264NWGYZ4H6JGATGRK4XW8N",
+                      "01M264NWGYG62E714H80WNYR3B"
+                    ],
+                    "display_ids": [
+                      "disp-nht-rx",
+                      "disp-nht-rx-detail",
+                      "disp-nht-overview"
+                    ],
+                    "description": "Fixed-bed desulfurization and denitrogenation reactor loop"
+                  }
+                ],
+                "description": null
+              }
+            ],
+            "default_display_id": "disp-nht-rx",
+            "description": "7-shell CFE heat integration train, charge heater, and trickle-bed catalytic reactor"
+          },
+          {
+            "id": "sys-nht-sep",
+            "name": "HP Separation & Effluent Cooling System",
+            "area_id": "area-nht",
+            "subsystems": [
+              {
+                "id": "sub-nht-sep-loop",
+                "name": "HP Separation Train",
+                "system_id": "sys-nht-sep",
+                "units": [
+                  {
+                    "id": "unit-nht-sep",
+                    "name": "HP Separation Unit",
+                    "subsystem_id": "sub-nht-sep-loop",
+                    "system_id": "sys-nht-sep",
+                    "area_id": "area-nht",
+                    "equipment_ids": [
+                      "01M264NWGYN01ETKFS0PNF7Z85",
+                      "01M264NWGYKNA0HEDAMS6R944N",
+                      "01M264NWGY0HRW7SFC8T3V8XK3",
+                      "01M264NWGYC9Y9N44EH8YV0EJX",
+                      "01M264NWGY6NQDSY2F4RYVWB0T"
+                    ],
+                    "display_ids": [
+                      "disp-nht-sep",
+                      "disp-nht-overview"
+                    ],
+                    "description": "Gas-liquid-water separation at 21.1 kg/cm2g"
+                  }
+                ],
+                "description": null
+              }
+            ],
+            "default_display_id": "disp-nht-sep",
+            "description": "Effluent cooling, salt dissolution wash water condensation, and three-phase separation"
+          },
+          {
+            "id": "sys-nht-recycle",
+            "name": "Recycle Gas Compression & Treat Gas System",
+            "area_id": "area-nht",
+            "subsystems": [
+              {
+                "id": "sub-nht-comp-train",
+                "name": "Recycle Compression Train",
+                "system_id": "sys-nht-recycle",
+                "units": [
+                  {
+                    "id": "unit-nht-recycle",
+                    "name": "Recycle Gas Compression Unit",
+                    "subsystem_id": "sub-nht-comp-train",
+                    "system_id": "sys-nht-recycle",
+                    "area_id": "area-nht",
+                    "equipment_ids": [
+                      "01M264NWGYB0FSYW9FPH3XHA5H",
+                      "01M264NWGYSWRP39SEERE9SC0Z",
+                      "01M264NWGYVWMMKQ50CQMHE99T",
+                      "01M264NWGY49YSH2F8GM696A7Z"
+                    ],
+                    "display_ids": [
+                      "disp-nht-h2-recycle",
+                      "disp-nht-comp-detail",
+                      "disp-nht-overview"
+                    ],
+                    "description": "High-pressure recycle gas boost back to 36.3 kg/cm2g"
+                  }
+                ],
+                "description": null
+              }
+            ],
+            "default_display_id": "disp-nht-h2-recycle",
+            "description": "Recycle gas KO drum, centrifugal compressor, anti-surge and purge gas control"
+          },
+          {
+            "id": "sys-nht-strip",
+            "name": "Stripper & Debutanizer Fractionation System",
+            "area_id": "area-nht",
+            "subsystems": [
+              {
+                "id": "sub-nht-strip-train",
+                "name": "Stripper Section",
+                "system_id": "sys-nht-strip",
+                "units": [
+                  {
+                    "id": "unit-nht-strip",
+                    "name": "Stripper Fractionation Unit",
+                    "subsystem_id": "sub-nht-strip-train",
+                    "system_id": "sys-nht-strip",
+                    "area_id": "area-nht",
+                    "equipment_ids": [
+                      "01M264NWGY270D19ER7H5T4ZDN",
+                      "01M264NWGYGEQ3HB28PTXJ9WDB",
+                      "01M264NWGYVD8X6PVT691KM41M",
+                      "01M264NWGYW9VA3HK6MJ94T5XV",
+                      "01M264NWGY1J7JAJFTZRMYXVVC",
+                      "01M264NWGYDSSC6PJE4MFCGQ01",
+                      "01M264NWGYXWX7VXYDPVZ8VN4P"
+                    ],
+                    "display_ids": [
+                      "disp-nht-strip",
+                      "disp-nht-overview"
+                    ],
+                    "description": "Sour gas distillation and bottoms stabilization"
+                  }
+                ],
+                "description": null
+              }
+            ],
+            "default_display_id": "disp-nht-strip",
+            "description": "H2S and light ends stripping from unstabilized hydrotreated naphtha"
+          },
+          {
+            "id": "sys-nht-split",
+            "name": "Naphtha Splitter & Product Run-down System",
+            "area_id": "area-nht",
+            "subsystems": [
+              {
+                "id": "sub-nht-split-train",
+                "name": "Splitter Section",
+                "system_id": "sys-nht-split",
+                "units": [
+                  {
+                    "id": "unit-nht-split",
+                    "name": "Naphtha Splitter Unit",
+                    "subsystem_id": "sub-nht-split-train",
+                    "system_id": "sys-nht-split",
+                    "area_id": "area-nht",
+                    "equipment_ids": [
+                      "01M264NWGYG71P2XMNKVQ9HF7H",
+                      "01M264NWGYP5DNT9G85BX8HTS2",
+                      "01M264NWGYHJHV3WZ81FZ63663",
+                      "01M264NWGY72R7T3JNS36E64HS",
+                      "01M264NWGYEJHNJ83G0VSN314F",
+                      "01M264NWGYW5X8JWEER25H26FK"
+                    ],
+                    "display_ids": [
+                      "disp-nht-split",
+                      "disp-nht-overview"
+                    ],
+                    "description": "Precision narrow-boiling-range product splitting"
+                  }
+                ],
+                "description": null
+              }
+            ],
+            "default_display_id": "disp-nht-split",
+            "description": "Separation of light naphtha (Isom feed) from heavy naphtha (Platformer feed)"
+          },
+          {
+            "id": "sys-nht-water",
+            "name": "Wash Water Injection System",
+            "area_id": "area-nht",
+            "subsystems": [
+              {
+                "id": "sub-nht-water-train",
+                "name": "Wash Water Injection",
+                "system_id": "sys-nht-water",
+                "units": [
+                  {
+                    "id": "unit-nht-util",
+                    "name": "Utilities & Wash Water Unit",
+                    "subsystem_id": "sub-nht-water-train",
+                    "system_id": "sys-nht-water",
+                    "area_id": "area-nht",
+                    "equipment_ids": [
+                      "01M264NWGYXMFQ6G5ZCFB97RV2",
+                      "01M264NWGYP2YWBE9BAZ7DY1QE",
+                      "01M264NWGYQBS6Q7TPNHQT8Q6Q"
+                    ],
+                    "display_ids": [
+                      "disp-nht-util",
+                      "disp-nht-overview"
+                    ],
+                    "description": "Corrosion prevention via salt washing"
+                  }
+                ],
+                "description": null
+              }
+            ],
+            "default_display_id": "disp-nht-util",
+            "description": "Continuous high-pressure condensate injection upstream of air cooler"
+          },
+          {
+            "id": "sys-nht-steam",
+            "name": "Steam & Heat Utilities Distribution System",
+            "area_id": "area-nht",
+            "subsystems": [],
+            "default_display_id": "disp-nht-util",
+            "description": "High/medium pressure steam distribution to reboilers and pumps"
+          },
+          {
+            "id": "sys-nht-sour",
+            "name": "Sour Water & Acid Gas Recovery Header",
+            "area_id": "area-nht",
+            "subsystems": [],
+            "default_display_id": "disp-nht-sep",
+            "description": "Sour water boot drainage to SWS and H2S off-gas to SRU"
+          },
+          {
+            "id": "sys-nht-offgas",
+            "name": "SRU Off-Gas & Fuel Gas Balancing System",
+            "area_id": "area-nht",
+            "subsystems": [],
+            "default_display_id": "disp-nht-h2-recycle",
+            "description": "Fuel gas blending and flare header management"
+          },
+          {
+            "id": "sys-nht-bl",
+            "name": "Battery Limits & Product Interconnection Network",
+            "area_id": "area-nht",
+            "subsystems": [],
+            "default_display_id": "disp-nht-overview",
+            "description": "Battery limits transfer to downstream CCR and Isomerization units"
+          }
+        ],
+        "description": "High-pressure hydrotreating and desulfurization complex"
+      }
+    ],
+    "displays": [
+      {
+        "id": "disp-nht-overview",
+        "name": "NHT Overall Process Overview",
+        "display_type": "overview",
+        "area_id": "area-nht",
+        "system_id": null,
+        "subsystem_id": null,
+        "unit_id": null,
+        "equipment_ids": [
+          "01M264NWGY2Y34228GKMWTPSWQ",
+          "01M264NWGYD3EYGQB2CA6B2BH5",
+          "01M264NWGY938XXVJ3WYWDS46E",
+          "01M264NWGYN0S92JCTFGXWXYQA",
+          "01M264NWGYEE4RHAZTFQA0R53Y",
+          "01M264NWGYEQZ4B7BGFEN0ZQ29",
+          "01M264NWGYSWRP39SEERE9SC0Z",
+          "01M264NWGY15BXMWYRWKYZF36M",
+          "01M264NWGYZ4H6JGATGRK4XW8N",
+          "01M264NWGYG62E714H80WNYR3B",
+          "01M264NWGYKNA0HEDAMS6R944N",
+          "01M264NWGYC9Y9N44EH8YV0EJX",
+          "01M264NWGYXMFQ6G5ZCFB97RV2",
+          "01M264NWGYVD8X6PVT691KM41M",
+          "01M264NWGYG71P2XMNKVQ9HF7H"
+        ],
+        "instrument_ids": [
+          "FT-101",
+          "TT-101",
+          "PT-102"
+        ],
+        "stream_ids": [
+          "STR-NHT-00",
+          "STR-NHT-01",
+          "STR-NHT-02",
+          "STR-NHT-03",
+          "STR-NHT-04",
+          "STR-NHT-05",
+          "STR-NHT-12",
+          "STR-NHT-13",
+          "STR-NHT-14",
+          "STR-NHT-21",
+          "STR-NHT-25",
+          "STR-NHT-28",
+          "STR-NHT-29",
+          "STR-NHT-33",
+          "STR-NHT-40",
+          "STR-NHT-43"
+        ],
+        "viewport_x": 0.0,
+        "viewport_y": 0.0,
+        "viewport_width": 1920.0,
+        "viewport_height": 1080.0,
+        "viewport_zoom": 1.0,
+        "is_default": true,
+        "order": 1,
+        "description": "Global overview of the 30,033 BPSD Naphtha Hydrotreater flowsheet",
+        "placements": [
+          {
+            "equipment_id": "01M264NWGY2Y34228GKMWTPSWQ",
+            "x": 140.0,
+            "y": 220.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYD3EYGQB2CA6B2BH5",
+            "x": 360.0,
+            "y": 220.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGY938XXVJ3WYWDS46E",
+            "x": 560.0,
+            "y": 220.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYN0S92JCTFGXWXYQA",
+            "x": 720.0,
+            "y": 220.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYEE4RHAZTFQA0R53Y",
+            "x": 880.0,
+            "y": 220.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYEQZ4B7BGFEN0ZQ29",
+            "x": 1060.0,
+            "y": 220.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYSWRP39SEERE9SC0Z",
+            "x": 1500.0,
+            "y": 220.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGY15BXMWYRWKYZF36M",
+            "x": 360.0,
+            "y": 520.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+            "x": 720.0,
+            "y": 520.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYG62E714H80WNYR3B",
+            "x": 1080.0,
+            "y": 500.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYKNA0HEDAMS6R944N",
+            "x": 1360.0,
+            "y": 520.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYC9Y9N44EH8YV0EJX",
+            "x": 1500.0,
+            "y": 820.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYXMFQ6G5ZCFB97RV2",
+            "x": 1160.0,
+            "y": 840.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYVD8X6PVT691KM41M",
+            "x": 760.0,
+            "y": 800.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYG71P2XMNKVQ9HF7H",
+            "x": 360.0,
+            "y": 800.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          }
+        ]
+      },
+      {
+        "id": "disp-nht-feed",
+        "name": "NHT Feed Preparation & Surge",
+        "display_type": "process",
+        "area_id": "area-nht",
+        "system_id": "sys-nht-feed",
+        "subsystem_id": null,
+        "unit_id": "unit-nht-feed",
+        "equipment_ids": [
+          "01M264NWGY2Y34228GKMWTPSWQ",
+          "01M264NWGYD3EYGQB2CA6B2BH5",
+          "01M264NWGY938XXVJ3WYWDS46E",
+          "01M264NWGYWWE0SP8Z9GKHTE88",
+          "01M264NWGYN0S92JCTFGXWXYQA",
+          "01M264NWGYEE4RHAZTFQA0R53Y",
+          "01M264NWGYEQZ4B7BGFEN0ZQ29"
+        ],
+        "instrument_ids": [
+          "FT-101"
+        ],
+        "stream_ids": [
+          "STR-NHT-00",
+          "STR-NHT-01",
+          "STR-NHT-02",
+          "STR-NHT-03",
+          "STR-NHT-04"
+        ],
+        "viewport_x": 0.0,
+        "viewport_y": 0.0,
+        "viewport_width": 1920.0,
+        "viewport_height": 1080.0,
+        "viewport_zoom": 1.0,
+        "is_default": false,
+        "order": 2,
+        "description": "Feed storage, booster charge pumps, and coalescing filter system",
+        "placements": [
+          {
+            "equipment_id": "01M264NWGY2Y34228GKMWTPSWQ",
+            "x": 140.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYD3EYGQB2CA6B2BH5",
+            "x": 300.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGY938XXVJ3WYWDS46E",
+            "x": 460.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYWWE0SP8Z9GKHTE88",
+            "x": 460.0,
+            "y": 520.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYN0S92JCTFGXWXYQA",
+            "x": 620.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYEE4RHAZTFQA0R53Y",
+            "x": 760.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYEQZ4B7BGFEN0ZQ29",
+            "x": 900.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          }
+        ]
+      },
+      {
+        "id": "disp-nht-rx",
+        "name": "NHT Reactor Train & Combined Feed Exchangers",
+        "display_type": "process",
+        "area_id": "area-nht",
+        "system_id": "sys-nht-rx",
+        "subsystem_id": null,
+        "unit_id": "unit-nht-rx",
+        "equipment_ids": [
+          "01M264NWGYEQZ4B7BGFEN0ZQ29",
+          "01M264NWGY15BXMWYRWKYZF36M",
+          "01M264NWGY9GXXAJJ2W5XV6S7Z",
+          "01M264NWGYH4SEVX8VZEF1N02C",
+          "01M264NWGYDMMMYVS0BQCWWB1Z",
+          "01M264NWGY7SAF927VQHRJ6AE9",
+          "01M264NWGYDG93JK0EPQ4KBNTE",
+          "01M264NWGY27A3FQ6WP68DHJ25",
+          "01M264NWGYZ4H6JGATGRK4XW8N",
+          "01M264NWGYG62E714H80WNYR3B"
+        ],
+        "instrument_ids": [
+          "TT-101",
+          "TI-101-CIT",
+          "TI-101-SK1",
+          "TI-101-SK2",
+          "PT-104",
+          "FT-105",
+          "PT-105",
+          "PDT-101",
+          "TI-104",
+          "AI-101",
+          "TT-102"
+        ],
+        "stream_ids": [
+          "STR-NHT-05",
+          "STR-NHT-12",
+          "STR-NHT-13",
+          "STR-NHT-14"
+        ],
+        "viewport_x": 0.0,
+        "viewport_y": 0.0,
+        "viewport_width": 1920.0,
+        "viewport_height": 1080.0,
+        "viewport_zoom": 1.0,
+        "is_default": false,
+        "order": 3,
+        "description": "7-shell Combined Feed Exchanger train (72-E-01A..G), Charge Heater, and 72-R-01",
+        "placements": [
+          {
+            "equipment_id": "01M264NWGYEQZ4B7BGFEN0ZQ29",
+            "x": 100.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGY15BXMWYRWKYZF36M",
+            "x": 260.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGY9GXXAJJ2W5XV6S7Z",
+            "x": 430.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYH4SEVX8VZEF1N02C",
+            "x": 600.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYDMMMYVS0BQCWWB1Z",
+            "x": 770.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGY7SAF927VQHRJ6AE9",
+            "x": 940.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYDG93JK0EPQ4KBNTE",
+            "x": 1110.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGY27A3FQ6WP68DHJ25",
+            "x": 1280.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+            "x": 1480.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYG62E714H80WNYR3B",
+            "x": 1680.0,
+            "y": 360.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          }
+        ]
+      },
+      {
+        "id": "disp-nht-sep",
+        "name": "NHT High Pressure Separation",
+        "display_type": "process",
+        "area_id": "area-nht",
+        "system_id": "sys-nht-sep",
+        "subsystem_id": null,
+        "unit_id": "unit-nht-sep",
+        "equipment_ids": [
+          "01M264NWGYN01ETKFS0PNF7Z85",
+          "01M264NWGYKNA0HEDAMS6R944N",
+          "01M264NWGY0HRW7SFC8T3V8XK3",
+          "01M264NWGYC9Y9N44EH8YV0EJX",
+          "01M264NWGY6NQDSY2F4RYVWB0T",
+          "01M264NWGYB0FSYW9FPH3XHA5H"
+        ],
+        "instrument_ids": [
+          "PT-102",
+          "LT-101"
+        ],
+        "stream_ids": [
+          "STR-NHT-25",
+          "STR-NHT-27",
+          "STR-NHT-28",
+          "STR-NHT-33"
+        ],
+        "viewport_x": 0.0,
+        "viewport_y": 0.0,
+        "viewport_width": 1920.0,
+        "viewport_height": 1080.0,
+        "viewport_zoom": 1.0,
+        "is_default": false,
+        "order": 4,
+        "description": "Product Condenser A-101, Trim Cooler, and High Pressure Separator 72-V-02",
+        "placements": [
+          {
+            "equipment_id": "01M264NWGYN01ETKFS0PNF7Z85",
+            "x": 140.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYKNA0HEDAMS6R944N",
+            "x": 320.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGY0HRW7SFC8T3V8XK3",
+            "x": 500.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYC9Y9N44EH8YV0EJX",
+            "x": 700.0,
+            "y": 360.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGY6NQDSY2F4RYVWB0T",
+            "x": 880.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYB0FSYW9FPH3XHA5H",
+            "x": 700.0,
+            "y": 180.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          }
+        ]
+      },
+      {
+        "id": "disp-nht-h2-recycle",
+        "name": "NHT Hydrogen & Recycle Compression",
+        "display_type": "process",
+        "area_id": "area-nht",
+        "system_id": "sys-nht-recycle",
+        "subsystem_id": null,
+        "unit_id": "unit-nht-recycle",
+        "equipment_ids": [
+          "01M264NWGYB0FSYW9FPH3XHA5H",
+          "01M264NWGYSWRP39SEERE9SC0Z",
+          "01M264NWGYVWMMKQ50CQMHE99T",
+          "01M264NWGY49YSH2F8GM696A7Z",
+          "01M264NWGYEQZ4B7BGFEN0ZQ29"
+        ],
+        "instrument_ids": [
+          "FT-102"
+        ],
+        "stream_ids": [
+          "STR-NHT-29",
+          "STR-NHT-30",
+          "STR-NHT-31"
+        ],
+        "viewport_x": 0.0,
+        "viewport_y": 0.0,
+        "viewport_width": 1920.0,
+        "viewport_height": 1080.0,
+        "viewport_zoom": 1.0,
+        "is_default": false,
+        "order": 5,
+        "description": "Recycle Gas Compressor 72-K-01A/B and Make-up H2 injection header",
+        "placements": [
+          {
+            "equipment_id": "01M264NWGYB0FSYW9FPH3XHA5H",
+            "x": 220.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYSWRP39SEERE9SC0Z",
+            "x": 420.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYVWMMKQ50CQMHE99T",
+            "x": 620.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGY49YSH2F8GM696A7Z",
+            "x": 800.0,
+            "y": 260.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYEQZ4B7BGFEN0ZQ29",
+            "x": 800.0,
+            "y": 500.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          }
+        ]
+      },
+      {
+        "id": "disp-nht-strip",
+        "name": "NHT Naphtha Stripper Column",
+        "display_type": "process",
+        "area_id": "area-nht",
+        "system_id": "sys-nht-strip",
+        "subsystem_id": null,
+        "unit_id": "unit-nht-strip",
+        "equipment_ids": [
+          "01M264NWGY270D19ER7H5T4ZDN",
+          "01M264NWGYGEQ3HB28PTXJ9WDB",
+          "01M264NWGYVD8X6PVT691KM41M",
+          "01M264NWGYW9VA3HK6MJ94T5XV",
+          "01M264NWGY1J7JAJFTZRMYXVVC",
+          "01M264NWGYDSSC6PJE4MFCGQ01",
+          "01M264NWGYXWX7VXYDPVZ8VN4P"
+        ],
+        "instrument_ids": [
+          "LT-102",
+          "PT-103",
+          "FT-104"
+        ],
+        "stream_ids": [
+          "STR-NHT-34",
+          "STR-NHT-36",
+          "STR-NHT-37",
+          "STR-NHT-40"
+        ],
+        "viewport_x": 0.0,
+        "viewport_y": 0.0,
+        "viewport_width": 1920.0,
+        "viewport_height": 1080.0,
+        "viewport_zoom": 1.0,
+        "is_default": false,
+        "order": 6,
+        "description": "Stripper Column 72-C-01, Overhead Condenser E-103, and Bottoms Reboiling",
+        "placements": [
+          {
+            "equipment_id": "01M264NWGY270D19ER7H5T4ZDN",
+            "x": 180.0,
+            "y": 420.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYGEQ3HB28PTXJ9WDB",
+            "x": 340.0,
+            "y": 420.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYVD8X6PVT691KM41M",
+            "x": 540.0,
+            "y": 360.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYW9VA3HK6MJ94T5XV",
+            "x": 760.0,
+            "y": 200.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGY1J7JAJFTZRMYXVVC",
+            "x": 940.0,
+            "y": 220.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYDSSC6PJE4MFCGQ01",
+            "x": 1100.0,
+            "y": 240.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYXWX7VXYDPVZ8VN4P",
+            "x": 760.0,
+            "y": 540.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          }
+        ]
+      },
+      {
+        "id": "disp-nht-split",
+        "name": "NHT Naphtha Splitter & Rundown",
+        "display_type": "process",
+        "area_id": "area-nht",
+        "system_id": "sys-nht-split",
+        "subsystem_id": null,
+        "unit_id": "unit-nht-split",
+        "equipment_ids": [
+          "01M264NWGYG71P2XMNKVQ9HF7H",
+          "01M264NWGYP5DNT9G85BX8HTS2",
+          "01M264NWGYHJHV3WZ81FZ63663",
+          "01M264NWGY72R7T3JNS36E64HS",
+          "01M264NWGYEJHNJ83G0VSN314F",
+          "01M264NWGYW5X8JWEER25H26FK"
+        ],
+        "instrument_ids": [
+          "LT-103",
+          "TT-103"
+        ],
+        "stream_ids": [
+          "STR-NHT-43",
+          "STR-NHT-44",
+          "STR-NHT-46",
+          "STR-NHT-48"
+        ],
+        "viewport_x": 0.0,
+        "viewport_y": 0.0,
+        "viewport_width": 1920.0,
+        "viewport_height": 1080.0,
+        "viewport_zoom": 1.0,
+        "is_default": false,
+        "order": 7,
+        "description": "Fractionation into Light Hydrotreated Naphtha (Isom) and Heavy Naphtha (Platformer)",
+        "placements": [
+          {
+            "equipment_id": "01M264NWGYG71P2XMNKVQ9HF7H",
+            "x": 360.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYP5DNT9G85BX8HTS2",
+            "x": 580.0,
+            "y": 200.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYHJHV3WZ81FZ63663",
+            "x": 760.0,
+            "y": 220.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGY72R7T3JNS36E64HS",
+            "x": 920.0,
+            "y": 240.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYEJHNJ83G0VSN314F",
+            "x": 1100.0,
+            "y": 240.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYW5X8JWEER25H26FK",
+            "x": 620.0,
+            "y": 540.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          }
+        ]
+      },
+      {
+        "id": "disp-nht-util",
+        "name": "NHT Wash Water & Utility Distribution",
+        "display_type": "process",
+        "area_id": "area-nht",
+        "system_id": "sys-nht-water",
+        "subsystem_id": null,
+        "unit_id": "unit-nht-util",
+        "equipment_ids": [
+          "01M264NWGYXMFQ6G5ZCFB97RV2",
+          "01M264NWGYP2YWBE9BAZ7DY1QE",
+          "01M264NWGYQBS6Q7TPNHQT8Q6Q",
+          "01M264NWGYN01ETKFS0PNF7Z85"
+        ],
+        "instrument_ids": [
+          "FT-103"
+        ],
+        "stream_ids": [
+          "STR-NHT-22",
+          "STR-NHT-23",
+          "STR-NHT-24"
+        ],
+        "viewport_x": 0.0,
+        "viewport_y": 0.0,
+        "viewport_width": 1920.0,
+        "viewport_height": 1080.0,
+        "viewport_zoom": 1.0,
+        "is_default": false,
+        "order": 8,
+        "description": "Wash water break tank 72-V-04, injection pumps, and salt wash circuit",
+        "placements": [
+          {
+            "equipment_id": "01M264NWGYXMFQ6G5ZCFB97RV2",
+            "x": 220.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYP2YWBE9BAZ7DY1QE",
+            "x": 420.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYQBS6Q7TPNHQT8Q6Q",
+            "x": 600.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYN01ETKFS0PNF7Z85",
+            "x": 780.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          }
+        ]
+      },
+      {
+        "id": "disp-nht-comp-detail",
+        "name": "Recycle Gas Compressor 72-K-01 Detail",
+        "display_type": "detail",
+        "area_id": "area-nht",
+        "system_id": "sys-nht-recycle",
+        "subsystem_id": null,
+        "unit_id": "unit-nht-recycle",
+        "equipment_ids": [
+          "01M264NWGYB0FSYW9FPH3XHA5H",
+          "01M264NWGYSWRP39SEERE9SC0Z",
+          "01M264NWGYVWMMKQ50CQMHE99T"
+        ],
+        "instrument_ids": [
+          "FT-102"
+        ],
+        "stream_ids": [
+          "STR-NHT-29",
+          "STR-NHT-30"
+        ],
+        "viewport_x": 0.0,
+        "viewport_y": 0.0,
+        "viewport_width": 1920.0,
+        "viewport_height": 1080.0,
+        "viewport_zoom": 1.0,
+        "is_default": false,
+        "order": 9,
+        "description": "Recycle Compressor performance curve, anti-surge line, and seal oil system",
+        "placements": [
+          {
+            "equipment_id": "01M264NWGYB0FSYW9FPH3XHA5H",
+            "x": 260.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYSWRP39SEERE9SC0Z",
+            "x": 540.0,
+            "y": 360.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYVWMMKQ50CQMHE99T",
+            "x": 820.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          }
+        ]
+      },
+      {
+        "id": "disp-nht-rx-detail",
+        "name": "Reactor 72-R-01 Bed Profile & Multi-Point Temperatures",
+        "display_type": "detail",
+        "area_id": "area-nht",
+        "system_id": "sys-nht-rx",
+        "subsystem_id": null,
+        "unit_id": "unit-nht-rx",
+        "equipment_ids": [
+          "01M264NWGYZ4H6JGATGRK4XW8N",
+          "01M264NWGYG62E714H80WNYR3B"
+        ],
+        "instrument_ids": [
+          "TT-101",
+          "TI-101-CIT",
+          "TI-101-SK1",
+          "TI-101-SK2",
+          "PDT-101",
+          "TI-104",
+          "AI-101",
+          "TT-102"
+        ],
+        "stream_ids": [
+          "STR-NHT-13",
+          "STR-NHT-14"
+        ],
+        "viewport_x": 0.0,
+        "viewport_y": 0.0,
+        "viewport_width": 1920.0,
+        "viewport_height": 1080.0,
+        "viewport_zoom": 1.0,
+        "is_default": false,
+        "order": 10,
+        "description": "Detailed axial/radial multi-thermocouple temperature profiles across catalyst bed",
+        "placements": [
+          {
+            "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+            "x": 260.0,
+            "y": 380.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYG62E714H80WNYR3B",
+            "x": 620.0,
+            "y": 340.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          }
+        ]
+      },
+      {
+        "id": "disp-nht-alarm-summary",
+        "name": "NHT Plant Alarm Summary & Matrix",
+        "display_type": "alarm_summary",
+        "area_id": "area-nht",
+        "system_id": null,
+        "subsystem_id": null,
+        "unit_id": null,
+        "equipment_ids": [
+          "01M264NWGYG62E714H80WNYR3B",
+          "01M264NWGYC9Y9N44EH8YV0EJX",
+          "01M264NWGYSWRP39SEERE9SC0Z",
+          "01M264NWGYVD8X6PVT691KM41M"
+        ],
+        "instrument_ids": [],
+        "stream_ids": [],
+        "viewport_x": 0.0,
+        "viewport_y": 0.0,
+        "viewport_width": 1920.0,
+        "viewport_height": 1080.0,
+        "viewport_zoom": 1.0,
+        "is_default": false,
+        "order": 11,
+        "description": "First-out alarm priority matrix and emergency shutdown state overview",
+        "placements": [
+          {
+            "equipment_id": "01M264NWGYG62E714H80WNYR3B",
+            "x": 300.0,
+            "y": 300.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYC9Y9N44EH8YV0EJX",
+            "x": 600.0,
+            "y": 300.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYSWRP39SEERE9SC0Z",
+            "x": 900.0,
+            "y": 300.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYVD8X6PVT691KM41M",
+            "x": 1200.0,
+            "y": 300.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          }
+        ]
+      },
+      {
+        "id": "disp-nht-ctl-summary",
+        "name": "NHT Plant Control Loops & PID Overview",
+        "display_type": "control_overview",
+        "area_id": "area-nht",
+        "system_id": null,
+        "subsystem_id": null,
+        "unit_id": null,
+        "equipment_ids": [
+          "01M264NWGYN0S92JCTFGXWXYQA",
+          "01M264NWGYZ4H6JGATGRK4XW8N",
+          "01M264NWGY6NQDSY2F4RYVWB0T",
+          "01M264NWGYQBS6Q7TPNHQT8Q6Q",
+          "01M264NWGY49YSH2F8GM696A7Z"
+        ],
+        "instrument_ids": [],
+        "stream_ids": [],
+        "viewport_x": 0.0,
+        "viewport_y": 0.0,
+        "viewport_width": 1920.0,
+        "viewport_height": 1080.0,
+        "viewport_zoom": 1.0,
+        "is_default": false,
+        "order": 12,
+        "description": "Multi-loop faceplate overview of all 12 plantwide regulatory controllers",
+        "placements": [
+          {
+            "equipment_id": "01M264NWGYN0S92JCTFGXWXYQA",
+            "x": 200.0,
+            "y": 300.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYZ4H6JGATGRK4XW8N",
+            "x": 450.0,
+            "y": 300.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGY6NQDSY2F4RYVWB0T",
+            "x": 700.0,
+            "y": 300.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGYQBS6Q7TPNHQT8Q6Q",
+            "x": 950.0,
+            "y": 300.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          },
+          {
+            "equipment_id": "01M264NWGY49YSH2F8GM696A7Z",
+            "x": 1200.0,
+            "y": 300.0,
+            "width": 80.0,
+            "height": 80.0,
+            "rotation": 0.0
+          }
+        ]
+      }
+    ]
+  }
+}

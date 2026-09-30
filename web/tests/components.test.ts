@@ -1,3 +1,4 @@
+import { BASELINE_DEMO_PROJECT } from './fixtures/baseline';
 import { describe, it, expect, beforeEach, beforeAll, vi } from 'vitest';
 import { store } from '../src/state/store';
 import { NebuConnectionStatus } from '../src/components/nebu-connection-status';
@@ -7,6 +8,9 @@ import { NebuFaceplate } from '../src/components/nebu-faceplate';
 import { NebuAlarmPanel } from '../src/components/nebu-alarm-panel';
 import { NebuTrend } from '../src/components/nebu-trend';
 import { NebuTagTable } from '../src/components/nebu-tag-table';
+import { NebuControllerPanel } from '../src/components/nebu-controller-panel';
+import { NebuIoPanel } from '../src/components/nebu-io-panel';
+import { NebuIecEditor } from '../src/components/nebu-iec-editor';
 import { NebuApp } from '../src/components/nebu-app';
 
 describe('Native Web Components Suite', () => {
@@ -20,6 +24,9 @@ describe('Native Web Components Suite', () => {
       ['nebu-alarm-panel', NebuAlarmPanel],
       ['nebu-trend', NebuTrend],
       ['nebu-tag-table', NebuTagTable],
+      ['nebu-controller-panel', NebuControllerPanel],
+      ['nebu-io-panel', NebuIoPanel],
+      ['nebu-iec-editor', NebuIecEditor],
       ['nebu-app', NebuApp],
     ];
     for (const [tag, cls] of elements) {
@@ -78,6 +85,7 @@ describe('Native Web Components Suite', () => {
   });
 
   it('renders nebu-process-view SVG and reflects dynamic process values', async () => {
+    store.setActiveProject(BASELINE_DEMO_PROJECT);
     const el = document.createElement('nebu-process-view') as NebuProcessView;
     document.body.appendChild(el);
 
@@ -173,17 +181,112 @@ describe('Native Web Components Suite', () => {
     tableEl.remove();
   });
 
+  it('renders nebu-controller-panel component', async () => {
+    const ctrlEl = document.createElement('nebu-controller-panel') as NebuControllerPanel;
+    document.body.appendChild(ctrlEl);
+    expect(ctrlEl.querySelector('.controller-panel-card')).not.toBeNull();
+    expect(ctrlEl.querySelector('.panel-title')?.textContent).toContain('Virtual Controller');
+    ctrlEl.remove();
+  });
+
+  it('renders nebu-io-panel component with hardware topology and tabs', async () => {
+    const ioEl = document.createElement('nebu-io-panel') as NebuIoPanel;
+    document.body.appendChild(ioEl);
+    expect(ioEl.querySelector('.io-header')).not.toBeNull();
+    expect(ioEl.querySelector('.io-title')?.textContent).toContain('I/O Hardware Abstraction Layer');
+    expect(ioEl.querySelector('#tab-channels')).not.toBeNull();
+    expect(ioEl.querySelector('#tab-mappings')).not.toBeNull();
+    ioEl.remove();
+  });
+
   it('renders root nebu-app shell containing all vertical slice sub-components', () => {
     const appEl = document.createElement('nebu-app') as NebuApp;
     document.body.appendChild(appEl);
 
     expect(appEl.querySelector('nebu-connection-status')).not.toBeNull();
     expect(appEl.querySelector('nebu-sim-controls')).not.toBeNull();
+    expect(appEl.querySelector('nebu-dcs-shell')).not.toBeNull();
     expect(appEl.querySelector('nebu-process-view')).not.toBeNull();
     expect(appEl.querySelector('nebu-faceplate')).not.toBeNull();
     expect(appEl.querySelector('nebu-trend')).not.toBeNull();
     expect(appEl.querySelector('nebu-alarm-panel')).not.toBeNull();
     expect(appEl.querySelector('nebu-tag-table')).not.toBeNull();
+
+    // Verify workspace navigation to System workspace (AUD-02 clean separation)
+    appEl.activeMode = 'system';
+    appEl.render();
+    expect(appEl.querySelector('nebu-system-view')).not.toBeNull();
+
+    appEl.remove();
+  });
+
+  it('renders nebu-iec-editor with language switching and compilation', async () => {
+    const editor = document.createElement('nebu-iec-editor') as NebuIecEditor;
+    document.body.appendChild(editor);
+
+    expect(editor.querySelector('.iec-toolbar')).not.toBeNull();
+    expect(editor.querySelector('#iec-source-input')).not.toBeNull();
+    expect(editor.querySelector('#btn-compile')).not.toBeNull();
+
+    // Language switching to LD
+    const ldBtn = editor.querySelector('button[data-lang="LD"]') as HTMLButtonElement;
+    expect(ldBtn).not.toBeNull();
+    ldBtn.click();
+
+    const textarea = editor.querySelector('#iec-source-input') as HTMLTextAreaElement;
+    expect(textarea.value).toContain('"rungs"');
+
+    // Mock compile response
+    editor.apiClient.compileIec = vi.fn().mockResolvedValue({
+      success: true,
+      error_message: null,
+      symbol_count: 2,
+      statement_count: 1,
+      variables: [
+        { name: 'START', data_type: 'BOOL', value: 'FALSE', scope: 'VAR' }
+      ]
+    });
+
+    await editor.compile();
+    expect(editor.innerHTML).toContain('COMPILED');
+    expect(editor.innerHTML).toContain('START');
+
+    editor.remove();
+  });
+
+  it('renders app-header with dividers, mode tab icons, and dcs-hierarchy-header scroll support', async () => {
+    const appEl = document.createElement('nebu-app') as NebuApp;
+    document.body.appendChild(appEl);
+
+    // Verify header dividers exist
+    const dividers = appEl.querySelectorAll('.header-v-divider');
+    expect(dividers.length).toBeGreaterThanOrEqual(3);
+
+    // Verify mode tabs have icons
+    const modeTabs = appEl.querySelectorAll('.mode-tab');
+    expect(modeTabs.length).toBe(6);
+    const opsTab = Array.from(modeTabs).find((t) => t.getAttribute('data-mode') === 'operations');
+    expect(opsTab?.innerHTML).toContain('🎛️');
+    expect(opsTab?.innerHTML).toContain('Operations');
+
+    // Switch to operations mode and verify dcs-hierarchy-header exists with tabs
+    appEl.activeMode = 'operations';
+    appEl.render();
+
+    const dcsShell = appEl.querySelector('nebu-dcs-shell');
+    expect(dcsShell).not.toBeNull();
+
+    const hierHeader = dcsShell?.querySelector('.dcs-hierarchy-header');
+    expect(hierHeader).not.toBeNull();
+
+    const dcsTabs = dcsShell?.querySelectorAll('.dcs-tab-btn');
+    expect(dcsTabs?.length).toBe(6);
+    const detailTab = Array.from(dcsTabs || []).find((t) => t.getAttribute('data-tab') === 'detail') as HTMLButtonElement;
+    expect(detailTab).not.toBeNull();
+
+    // Click Point Detail tab and verify point-detail-view-container is rendered
+    detailTab.click();
+    expect(dcsShell?.querySelector('.point-detail-view-container')).not.toBeNull();
 
     appEl.remove();
   });

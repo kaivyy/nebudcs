@@ -132,6 +132,8 @@ pub struct PidController {
     config: PidConfig,
     mode: PidMode,
     sp: f64,
+    sp_min: f64,
+    sp_max: f64,
     pv: f64,
     pv_prev: f64,
     integral: f64,
@@ -143,6 +145,8 @@ pub struct PidController {
     is_high_saturated: bool,
     is_low_saturated: bool,
     quality: TagQuality,
+    feedforward: f64,
+    first_scan: bool,
 }
 
 impl PidController {
@@ -153,6 +157,8 @@ impl PidController {
             config,
             mode: PidMode::Manual,
             sp: 0.0,
+            sp_min: -1.0e9,
+            sp_max: 1.0e9,
             pv: 0.0,
             pv_prev: 0.0,
             integral: 0.0,
@@ -164,6 +170,8 @@ impl PidController {
             is_high_saturated: false,
             is_low_saturated: false,
             quality: TagQuality::Good,
+            feedforward: 0.0,
+            first_scan: true,
         }
     }
 
@@ -172,9 +180,29 @@ impl PidController {
         self.pv = initial_pv;
         self.pv_prev = initial_pv;
         self.derivative = 0.0;
+        self.first_scan = false;
         if self.config.sp_tracking_in_manual {
-            self.sp = initial_pv;
+            self.sp = initial_pv.clamp(self.sp_min, self.sp_max);
         }
+    }
+
+    /// Sets explicit setpoint limits $[SP_{min}, SP_{max}]$.
+    pub fn set_sp_limits(&mut self, min: f64, max: f64) {
+        if min.is_finite() && max.is_finite() && min < max {
+            self.sp_min = min;
+            self.sp_max = max;
+            self.sp = self.sp.clamp(min, max);
+        }
+    }
+
+    /// Lower setpoint limit.
+    pub fn sp_min(&self) -> f64 {
+        self.sp_min
+    }
+
+    /// Upper setpoint limit.
+    pub fn sp_max(&self) -> f64 {
+        self.sp_max
     }
 
     /// Access to controller configuration.
@@ -206,15 +234,15 @@ impl PidController {
                 self.derivative = 0.0;
 
                 if self.config.sp_tracking_in_manual {
-                    self.sp = self.pv;
+                    self.sp = self.pv.clamp(self.sp_min, self.sp_max);
                 }
 
                 let err = self.calculate_error(self.sp, self.pv);
                 let p = self.config.kp * err;
 
                 // Pre-load integral such that calculated OUT == manual_output:
-                // OUT = P + I + D => I = manual_output - P - D
-                let target_i = self.manual_output - p;
+                // OUT = P + I + D + FF => I = manual_output - P - D - FF
+                let target_i = self.manual_output - p - self.feedforward;
                 self.integral = target_i.clamp(self.config.out_min, self.config.out_max);
                 self.output = self.manual_output;
             }
@@ -240,9 +268,9 @@ impl PidController {
         self.sp
     }
 
-    /// Sets the local setpoint.
+    /// Sets the local setpoint clamped to configured SP limits.
     pub fn set_sp(&mut self, sp: f64) {
-        self.sp = sp;
+        self.sp = sp.clamp(self.sp_min, self.sp_max);
     }
 
     /// Current measured process variable.
@@ -313,10 +341,38 @@ impl PidController {
         }
     }
 
-    /// Sets the cascade setpoint (consumed when in `Cascade` or `RemoteCascade` mode).
+    /// Sets the cascade setpoint (consumed when in `Cascade` or `RemoteCascade` mode),
+    /// clamped to configured SP limits.
     pub fn set_cascade_sp(&mut self, sp: f64) {
         if self.mode == PidMode::Cascade || self.mode == PidMode::RemoteCascade {
-            self.sp = sp;
+            self.sp = sp.clamp(self.sp_min, self.sp_max);
+        }
+    }
+
+    /// Current feedforward contribution.
+    pub fn feedforward(&self) -> f64 {
+        self.feedforward
+    }
+
+    /// Sets the feedforward bias/trim contribution.
+    pub fn set_feedforward(&mut self, ff: f64) {
+        self.feedforward = if ff.is_finite() { ff } else { 0.0 };
+    }
+
+    /// Executes one discrete PID calculation step with an explicit feedforward value.
+    pub fn step_with_feedforward(&mut self, dt: f64, pv: f64, feedforward: f64) -> f64 {
+        self.set_feedforward(feedforward);
+        self.step(dt, pv)
+    }
+
+    /// Applies external reset feedback to align the integral accumulator with an
+    /// external constraint or selector output, preventing reset windup.
+    pub fn apply_external_reset_feedback(&mut self, ext_fb: f64) {
+        if ext_fb.is_finite() {
+            let err = self.calculate_error(self.sp, self.pv);
+            let p = self.config.kp * err;
+            self.integral = (ext_fb - p - self.derivative - self.feedforward)
+                .clamp(self.config.out_min, self.config.out_max);
         }
     }
 
@@ -350,6 +406,8 @@ impl PidController {
         self.tracked_position = self.config.out_min;
         self.is_high_saturated = false;
         self.is_low_saturated = false;
+        self.feedforward = 0.0;
+        self.first_scan = true;
     }
 
     /// Executes one discrete PID calculation step with fixed timestep $\Delta t$ and current PV.
@@ -378,7 +436,7 @@ impl PidController {
         // If in Manual mode, output is directly driven by manual_output
         if self.mode == PidMode::Manual {
             if self.config.sp_tracking_in_manual {
-                self.sp = pv;
+                self.sp = pv.clamp(self.sp_min, self.sp_max);
             }
             self.pv_prev = pv;
             self.derivative = 0.0;
@@ -398,7 +456,12 @@ impl PidController {
             let n = self.config.derivative_filter_n;
             let td = self.config.td;
             let alpha = td / (td + n * dt);
-            let delta_pv = pv - self.pv_prev;
+            let delta_pv = if self.first_scan {
+                self.first_scan = false;
+                0.0
+            } else {
+                pv - self.pv_prev
+            };
 
             // D[k] = alpha * D[k-1] - (Kp * N * Td / (Td + N*dt)) * delta_PV
             // Note: sign depends on direction: reverse direction means d(err) = -d(pv)
@@ -415,7 +478,7 @@ impl PidController {
         // 3. Integral term with Anti-Windup (Conditional Integration)
         if self.config.ti > 0.0 && dt > 0.0 {
             let delta_i = (self.config.kp * dt / self.config.ti) * err;
-            let candidate_out = p + self.integral + self.derivative;
+            let candidate_out = p + self.integral + self.derivative + self.feedforward;
 
             // Conditional integration logic:
             // If output is saturated high and error drives output higher, suspend integration.
@@ -435,7 +498,7 @@ impl PidController {
         }
 
         // 4. Compute unclamped and clamped output
-        let raw_out = p + self.integral + self.derivative;
+        let raw_out = p + self.integral + self.derivative + self.feedforward;
         self.output = raw_out.clamp(self.config.out_min, self.config.out_max);
 
         self.is_high_saturated = raw_out >= self.config.out_max;

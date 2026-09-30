@@ -1,0 +1,47 @@
+{
+  "id": "01M24KSEGQVJ0FDBTDAEDPXS1Z",
+  "name": "Specialty Chemical Solvent Purification Plant",
+  "schema_version": "0.1.0",
+  "plants": [
+    {
+      "id": "01M24KSEGQNPF9A12PR23ZC3X2",
+      "name": "Plant 01",
+      "areas": [
+        {
+          "id": "01M24KSEGQ9V7MMMXGSJKN6P5R",
+          "name": "Area 01",
+          "units": [
+            {
+              "id": "01M24KSEGQF2PH1D3QDV9BZBA6",
+              "name": "Unit 01",
+              "equipment": [],
+              "streams": [],
+              "instruments": [],
+              "control_loops": [],
+              "alarms": [],
+              "interlocks": [],
+              "boundary_conditions": [],
+              "initial_conditions": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "description": "Pure custom non-refinery chemical plant proving generic core",
+    "author": "Process Systems Engineer",
+    "created": "2026-09-06T00:00:00Z",
+    "modified": "2026-09-06T00:00:00Z"
+  },
+  "controllers": [],
+  "io_systems": [],
+  "io_mappings": [],
+  "tags": [],
+  "advanced_control": [],
+  "communications": null,
+  "sis": null,
+  "displays": [],
+  "navigation_links": [],
+  "plant_structure": null
+}

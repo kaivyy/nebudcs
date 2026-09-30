@@ -2,6 +2,14 @@
 /target/
 Cargo.lock
 
+# Environment & Secrets
+.env
+.env.*
+*.env
+*.pem
+*.key
+*.secret
+
 # Editor / OS artefacts
 .DS_Store
 *.swp

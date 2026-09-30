@@ -1,0 +1,228 @@
+{
+  "id": "62RYP8QKTAM55MQHKA3SPZC0GY",
+  "name": "Alpha Cracking Train",
+  "schema_version": "0.1.0",
+  "plants": [
+    {
+      "id": "01M2226E3X1D5AZJJAKZZC1PKG",
+      "name": "Plant (Alpha Cracking Train)",
+      "areas": [
+        {
+          "id": "01M2226E3X0WADA21Y733FNV03",
+          "name": "Main Area",
+          "units": [
+            {
+              "id": "01M2226E3XKTW4CJBS3A8RWDS8",
+              "name": "Main Unit",
+              "equipment": [
+                {
+                  "id": "1MARWF5VW8BSAV4JVQHZYSQ68F",
+                  "definition_id": "0ATRCF671FM4B5GSSRFVNKC51R",
+                  "definition_version": "1.0.0",
+                  "name": "P-101",
+                  "parameters": {
+                    "design_flow": 4500.0,
+                    "rated_head": 110.0
+                  },
+                  "position": {
+                    "x": 120.0,
+                    "y": 200.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "4P6BXM9JZX6C2F6AYMV773EKPZ",
+                  "definition_id": "47AQHQPS0ARBDTEWRCRZJWZBZ9",
+                  "definition_version": "1.0.0",
+                  "name": "FV-101",
+                  "parameters": {
+                    "cv": 65.0,
+                    "position": 50.0
+                  },
+                  "position": {
+                    "x": 300.0,
+                    "y": 200.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                },
+                {
+                  "id": "1FPH27F10CX4QJKJC902T1D7VF",
+                  "definition_id": "5ZGCZ0HF33040DEFH208NSQK7S",
+                  "definition_version": "1.0.0",
+                  "name": "V-101",
+                  "parameters": {
+                    "volume": 18.0
+                  },
+                  "position": {
+                    "x": 500.0,
+                    "y": 200.0
+                  },
+                  "display_width": null,
+                  "display_height": null,
+                  "rotation": null
+                }
+              ],
+              "streams": [
+                {
+                  "id": "4A6DYX1T0WAE4TFX9YS727DBH2",
+                  "name": "S-101",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "1MARWF5VW8BSAV4JVQHZYSQ68F",
+                    "port_id": "1NQHXSA59AXSTTAS8GQETNQXF7"
+                  },
+                  "sink": {
+                    "equipment_id": "4P6BXM9JZX6C2F6AYMV773EKPZ",
+                    "port_id": "68A3WN88ZB4Y0MYZWJAKSCKECP"
+                  },
+                  "composition": null,
+                  "route_points": [
+                    {
+                      "x": 120.0,
+                      "y": 200.0
+                    },
+                    {
+                      "x": 300.0,
+                      "y": 200.0
+                    }
+                  ],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                },
+                {
+                  "id": "3TDYN4QQ4FJBZDZVE16EFJXD5Y",
+                  "name": "S-102",
+                  "stream_type": "material",
+                  "source": {
+                    "equipment_id": "4P6BXM9JZX6C2F6AYMV773EKPZ",
+                    "port_id": "20BW59F2XB37X5TYG8K1HMDYRS"
+                  },
+                  "sink": {
+                    "equipment_id": "1FPH27F10CX4QJKJC902T1D7VF",
+                    "port_id": "3AWM1X0D9W8KPD9RV20P0FTH3A"
+                  },
+                  "composition": null,
+                  "route_points": [
+                    {
+                      "x": 300.0,
+                      "y": 200.0
+                    },
+                    {
+                      "x": 500.0,
+                      "y": 200.0
+                    }
+                  ],
+                  "diameter": null,
+                  "length": null,
+                  "roughness": null,
+                  "elevation_change": null,
+                  "loss_k": null
+                }
+              ],
+              "instruments": [
+                {
+                  "id": "5J90MZSZZCYMCY7JEH1M713YG1",
+                  "tag": "PT-101",
+                  "equipment_id": "1MARWF5VW8BSAV4JVQHZYSQ68F",
+                  "port_id": "1NQHXSA59AXSTTAS8GQETNQXF7",
+                  "measurement_kind": "Pressure",
+                  "range_min": 0.0,
+                  "range_max": 30.0,
+                  "unit": "bar",
+                  "position": {
+                    "x": 180.0,
+                    "y": 120.0
+                  }
+                },
+                {
+                  "id": "2BWSGH4EN9JNX1K4ZQ15JMEXMX",
+                  "tag": "LT-101",
+                  "equipment_id": "1FPH27F10CX4QJKJC902T1D7VF",
+                  "port_id": null,
+                  "measurement_kind": "Level",
+                  "range_min": 0.0,
+                  "range_max": 100.0,
+                  "unit": "%",
+                  "position": {
+                    "x": 500.0,
+                    "y": 120.0
+                  }
+                }
+              ],
+              "control_loops": [
+                {
+                  "id": "05Q5T9SY0027BHSR1CY2H062WW",
+                  "name": "LIC-101",
+                  "pv_tag": "V-101.LEVEL",
+                  "sp": 55.0,
+                  "out_tag": "FV-101.POS",
+                  "kp": 1.8,
+                  "ti": 25.0,
+                  "td": 1.0,
+                  "reverse_acting": false,
+                  "mode": "AUTO",
+                  "output_min": 0.0,
+                  "output_max": 100.0,
+                  "position": {
+                    "x": 400.0,
+                    "y": 80.0
+                  }
+                }
+              ],
+              "alarms": [
+                {
+                  "id": "2TZ0RFNY35YSKY3A3Y8HYT9B4J",
+                  "name": "LAH-101",
+                  "pv_tag": "V-101.LEVEL",
+                  "alarm_type": "HI",
+                  "severity": "high",
+                  "trip_limit": 85.0,
+                  "deadband": 1.0,
+                  "description": "Vessel high level alarm"
+                }
+              ],
+              "interlocks": [
+                {
+                  "id": "0ENSD0R5KDM72D8FJ46Z0CQXN0",
+                  "name": "TRIP-K101",
+                  "source_tag": "V-101.LEVEL",
+                  "condition": "<",
+                  "threshold": 8.0,
+                  "target_action": "TRIP",
+                  "target_equipment": "1MARWF5VW8BSAV4JVQHZYSQ68F",
+                  "latched": true,
+                  "description": "Low level pump dry-run trip"
+                }
+              ],
+              "boundary_conditions": [],
+              "initial_conditions": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "description": "Full end-to-end vertical slice test flowsheet",
+    "author": "Lead Verification Engineer",
+    "created": "2026-09-06T00:00:00Z",
+    "modified": "2026-09-06T00:00:00Z"
+  },
+  "controllers": [],
+  "io_systems": [],
+  "io_mappings": [],
+  "tags": [],
+  "advanced_control": [],
+  "communications": null,
+  "sis": null,
+  "displays": [],
+  "navigation_links": [],
+  "plant_structure": null
+}

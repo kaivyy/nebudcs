@@ -60,6 +60,26 @@ impl ProtocolError {
         self.details = Some(details.into());
         self
     }
+
+    #[allow(non_snake_case)]
+    pub fn InvalidPayload(msg: impl Into<String>) -> Self {
+        Self::new(ProtocolErrorCode::InvalidMessage, msg.into())
+    }
+
+    #[allow(non_snake_case)]
+    pub fn ConnectionLost(msg: impl Into<String>) -> Self {
+        Self::new(ProtocolErrorCode::InternalError, msg.into())
+    }
+
+    #[allow(non_snake_case)]
+    pub fn SecurityError(msg: impl Into<String>) -> Self {
+        Self::new(ProtocolErrorCode::Unauthorized, msg.into())
+    }
+
+    #[allow(non_snake_case)]
+    pub fn Internal(msg: impl Into<String>) -> Self {
+        Self::new(ProtocolErrorCode::InternalError, msg.into())
+    }
 }
 
 pub type ProtocolResult<T> = Result<T, ProtocolError>;

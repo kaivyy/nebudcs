@@ -70,11 +70,7 @@ fn test_hot_path_zero_heap_allocations() {
     arbiter.submit(ActuatorCommand::new(CommandPriority::Auto, 50.0));
     arbiter.submit(ActuatorCommand::new(CommandPriority::Manual, 45.0));
 
-    let prot_cfg = ProtectionConfig {
-        name: "TEST_PROT".to_string(),
-        threshold: 90.0,
-        reset_deadband: 5.0,
-    };
+    let prot_cfg = ProtectionConfig::new("TEST_PROT", 90.0, 5.0);
     let mut prot = ProtectionBlock::new(prot_cfg);
     let voter = VotingVoter2oo3::new(90.0, DegradationPolicy::DegradeTo1oo2);
 

@@ -19,11 +19,11 @@ pub use curve::{Curve1D, Curve2D, ExtrapolationMode, InterpolationMethod};
 pub use error::{ScriptingError, ScriptingResult};
 pub use indexmap::IndexMap;
 pub use library::{
-    export_package, export_template, import_package, import_template, DependencyResolver,
-    EquipmentLibrary, EquipmentPackage, EquipmentTemplate, PackageDependency,
-    PackageInstantiationResult, PackageInternalStream, PackageParameterMapping, PackagePortMapping,
-    PackageSubComponent, SerializationFormat, TemplateMetadata, TemplateSource, VersionConstraint,
-    VersionLifecycle, VersionedKey,
+    export_package, export_template, import_package, import_template,
+    standard_domain_equipment_definitions, DependencyResolver, EquipmentLibrary, EquipmentPackage,
+    EquipmentTemplate, PackageDependency, PackageInstantiationResult, PackageInternalStream,
+    PackageParameterMapping, PackagePortMapping, PackageSubComponent, SerializationFormat,
+    TemplateMetadata, TemplateSource, VersionConstraint, VersionLifecycle, VersionedKey,
 };
 pub use model::{
     CompositionDefinition, CustomEquipmentDefinition, CustomizationTier, InterlockRuleDefinition,

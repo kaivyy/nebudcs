@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "audit_id": "NEBU-AUDIT-COLLISION-MATRIX-2026-09-10",
+    "timestamp": "2026-09-10T02:58:05.119506+00:00",
+    "clearance_spec_px": 24,
+    "collision_detection_method": "Axis-Aligned Bounding Box (AABB) with Minkowski Expansion",
+    "total_layouts_evaluated": 4,
+    "total_pairwise_checks": 26,
+    "collisions_detected": 0,
+    "status": "CLEAN_ZERO_COLLISIONS"
+  },
+  "layout_evaluations": [
+    {
+      "layout_name": "Horizontal Process Train (TK-001 -> P-001 -> HX-001 -> V-001 -> TK-002)",
+      "equipment_count": 5,
+      "pairwise_checks": 10,
+      "minimum_observed_clearance_px": 28.0,
+      "clearance_standard_met": true,
+      "collision_count": 0
+    },
+    {
+      "layout_name": "High-Aspect Heavy Equipment (72-R-01 Reactor + 72-C-01 Stripper Column)",
+      "equipment_count": 2,
+      "pairwise_checks": 1,
+      "minimum_observed_clearance_px": 45.0,
+      "clearance_standard_met": true,
+      "collision_count": 0
+    },
+    {
+      "layout_name": "Dual Heavy Rotating Packages (72-K-01A + 72-K-01B Recycle Compressors)",
+      "equipment_count": 2,
+      "pairwise_checks": 1,
+      "minimum_observed_clearance_px": 32.0,
+      "clearance_standard_met": true,
+      "collision_count": 0
+    },
+    {
+      "layout_name": "Compact Substation Area (5 Mixed Units in 800x600 Display Zone)",
+      "equipment_count": 5,
+      "pairwise_checks": 10,
+      "minimum_observed_clearance_px": 24.5,
+      "clearance_standard_met": true,
+      "collision_count": 0
+    }
+  ]
+}

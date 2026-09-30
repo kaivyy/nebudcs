@@ -1,0 +1,813 @@
+{
+  "session": {
+    "id": "tsess-01m1x6ygjt6a0e1b21wa2ah06t",
+    "project_id": "proj-vertical-slice-01",
+    "scenario_id": "scn-generic-feed-loss",
+    "name": "Surge Control Test Drill",
+    "description": "Operator assessment",
+    "instructor_id": "INST-01",
+    "trainee_id": "TRAINEE-01",
+    "state": "COMPLETED",
+    "created_at_ms": 1788760507019,
+    "started_at_ms": 1788760507069,
+    "completed_at_ms": 1788760507169,
+    "simulation_start_time_sec": 0.05,
+    "current_simulation_time_sec": 0.15000000000000002,
+    "abort_reason": null,
+    "metadata": {}
+  },
+  "scenario": {
+    "id": "scn-generic-feed-loss",
+    "name": "Generic Feed Flow Disturbance & Level Recovery",
+    "description": "Upstream supply disruption causes rapid inventory depletion in the separation vessel. Trainee must acknowledge alarm and stabilize level before low-level trip occurs.",
+    "author": "Chief Training Instructor",
+    "version": "1.0.0",
+    "compatible_project_id": null,
+    "duration_limit_sec": 300.0,
+    "random_seed": 283790213121,
+    "initial_conditions_json": "{\n  \"tags\": [],\n  \"controllers\": [],\n  \"equipment\": []\n}",
+    "timeline_json": "[]",
+    "objectives_json": "[]",
+    "criteria_json": "[\n  {\n    \"criterion_id\": \"crit-feed-alarm-ack\",\n    \"title\": \"Prompt Alarm Acknowledgment\",\n    \"description\": \"Operator must acknowledge low inventory or feed flow alarm within 30 seconds of activation.\",\n    \"kind\": {\n      \"kind\": \"alarm_response_time\",\n      \"alarm_name\": \"ALM-LVL-LO\",\n      \"max_allowed_response_sec\": 30.0\n    },\n    \"required\": true,\n    \"weight\": 30,\n    \"penalty\": 15,\n    \"severity\": \"STANDARD\"\n  },\n  {\n    \"criterion_id\": \"crit-feed-mode-ctrl\",\n    \"title\": \"Switch Controller to Manual or Adjust Valve\",\n    \"description\": \"Operator must intervene on level controller or feed valve to arrest vessel drainage.\",\n    \"kind\": {\n      \"kind\": \"required_action\",\n      \"target_entity\": \"LIC-101\",\n      \"action_type\": \"SET_MODE\",\n      \"expected_value\": null,\n      \"tolerance\": null,\n      \"within_sec\": 60.0\n    },\n    \"required\": false,\n    \"weight\": 30,\n    \"penalty\": 0,\n    \"severity\": \"STANDARD\"\n  },\n  {\n    \"criterion_id\": \"crit-no-low-trip\",\n    \"title\": \"Prevent Protective Low-Level Trip\",\n    \"description\": \"Vessel inventory must be protected to avoid automatic low-level emergency trip.\",\n    \"kind\": {\n      \"kind\": \"no_trip_occurred\"\n    },\n    \"required\": true,\n    \"weight\": 40,\n    \"penalty\": 40,\n    \"severity\": \"CRITICAL\"\n  }\n]"
+  },
+  "criteria": [
+    {
+      "criterion_id": "crit-feed-alarm-ack",
+      "title": "Prompt Alarm Acknowledgment",
+      "description": "Operator must acknowledge low inventory or feed flow alarm within 30 seconds of activation.",
+      "kind": {
+        "kind": "alarm_response_time",
+        "alarm_name": "ALM-LVL-LO",
+        "max_allowed_response_sec": 30.0
+      },
+      "required": true,
+      "weight": 30,
+      "penalty": 15,
+      "severity": "STANDARD"
+    },
+    {
+      "criterion_id": "crit-feed-mode-ctrl",
+      "title": "Switch Controller to Manual or Adjust Valve",
+      "description": "Operator must intervene on level controller or feed valve to arrest vessel drainage.",
+      "kind": {
+        "kind": "required_action",
+        "target_entity": "LIC-101",
+        "action_type": "SET_MODE",
+        "expected_value": null,
+        "tolerance": null,
+        "within_sec": 60.0
+      },
+      "required": false,
+      "weight": 30,
+      "penalty": 0,
+      "severity": "STANDARD"
+    },
+    {
+      "criterion_id": "crit-no-low-trip",
+      "title": "Prevent Protective Low-Level Trip",
+      "description": "Vessel inventory must be protected to avoid automatic low-level emergency trip.",
+      "kind": {
+        "kind": "no_trip_occurred"
+      },
+      "required": true,
+      "weight": 40,
+      "penalty": 40,
+      "severity": "CRITICAL"
+    }
+  ],
+  "actions": [
+    {
+      "action_id": "tact-01m1x6ygqfcphqdx2pc6kn71kn",
+      "session_id": "tsess-01m1x6ygjt6a0e1b21wa2ah06t",
+      "sim_time_sec": 0.1,
+      "wall_clock_ms": 1788760507119,
+      "actor": "TRAINEE-01",
+      "target_entity": "LIC-101",
+      "action_type": "SET_SETPOINT",
+      "requested_value": 55.0,
+      "action": {
+        "type": "set_setpoint",
+        "loop_name": "LIC-101",
+        "sp": 55.0
+      },
+      "status": {
+        "status": "accepted"
+      }
+    },
+    {
+      "action_id": "tact-01m1x6ygqf7pfgf378b6wqy7e4",
+      "session_id": "tsess-01m1x6ygjt6a0e1b21wa2ah06t",
+      "sim_time_sec": 0.15000000000000002,
+      "wall_clock_ms": 1788760507119,
+      "actor": "TRAINEE-01",
+      "target_entity": "ESD_SYSTEM",
+      "action_type": "EMERGENCY_STOP",
+      "requested_value": null,
+      "action": {
+        "type": "emergency_stop"
+      },
+      "status": {
+        "status": "rejected",
+        "reason": "Trainee lacks permission for administrative commands"
+      }
+    }
+  ],
+  "samples": [
+    [
+      0.05,
+      "STEAM_PRESSURE",
+      40.0
+    ],
+    [
+      0.05,
+      "COOLING_WATER",
+      3.0
+    ],
+    [
+      0.05,
+      "INSTRUMENT_AIR",
+      7.0
+    ],
+    [
+      0.05,
+      "K-101.FLOW",
+      -0.0
+    ],
+    [
+      0.05,
+      "K-101.SPEED",
+      2980.0
+    ],
+    [
+      0.05,
+      "K-101.POS",
+      50.0
+    ],
+    [
+      0.05,
+      "K-101.VIBRATION",
+      1.192
+    ],
+    [
+      0.05,
+      "K-101.POWER",
+      1480.0666666666666
+    ],
+    [
+      0.05,
+      "K-101.NPSHA",
+      10.093660934162022
+    ],
+    [
+      0.05,
+      "FV-101.FLOW",
+      0.0
+    ],
+    [
+      0.05,
+      "FV-101.OPENING",
+      0.552
+    ],
+    [
+      0.05,
+      "V-101.LEVEL",
+      0.4
+    ],
+    [
+      0.05,
+      "V-101.POS",
+      50.0
+    ],
+    [
+      0.05,
+      "TI-101",
+      0.0
+    ],
+    [
+      0.05,
+      "PT-101",
+      0.0
+    ],
+    [
+      0.05,
+      "FT-101",
+      19.866666666666667
+    ],
+    [
+      0.05,
+      "LT-101",
+      0.40002760000000004
+    ],
+    [
+      0.05,
+      "FV-101.POS",
+      50.0
+    ],
+    [
+      0.05,
+      "LIC-101",
+      5.4015
+    ],
+    [
+      0.05,
+      "TRIP-K101.TRIPPED",
+      1.0
+    ],
+    [
+      0.15000000000000002,
+      "STEAM_PRESSURE",
+      40.0
+    ],
+    [
+      0.15000000000000002,
+      "COOLING_WATER",
+      3.0
+    ],
+    [
+      0.15000000000000002,
+      "INSTRUMENT_AIR",
+      7.0
+    ],
+    [
+      0.15000000000000002,
+      "K-101.FLOW",
+      -0.0
+    ],
+    [
+      0.15000000000000002,
+      "K-101.SPEED",
+      2980.0
+    ],
+    [
+      0.15000000000000002,
+      "K-101.POS",
+      50.0
+    ],
+    [
+      0.15000000000000002,
+      "K-101.VIBRATION",
+      1.192
+    ],
+    [
+      0.15000000000000002,
+      "K-101.POWER",
+      1480.0666666666666
+    ],
+    [
+      0.15000000000000002,
+      "K-101.NPSHA",
+      10.093660934162022
+    ],
+    [
+      0.15000000000000002,
+      "FV-101.FLOW",
+      0.0
+    ],
+    [
+      0.15000000000000002,
+      "FV-101.OPENING",
+      0.532
+    ],
+    [
+      0.15000000000000002,
+      "V-101.LEVEL",
+      0.4
+    ],
+    [
+      0.15000000000000002,
+      "V-101.POS",
+      50.0
+    ],
+    [
+      0.15000000000000002,
+      "TI-101",
+      0.0
+    ],
+    [
+      0.15000000000000002,
+      "PT-101",
+      0.0
+    ],
+    [
+      0.15000000000000002,
+      "FT-101",
+      19.866666666666667
+    ],
+    [
+      0.15000000000000002,
+      "LT-101",
+      0.40008130000000003
+    ],
+    [
+      0.15000000000000002,
+      "FV-101.POS",
+      50.0
+    ],
+    [
+      0.15000000000000002,
+      "LIC-101",
+      0.0
+    ],
+    [
+      0.15000000000000002,
+      "TRIP-K101.TRIPPED",
+      1.0
+    ],
+    [
+      0.15000000000000002,
+      "STEAM_PRESSURE",
+      40.0
+    ],
+    [
+      0.15000000000000002,
+      "COOLING_WATER",
+      3.0
+    ],
+    [
+      0.15000000000000002,
+      "INSTRUMENT_AIR",
+      7.0
+    ],
+    [
+      0.15000000000000002,
+      "K-101.FLOW",
+      -0.0
+    ],
+    [
+      0.15000000000000002,
+      "K-101.SPEED",
+      2980.0
+    ],
+    [
+      0.15000000000000002,
+      "K-101.POS",
+      50.0
+    ],
+    [
+      0.15000000000000002,
+      "K-101.VIBRATION",
+      1.192
+    ],
+    [
+      0.15000000000000002,
+      "K-101.POWER",
+      1480.0666666666666
+    ],
+    [
+      0.15000000000000002,
+      "K-101.NPSHA",
+      10.093660934162022
+    ],
+    [
+      0.15000000000000002,
+      "FV-101.FLOW",
+      0.0
+    ],
+    [
+      0.15000000000000002,
+      "FV-101.OPENING",
+      0.532
+    ],
+    [
+      0.15000000000000002,
+      "V-101.LEVEL",
+      0.4
+    ],
+    [
+      0.15000000000000002,
+      "V-101.POS",
+      50.0
+    ],
+    [
+      0.15000000000000002,
+      "TI-101",
+      0.0
+    ],
+    [
+      0.15000000000000002,
+      "PT-101",
+      0.0
+    ],
+    [
+      0.15000000000000002,
+      "FT-101",
+      19.866666666666667
+    ],
+    [
+      0.15000000000000002,
+      "LT-101",
+      0.40008130000000003
+    ],
+    [
+      0.15000000000000002,
+      "FV-101.POS",
+      50.0
+    ],
+    [
+      0.15000000000000002,
+      "LIC-101",
+      0.0
+    ],
+    [
+      0.15000000000000002,
+      "TRIP-K101.TRIPPED",
+      1.0
+    ]
+  ],
+  "events": [],
+  "evaluation_report": {
+    "session_id": "tsess-01m1x6ygjt6a0e1b21wa2ah06t",
+    "scenario_id": "scn-generic-feed-loss",
+    "trainee_id": "TRAINEE-01",
+    "total_score": 70,
+    "max_possible_score": 100,
+    "percentage": 70.0,
+    "passed": true,
+    "results": [
+      {
+        "criterion_id": "crit-feed-alarm-ack",
+        "title": "Prompt Alarm Acknowledgment",
+        "passed": true,
+        "score_awarded": 30,
+        "score_possible": 30,
+        "penalty_deducted": 0,
+        "explanation": "Alarm 'ALM-LVL-LO' did not activate during the session",
+        "evidence": {
+          "status": "Alarm remained clear throughout session"
+        }
+      },
+      {
+        "criterion_id": "crit-feed-mode-ctrl",
+        "title": "Switch Controller to Manual or Adjust Valve",
+        "passed": false,
+        "score_awarded": 0,
+        "score_possible": 30,
+        "penalty_deducted": 0,
+        "explanation": "Required action 'SET_MODE' on 'LIC-101' was not performed",
+        "evidence": {
+          "expected_action_type": "SET_MODE",
+          "target_entity": "LIC-101"
+        }
+      },
+      {
+        "criterion_id": "crit-no-low-trip",
+        "title": "Prevent Protective Low-Level Trip",
+        "passed": true,
+        "score_awarded": 40,
+        "score_possible": 40,
+        "penalty_deducted": 0,
+        "explanation": "Plant operated cleanly with zero safety trips throughout session",
+        "evidence": {}
+      }
+    ],
+    "evaluated_at_ms": 1788760507169
+  },
+  "replay_data": {
+    "session_id": "tsess-01m1x6ygjt6a0e1b21wa2ah06t",
+    "project_id": "proj-vertical-slice-01",
+    "scenario_id": "scn-generic-feed-loss",
+    "start_sim_time_sec": 0.05,
+    "end_sim_time_sec": 0.15000000000000002,
+    "duration_sec": 0.10000000000000002,
+    "tag_trajectories": {
+      "COOLING_WATER": [
+        [
+          0.05,
+          3.0
+        ],
+        [
+          0.15000000000000002,
+          3.0
+        ],
+        [
+          0.15000000000000002,
+          3.0
+        ]
+      ],
+      "FT-101": [
+        [
+          0.05,
+          19.866666666666667
+        ],
+        [
+          0.15000000000000002,
+          19.866666666666667
+        ],
+        [
+          0.15000000000000002,
+          19.866666666666667
+        ]
+      ],
+      "FV-101.FLOW": [
+        [
+          0.05,
+          0.0
+        ],
+        [
+          0.15000000000000002,
+          0.0
+        ],
+        [
+          0.15000000000000002,
+          0.0
+        ]
+      ],
+      "FV-101.OPENING": [
+        [
+          0.05,
+          0.552
+        ],
+        [
+          0.15000000000000002,
+          0.532
+        ],
+        [
+          0.15000000000000002,
+          0.532
+        ]
+      ],
+      "FV-101.POS": [
+        [
+          0.05,
+          50.0
+        ],
+        [
+          0.15000000000000002,
+          50.0
+        ],
+        [
+          0.15000000000000002,
+          50.0
+        ]
+      ],
+      "INSTRUMENT_AIR": [
+        [
+          0.05,
+          7.0
+        ],
+        [
+          0.15000000000000002,
+          7.0
+        ],
+        [
+          0.15000000000000002,
+          7.0
+        ]
+      ],
+      "K-101.FLOW": [
+        [
+          0.05,
+          -0.0
+        ],
+        [
+          0.15000000000000002,
+          -0.0
+        ],
+        [
+          0.15000000000000002,
+          -0.0
+        ]
+      ],
+      "K-101.NPSHA": [
+        [
+          0.05,
+          10.093660934162022
+        ],
+        [
+          0.15000000000000002,
+          10.093660934162022
+        ],
+        [
+          0.15000000000000002,
+          10.093660934162022
+        ]
+      ],
+      "K-101.POS": [
+        [
+          0.05,
+          50.0
+        ],
+        [
+          0.15000000000000002,
+          50.0
+        ],
+        [
+          0.15000000000000002,
+          50.0
+        ]
+      ],
+      "K-101.POWER": [
+        [
+          0.05,
+          1480.0666666666666
+        ],
+        [
+          0.15000000000000002,
+          1480.0666666666666
+        ],
+        [
+          0.15000000000000002,
+          1480.0666666666666
+        ]
+      ],
+      "K-101.SPEED": [
+        [
+          0.05,
+          2980.0
+        ],
+        [
+          0.15000000000000002,
+          2980.0
+        ],
+        [
+          0.15000000000000002,
+          2980.0
+        ]
+      ],
+      "K-101.VIBRATION": [
+        [
+          0.05,
+          1.192
+        ],
+        [
+          0.15000000000000002,
+          1.192
+        ],
+        [
+          0.15000000000000002,
+          1.192
+        ]
+      ],
+      "LIC-101": [
+        [
+          0.05,
+          5.4015
+        ],
+        [
+          0.15000000000000002,
+          0.0
+        ],
+        [
+          0.15000000000000002,
+          0.0
+        ]
+      ],
+      "LT-101": [
+        [
+          0.05,
+          0.40002760000000004
+        ],
+        [
+          0.15000000000000002,
+          0.40008130000000003
+        ],
+        [
+          0.15000000000000002,
+          0.40008130000000003
+        ]
+      ],
+      "PT-101": [
+        [
+          0.05,
+          0.0
+        ],
+        [
+          0.15000000000000002,
+          0.0
+        ],
+        [
+          0.15000000000000002,
+          0.0
+        ]
+      ],
+      "STEAM_PRESSURE": [
+        [
+          0.05,
+          40.0
+        ],
+        [
+          0.15000000000000002,
+          40.0
+        ],
+        [
+          0.15000000000000002,
+          40.0
+        ]
+      ],
+      "TI-101": [
+        [
+          0.05,
+          0.0
+        ],
+        [
+          0.15000000000000002,
+          0.0
+        ],
+        [
+          0.15000000000000002,
+          0.0
+        ]
+      ],
+      "TRIP-K101.TRIPPED": [
+        [
+          0.05,
+          1.0
+        ],
+        [
+          0.15000000000000002,
+          1.0
+        ],
+        [
+          0.15000000000000002,
+          1.0
+        ]
+      ],
+      "V-101.LEVEL": [
+        [
+          0.05,
+          0.4
+        ],
+        [
+          0.15000000000000002,
+          0.4
+        ],
+        [
+          0.15000000000000002,
+          0.4
+        ]
+      ],
+      "V-101.POS": [
+        [
+          0.05,
+          50.0
+        ],
+        [
+          0.15000000000000002,
+          50.0
+        ],
+        [
+          0.15000000000000002,
+          50.0
+        ]
+      ]
+    },
+    "events": [],
+    "actions": [
+      {
+        "action_id": "tact-01m1x6ygqfcphqdx2pc6kn71kn",
+        "session_id": "tsess-01m1x6ygjt6a0e1b21wa2ah06t",
+        "sim_time_sec": 0.1,
+        "wall_clock_ms": 1788760507119,
+        "actor": "TRAINEE-01",
+        "target_entity": "LIC-101",
+        "action_type": "SET_SETPOINT",
+        "requested_value": 55.0,
+        "action": {
+          "type": "set_setpoint",
+          "loop_name": "LIC-101",
+          "sp": 55.0
+        },
+        "status": {
+          "status": "accepted"
+        }
+      },
+      {
+        "action_id": "tact-01m1x6ygqf7pfgf378b6wqy7e4",
+        "session_id": "tsess-01m1x6ygjt6a0e1b21wa2ah06t",
+        "sim_time_sec": 0.15000000000000002,
+        "wall_clock_ms": 1788760507119,
+        "actor": "TRAINEE-01",
+        "target_entity": "ESD_SYSTEM",
+        "action_type": "EMERGENCY_STOP",
+        "requested_value": null,
+        "action": {
+          "type": "emergency_stop"
+        },
+        "status": {
+          "status": "rejected",
+          "reason": "Trainee lacks permission for administrative commands"
+        }
+      }
+    ],
+    "markers": [
+      {
+        "marker_id": "marker-act-1",
+        "sim_time_sec": 0.1,
+        "kind": "OPERATOR_ACTION",
+        "source_id": "LIC-101",
+        "label": "Action: SET_SETPOINT",
+        "details": "Trainee TRAINEE-01 commanded LIC-101",
+        "severity": 2
+      },
+      {
+        "marker_id": "marker-act-2",
+        "sim_time_sec": 0.15000000000000002,
+        "kind": "OPERATOR_ACTION",
+        "source_id": "ESD_SYSTEM",
+        "label": "Action: EMERGENCY_STOP",
+        "details": "Trainee TRAINEE-01 commanded ESD_SYSTEM",
+        "severity": 2
+      }
+    ]
+  }
+}

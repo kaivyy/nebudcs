@@ -17,7 +17,7 @@ describe('Store State Management', () => {
     expect(store.speedMultiplier).toBe(1.0);
     expect(store.tags.size).toBe(0);
     expect(store.alarms.size).toBe(0);
-    expect(store.selectedLoop).toBe('LIC-101.OUT');
+    expect(store.selectedLoop).toBe('');
   });
 
   it('notifies subscribers upon connection state changes', async () => {

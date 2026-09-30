@@ -146,11 +146,7 @@ fn test_standard_and_large_workload_benchmarks() {
         ctrl_large.pid_mut(out_tag).unwrap().set_sp(55.0);
 
         if i < 100 {
-            let prot_cfg = ProtectionConfig {
-                name: format!("PROT_{i}"),
-                threshold: 95.0,
-                reset_deadband: 5.0,
-            };
+            let prot_cfg = ProtectionConfig::new(format!("PROT_{i}"), 95.0, 5.0);
             ctrl_large.register_protection(
                 format!("PROT_{i}"),
                 pv_tag,

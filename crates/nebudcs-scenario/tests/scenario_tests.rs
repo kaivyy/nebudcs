@@ -101,6 +101,7 @@ fn test_scenario_serialization_roundtrip() {
             weight: 100,
             mandatory: true,
         }],
+        branches: Vec::new(),
     };
 
     let serialized = serde_json::to_string_pretty(&scenario).expect("Serialization failed");
@@ -124,6 +125,7 @@ fn test_validation_rejects_nan_infinity_and_invalid_bounds() {
         initial_conditions: InitialConditions::default(),
         timeline: Vec::new(),
         objectives: Vec::new(),
+        branches: Vec::new(),
     };
 
     assert!(validate_scenario(&scenario).is_err());
@@ -260,6 +262,7 @@ fn test_initial_conditions_application() {
         },
         timeline: Vec::new(),
         objectives: Vec::new(),
+        branches: Vec::new(),
     };
 
     engine.load_scenario(scenario).unwrap();
@@ -421,6 +424,7 @@ fn test_deterministic_replay_identical_trajectories() {
                 }),
             }],
             objectives: Vec::new(),
+            branches: Vec::new(),
         };
 
         engine.load_scenario(scenario).unwrap();
@@ -477,6 +481,7 @@ fn test_historian_event_logging() {
             },
         }],
         objectives: Vec::new(),
+        branches: Vec::new(),
     };
 
     engine.load_scenario(scenario).unwrap();

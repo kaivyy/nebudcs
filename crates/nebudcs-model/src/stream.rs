@@ -36,6 +36,8 @@ pub enum StreamType {
     UtilityFlare,
     /// Catalyst transport between reactor and regenerator.
     CatalystTransport,
+    /// Mechanical shaft power transmission between rotating machinery.
+    MechanicalShaft,
 }
 
 /// Component mole fractions for a material stream.
@@ -92,6 +94,24 @@ pub struct StreamDefinition {
     /// Optional initial composition for material streams.
     #[serde(default)]
     pub composition: Option<StreamComposition>,
+    /// Optional waypoints for Manhattan / orthogonal visual layout on P&ID canvas.
+    #[serde(default)]
+    pub route_points: Vec<crate::equipment::Position2D>,
+    /// Pipe inner diameter in meters (e.g. 0.1 m for a 4-inch pipe).
+    #[serde(default)]
+    pub diameter: Option<f64>,
+    /// Pipe length in meters.
+    #[serde(default)]
+    pub length: Option<f64>,
+    /// Pipe wall absolute roughness in meters (e.g. 0.000045 m for commercial steel).
+    #[serde(default)]
+    pub roughness: Option<f64>,
+    /// Elevation change from source to sink in meters (delta_z = z_sink - z_source).
+    #[serde(default)]
+    pub elevation_change: Option<f64>,
+    /// Minor / fitting loss factor K (dimensionless).
+    #[serde(default)]
+    pub loss_k: Option<f64>,
 }
 
 /// A reference to a specific port on a specific equipment instance.
@@ -124,7 +144,30 @@ impl StreamDefinition {
                 port_id: sink_port,
             },
             composition: None,
+            route_points: Vec::new(),
+            diameter: None,
+            length: None,
+            roughness: None,
+            elevation_change: None,
+            loss_k: None,
         }
+    }
+
+    /// Builder to configure pipe hydraulic parameters.
+    pub fn with_hydraulics(
+        mut self,
+        diameter: f64,
+        length: f64,
+        roughness: f64,
+        elevation_change: f64,
+        loss_k: f64,
+    ) -> Self {
+        self.diameter = Some(diameter);
+        self.length = Some(length);
+        self.roughness = Some(roughness);
+        self.elevation_change = Some(elevation_change);
+        self.loss_k = Some(loss_k);
+        self
     }
 }
 
@@ -201,5 +244,45 @@ mod tests {
             let decoded: StreamType = serde_json::from_str(&json).unwrap();
             assert_eq!(t, &decoded);
         }
+    }
+
+    #[test]
+    fn test_stream_hydraulic_parameters_serde() {
+        let stream = make_stream().with_hydraulics(0.15, 45.0, 0.000045, 2.5, 3.2);
+        assert_eq!(stream.diameter, Some(0.15));
+        assert_eq!(stream.length, Some(45.0));
+        assert_eq!(stream.roughness, Some(0.000045));
+        assert_eq!(stream.elevation_change, Some(2.5));
+        assert_eq!(stream.loss_k, Some(3.2));
+
+        let json = serde_json::to_string(&stream).expect("serialize");
+        let decoded: StreamDefinition = serde_json::from_str(&json).expect("deserialize");
+        assert_eq!(decoded.diameter, Some(0.15));
+        assert_eq!(decoded.length, Some(45.0));
+        assert_eq!(decoded.roughness, Some(0.000045));
+        assert_eq!(decoded.elevation_change, Some(2.5));
+        assert_eq!(decoded.loss_k, Some(3.2));
+    }
+
+    #[test]
+    fn test_stream_legacy_deserialization_backward_compatible() {
+        let stream = make_stream();
+        let mut value = serde_json::to_value(&stream).expect("to_value");
+        let obj = value.as_object_mut().unwrap();
+        obj.remove("diameter");
+        obj.remove("length");
+        obj.remove("roughness");
+        obj.remove("elevation_change");
+        obj.remove("loss_k");
+
+        let legacy_json = serde_json::to_string(&value).expect("serialize legacy");
+        let decoded: StreamDefinition =
+            serde_json::from_str(&legacy_json).expect("deserialize legacy");
+        assert_eq!(decoded.name, stream.name);
+        assert_eq!(decoded.diameter, None);
+        assert_eq!(decoded.length, None);
+        assert_eq!(decoded.roughness, None);
+        assert_eq!(decoded.elevation_change, None);
+        assert_eq!(decoded.loss_k, None);
     }
 }

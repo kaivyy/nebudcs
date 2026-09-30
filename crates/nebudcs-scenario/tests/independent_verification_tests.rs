@@ -405,6 +405,7 @@ fn test_simulation_time_independence_from_wall_clock() {
             }),
         }],
         objectives: vec![],
+        branches: vec![],
     };
 
     engine.load_scenario(scenario).unwrap();
@@ -467,6 +468,7 @@ fn test_timeline_same_timestamp_deterministic_execution() {
             },
         ],
         objectives: vec![],
+        branches: vec![],
     };
 
     engine.load_scenario(scenario).unwrap();
@@ -594,6 +596,7 @@ fn test_closed_loop_physical_propagation_fault_to_alarm() {
             }),
         }],
         objectives: vec![],
+        branches: vec![],
     };
 
     engine.load_scenario(scenario).unwrap();
@@ -643,6 +646,7 @@ fn test_adversarial_validation_rejects_malformed_definitions() {
             }),
         }],
         objectives: vec![],
+        branches: vec![],
     });
     assert!(matches!(res, Err(ScenarioError::Validation(_))));
 
@@ -670,6 +674,7 @@ fn test_adversarial_validation_rejects_malformed_definitions() {
             weight: 10,
             mandatory: true,
         }],
+        branches: vec![],
     });
     assert!(matches!(res, Err(ScenarioError::Validation(_))));
 
@@ -685,6 +690,7 @@ fn test_adversarial_validation_rejects_malformed_definitions() {
         initial_conditions: InitialConditions::default(),
         timeline: vec![],
         objectives: vec![],
+        branches: vec![],
     });
     assert!(matches!(res, Err(ScenarioError::Validation(_))));
 }

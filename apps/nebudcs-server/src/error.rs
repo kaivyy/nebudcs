@@ -30,6 +30,9 @@ pub enum ServerError {
     #[error("Command rejected by simulation logic: {0}")]
     CommandRejected(String),
 
+    #[error("Too many requests; rate limit exceeded")]
+    TooManyRequests,
+
     #[error("Internal server error: {0}")]
     Internal(String),
 }
@@ -42,6 +45,7 @@ impl ServerError {
             Self::NotFound(_) => StatusCode::NOT_FOUND,
             Self::InvalidRequest(_) => StatusCode::BAD_REQUEST,
             Self::PayloadTooLarge => StatusCode::PAYLOAD_TOO_LARGE,
+            Self::TooManyRequests => StatusCode::TOO_MANY_REQUESTS,
             Self::CommandRejected(_) => StatusCode::UNPROCESSABLE_ENTITY,
             Self::Internal(_) => StatusCode::INTERNAL_SERVER_ERROR,
         }
@@ -61,6 +65,9 @@ impl ServerError {
             }
             Self::PayloadTooLarge => {
                 ProtocolError::new(ProtocolErrorCode::PayloadTooLarge, self.to_string())
+            }
+            Self::TooManyRequests => {
+                ProtocolError::new(ProtocolErrorCode::RateLimited, self.to_string())
             }
             Self::CommandRejected(_) => {
                 ProtocolError::new(ProtocolErrorCode::CommandRejected, self.to_string())

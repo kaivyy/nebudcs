@@ -33,10 +33,42 @@ pub struct ScenarioDefinition {
     /// Evaluation objectives and grading hooks.
     #[serde(default)]
     pub objectives: Vec<ScenarioObjective>,
+    /// Dynamic branches evaluated based on operator action or process conditions.
+    #[serde(default)]
+    pub branches: Vec<ScenarioBranch>,
 }
 
 fn default_seed() -> u64 {
     0x42_1337_cafe
+}
+
+impl Default for ScenarioDefinition {
+    fn default() -> Self {
+        Self {
+            id: String::new(),
+            name: String::new(),
+            description: String::new(),
+            author: String::new(),
+            schema_version: SCENARIO_SCHEMA_VERSION,
+            duration_limit_sec: None,
+            random_seed: default_seed(),
+            initial_conditions: InitialConditions::default(),
+            timeline: Vec::new(),
+            objectives: Vec::new(),
+            branches: Vec::new(),
+        }
+    }
+}
+
+/// Declarative branching scenario path fired by conditional evaluation.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ScenarioBranch {
+    pub branch_id: String,
+    pub name: String,
+    pub description: String,
+    pub trigger: EventTrigger,
+    #[serde(default)]
+    pub actions: Vec<ScenarioAction>,
 }
 
 /// Initial condition snapshot applied deterministically before scenario launch.
@@ -102,6 +134,30 @@ pub enum EventTrigger {
         operator: ComparisonOp,
         value: f64,
     },
+    /// Triggers when a process variable deviates beyond a threshold from target.
+    PvDeviation {
+        tag: String,
+        target: f64,
+        max_deviation: f64,
+    },
+    /// Triggers when equipment running state matches condition.
+    EquipmentState {
+        equipment_name: String,
+        is_running: bool,
+    },
+    /// Triggers when an alarm enters active/unacknowledged state.
+    AlarmActive { alarm_name: String },
+    /// Triggers when an SIF enters tripped state.
+    SisState { sif_id: String, is_tripped: bool },
+    /// Triggers on operator action on target entity.
+    OperatorActionTrigger {
+        target_entity: String,
+        action_type: String,
+    },
+    /// Compound AND of multiple triggers.
+    CompoundAnd { triggers: Vec<EventTrigger> },
+    /// Compound OR of multiple triggers.
+    CompoundOr { triggers: Vec<EventTrigger> },
 }
 
 /// Comparison operators for condition-based event triggers and evaluation criteria.

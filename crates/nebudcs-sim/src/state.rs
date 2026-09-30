@@ -232,16 +232,12 @@ impl<'a> StateWriteView<'a> {
         self.buffer.equipment.insert(id, state);
     }
 
-    /// Mutates an existing equipment state in State[N+1].
+    /// Mutates an existing equipment state in State[N+1], creating a default state if not yet present.
     pub fn mutate_equipment<F>(&mut self, id: EquipmentId, f: F) -> Result<(), SimError>
     where
         F: FnOnce(&mut EquipmentState),
     {
-        let eq = self
-            .buffer
-            .equipment
-            .get_mut(&id)
-            .ok_or(SimError::EquipmentNotFound { equipment_id: id })?;
+        let eq = self.buffer.equipment.entry(id).or_default();
         f(eq);
         Ok(())
     }

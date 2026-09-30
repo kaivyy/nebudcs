@@ -46,7 +46,7 @@ max_value = 15000000.0
 required = false
 
 [[definition.ports]]
-id = "01M1T4ZBRKCHSYN76EAKYWCDZG"
+id = "3AWM1X0D9W8KPD9RV20P0FTH3A"
 name = "feed"
 domain = "material"
 direction = "inlet"
@@ -60,7 +60,7 @@ cardinality = "zero_or_more"
 description = "Port feed"
 
 [[definition.ports]]
-id = "01M1T4ZBRKKR75R3QR3V5E3RYJ"
+id = "6W06EDM06HWKQES92WSCG4RW65"
 name = "gas_out"
 domain = "material"
 direction = "outlet"
@@ -70,7 +70,7 @@ cardinality = "zero_or_more"
 description = "Port gas_out"
 
 [[definition.ports]]
-id = "01M1T4ZBRK2FADK6VVAVQD06NF"
+id = "79KAB0B0B6SCFDAF3AST98A7D6"
 name = "liquid_out"
 domain = "material"
 direction = "outlet"
@@ -80,7 +80,7 @@ cardinality = "zero_or_more"
 description = "Port liquid_out"
 
 [[definition.ports]]
-id = "01M1T4ZBRKTQJEYFGBJSKDVA2Q"
+id = "2E84B59TDJ01TWTTF4946MEHSA"
 name = "psv_relief"
 direction = "outlet"
 phase_compatibility = []

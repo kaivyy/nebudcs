@@ -30,6 +30,7 @@ impl Pressure {
             PressureUnit::KiloPascal => v / 1_000.0,
             PressureUnit::Bar | PressureUnit::BarG => v / 100_000.0,
             PressureUnit::Psi => v / 6_894.757_293_168_36,
+            PressureUnit::KgPerCm2G => v / 98_066.5,
         }
     }
 
@@ -41,6 +42,7 @@ impl Pressure {
             PressureUnit::KiloPascal => value * 1_000.0,
             PressureUnit::Bar | PressureUnit::BarG => value * 100_000.0,
             PressureUnit::Psi => value * 6_894.757_293_168_36,
+            PressureUnit::KgPerCm2G => value * 98_066.5,
         };
         Self::new_unchecked(pa)
     }
@@ -87,6 +89,8 @@ impl MassFlow {
             MassFlowUnit::KgPerSec => v,
             MassFlowUnit::KgPerHour => v * 3_600.0,
             MassFlowUnit::TonnesPerHour => v * 3.6,
+            MassFlowUnit::TonnesPerDay => v * 86.4,
+            MassFlowUnit::PoundsPerHour => v * 3_600.0 / 0.453_592_37,
         }
     }
 
@@ -97,6 +101,8 @@ impl MassFlow {
             MassFlowUnit::KgPerSec => value,
             MassFlowUnit::KgPerHour => value / 3_600.0,
             MassFlowUnit::TonnesPerHour => value / 3.6,
+            MassFlowUnit::TonnesPerDay => value * 1_000.0 / 86_400.0,
+            MassFlowUnit::PoundsPerHour => value * 0.453_592_37 / 3_600.0,
         };
         Self::new_unchecked(kgs)
     }
@@ -110,6 +116,8 @@ impl MassFlow {
 const BPD_TO_M3S: f64 = 1.840_130_728e-6;
 /// 1 L/min in m³/s.
 const LPM_TO_M3S: f64 = 1.666_666_7e-5;
+/// 1 m³ to standard cubic feet.
+const M3_TO_SCF: f64 = 35.314_666_7;
 
 impl VolumetricFlow {
     /// Convert canonical m³/s to a display unit.
@@ -119,8 +127,13 @@ impl VolumetricFlow {
         match unit {
             VolumetricFlowUnit::M3PerSec => v,
             VolumetricFlowUnit::M3PerHour => v * 3_600.0,
-            VolumetricFlowUnit::BarrelsPerDay => v / BPD_TO_M3S,
+            VolumetricFlowUnit::M3PerDay => v * 86_400.0,
+            VolumetricFlowUnit::BarrelsPerDay | VolumetricFlowUnit::BarrelsPerStreamDay => {
+                v / BPD_TO_M3S
+            }
             VolumetricFlowUnit::LitresPerMin => v / LPM_TO_M3S,
+            VolumetricFlowUnit::NormalM3PerHour => v * 3_600.0,
+            VolumetricFlowUnit::StandardCubicFeetPerHour => v * 3_600.0 * M3_TO_SCF,
         }
     }
 
@@ -130,10 +143,161 @@ impl VolumetricFlow {
         let m3s = match unit {
             VolumetricFlowUnit::M3PerSec => value,
             VolumetricFlowUnit::M3PerHour => value / 3_600.0,
-            VolumetricFlowUnit::BarrelsPerDay => value * BPD_TO_M3S,
+            VolumetricFlowUnit::M3PerDay => value / 86_400.0,
+            VolumetricFlowUnit::BarrelsPerDay | VolumetricFlowUnit::BarrelsPerStreamDay => {
+                value * BPD_TO_M3S
+            }
             VolumetricFlowUnit::LitresPerMin => value * LPM_TO_M3S,
+            VolumetricFlowUnit::NormalM3PerHour => value / 3_600.0,
+            VolumetricFlowUnit::StandardCubicFeetPerHour => value / (3_600.0 * M3_TO_SCF),
         };
         Self::new_unchecked(m3s)
+    }
+}
+
+/// Canonical parsing from string unit and numeric value into canonical MassFlow and VolumetricFlow.
+pub fn parse_flow(
+    value: f64,
+    unit_str: &str,
+    density_kg_m3: f64,
+    _molecular_weight: Option<f64>,
+) -> Result<(MassFlow, VolumetricFlow), String> {
+    let clean = unit_str.trim().to_lowercase().replace('³', "3");
+    let rho = if density_kg_m3 > 0.0 {
+        density_kg_m3
+    } else {
+        1000.0
+    };
+
+    match clean.as_str() {
+        "bpsd" | "bpd" | "bbl/d" | "bbl/day" | "barrel/d" | "barrels/day" => {
+            let m3s = value * BPD_TO_M3S;
+            let kgs = m3s * rho;
+            Ok((
+                MassFlow::new_unchecked(kgs),
+                VolumetricFlow::new_unchecked(m3s),
+            ))
+        }
+        "m3/h" | "m3/hr" | "m3/hour" => {
+            let m3s = value / 3_600.0;
+            let kgs = m3s * rho;
+            Ok((
+                MassFlow::new_unchecked(kgs),
+                VolumetricFlow::new_unchecked(m3s),
+            ))
+        }
+        "m3/d" | "m3/day" => {
+            let m3s = value / 86_400.0;
+            let kgs = m3s * rho;
+            Ok((
+                MassFlow::new_unchecked(kgs),
+                VolumetricFlow::new_unchecked(m3s),
+            ))
+        }
+        "m3/s" | "m3/sec" => {
+            let m3s = value;
+            let kgs = m3s * rho;
+            Ok((
+                MassFlow::new_unchecked(kgs),
+                VolumetricFlow::new_unchecked(m3s),
+            ))
+        }
+        "l/min" | "lpm" | "litres/min" => {
+            let m3s = value * LPM_TO_M3S;
+            let kgs = m3s * rho;
+            Ok((
+                MassFlow::new_unchecked(kgs),
+                VolumetricFlow::new_unchecked(m3s),
+            ))
+        }
+        "kg/s" | "kg/sec" => {
+            let kgs = value;
+            let m3s = kgs / rho;
+            Ok((
+                MassFlow::new_unchecked(kgs),
+                VolumetricFlow::new_unchecked(m3s),
+            ))
+        }
+        "kg/h" | "kg/hr" => {
+            let kgs = value / 3_600.0;
+            let m3s = kgs / rho;
+            Ok((
+                MassFlow::new_unchecked(kgs),
+                VolumetricFlow::new_unchecked(m3s),
+            ))
+        }
+        "t/h" | "tonne/h" | "tonnes/h" | "tph" => {
+            let kgs = value * 1_000.0 / 3_600.0;
+            let m3s = kgs / rho;
+            Ok((
+                MassFlow::new_unchecked(kgs),
+                VolumetricFlow::new_unchecked(m3s),
+            ))
+        }
+        "t/d" | "tonne/d" | "tonnes/d" | "tonnes/day" => {
+            let kgs = value * 1_000.0 / 86_400.0;
+            let m3s = kgs / rho;
+            Ok((
+                MassFlow::new_unchecked(kgs),
+                VolumetricFlow::new_unchecked(m3s),
+            ))
+        }
+        "lb/h" | "lb/hr" | "lbs/h" | "lbs/hr" => {
+            let kgs = value * 0.453_592_37 / 3_600.0;
+            let m3s = kgs / rho;
+            Ok((
+                MassFlow::new_unchecked(kgs),
+                VolumetricFlow::new_unchecked(m3s),
+            ))
+        }
+        "nm3/h" | "nm3/hr" => {
+            let m3s = value / 3_600.0;
+            let kgs = m3s * rho;
+            Ok((
+                MassFlow::new_unchecked(kgs),
+                VolumetricFlow::new_unchecked(m3s),
+            ))
+        }
+        "scf/h" | "scfh" | "scf/hr" => {
+            let m3s = value / (3_600.0 * M3_TO_SCF);
+            let kgs = m3s * rho;
+            Ok((
+                MassFlow::new_unchecked(kgs),
+                VolumetricFlow::new_unchecked(m3s),
+            ))
+        }
+        unknown => Err(format!("Unsupported flow unit '{unknown}'")),
+    }
+}
+
+/// Canonical parsing from string unit and numeric value into canonical Pressure.
+pub fn parse_pressure(value: f64, unit_str: &str) -> Result<Pressure, String> {
+    let clean = unit_str.trim().to_lowercase().replace('²', "2");
+    match clean.as_str() {
+        "pa" | "pascal" => Ok(Pressure::new_unchecked(value)),
+        "kpa" | "kilopascal" => Ok(Pressure::new_unchecked(value * 1_000.0)),
+        "bar" | "bara" | "bar(a)" => Ok(Pressure::new_unchecked(value * 100_000.0)),
+        "barg" | "bar(g)" | "bar_g" => Ok(Pressure::new_unchecked((value + 1.013_25) * 100_000.0)),
+        "psi" | "psia" => Ok(Pressure::new_unchecked(value * 6_894.757_293_168_36)),
+        "psig" => Ok(Pressure::new_unchecked(
+            (value + 14.6959) * 6_894.757_293_168_36,
+        )),
+        "kg/cm2" | "kg/cm2a" => Ok(Pressure::new_unchecked(value * 98_066.5)),
+        "kg/cm2g" | "kg/cm2(g)" => Ok(Pressure::new_unchecked((value + 1.033_23) * 98_066.5)),
+        unknown => Err(format!("Unsupported pressure unit '{unknown}'")),
+    }
+}
+
+/// Canonical parsing from string unit and numeric value into canonical Temperature.
+pub fn parse_temperature(value: f64, unit_str: &str) -> Result<Temperature, String> {
+    let clean = unit_str.trim().to_lowercase().replace('°', "");
+    match clean.as_str() {
+        "k" | "kelvin" => Ok(Temperature::new_unchecked(value)),
+        "c" | "celsius" | "degc" => Ok(Temperature::new_unchecked(value + 273.15)),
+        "f" | "fahrenheit" | "degf" => {
+            Ok(Temperature::new_unchecked((value - 32.0) * 5.0 / 9.0 + 273.15))
+        }
+        unknown => Err(format!("Unsupported temperature unit '{unknown}'")),
     }
 }
 
@@ -359,5 +523,38 @@ mod tests {
         let json = serde_json::to_string(&v).unwrap();
         let decoded: UnitAwareValue = serde_json::from_str(&json).unwrap();
         assert_eq!(v, decoded);
+    }
+
+    #[test]
+    fn test_canonical_feed_and_utility_parsing() {
+        let density = 740.0; // Naphtha density kg/m3
+
+        // 2000 BPSD
+        let (mass_bpsd, vol_bpsd) = parse_flow(2000.0, "BPSD", density, None).unwrap();
+        assert!((vol_bpsd.to_display(VolumetricFlowUnit::BarrelsPerStreamDay) - 2000.0).abs() < 1e-4);
+        let m3_h = vol_bpsd.to_display(VolumetricFlowUnit::M3PerHour);
+        assert!((m3_h - 13.2489).abs() < 0.01);
+        assert!((mass_bpsd.value() - vol_bpsd.value() * density).abs() < 1e-6);
+
+        // 199 m3/h
+        let (mass_m3h, vol_m3h) = parse_flow(199.0, "m3/h", density, None).unwrap();
+        assert!((vol_m3h.to_display(VolumetricFlowUnit::M3PerHour) - 199.0).abs() < 1e-6);
+        assert!((mass_m3h.to_display(MassFlowUnit::KgPerHour) - (199.0 * 740.0)).abs() < 1e-4);
+
+        // 3300 t/d
+        let (mass_td, _vol_td) = parse_flow(3300.0, "t/d", density, None).unwrap();
+        assert!((mass_td.to_display(MassFlowUnit::TonnesPerDay) - 3300.0).abs() < 1e-4);
+
+        // 10000 kg/h
+        let (mass_kgh, _vol_kgh) = parse_flow(10000.0, "kg/h", density, None).unwrap();
+        assert!((mass_kgh.to_display(MassFlowUnit::KgPerHour) - 10000.0).abs() < 1e-4);
+
+        // 5 barg
+        let p = parse_pressure(5.0, "barg").unwrap();
+        assert!((p.value() - 601_325.0).abs() < 1e-3);
+
+        // 68 °C
+        let t = parse_temperature(68.0, "°C").unwrap();
+        assert!((t.to_display(TemperatureUnit::Celsius) - 68.0).abs() < 1e-6);
     }
 }

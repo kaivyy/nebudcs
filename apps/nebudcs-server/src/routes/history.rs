@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 
 use nebudcs_historian::point::HistorianPointId;
 use nebudcs_historian::{AggregatedBucket, AggregatedQueryRequest, RawQueryRequest, RawSample};
-use nebudcs_protocol::HistoricalEventDto;
+use nebudcs_protocol::{FirstOutEventDto, HistoricalEventDto};
 use nebudcs_types::SimulationTime;
 
 use crate::error::{ServerError, ServerResult};
@@ -132,4 +132,86 @@ pub async fn query_events(
         .collect();
 
     Ok(Json(dtos))
+}
+
+#[derive(Debug, Clone, Deserialize)]
+pub struct FirstOutQueryParams {
+    pub run_id: Option<String>,
+}
+
+/// Chronological first-out disturbance sequence analysis (Stage 10 / ISA-18.2).
+pub async fn query_first_out_event(
+    State(host): State<HostHandle>,
+    Query(params): Query<FirstOutQueryParams>,
+) -> ServerResult<Json<FirstOutEventDto>> {
+    let run_id = params.run_id.unwrap_or_else(|| "active".to_string());
+    let reader = match host.historian_reader() {
+        Some(r) => r,
+        None => {
+            return Ok(Json(FirstOutEventDto {
+                run_id,
+                first_out_alarm: None,
+                initiating_event_type: None,
+                timestamp_sim: None,
+                disturbance_chain: Vec::new(),
+            }));
+        }
+    };
+    let snapshot = host.get_snapshot().await;
+    let end =
+        SimulationTime::try_new(snapshot.sim_time_sec.max(0.0)).unwrap_or(SimulationTime::ZERO);
+
+    let events = reader
+        .query_events(&run_id, SimulationTime::ZERO, end)
+        .map_err(|e| ServerError::Internal(e.to_string()))?;
+
+    let dtos: Vec<HistoricalEventDto> = events
+        .into_iter()
+        .map(|ev| HistoricalEventDto {
+            sim_time_sec: ev.sim_time.seconds(),
+            seq: ev.seq,
+            event_type: ev.event_type,
+            source_id: ev.source_id,
+            old_state: ev.old_state,
+            new_state: ev.new_state,
+            value: ev.value,
+            severity: ev.severity,
+            details_json: ev.details_json,
+            wall_clock_ms: ev.persisted_wall_clock_ms,
+        })
+        .collect();
+
+    // Identify initiating disturbance (first trip, safety event, or alarm activation)
+    let first_disturbance = dtos.iter().find(|e| {
+        e.event_type.contains("trip")
+            || e.event_type.contains("alarm")
+            || e.event_type.contains("sif")
+            || e.event_type.contains("fault")
+    });
+
+    let (first_out_alarm, initiating_event_type, timestamp_sim, disturbance_chain) =
+        if let Some(first) = first_disturbance {
+            let t0 = first.sim_time_sec;
+            let chain = dtos
+                .iter()
+                .filter(|e| e.sim_time_sec >= t0 && e.sim_time_sec <= t0 + 120.0)
+                .cloned()
+                .collect();
+            (
+                Some(first.source_id.clone()),
+                Some(first.event_type.clone()),
+                Some(t0),
+                chain,
+            )
+        } else {
+            (None, None, None, dtos)
+        };
+
+    Ok(Json(FirstOutEventDto {
+        run_id,
+        first_out_alarm,
+        initiating_event_type,
+        timestamp_sim,
+        disturbance_chain,
+    }))
 }

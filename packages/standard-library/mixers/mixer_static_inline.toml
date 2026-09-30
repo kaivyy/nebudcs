@@ -38,7 +38,7 @@ max_value = 100000.0
 required = false
 
 [[definition.ports]]
-id = "01M1T4ZBRKM4ZET75RGE639SJ7"
+id = "51G577P091BGTBZGBMXF00MCQ6"
 name = "primary_in"
 domain = "material"
 direction = "inlet"
@@ -51,7 +51,7 @@ cardinality = "zero_or_more"
 description = "Port primary_in"
 
 [[definition.ports]]
-id = "01M1T4ZBRKDGJX6WQ2XGZV08B6"
+id = "00T3ZVG186HQAZG7YEDGFR4ZNA"
 name = "secondary_in"
 domain = "material"
 direction = "inlet"
@@ -64,7 +64,7 @@ cardinality = "zero_or_more"
 description = "Port secondary_in"
 
 [[definition.ports]]
-id = "01M1T4ZBRKA49EE9YPHD6K1Q8M"
+id = "5166ZW6PYZRVCYP21HBRCS04R9"
 name = "mixture_out"
 domain = "material"
 direction = "outlet"

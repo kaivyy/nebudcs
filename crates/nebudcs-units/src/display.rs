@@ -23,6 +23,16 @@ pub enum QuantityKind {
     DifferentialPressure,
     Density,
     SpecificEnthalpy,
+    MolarFlow,
+    MolarEnthalpy,
+    MolarEntropy,
+    SpecificEntropy,
+    MolarHeatCapacity,
+    SpecificHeatCapacity,
+    MolarVolume,
+    MolarDensity,
+    Fugacity,
+    CompressibilityFactor,
 }
 
 // ---------------------------------------------------------------------------
@@ -44,6 +54,8 @@ pub enum PressureUnit {
     /// Bar gauge (display only — same scale as bar, offset by 1 atm when
     /// converting absolute to gauge, which requires a reference)
     BarG,
+    /// kg/cm² gauge (1 kg/cm² = 98 066.5 Pa)
+    KgPerCm2G,
 }
 
 /// Display units for temperature.
@@ -68,6 +80,10 @@ pub enum MassFlowUnit {
     KgPerHour,
     /// t/h (metric tonnes per hour)
     TonnesPerHour,
+    /// t/d (metric tonnes per day)
+    TonnesPerDay,
+    /// lb/h (pounds per hour)
+    PoundsPerHour,
 }
 
 /// Display units for volumetric flow.
@@ -78,10 +94,18 @@ pub enum VolumetricFlowUnit {
     M3PerSec,
     /// m³/h
     M3PerHour,
+    /// m³/day
+    M3PerDay,
     /// US barrels per day (1 BPD ≈ 1.840130728e-6 m³/s)
     BarrelsPerDay,
+    /// Barrels per stream day (BPSD, 1 BPSD = 1 BPD)
+    BarrelsPerStreamDay,
     /// Litres per minute (1 L/min = 1.666667e-5 m³/s)
     LitresPerMin,
+    /// Normal cubic meters per hour (Nm³/h, at 0 °C, 1.01325 bar)
+    NormalM3PerHour,
+    /// Standard cubic feet per hour (SCFH, at 60 °F, 14.696 psi)
+    StandardCubicFeetPerHour,
 }
 
 /// Display units for power.
@@ -155,6 +179,16 @@ mod tests {
             QuantityKind::DifferentialPressure,
             QuantityKind::Density,
             QuantityKind::SpecificEnthalpy,
+            QuantityKind::MolarFlow,
+            QuantityKind::MolarEnthalpy,
+            QuantityKind::MolarEntropy,
+            QuantityKind::SpecificEntropy,
+            QuantityKind::MolarHeatCapacity,
+            QuantityKind::SpecificHeatCapacity,
+            QuantityKind::MolarVolume,
+            QuantityKind::MolarDensity,
+            QuantityKind::Fugacity,
+            QuantityKind::CompressibilityFactor,
         ];
         let set: std::collections::HashSet<_> = kinds
             .iter()

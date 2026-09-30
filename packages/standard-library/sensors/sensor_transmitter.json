@@ -37,7 +37,7 @@
     },
     "ports": [
       {
-        "id": "01M1T4ZBRKEQNJTFJ2T9DAAHVB",
+        "id": "5WPDJQS1C72N4FFQ3GBXPWZGDG",
         "name": "process_tap",
         "domain": "material",
         "direction": "inlet",
@@ -50,7 +50,7 @@
         "description": "Port process_tap"
       },
       {
-        "id": "01M1T4ZBRKWCMNKDSPRDEBAD5D",
+        "id": "72RRQR1SEQDKWX48ER5BA34T6C",
         "name": "signal_out",
         "domain": "signal",
         "direction": "outlet",

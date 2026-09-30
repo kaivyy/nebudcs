@@ -55,7 +55,7 @@ max_value = 3600.0
 required = false
 
 [[definition.ports]]
-id = "01M1T4ZBRKV1QS1KP477ARF720"
+id = "2Z0TCSV15342N4G68500SBPH4T"
 name = "suction"
 domain = "material"
 direction = "inlet"
@@ -65,7 +65,7 @@ cardinality = "zero_or_more"
 description = "Port suction"
 
 [[definition.ports]]
-id = "01M1T4ZBRKR0MJ8CVA71XCNJ6S"
+id = "1NQHXSA59AXSTTAS8GQETNQXF7"
 name = "discharge"
 domain = "material"
 direction = "outlet"
@@ -75,7 +75,7 @@ cardinality = "zero_or_more"
 description = "Port discharge"
 
 [[definition.ports]]
-id = "01M1T4ZBRKX4A6EFGYXZW2H4RS"
+id = "6GKW3D2766N5JWAYMXQZB1PA8V"
 name = "motor_feeder"
 domain = "electrical"
 direction = "inlet"
@@ -120,7 +120,7 @@ extrapolation = "clamp"
 [definition.curves_2d]
 
 [[definition.operating_envelope.dimensions]]
-tag_id = "01M1T4ZBRKSVBBGKXPQC0E1WGC"
+tag_id = "01M24QAGEWHXYC9NHDTS22J1GP"
 description = "Operating flow range"
 normal_min = 20.0
 normal_max = 140.0

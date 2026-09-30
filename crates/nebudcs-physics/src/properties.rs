@@ -64,6 +64,26 @@ pub trait PropertyPackage: Send + Sync {
         comp: &ComponentComposition,
     ) -> Result<PhaseEquilibrium, PhysicsError>;
 
+    /// Returns the thermodynamic capabilities supported by this package.
+    fn capabilities(&self) -> crate::thermo::provenance::PropertyPackageCapabilities {
+        crate::thermo::provenance::PropertyPackageCapabilities::default()
+    }
+
+    /// Returns the permissible thermodynamic operating domain.
+    fn validity_domain(&self) -> crate::thermo::provenance::ValidityDomain {
+        crate::thermo::provenance::ValidityDomain::default()
+    }
+
+    /// Verifies operating coordinates against the package validity domain.
+    fn check_validity(
+        &self,
+        p: Pressure,
+        t: Temperature,
+        _comp: &ComponentComposition,
+    ) -> crate::thermo::provenance::ValidityState {
+        self.validity_domain().check(t.value(), p.value())
+    }
+
     /// Evaluates the complete [`PhysicalState`] for the specified thermodynamic coordinates.
     fn evaluate_state(
         &self,

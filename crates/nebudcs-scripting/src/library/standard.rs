@@ -49,7 +49,7 @@ fn make_port(
     phases: Vec<Phase>,
 ) -> PortDefinition {
     PortDefinition {
-        id: PortId::new(),
+        id: name.parse::<PortId>().unwrap_or_else(|_| PortId::new()),
         name: name.to_string(),
         domain,
         direction,

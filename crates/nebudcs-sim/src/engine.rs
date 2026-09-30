@@ -17,7 +17,9 @@ use nebudcs_types::{EquipmentId, TagId};
 use crate::clock::{ClockState, SimulationClock};
 use crate::error::SimError;
 use crate::plan::ExecutionPlan;
-use crate::state::{DoubleBufferedState, EquipmentState, StateBuffer, StateReadView};
+use crate::state::{
+    DoubleBufferedState, EquipmentState, StateBuffer, StateReadView, StateWriteView,
+};
 use crate::system::{SimulationSystem, StepContext};
 
 /// Central deterministic simulation engine.
@@ -58,6 +60,22 @@ impl SimulationEngine {
     /// Registers an extensible simulation system.
     pub fn add_system<S: SimulationSystem + 'static>(&mut self, system: S) {
         self.systems.push(Box::new(system));
+    }
+
+    /// Removes all registered simulation systems.
+    pub fn clear_systems(&mut self) {
+        self.systems.clear();
+    }
+
+    /// Resets the engine state, execution plan, systems, and clock for a clean project load.
+    pub fn reset(&mut self) {
+        let dt = self.clock.dt();
+        if let Ok(clock) = SimulationClock::new(dt) {
+            self.clock = clock;
+        }
+        self.state = DoubleBufferedState::new();
+        self.plan = ExecutionPlan::new();
+        self.systems.clear();
     }
 
     /// Initializes the simulation state with an initial buffer.
@@ -128,11 +146,33 @@ impl SimulationEngine {
         }
     }
 
+    /// Executes exactly one simulation tick with an optional custom callback executed alongside registered systems.
+    pub fn step_with_callback<F>(&mut self, mut callback: F) -> Result<(), SimError>
+    where
+        F: FnMut(StepContext, &StateReadView<'_>, &mut StateWriteView<'_>) -> Result<(), SimError>,
+    {
+        self.execute_tick_internal(Some(&mut callback))
+    }
+
     /// Core deterministic execution pipeline.
     ///
     /// Guarantees that State[N+1] is committed only after ALL systems succeed.
     /// If any system fails, State[N] remains intact.
     fn execute_tick(&mut self) -> Result<(), SimError> {
+        self.execute_tick_internal(None)
+    }
+
+    #[allow(clippy::type_complexity)]
+    fn execute_tick_internal(
+        &mut self,
+        mut extra_callback: Option<
+            &mut dyn FnMut(
+                StepContext,
+                &StateReadView<'_>,
+                &mut StateWriteView<'_>,
+            ) -> Result<(), SimError>,
+        >,
+    ) -> Result<(), SimError> {
         let dt = self.clock.dt();
         let next_time = self.clock.time().advance(dt);
         let ctx = StepContext {
@@ -154,6 +194,10 @@ impl SimulationEngine {
                         detail: e.to_string(),
                     });
                 }
+            }
+
+            if let Some(ref mut cb) = extra_callback {
+                cb(ctx, &read_view, &mut write_view)?;
             }
         }
 

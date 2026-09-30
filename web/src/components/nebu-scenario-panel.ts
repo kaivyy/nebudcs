@@ -39,19 +39,35 @@ export class NebuScenarioPanel extends HTMLElement {
 
         <div class="fault-injection-section">
           <div class="section-title">QUICK FAULT INJECTION</div>
-          <div class="fault-buttons">
-            <button id="fltBiasBtn" class="btn btn-sm btn-outline-warning" title="Add +15 bar offset to PI-101">
-              Sensor Bias (+15 bar)
-            </button>
-            <button id="fltStuckBtn" class="btn btn-sm btn-outline-warning" title="Freeze valve FV-101 at 25%">
-              Actuator Stuck (25%)
-            </button>
-            <button id="fltLossBtn" class="btn btn-sm btn-outline-danger" title="Force TagQuality::Bad on FT-101.FLOW">
-              Signal Loss (FT-101)
-            </button>
-            <button id="fltTripBtn" class="btn btn-sm btn-outline-danger" title="Trigger mechanical overspeed trip on K-101">
-              Trip Compressor (K-101)
-            </button>
+          <div class="fault-form mono" id="faultForm">
+            <div class="fault-field">
+              <label>TARGET:</label>
+              <select id="faultTargetSelect">
+                <option value="">-- Load project --</option>
+              </select>
+            </div>
+            <div class="fault-field">
+              <label>FAULT TYPE:</label>
+              <select id="faultTypeSelect">
+                <option value="sensor_bias">Sensor Bias</option>
+                <option value="sensor_loss_of_signal">Signal Loss</option>
+                <option value="actuator_stuck">Actuator Stuck</option>
+                <option value="equipment_mechanical_trip">Mechanical Trip</option>
+              </select>
+            </div>
+            <div class="fault-field" id="biasValueField">
+              <label>BIAS:</label>
+              <input type="number" id="biasValueInput" value="10" style="width:55px;"/>
+            </div>
+            <div class="fault-field" id="stuckPosField" style="display:none">
+              <label>POS (%):</label>
+              <input type="number" id="stuckPosInput" value="25" min="0" max="100" style="width:55px;"/>
+            </div>
+            <div class="fault-field">
+              <label>DUR (s):</label>
+              <input type="number" id="faultDurationInput" value="60" min="1" style="width:55px;"/>
+            </div>
+            <button id="injectFaultBtn" class="btn btn-sm btn-outline-warning">INJECT</button>
           </div>
         </div>
 
@@ -93,17 +109,34 @@ export class NebuScenarioPanel extends HTMLElement {
   private setupEventListeners() {
     this.querySelector("#loadDemoScnBtn")?.addEventListener("click", async () => {
       if (!this.apiClient) return;
+
+      // Build a generic demo scenario from the active project model
+      const proj = store.activeProject;
+      const firstLoop = proj?.control_loops[0];
+      const firstInstrument = proj?.instruments[0];
+
+      // Initial conditions: set all control loops to AUTO at their configured SP
+      const controllers = proj
+        ? proj.control_loops.map((cl) => ({ loop_name: cl.pv_tag, mode: "AUTO", sp: cl.sp }))
+        : [];
+
+      // Disturbance target: first instrument (if any), else first loop PV
+      const disturbanceTag = firstInstrument?.tag ?? firstLoop?.pv_tag ?? "SIM.TIME";
+      // Objective: keep first loop PV near its SP
+      const objectiveTag = firstLoop?.pv_tag ?? disturbanceTag;
+      const objectiveSp = firstLoop?.sp ?? 50;
+
       const demoScenario = {
-        id: "SCN-DEMO-01",
-        name: "Feed Pressure Disturbance & Recovery",
-        description: "Step disturbance in feed pressure with required operator response",
+        id: `SCN-DEMO-${Date.now().toString().slice(-4)}`,
+        name: `Disturbance & Recovery — ${proj?.name ?? "Demo Plant"}`,
+        description: "Step disturbance with required operator response. Targets derived from active project.",
         author: "NebuDCS Instructor",
         schema_version: "1.0.0",
         duration_limit_sec: 180.0,
         random_seed: 42,
         initial_conditions: {
-          tags: [{ tag: "PI-101", value: 32.5 }],
-          controllers: [{ loop_name: "LIC-101.PV", mode: "AUTO", sp: 50.0 }],
+          tags: [],
+          controllers,
           equipment: []
         },
         timeline: [
@@ -114,27 +147,27 @@ export class NebuScenarioPanel extends HTMLElement {
             action: {
               type: "apply_disturbance",
               id: "DST-P1",
-              target_tag: "PI-101",
+              target_tag: disturbanceTag,
               disturbance_type: { waveform: "step", value: 10.0, relative: true },
               duration_sec: 30.0
             }
           }
         ],
-        objectives: [
+        objectives: firstLoop ? [
           {
             id: "OBJ-RANGE",
-            description: "Maintain level between 40% and 60%",
+            description: `Maintain ${objectiveTag} within ±10% of SP`,
             criteria: {
               type: "tag_within_range",
-              tag: "LIC-101.PV",
-              min_val: 40.0,
-              max_val: 60.0,
+              tag: objectiveTag,
+              min_val: objectiveSp * 0.9,
+              max_val: objectiveSp * 1.1,
               hold_duration_sec: 10.0
             },
             weight: 100,
             mandatory: true
           }
-        ]
+        ] : []
       };
       try {
         await this.apiClient.loadScenario(demoScenario);
@@ -195,69 +228,63 @@ export class NebuScenarioPanel extends HTMLElement {
       }
     });
 
-    // Fault injection quick buttons
-    this.querySelector("#fltBiasBtn")?.addEventListener("click", async () => {
-      try {
-        await this.apiClient?.injectFault({
-          id: `FLT-BIAS-${Date.now().toString().slice(-4)}`,
-          target: "PI-101",
-          fault_type: { category: "sensor_bias", offset: 15.0 },
-          duration_sec: 60.0
-        });
-        const status = await this.apiClient?.getScenarioStatus();
-        if (status) store.setScenarioStatus(status);
-      } catch (e) {
-        console.error("Failed to inject bias fault", e);
-      }
+    // Generic fault injection — targets derived from active project model
+    this.querySelector("#faultTypeSelect")?.addEventListener("change", () => {
+      const ft = (this.querySelector("#faultTypeSelect") as HTMLSelectElement).value;
+      const biasField = this.querySelector("#biasValueField") as HTMLElement | null;
+      const stuckField = this.querySelector("#stuckPosField") as HTMLElement | null;
+      if (biasField) biasField.style.display = ft === "sensor_bias" ? "" : "none";
+      if (stuckField) stuckField.style.display = ft === "actuator_stuck" ? "" : "none";
     });
 
-    this.querySelector("#fltStuckBtn")?.addEventListener("click", async () => {
-      try {
-        await this.apiClient?.injectFault({
-          id: `FLT-STUCK-${Date.now().toString().slice(-4)}`,
-          target: "FV-101.POS",
-          fault_type: { category: "actuator_stuck", position: 25.0 },
-          duration_sec: 60.0
-        });
-        const status = await this.apiClient?.getScenarioStatus();
-        if (status) store.setScenarioStatus(status);
-      } catch (e) {
-        console.error("Failed to inject stuck valve fault", e);
-      }
-    });
+    this.querySelector("#injectFaultBtn")?.addEventListener("click", async () => {
+      const target = (this.querySelector("#faultTargetSelect") as HTMLSelectElement)?.value;
+      const faultType = (this.querySelector("#faultTypeSelect") as HTMLSelectElement)?.value;
+      const duration = parseFloat((this.querySelector("#faultDurationInput") as HTMLInputElement)?.value) || 60;
+      const bias = parseFloat((this.querySelector("#biasValueInput") as HTMLInputElement)?.value) || 10;
+      const stuckPos = parseFloat((this.querySelector("#stuckPosInput") as HTMLInputElement)?.value) || 25;
+      if (!target || !this.apiClient) return;
 
-    this.querySelector("#fltLossBtn")?.addEventListener("click", async () => {
-      try {
-        await this.apiClient?.injectFault({
-          id: `FLT-LOSS-${Date.now().toString().slice(-4)}`,
-          target: "FT-101.FLOW",
-          fault_type: { category: "sensor_loss_of_signal" },
-          duration_sec: 45.0
-        });
-        const status = await this.apiClient?.getScenarioStatus();
-        if (status) store.setScenarioStatus(status);
-      } catch (e) {
-        console.error("Failed to inject signal loss fault", e);
+      let fault_type: Record<string, unknown>;
+      switch (faultType) {
+        case "sensor_bias":
+          fault_type = { category: "sensor_bias", offset: bias };
+          break;
+        case "actuator_stuck":
+          fault_type = { category: "actuator_stuck", position: stuckPos };
+          break;
+        case "sensor_loss_of_signal":
+          fault_type = { category: "sensor_loss_of_signal" };
+          break;
+        default:
+          fault_type = { category: "equipment_mechanical_trip" };
+          break;
       }
-    });
 
-    this.querySelector("#fltTripBtn")?.addEventListener("click", async () => {
       try {
-        await this.apiClient?.injectFault({
-          id: `FLT-TRIP-${Date.now().toString().slice(-4)}`,
-          target: "K-101.STATUS",
-          fault_type: { category: "equipment_mechanical_trip" },
-          duration_sec: null
+        await this.apiClient.injectFault({
+          id: `FLT-${Date.now().toString().slice(-6)}`,
+          target,
+          fault_type,
+          duration_sec: faultType === "equipment_mechanical_trip" ? null : duration
         });
-        const status = await this.apiClient?.getScenarioStatus();
+        const status = await this.apiClient.getScenarioStatus();
         if (status) store.setScenarioStatus(status);
       } catch (e) {
-        console.error("Failed to inject trip fault", e);
+        console.error("Failed to inject fault", e);
       }
     });
   }
 
+  private _lastProject: unknown = null;
+
   private render(s: Store) {
+    // Rebuild fault targets when project changes
+    if (s.activeProject !== this._lastProject) {
+      this._lastProject = s.activeProject;
+      this.rebuildFaultTargets();
+    }
+
     const scn = s.scenarioStatus;
     if (!scn) return;
 
@@ -312,7 +339,58 @@ export class NebuScenarioPanel extends HTMLElement {
     }
   }
 
-  private badgeColorForState(state: string): string {
+  /**
+   * Builds a list of fault injection targets from the active project model.
+   * Instruments → sensor faults; control loop outputs → actuator faults;
+   * equipment → mechanical trip faults.
+   */
+  private buildFaultTargets(): Array<{ value: string; label: string }> {
+    const proj = store.activeProject;
+    if (!proj) return [];
+
+    const targets: Array<{ value: string; label: string }> = [];
+
+    // Instruments → sensor bias / signal loss
+    for (const inst of proj.instruments) {
+      targets.push({
+        value: inst.tag,
+        label: `${inst.tag} (${inst.measurement_kind})`,
+      });
+    }
+
+    // Control loop output tags → actuator stuck
+    for (const cl of proj.control_loops) {
+      targets.push({
+        value: cl.out_tag,
+        label: `${cl.out_tag} (actuator)`,
+      });
+    }
+
+    // Equipment → mechanical trip
+    for (const eq of proj.equipment) {
+      targets.push({
+        value: `${eq.name}.STATUS`,
+        label: `${eq.name} (equipment trip)`,
+      });
+    }
+
+    return targets;
+  }
+
+  private rebuildFaultTargets() {
+    const sel = this.querySelector("#faultTargetSelect") as HTMLSelectElement | null;
+    if (!sel) return;
+    const targets = this.buildFaultTargets();
+    if (targets.length === 0) {
+      sel.innerHTML = '<option value="">-- Load project to enable fault injection --</option>';
+    } else {
+      sel.innerHTML = targets
+        .map((t) => `<option value="${t.value}">${t.label}</option>`)
+        .join("");
+    }
+  }
+
+    private badgeColorForState(state: string): string {
     switch (state.toUpperCase()) {
       case "RUNNING":
         return "success";

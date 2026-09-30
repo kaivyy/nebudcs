@@ -20,6 +20,19 @@ pub enum ProtectionState {
     Degraded,
 }
 
+/// Direction of process trip initiation.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+pub enum TripDirection {
+    /// Trip initiates when PV >= threshold (e.g. High Pressure, High Temperature).
+    High,
+    /// Trip initiates when PV <= threshold (e.g. Low Level, Low Suction Pressure).
+    Low,
+}
+
+fn default_trip_direction() -> TripDirection {
+    TripDirection::High
+}
+
 /// Static configuration for a protection block.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ProtectionConfig {
@@ -29,9 +42,31 @@ pub struct ProtectionConfig {
     pub threshold: f64,
     /// Margin below threshold required before trip latch can be reset.
     pub reset_deadband: f64,
+    /// Trip initiation direction (defaults to High).
+    #[serde(default = "default_trip_direction")]
+    pub direction: TripDirection,
 }
 
 impl ProtectionConfig {
+    /// Creates a new protection config with default High trip direction.
+    pub fn new(name: impl Into<String>, threshold: f64, reset_deadband: f64) -> Self {
+        Self {
+            name: name.into(),
+            threshold,
+            reset_deadband,
+            direction: TripDirection::High,
+        }
+    }
+
+    /// Creates a low-trip protection config (trips when PV <= threshold).
+    pub fn new_low(name: impl Into<String>, threshold: f64, reset_deadband: f64) -> Self {
+        Self {
+            name: name.into(),
+            threshold,
+            reset_deadband,
+            direction: TripDirection::Low,
+        }
+    }
     /// Validates the protection configuration parameters.
     pub fn validate(&self) -> Result<(), crate::error::ControlError> {
         if !self.threshold.is_finite() {
@@ -96,8 +131,15 @@ impl ProtectionBlock {
     /// Resets the protection block directly if initiating condition is cleared.
     pub fn reset(&mut self, current_pv: f64) -> bool {
         if self.state == ProtectionState::Tripped {
-            let cleared_threshold = self.config.threshold - self.config.reset_deadband;
-            if current_pv <= cleared_threshold {
+            let can_reset = match self.config.direction {
+                TripDirection::High => {
+                    current_pv <= (self.config.threshold - self.config.reset_deadband)
+                }
+                TripDirection::Low => {
+                    current_pv >= (self.config.threshold + self.config.reset_deadband)
+                }
+            };
+            if can_reset {
                 self.state = ProtectionState::Armed;
                 return true;
             }
@@ -108,22 +150,39 @@ impl ProtectionBlock {
     /// Steps the protection block with current PV and optional operator manual reset command.
     ///
     /// - If in `Tripped`: remains latched until condition clears below
-    ///   `threshold - reset_deadband` AND `reset_command` is true.
-    /// - If in `Armed`/`Active`: trips if PV reaches or exceeds `threshold`.
+    ///   `threshold - reset_deadband` (for High) or above `threshold + reset_deadband` (for Low)
+    ///   AND `reset_command` is true.
+    /// - If in `Armed`/`Active`: trips if threshold condition is met.
     pub fn step(&mut self, pv: f64, reset_command: bool) -> bool {
         if self.state == ProtectionState::Bypassed {
             return false;
         }
 
-        if self.state == ProtectionState::Tripped {
-            let cleared_threshold = self.config.threshold - self.config.reset_deadband;
-            if reset_command && pv <= cleared_threshold {
-                self.state = ProtectionState::Armed;
+        match self.config.direction {
+            TripDirection::High => {
+                if self.state == ProtectionState::Tripped {
+                    let cleared_threshold = self.config.threshold - self.config.reset_deadband;
+                    if reset_command && pv <= cleared_threshold {
+                        self.state = ProtectionState::Armed;
+                    }
+                } else if pv >= self.config.threshold {
+                    self.state = ProtectionState::Tripped;
+                } else if self.state == ProtectionState::Armed {
+                    self.state = ProtectionState::Active;
+                }
             }
-        } else if pv >= self.config.threshold {
-            self.state = ProtectionState::Tripped;
-        } else if self.state == ProtectionState::Armed {
-            self.state = ProtectionState::Active;
+            TripDirection::Low => {
+                if self.state == ProtectionState::Tripped {
+                    let cleared_threshold = self.config.threshold + self.config.reset_deadband;
+                    if reset_command && pv >= cleared_threshold {
+                        self.state = ProtectionState::Armed;
+                    }
+                } else if pv <= self.config.threshold {
+                    self.state = ProtectionState::Tripped;
+                } else if self.state == ProtectionState::Armed {
+                    self.state = ProtectionState::Active;
+                }
+            }
         }
 
         self.is_tripped()

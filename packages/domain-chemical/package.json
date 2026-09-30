@@ -1,0 +1,80 @@
+{
+  "id": "domain.chemical.exothermic_reaction",
+  "name": "Chemical Process & Exothermic CSTR Reaction Package",
+  "version": "1.0.0",
+  "domain_kind": "chemical_processing",
+  "description": "Continuous chemical synthesis plant with raw material charge pump, reactant feed preheater, jacket-cooled CSTR with Arrhenius exothermic kinetics, volatile fractionator/degasser separator, and unreacted feed recycle loop.",
+  "author": "NebuDCS Standard Library",
+  "thermodynamic_requirements": [
+    "Arrhenius Reaction Kinetics (k = A * exp(-Ea / RT))",
+    "Exothermic Heat of Reaction Release Coupling",
+    "Flash Vapor-Liquid Equilibrium Phase Separation"
+  ],
+  "utility_requirements": [
+    "COOLING_WATER",
+    "STEAM_PRESSURE",
+    "INSTRUMENT_AIR",
+    "NITROGEN"
+  ],
+  "composition_defaults": {
+    "Reactant_A": 0.85,
+    "Solvent": 0.15
+  },
+  "operating_ranges": {
+    "reactant_conversion": {
+      "quantity": "Conversion",
+      "min_value": 0.0,
+      "max_value": 1.0,
+      "unit": "fraction",
+      "normal_operating_value": 0.82
+    },
+    "reactor_core_temp": {
+      "quantity": "Temperature",
+      "min_value": 80.0,
+      "max_value": 220.0,
+      "unit": "°C",
+      "normal_operating_value": 165.0
+    },
+    "reactor_liquid_level": {
+      "quantity": "Level",
+      "min_value": 0.2,
+      "max_value": 0.95,
+      "unit": "fraction",
+      "normal_operating_value": 0.65
+    },
+    "reactor_pressure": {
+      "quantity": "Pressure",
+      "min_value": 1.0,
+      "max_value": 30.0,
+      "unit": "bar",
+      "normal_operating_value": 12.0
+    }
+  },
+  "control_strategies": [
+    "TIC-401 Exothermic Reactor Temperature Control via Cooling Water Jacket Valve",
+    "LIC-401 Reactor Level Regulation via Bottoms Effluent Valve",
+    "FIC-401 Fresh Reactant Feed Pacing Control",
+    "High-Temperature Runaway Emergency Interlock (Trip Feed, Flood Coolant)"
+  ],
+  "scenario_presets": [
+    "scn-chem-cooling-jacket-failure",
+    "scn-chem-thermal-runaway",
+    "scn-chem-recycle-pump-trip",
+    "scn-chem-feed-composition-disturbance"
+  ],
+  "equipment_templates": [
+    "standard.tank.atmospheric",
+    "standard.pump.centrifugal",
+    "standard.heat_exchanger.shell_and_tube",
+    "standard.reactor.cstr",
+    "standard.vessel.vertical_separator",
+    "standard.valve.control_globe"
+  ],
+  "plant_template_ids": [
+    "proj-domain-chem-reaction"
+  ],
+  "validation_rules": [
+    "VLD-CHM01: Exothermic reactor must have active heat removal mechanism (jacket or internal coils)",
+    "VLD-CHM02: Reactor recycle stream must connect to feed mixer or pump suction prior to preheater"
+  ]
+}

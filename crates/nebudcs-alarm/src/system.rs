@@ -22,9 +22,15 @@ pub struct AlarmSystem {
 }
 
 impl AlarmSystem {
-    /// Creates a new alarm simulation system.
+    /// Creates an empty alarm simulation system.
     pub fn new() -> Self {
         Self::default()
+    }
+
+    /// Clears all registered alarms and monitored tags.
+    pub fn clear(&mut self) {
+        self.engine.clear();
+        self.monitored_tags.clear();
     }
 
     /// Registers an alarm block and tracks its monitored tag.

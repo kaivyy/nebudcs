@@ -90,6 +90,21 @@ impl InstrumentConfig {
     }
 }
 
+impl Default for InstrumentConfig {
+    fn default() -> Self {
+        Self {
+            lrv: 0.0,
+            urv: 100.0,
+            sensor_lag_tau: 0.0,
+            damping_tau: 0.0,
+            noise_std_dev: 0.0,
+            calibration_bias: 0.0,
+            span_gain: 1.0,
+            scan_interval: 0.1,
+        }
+    }
+}
+
 /// Builder for `InstrumentConfig`.
 #[derive(Debug, Clone)]
 pub struct InstrumentConfigBuilder {

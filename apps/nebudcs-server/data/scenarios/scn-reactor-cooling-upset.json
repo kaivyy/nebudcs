@@ -1,0 +1,14 @@
+{
+  "id": "scn-reactor-cooling-upset",
+  "name": "Generic Cooling Loss & Exotherm Mitigation",
+  "description": "Cooling media supply loss induces a thermal excursion. Trainee must respond to temperature warning and throttle energy source before high temperature trip triggers.",
+  "author": "Process Safety Instructor",
+  "version": "1.0.0",
+  "compatible_project_id": null,
+  "duration_limit_sec": 240.0,
+  "random_seed": 283790213122,
+  "initial_conditions_json": "{\n  \"tags\": [],\n  \"controllers\": [],\n  \"equipment\": []\n}",
+  "timeline_json": "[]",
+  "objectives_json": "[]",
+  "criteria_json": "[\n  {\n    \"criterion_id\": \"crit-temp-alarm-ack\",\n    \"title\": \"Acknowledge High Temperature Alarm\",\n    \"description\": \"Operator must acknowledge high temperature alarm within 25 seconds.\",\n    \"kind\": {\n      \"kind\": \"alarm_response_time\",\n      \"alarm_name\": \"ALM-TEMP-HI\",\n      \"max_allowed_response_sec\": 25.0\n    },\n    \"required\": true,\n    \"weight\": 35,\n    \"penalty\": 20,\n    \"severity\": \"STANDARD\"\n  },\n  {\n    \"criterion_id\": \"crit-forbid-bypass\",\n    \"title\": \"Do Not Bypass Safety Interlocks\",\n    \"description\": \"Safety interlock bypass during runaway condition is strictly forbidden.\",\n    \"kind\": {\n      \"kind\": \"forbidden_action\",\n      \"target_entity\": \"ESD-RUNAWAY\",\n      \"action_type\": \"BYPASS_INTERLOCK\"\n    },\n    \"required\": true,\n    \"weight\": 35,\n    \"penalty\": 50,\n    \"severity\": \"FATAL\"\n  },\n  {\n    \"criterion_id\": \"crit-no-thermal-trip\",\n    \"title\": \"Avert High Temperature Trip\",\n    \"description\": \"Process temperature must not breach safety trip threshold.\",\n    \"kind\": {\n      \"kind\": \"no_trip_occurred\"\n    },\n    \"required\": true,\n    \"weight\": 30,\n    \"penalty\": 30,\n    \"severity\": \"CRITICAL\"\n  }\n]"
+}

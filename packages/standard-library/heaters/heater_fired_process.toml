@@ -37,7 +37,7 @@ max_value = 150000000.0
 required = false
 
 [[definition.ports]]
-id = "01M1T4ZBRKN44D2XZ5PFT5RRRG"
+id = "6B02X5387W3WQYBZ0CAP57R0YF"
 name = "process_in"
 domain = "material"
 direction = "inlet"
@@ -50,7 +50,7 @@ cardinality = "zero_or_more"
 description = "Port process_in"
 
 [[definition.ports]]
-id = "01M1T4ZBRK12T1GZ5PV9AZTXGJ"
+id = "21PP3MM2206Y93A468WWFMDYN0"
 name = "process_out"
 domain = "material"
 direction = "outlet"
@@ -63,7 +63,7 @@ cardinality = "zero_or_more"
 description = "Port process_out"
 
 [[definition.ports]]
-id = "01M1T4ZBRK5PP4YDGRCM902J3X"
+id = "7A8RCCWBG4XHF1PZ9CM76RVYWP"
 name = "fuel_gas"
 direction = "inlet"
 phase_compatibility = ["gas"]
@@ -75,7 +75,7 @@ description = "Port fuel_gas"
 utility = "fuel_gas"
 
 [[definition.ports]]
-id = "01M1T4ZBRK952GWXXVRHM86AVZ"
+id = "4W2JB8X5K2J8ZJ3GNK2ERPYE3H"
 name = "flue_gas_stack"
 direction = "outlet"
 phase_compatibility = ["gas"]

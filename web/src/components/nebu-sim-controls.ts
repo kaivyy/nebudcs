@@ -1,11 +1,11 @@
 import { store, Store } from "../state/store";
 import { WsClient } from "../websocket/client";
-import { ApiClient } from "../api/client";
+import { ApiClient, sharedApiClient } from "../api/client";
 
 export class NebuSimControls extends HTMLElement {
   private unsubscribe?: () => void;
   public wsClient?: WsClient;
-  public apiClient?: ApiClient;
+  public apiClient: ApiClient = sharedApiClient;
 
   private playBtn!: HTMLButtonElement;
   private pauseBtn!: HTMLButtonElement;
@@ -20,10 +20,10 @@ export class NebuSimControls extends HTMLElement {
     this.innerHTML = `
       <div class="sim-controls-panel">
         <div class="controls-group">
-          <button class="btn-play" title="Resume continuous simulation">▶ Play</button>
-          <button class="btn-pause" title="Pause simulation clock">⏸ Pause</button>
-          <button class="btn-step" title="Advance by single discrete timestep">⏯ Step</button>
-          <button class="btn-reset" title="Reset simulation baseline">⟲ Reset</button>
+          <button type="button" class="btn-play" title="Resume continuous simulation">▶ Play</button>
+          <button type="button" class="btn-pause" title="Pause simulation clock">⏸ Pause</button>
+          <button type="button" class="btn-step" title="Advance by single discrete timestep">⏯ Step</button>
+          <button type="button" class="btn-reset" title="Reset simulation baseline">⟲ Reset</button>
         </div>
 
         <div class="speed-group">
@@ -84,6 +84,11 @@ export class NebuSimControls extends HTMLElement {
         } as any);
       } else if (this.apiClient) {
         await this.apiClient.controlSim(action as any);
+      }
+      if (action.action === "play") {
+        store.setSimRunning(true);
+      } else if (action.action === "pause" || action.action === "reset") {
+        store.setSimRunning(false);
       }
       this.showFeedback("Command acknowledged", false);
     } catch (err: any) {
